@@ -39,7 +39,7 @@ export default class ConversationList extends BaseComponent {
                 mapContainerClass="message-list-scai"
                 mapSectionClass="message-item-scai"
                 cells={[
-                    { type: "customBuilt", custom: <img style={{ width: "50px" }} src={contactPng} />, wrapperStyle: { width: "50px", itemStyle: { width: "50px" } } },
+                    { type: "customBuilt", custom: <img style={{ width: "50px" }} src={contactPng} />, wrapperStyle: { width: "50px"}, itemStyle: { width: "50px" }  },
                     {
                         type: "custom", custom: CustomMessageListItem, itemClick: (obj) => {
                             // Dispatch to set the currentConversation in global state

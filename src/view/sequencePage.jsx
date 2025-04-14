@@ -80,6 +80,7 @@ export default class SequencePage extends GetComponentsFromUrl {
                     filter={{ search: this.propsState.currentSequence?.getJson()._id, attribute: "sequenceId" }}
                     cells={[
                         { type: "attribute", name: "subject" },
+                        {type:"attribute", name:"content"}
                         // { type: "custom", custom: StepComponent}
                     ]}
                 />
