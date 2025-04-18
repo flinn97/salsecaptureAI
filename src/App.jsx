@@ -19,6 +19,7 @@ import "./salescaptureAI.scss"
 import { data } from './models/fakeData.js';
 import "./style.scss"
 import "./finalSCAICss.css"
+import CreateStepPopup from './view/popups/createStepPopup.jsx';
 //  import Settings from './view/settings';
 //  import AddContactPopup from './view/addContactPopup';
 
@@ -28,7 +29,7 @@ import "./finalSCAICss.css"
 export default class App extends AppBaseClass {
   constructor(props) {
     super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
-    this.popupComponents = { contact: ContactPopup, };
+    this.popupComponents = { contact: ContactPopup, step: CreateStepPopup };
     this.popupComponentsProps = {};
     //REMOVE
     let user = {

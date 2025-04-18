@@ -3,12 +3,13 @@
  * and a list of steps associated with it. It extends GetComponentsFromUrl to handle 
  * fetching the sequence based on the URL parameters.
  */
-import { GetComponentsFromUrl, UploadButton } from "flinntech";
+import { GetComponentsFromUrl, UploadButton, PopupButton } from "flinntech";
 import { MapComponent } from "flinntech";
 import { ParentFormComponent, RunButton } from "flinntech";
 import { Card } from "flinntech";
 import { Timestamp } from "firebase/firestore";
 import Dropdown from "./components/dropdown";
+import StepCustomItem from "./components/stepCustom";
 
 export default class SequencePage extends GetComponentsFromUrl {
     /**
@@ -122,78 +123,75 @@ export default class SequencePage extends GetComponentsFromUrl {
                     </div>
 
                     <div className="icon-list">
-                        <div className="icon-row">
-                            <div className="icon-container">
-                                <div className="icon">
-                                    <i className="fa-solid fa-envelope"></i>
-                                </div>
-                            </div>
-                            <div className="message-container">
-                                <b>Welcome! How Can We Best Help You?</b>
-                                <br />
-                                <span>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                </span>
-                            </div>
-                        </div>
+                    <MapComponent
+                    mapSectionClass="none"
+                    name="step"
+                    filter={{ search: this.propsState.currentSequence?.getJson()._id, attribute: "sequenceId" }}
+                    filterFunc={(obj)=>{
+                        
+                        if(obj.getJson().content===undefined){
+                            return false;
+                        }
+                        if(obj.getJson().content===""){
+                            return false
+                        }
+                        return true
+                    }}
+                    cells={[
+                        { type: "custom", custom: StepCustomItem, wrapperClass:"none" },
+                      
+                    ]}
+                />
+                        
 
-                        <div className="icon-row">
-                            <div className="icon-container">
-                                <div className="svg">
-                                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <line
-                                            x1="50%"
-                                            y1="0"
-                                            x2="50%"
-                                            y2="50"
-                                            stroke="var(--app-green)"
-                                            strokeWidth="3"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
-
-
-                        <div className="icon-row">
-                            <div className="svg-last">
-                                <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M25,0 V50 Q25,70 50,70 H50"
-                                        fill="none"
-                                        stroke="var(--app-green)"
-                                        strokeWidth="3"
-                                        strokeLinecap="round"
-                                    />
-                                </svg>
-                                <div className="icon-last">
-                                    <i className="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
+                        <PopupButton
+                                formclass="none"
+                                wrapperClass="none"
+                                content={<div className="icon-row">
+                                <div className="svg-last">
+                                        <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M25,0 V50 Q25,70 50,70 H50"
+                                                fill="none"
+                                                stroke="var(--app-green)"
+                                                strokeWidth="3"
+                                                strokeLinecap="round"
+                                            />
+                                        </svg>
+                                        <div className="icon-last">
+                                            
+                                            <i className="fa-solid fa-plus"></i>
+                                        </div>
+                                   </div>
+                                   
+                                    
+                                    
+                                </div>}
+                                popupSwitch="addStep"
+                            />
+                        
                     </div>
                 </div>
-                <h4 style={{ marginBottom: "10px" }}>Steps for Sequence</h4>
-                Name:
+                {/* <h4 style={{ marginBottom: "10px" }}>Steps for Sequence</h4> */}
+                {/* Name:
                 {this.propsState.currentSequence && (
                     <ParentFormComponent
                         obj={this.propsState.currentSequence}
                         name="name"
                     />
-                )}
+                )} */}
 
-                {/* MapComponent to display steps associated with the current sequence */}
+                {/* MapComponent to display steps associated with the current sequence
                 <MapComponent
                     name="step"
                     filter={{ search: this.propsState.currentSequence?.getJson()._id, attribute: "sequenceId" }}
+                    
                     cells={[
                         { type: "attribute", name: "subject" },
                         { type: "attribute", name: "content" }
                         // { type: "custom", custom: StepComponent}
                     ]}
-                />
+                /> */}
 
 
                 {/* If there is a currentStep, show the form to edit it */}
