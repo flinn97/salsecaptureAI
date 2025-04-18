@@ -1,0 +1,218 @@
+.top-nav-float {
+
+    background-color: #fff;
+  }
+  
+  .top-nav {
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 100;
+  }
+  
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .nav-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .nav-icon {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .nav-icon i {
+    font-size: 14px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 2px 10px;
+    background-color: #69463a;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #69463a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-container {
+    padding: 0 15px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .search-cancel {
+    color: #666;
+    margin-left: 10px;
+    font-size: 16px;
+    display: none;
+    cursor: pointer;
+  }
+  
+  .search-input:focus ~ .search-cancel {
+    display: block;
+  }
+  
+  .filter-nav {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 100;
+  }
+  
+  .filter-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .filter-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .contact-list {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .contact-checkbox {
+    margin-right: 12px;
+    display: none;
+    cursor: pointer;
+  }
+  
+  .select-mode .contact-checkbox {
+    display: block;
+  }
+  
+  .contact-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-content: flex-start;
+    max-width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    /* transition: max-height 1s ease; */
+  }
+  
+  .contact-tag-container.active {
+    max-height: 500px;
+    transition: max-height 1s ease;
+  }
+  
+  .contact-tag-btn {
+    padding: 0 12px;
+    background-color: #696969;
+    border: none;
+    border-radius: 20px;
+    color: #c6c6c6;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .contact-tag-btn:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .contact-tag-btn.active {
+    background-color: #fff;
+    color: #9a9a9a;
+    border: 1px solid #9a9a9a;
+  }
+  
+  .floating-select-set {
+    position: fixed;
+    bottom: 100px;
+    left: "0";
+    right: "30px";
+    bottom: "40px";
+    background-color: #555555;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px 16px;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 1rem;
+    margin: 0px 40px;
+    display: flex;
+    max-width: 600px;
+  }
+  
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #36b593;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ade0d3;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  
+  .bottom-nav-item i {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+  
+  .bottom-nav-item.active {
+    color: #fff;
+  }

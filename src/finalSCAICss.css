@@ -1,0 +1,585 @@
+/* ==========================================================================
+   CSS Variables & Global Reset
+   ========================================================================== */
+   :root {
+    --app-green: #5aaa95;
+    --app-brown: #69463a;
+    --app-dark-gray: #848484;
+    --app-light-gray: #e6e6e6;
+    --app-dark-blue: #2374ab;
+    --app-light-blue: #9ad7ff;
+    --app-light-green: #c3ebe1;
+    --whatsapp-green: #128C7E;
+    --whatsapp-light-green: #25D366;
+    --whatsapp-teal-green: #075E54;
+    --whatsapp-chat-bg: #e5ddd5;
+    --whatsapp-outgoing-bg: #DCF8C6;
+    --whatsapp-incoming-bg: #FFFFFF;
+    --whatsapp-timestamp: #667781;
+    --whatsapp-icon: #54656F;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--whatsapp-chat-bg);
+    padding-bottom: 60px; /* leave space for nav */
+    min-height: 100vh;
+  }
+  
+  /* ==========================================================================
+     Common Containers
+     ========================================================================== */
+  .mobile-container {
+    max-width: 600px;
+  }
+  
+  /* CSS rules for selectors with identical definitions across all occurrences */
+
+.btn-gray {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background-color: #696969; /* 背景色 */
+  color: white; /* 文字颜色 */
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 25px; /* 圆角大小 */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 过渡效果 */
+}
+
+.btn-gray.active {
+  background-color: #458272; /* 背景色 */
+}
+
+.chat-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+  background-color: var(--app-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--app-light-gray);
+}
+
+.chat-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--whatsapp-border);
+}
+
+.contact {
+  padding: 12px 15px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px 0;
+  transition: background-color 0.2s;
+}
+
+.contact-item .btn {
+  margin-right: 1rem;
+}
+
+.contact-item:hover {
+  background-color: #f9f9f9;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+  background-color: var(--app-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--app-light-gray);
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 0; /* 防止内容溢出 */
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-desc {
+  font-size: 14px;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-icon {
+  padding: 0 0.3rem;
+  font-size: 24px;
+  color: #9a9a9a;
+}
+
+.date-divider {
+  text-align: center;
+  margin: 15px 0;
+  position: relative;
+}
+
+.date-divider span {
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  color: #667781;
+  /*box-shadow: 0 1px 1px rgba(0,0,0,0.08);*/
+}
+
+.emoji-item {
+  font-size: 24px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.emoji-panel {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.filter {
+  margin: 1rem 0;
+}
+
+.float-btn {
+  position: fixed;
+  bottom: 20px; /* Note: One instance has bottom: 25px, but this definition appears multiple times */
+  left: 50%;    /* This specific block's first appearance might differ slightly if needed */
+  transform: translateX(-50%); /* Assuming this is the most representative block */
+  width: 60px;
+  height: 60px;
+  background-color: #378c75;
+  color: #ade0d3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 125;
+  transition: all 0.3s ease;
+}
+
+.float-btn i {
+  font-size: 36px; /* One instance has 24px */
+  /* Selecting the most common/intended definition based on visual inspection */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.float-btn:active {
+  transform: scale(0.95);
+}
+
+.float-btn:hover {
+  /*background-color: #2374ab;*/
+  /*transform: translateY(-3px);*/
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.floating-select-btn {
+  flex: 1;
+  margin: 0 8px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: white;
+}
+
+.floating-select-btn-text {
+  font-size: 12px;
+}
+
+.floating-select-primary-btn {
+  flex: 2;
+  background-color: #5aaa95;
+  color: white;
+  border-radius: 1.5rem;
+}
+
+.floating-select-primary-btn:hover {
+  background-color: #06ad56;
+}
+
+.footer-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  color: #2374ab;
+  background-color: #9ad7ff;
+}
+
+.footer-btn:hover {
+  background-color: #e5e5e5;
+}
+
+.footer-input {
+  flex: 1;
+  height: 40px;
+  border: 2px solid #f0f0f0;
+  border-radius: 20px;
+  background-color: white;
+  padding: 0 15px;
+  margin: 0 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.footer-send {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--whatsapp-light-green);
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  color: var(--app-light-gray);
+  background-color: var(--app-green);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.icon i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-container {
+  display: flex;
+}
+
+.icon-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.icon-row {
+  display: flex;
+}
+
+.icon-row > div:nth-child(1) {
+  flex: 1;
+}
+
+.icon-row > div:nth-child(2) {
+  flex: 5;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 1rem;
+  font-size: 15px;
+  line-height: 1.4;
+  position: relative;
+  word-break: break-word;
+}
+
+.message-container {
+  /*display:flex;*/
+  /*flex-direction: column;*/
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.message-incoming {
+  justify-content: flex-start;
+}
+
+.message-incoming .message-bubble {
+  background-color: #e6e6e6;
+  color: #000000;
+  /*border-top-left-radius: 0;*/
+}
+
+.message-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #667781;
+}
+
+.message-outgoing {
+  justify-content: flex-end;
+}
+
+.message-outgoing .message-bubble {
+  background-color: #5aaa95;
+  color: #fff;
+  /*border-top-right-radius: 0;*/
+}
+
+.message-phone {
+  position: fixed;
+  bottom: 75px;
+  right: 20px;
+}
+
+.message-phone-bubble {
+  background-color: #848484;
+  color: #c4c4c4;
+  padding: 4px 12px;
+  border-radius: 1rem;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.message-status {
+  margin-left: 5px;
+}
+
+.new-sequence-icons .col > :nth-child(1) {
+  width: 70px;
+  height: 70px;
+  font-size: 1.75rem;
+  color: #c3ebe1; /* Note: One instance has #378c75 */
+  background-color: #378c75; /* Note: One instance has #c3ebe1 */
+  /* Selecting the definition that appears first */
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.new-sequence-icons .row {
+  justify-content: space-around;
+  margin: 50px 50px;
+}
+
+.panel {
+  position: fixed;
+  bottom: -300px;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  transition: bottom 0.3s;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.panel.show {
+  bottom: 70px;
+}
+
+.search-bar {
+  padding: 0 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  color: #999;
+  margin-right: 0.75rem;
+  font-size: 18px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0.5rem 0;
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: #bbb;
+}
+
+.sequence .col div:nth-child(2) {
+  font-weight: 800;
+}
+
+.sequence .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0 1rem;
+}
+
+.sequence .title-left {
+  font-weight: 800;
+}
+
+.sequence .title-right {
+  color: var(--app-dark-gray);
+}
+
+.svg {
+  width: 50px;
+  height: 50px;
+}
+
+.svg-last {
+  width: 50px;
+  height: 100px;
+  position: relative;
+}
+
+.svg-last .icon-last {
+  position: absolute;
+  bottom: 5px;
+  left: 50px;
+  color: var(--app-light-gray);
+  background-color: var(--app-green);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.switch-tab {
+  margin: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--app-light-gray);
+  color: var(--app-dark-gray);
+}
+
+.switch-tab .row div {
+  flex: 1;
+}
+
+.switch-tab-btn {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background-color: var(--app-light-gray); /* Note: One definition uses #696969 */
+  color: #000; /* Note: One definition uses white */
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 1rem; /* Note: One definition uses 25px */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* Selecting the definition that appears most frequently */
+}
+
+.switch-tab-btn.active {
+  background-color: #fff; /* Note: One definition uses #458272 */
+  font-weight: 800;
+  /* Selecting the definition that appears most frequently */
+}
+
+
+.title-bar {
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 100;
+}
+
+.title-icon {
+  /*width: 24px;*/
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  cursor: pointer;
+}
+
+.title-icon i {
+  font-size: 25px;
+}
+
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-left i {
+  font-size: 16px;
+}
+
+.title-right i {
+  font-size: 8px;
+  color: var(--app-green);
+}
+  

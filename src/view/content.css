@@ -1,0 +1,52 @@
+
+.sequence{
+    border: 1px solid var(--app-light-gray);
+    padding: 0 1rem;
+    margin: 0 1rem 1rem;
+    border-radius: 1rem;
+}
+.sequence .title{
+    display:flex;
+    justify-content:space-between;
+    padding: 0.5rem 1rem 0 1rem;
+}
+.sequence .title-left{
+    font-weight:800;
+}
+.sequence .title-right{
+    color:var(--app-dark-gray);
+}
+.sequence .col div:nth-child(2){
+    font-weight:800;
+}
+
+
+/*switch-tab*/
+
+.switch-tab{
+    margin:0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--app-light-gray);
+    color: var(--app-dark-gray);
+}
+
+.switch-tab-btn {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background-color: var(--app-light-gray);
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 1rem;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.switch-tab-btn.active {
+    background-color: #fff;
+    font-weight:800;
+}
+.switch-tab .row div{
+    flex:1;
+}

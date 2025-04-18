@@ -5,6 +5,7 @@
  */
 import { Card } from "flinntech";
 import { BaseComponent } from "flinntech";
+import { Link } from "react-router-dom";
 import Sequences from "./Sequences"; // Custom component for Sequences
 import Templates from "./Templates"; // Custom component for Templates
 
@@ -27,12 +28,50 @@ export default class ContentCard extends BaseComponent {
      */
     getInnerContent() {
         return (
-            <div className="layoutRow" style={{ marginTop: "20px", marginLeft:"200px" }}>
+            <div className="mobile-container" style={{width:"80%", marginLeft:"300px"}}>
+                <div className="top-nav-float">
+                    <nav className="top-nav">
+                        <div className="nav-left">
+                            <div className="nav-icon">
+                                <i className="fas fa-circle"></i>
+                            </div>
+                            <div className="title-name">Content</div>
+                        </div>
+
+
+
+
+                    </nav>
+
+
+                    <div className="search-container">
+                        <div className="search-bar">
+                            <i className="fas fa-search search-icon"></i>
+                            <input onChange={(e) => {
+                                this.dispatch({ tags: e.target.value })
+                            }}
+                                className="search-input" />
+                        </div>
+                    </div>
+
+                    <div className="filter">
+                        <div className="row row-space-between">
+                        <Link to="/sequence" className="btn-gray" >
+                        New Sequence
+                </Link>
+                <Link to="/template" className="btn-gray" >
+                    New Template
+                </Link>
+                            <div className="btn-gray">New AI</div>
+                        </div>
+                    </div>
+
+                </div>
                 {/* Left Card for Sequences */}
                 <div style={{ width: "45%", marginRight: "30px" }}>
                     <Card theme="defaultCard" content={<Sequences />} />
                 </div>
-                
+
                 {/* Right Card for Templates */}
                 <div style={{ width: "45%" }}>
                     <Card theme="defaultCard" content={<Templates />} />

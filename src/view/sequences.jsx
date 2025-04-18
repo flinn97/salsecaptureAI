@@ -6,6 +6,7 @@ import { Card } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import { MapComponent } from "flinntech";
+import SequenceCustomItem from "./components/sequenceCustom";
 
 export default class Sequences extends BaseComponent {
     /**
@@ -29,24 +30,25 @@ export default class Sequences extends BaseComponent {
             <div className="fit">
                 <h4 style={{ marginBottom: "10px" }}>Sequences</h4>
                 {/* Link to navigate to the sequences page */}
-                <Link to="/sequence" className="defaultButton" style={{ marginBottom: "20px" }}>
-                    Add Sequence
-                </Link>
+                
                 
                 {/* MapComponent to display sequences with title and date */}
                 <MapComponent
                     name="sequence"
                     cells={[
-                        {
-                            type: "attribute",
-                            name: "name",
-                            hasLink: true, // Enables link functionality
-                            linkClick: (obj) => {
-                                const id = obj.getJson()._id; // Get the sequence ID
-                                this.dispatch({ popupSwitch: "", currentPopupComponent: undefined });
-                                window.location.href = `/sequence/${id}`; // Redirect to the specific sequence page
-                            }
-                        },
+                        {type:"custom",
+                        custom:SequenceCustomItem
+                        }
+                        // {
+                        //     type: "attribute",
+                        //     name: "name",
+                        //     hasLink: true, // Enables link functionality
+                        //     linkClick: (obj) => {
+                        //         const id = obj.getJson()._id; // Get the sequence ID
+                        //         this.dispatch({ popupSwitch: "", currentPopupComponent: undefined });
+                        //         window.location.href = `/sequence/${id}`; // Redirect to the specific sequence page
+                        //     }
+                        // },
                         // {
                         //     type: "attribute",
                         //     name: "date", // Display the date of the sequence

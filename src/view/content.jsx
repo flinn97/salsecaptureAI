@@ -5,6 +5,7 @@
 import { Card } from "flinntech";
 import { GetAllComponents } from "flinntech";
 import ContentCard from "./ContentCard";
+import "./content.css";
 
 export default class Content extends GetAllComponents {
     /**
@@ -34,11 +35,10 @@ export default class Content extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass} style={{ marginLeft: window.innerWidth < 1000 ? "5px" : "50px" }}>
+            <div className={this.props.pageClass || this.state.defaultClass} >
                 {this.state.gotComponents && (
-                    <div className="fit">
-                        <Card theme="defaultCard" content={<ContentCard />} />
-                    </div>
+                        <Card theme="NoBorder" type="fit"content={<ContentCard />} />
+                    
                 )}
             </div>
         );

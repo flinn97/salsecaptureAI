@@ -5,6 +5,7 @@
 import { MapComponent } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
+import TemplateCustomItem from "./components/templateCustom";
 
 export default class Templates extends BaseComponent {
     /**
@@ -27,26 +28,18 @@ export default class Templates extends BaseComponent {
         return (
             <>
                 <h4 style={{ marginBottom: "10px" }}>Templates</h4>
-                <Link to="/template" style={{ marginTop: '10px', display: 'block' }}>
-                    Add Template
-                </Link>
+                
                 {/* MapComponent to display templates with links */}
-                <MapComponent 
-                    name="template" 
+                <MapComponent
+                    name="template"
                     cells={[
-                        { 
-                            type: "attribute", 
-                            name: "content", 
-                            hasLink: true,
-                            linkClick: (obj) => {
-                                const id = obj.getJson()._id; // Get the sequence ID
-                                this.dispatch({ popupSwitch: "", currentPopupComponent: undefined });
-                                window.location.href = `/template/${id}`; // Redirect to the specific sequence page
-                            }
-                        },
-                        {type:"attribute", name:"content"}
+                        {type:"custom",
+                        custom:TemplateCustomItem
+                        }
+                      
                     ]}
                 />
+                
                 
             </>
         );

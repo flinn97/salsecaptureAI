@@ -6,7 +6,7 @@
 import { Card } from "flinntech";
 import { GetAllComponents } from "flinntech";
 import ContactsCard from "./contactCard"; // Custom component for displaying contacts
-
+import "./contacts.css";
 export default class Contacts extends GetAllComponents {
     /**
      * Constructor for the Contacts component.
@@ -37,9 +37,7 @@ export default class Contacts extends GetAllComponents {
     render() {
         return (
             <div className={this.props.pageClass || this.state.defaultClass}>
-                <div style={{ margin: "20px" }}>
-                    <Card theme="defaultCard" content={<ContactsCard />} />
-                </div>
+                    <Card theme="NoBorder" type="fit" content={<ContactsCard />} />
             </div>
         );
     }

@@ -18,6 +18,7 @@ import "./salescaptureAI.scss"
 //REMOVE
 import { data } from './models/fakeData.js';
 import "./style.scss"
+import "./finalSCAICss.css"
 //  import Settings from './view/settings';
 //  import AddContactPopup from './view/addContactPopup';
 

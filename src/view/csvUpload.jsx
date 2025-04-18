@@ -31,11 +31,12 @@ class CsvUpload extends Component {
     const { data } = this.state;
 
     return (
-      <div>
-        <h2>Upload CSV File</h2>
-        <input type="file" accept=".csv" onChange={this.handleFileUpload} />
+        <div className="btn-gray" style={{position:'relative'}}>
+        Upload CSV
+        <input style={{opacity:0, width:'100%', height:"100%", position:"absolute", left:"0px", top:"0px"}} type="file" accept=".csv" onChange={this.handleFileUpload} />
 
-      </div>
+                            </div>
+
     );
   }
 }

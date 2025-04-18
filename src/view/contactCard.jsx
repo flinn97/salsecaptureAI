@@ -7,6 +7,7 @@ import { PopupButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 import add from "../assets/add.png";
 import CheckIt from "./components/check";
+import ContactsCustomItem from "./components/contactsCustom";
 import CsvUpload from "./csvUpload";
 
 /**
@@ -28,17 +29,17 @@ export default class ContactsCard extends BaseComponent {
         };
     }
 
-    filterFunc(){
+    filterFunc() {
         debugger
         let filterText = this.propsState.tags.split(',');
         let contactList = this.componentList.getList("contact");
-        let newList =[]
-        for(let tag of filterText){
-            let list = contactList.filter(obj=>obj.getJson().tags.includes(tag))
-            newList=[...newList, ...list]
+        let newList = []
+        for (let tag of filterText) {
+            let list = contactList.filter(obj => obj.getJson().tags.includes(tag))
+            newList = [...newList, ...list]
         }
-        this.dispatch({selectedContacts:newList})
-        
+        this.dispatch({ selectedContacts: newList })
+
     }
 
 
@@ -49,106 +50,171 @@ export default class ContactsCard extends BaseComponent {
      */
     getInnerContent() {
         return (
-            <>
-                <h4 style={{ marginBottom: "10px" }}>{this.state.title}</h4>
-                {/* Button to add a new contact */}
-                <PopupButton
-                    formClass="FCImgButton"
-                    content={<img src={add} style={{ width: "30px", height: "30px" }} />}
-                    popupSwitch="addContact"
+            <div className="mobile-container">
+                <div className="top-nav-float">
+                    <nav className="top-nav">
+                        <div className="nav-left">
+                            <div className="nav-icon">
+                                <i className="fas fa-circle"></i>
+                            </div>
+                            <div className="nav-title">Contacts</div>
+                        </div>
+
+                        <div className="nav-right">
+                            <div className="nav-icon">
+                                <button className="btn">A to Z <i className="fa-solid fa-angle-down"></i></button>
+                            </div>
+                            <div className="nav-icon">
+                                <button className="btn"><i className="fa-solid fa-filter"></i></button>
+                            </div>
+                        </div>
+
+
+                    </nav>
+
+
+                    <div className="search-container">
+                        <div className="search-bar">
+                            <i className="fas fa-search search-icon"></i>
+                            <input onChange={(e) => {
+                                this.dispatch({ tags: e.target.value })
+                            }}
+                                className="search-input" />
+                        </div>
+                    </div>
+
+                    <div className="filter-nav">
+                        <div className="filter-nav-left">
+                            <CheckIt check={this.filterFunc} uncheck={() => { this.dispatch({ selectedContacts: [] }) }} />
+                            {/* <div id="selectBtn" className="btn-gray">
+                                Select
+                            </div> */}
+                            Select all {this.propsState.selectedContacts?.length? this.propsState.selectedContacts.length +" Selected":""}
+                        </div>
+
+                        <div className="filter-nav-right">
+                            <CsvUpload callBack={async (data) => {
+                                data = data.data.map((obj, i) => {
+                                    obj.owner = this.propsState.currentUser.getJson()._id;
+                                    obj.type = "contact";
+                                    return obj
+
+                                })
+                                await this.operationsFactory.prepare({ prepare: data });
+                                this.operationsFactory.run();
+
+
+                            }} />
+                            {/* <div className="btn-gray">
+                                Views
+                            </div> */}
+                            {/* <div id="toggleTags" className="btn-gray">
+                                Show Tags
+                            </div> */}
+                            <PopupButton
+                                formclassName="FCImgButton"
+                                wrapperclassName="none"
+                                content={<div  className="btn-gray">
+                                    Add Contact
+                                </div>}
+                                popupSwitch="addContact"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                
+
+
+
+                {/* Header row for the contacts data table */}
+
+                {/* Scrollable section for the contacts data */}
+                <MapComponent
+
+                    filterFunc={(o) => {
+                        if (!this.propsState.tags) {
+                            return true
+                        }
+                        let filterText = this.propsState.tags.split(',');
+                        for (let tag of filterText) {
+                            if (tag === "") {
+                                continue;
+                            }
+                            if (o.getJson().tags.includes(tag)) {
+                                return true;
+                            }
+                        }
+
+                        return false
+
+
+                    }}
+
+                    name="contact"
+                    mapContainerclassName="contact-list"
+                    mapSectionclassName="contact"
+                    cells={[
+                        {
+                            type: "custom",
+                            custom: ContactsCustomItem
+                        }
+                        // {
+                        //     type: "custom",
+                        //     custom: CheckIt,
+                        //     check: (obj) => {
+
+                        //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
+                        //         contacts.push(obj);
+                        //         this.dispatch({ selectedContacts: contacts });
+                        //     },
+                        //     uncheck: (obj) => {
+                        //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
+                        //         contacts = contacts.filter(contact => contact !== obj);
+                        //         this.dispatch({ selectedContacts: contacts });
+                        //     }
+                        // },
+
+                        // {
+                        //     type: "attribute",
+                        //     name: "name",
+                        //     style: { cursor: "pointer" },
+                        //     itemClick: (obj) => {
+                        //         this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
+                        //     }
+                        // },
+                        // { type: "attribute", name: "email" },
+                        // { type: "attribute", name: "phone" },
+                        // { type: "attribute", name: "status" },
+                    ]}
+                    hasLink={true}
+
                 />
-                <PopupButton
-                    formClass="FCImgButton"
-                    content={<div>Add to Sequence</div>}
+                {this.propsState.selectedContacts?.length > 0 &&
+                    <div id="floating-select-set" className="floating-select-set">
+                        <button className="floating-select-btn">
+                            <span className="floating-select-btn-text">Export</span>
+                        </button>
+                        <button onClick={()=>{
+                            for(let contact of this.propsState.selectedContacts){
+                                contact.del();
+                            }
+                        }}className="floating-select-btn" >
+                            <span className="floating-select-btn-text">Delete</span>
+                        </button>
+                        <button className="floating-select-btn floating-select-primary-btn">
+                            <PopupButton
+                    formclassName="FCImgButton"
+                    content={<span className="floating-select-btn-text">Add to Sequence</span>}
                     popupSwitch="addToSequence"
                 />
-                <CsvUpload callBack={async (data) => {
-                    data = data.data.map((obj, i) => {
-                        obj.owner = this.propsState.currentUser.getJson()._id;
-                        obj.type = "contact";
-                        return obj
-
-                    })
-                    await this.operationsFactory.prepare({ prepare: data });
-                    this.operationsFactory.run();
-
-
-                }} />
-                <input onChange={(e) => {
-                    this.dispatch({ tags: e.target.value })
-                }}
-                    style={{
-                        borderRadius: "50px", background: "#ffdead05", width: "50vw", color: "black", border: "1px solid gray",
-                        height: window.innerWidth > 700 ? "3rem" : "1.8rem", fontSize: window.innerWidth > 700 ? "1.8rem" : "1rem", paddingLeft: window.innerWidth > 700 ? "50px" : "52px", paddinRight: "1rem", marginRight: window.innerWidth > 700 ? "29px" : "-20px"
-                    }} />
-                <CheckIt check={this.filterFunc} uncheck={()=>{this.dispatch({selectedContacts:[]})}} />
-                <div className="fit" style={{ backgroundColor: "#f8f5f5", width: "92%" }}>
-                    {/* Header row for the contacts data table */}
-                    <div className="Map-Section-ei" style={{ padding: "10px", paddingLeft: "15px", display: "flex", flexDirection: "row" }}>
-                        <div className="Map-Cell textBold">Name</div>
-                        <div className="textBold Map-Cell">Email</div>
-                        <div className="textBold Map-Cell">Phone</div>
-                        <div className="textBold Map-Cell">Status</div>
+                            
+                        </button>
                     </div>
-                    {/* Scrollable section for the contacts data */}
-                    <div className="scroller" style={{ height: "130px", marginLeft: "12px" }}>
-                        <MapComponent
-                        filterFunc={(o)=>{
-                            if(!this.propsState.tags){
-                                return true
-                            }
-                            let filterText = this.propsState.tags.split(',');
-                            for(let tag of filterText){
-                                if(tag===""){
-                                    continue;
-                                }
-                                if(o.getJson().tags.includes(tag)){
-                                    return true;
-                                }
-                            }
-                            
-                                return false
-                            
-                            
-                        }}
-
-                            name="contact"
-                            mapSectionClass="Map-Section-ei"
-                            cells={[
-                                {
-                                    type: "custom",
-                                    custom: CheckIt,
-                                    check: (obj) => {
-                                        
-                                        let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
-                                        contacts.push(obj);
-                                        this.dispatch({ selectedContacts: contacts });
-                                    },
-                                    uncheck: (obj) => {
-                                        let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
-                                        contacts = contacts.filter(contact => contact !== obj);
-                                        this.dispatch({ selectedContacts: contacts });
-                                    }
-                                },
-
-                                {
-                                    type: "attribute",
-                                    name: "name",
-                                    style: { cursor: "pointer" },
-                                    itemClick: (obj) => {
-                                        this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
-                                    }
-                                },
-                                { type: "attribute", name: "email" },
-                                { type: "attribute", name: "phone" },
-                                { type: "attribute", name: "status" },
-                            ]}
-                            hasLink={true}
-
-                        />
-                    </div>
-                </div>
-            </>
+                }
+            </div>
         );
     }
 
