@@ -216,3 +216,25 @@
   .bottom-nav-item.active {
     color: #fff;
   }
+
+
+
+/*css to fit in current page*/
+.filter-nav-right div{
+  margin-bottom:0;
+}
+
+
+.filter-nav-left>:nth-child(1){
+  height:25px;
+}
+
+.contact-item>:nth-child(1){
+  height:25px;
+}
+.filter-nav-right span{
+  cursor:pointer;
+}
+/*.filter-nav-right input{*/
+/*  pointer-events:none;*/
+/*}*/
