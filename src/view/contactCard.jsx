@@ -73,8 +73,8 @@ export default class ContactsCard extends BaseComponent {
                     </nav>
 
 
-                    <div className="search-bar">
-                        <div className="search-container">
+                    <div className="search-container">
+                        <div className="search-bar">
                             <i className="fas fa-search search-icon"></i>
                             <input onChange={(e) => {
                                 this.dispatch({ tags: e.target.value })
