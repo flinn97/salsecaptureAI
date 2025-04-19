@@ -155,9 +155,9 @@
     white-space: nowrap;
   }
   
-  .contact-tag-btn:hover {
-    background-color: #d0d0d0;
-  }
+  /*.contact-tag-btn:hover {*/
+  /*  background-color: #d0d0d0;*/
+  /*}*/
   
   .contact-tag-btn.active {
     background-color: #fff;
@@ -249,4 +249,12 @@ input[type="file"] {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease; /* 过渡效果 */
+}
+
+.floating-select-btn>div{
+  margin-bottom:0;
+}
+.floating-select-btn>div>div{
+  height:100%;
+  background-color:transparent;
 }
