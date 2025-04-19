@@ -50,3 +50,9 @@
 .switch-tab .row div{
     flex:1;
 }
+
+
+/*remove overflow*/
+.Map-Section {
+    margin:0;
+}

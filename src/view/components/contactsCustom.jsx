@@ -29,11 +29,15 @@ class ContactsCustomItem extends BaseComponent {
                             this.dispatch({ selectedContacts: contacts });
                         }
                         } />
-                    <img
-                        src={user.picURL !== "" ? user.picURL || contactImg : contactImg}
-                        alt="头像"
-                        className="contact-avatar"
-                    />
+                    {/*<img*/}
+                    {/*    src={user.picURL !== "" ? user.picURL || contactImg : contactImg}*/}
+                    {/*    alt="头像"*/}
+                    {/*    className="contact-avatar"*/}
+                    {/*/>*/}
+
+                    <div className="contact-avatar">
+                        <i className="fa-solid fa-user"></i>
+                    </div>
                     <div className="contact-info">
                         <div onClick={(obj) => {
                             this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });

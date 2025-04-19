@@ -50,7 +50,7 @@ export default class ContentCard extends BaseComponent {
                             <input onChange={(e) => {
                                 this.dispatch({ tags: e.target.value })
                             }}
-                                className="search-input" />
+                                className="search-input" placeholder="Search" />
                         </div>
                     </div>
 
@@ -68,7 +68,8 @@ export default class ContentCard extends BaseComponent {
 
                 </div>
                 {/* Left Card for Sequences */}
-                <div style={{ width: "45%", marginRight: "30px" }}>
+                {/*<div style={{ width: "45%", marginRight: "30px" }}>*/}
+                <div>
                     <Card theme="defaultCard" content={<Sequences />} />
                 </div>
 

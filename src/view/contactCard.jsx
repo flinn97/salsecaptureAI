@@ -79,7 +79,7 @@ export default class ContactsCard extends BaseComponent {
                             <input onChange={(e) => {
                                 this.dispatch({ tags: e.target.value })
                             }}
-                                className="search-input" />
+                                className="search-input" placeholder="Search" />
                         </div>
                     </div>
 

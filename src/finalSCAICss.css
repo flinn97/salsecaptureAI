@@ -38,6 +38,33 @@
   .mobile-container {
     max-width: 600px;
   }
+
+.col{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-space-around{
+  justify-content: space-around;
+  padding: 0.5rem 1rem;
+}
+
+.row-space-between{
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.row-left{
+  justify-content: left;
+  padding: 0.5rem 1rem;
+}
   
   /* CSS rules for selectors with identical definitions across all occurrences */
 
@@ -441,10 +468,18 @@
   bottom: 70px;
 }
 
-.search-bar {
-  padding: 0 1rem;
+.search-container {
+  padding:0 1rem;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
 }
 
 .search-icon {
