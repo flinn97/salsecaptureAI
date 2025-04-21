@@ -35,37 +35,27 @@
          return(
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
           <>subject</>
-                {this.propsState.currentStep && (
                     <ParentFormComponent
-                        obj={this.propsState.currentStep}
+                        obj={this.propsState.currentPopupComponent}
                         name="subject"
                     />
-                )}
                 <>content</>
-                {this.propsState.currentStep && (
                     <ParentFormComponent
                         type="quill"
-                        obj={this.propsState.currentStep}
+                        obj={this.propsState.currentPopupComponent}
                         name="content"
                         wrapperClass="contentWrapper"
                     />
-                )}
+                
                 <>next send in days</>
-                {this.propsState.currentStep && (
-                    //     <Dropdown
-                    //     options={selectOptions} // Assuming selectOptions is an array of objects like: [{ label: "ASAP" }, { label: "5 minutes" }, { label: "10 minutes" }]
-                    //     obj = {this.propsState.currentStep}
-                    //     placeholder="Select next send"
-                    //     className="custom-dropdown"
-                    //     name="nextSend"
-                    //   />
+                
                     <ParentFormComponent
 
-                        obj={this.propsState.currentStep}
+                        obj={this.propsState.currentPopupComponent}
                         name="nextSend"
                     />
-                )}
-                <UploadButton obj={this.propsState.currentStep} />
+                
+                <UploadButton obj={this.propsState.currentPopupComponent} content={<img alt="PETER:addImage"/>}/>
            <div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> {/*Container for the save button*/}
              <div style={{paddingRight:"50px", paddingBottom:"20px"}}> {/*Container for button spacing*/}
            {button}</div> {/*Button to save changes*/}

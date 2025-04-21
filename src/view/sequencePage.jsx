@@ -33,7 +33,7 @@
          }
  
          await this.dispatch({ currentSequence: sequence });
-         this.createStep(sequence);
+        //  this.createStep(sequence);
  
      }
  
@@ -46,6 +46,14 @@
          });
          this.dispatch({ currentStep: newStep.length === 2 ? newStep[1] : newStep[0] }); // Dispatch the currentStep as the new step
      }
+      getStepJson() {
+        
+        let list = this.componentList.getList("step", this.propsState.currentSequence?.getJson()._id, "sequenceId");
+
+        // If no ID in the URL, prepare a new Step objectx
+        let newStep ={ type: "step", sequenceId: this.propsState.currentSequence?.getJson()._id, step: list.length }
+        return newStep
+    }
  
      /**
       * Returns the inner content of the SequencePage component.
@@ -122,6 +130,10 @@
                  <PopupButton
                                  formClass="svg-last"
                                  wrapperClass="icon-row"
+                                 newProp="asdf"
+                                 obj={
+                                    this.getStepJson()
+                                 }
                                  content={<>
                                      <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
                                      <path
