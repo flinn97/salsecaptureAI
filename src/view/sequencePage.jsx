@@ -124,8 +124,20 @@ export default class SequencePage extends GetComponentsFromUrl {
                     <div className="icon-list">
                         <div className="icon-row">
                             <div className="icon-container">
-                                <div className="icon">
-                                    <i className="fa-solid fa-envelope"></i>
+                                <div className="col">
+                                    <div className="icon"><i className="fa-solid fa-envelope"></i></div>
+                                    <div className="svg">
+                                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                            <line
+                                                x1="50%"
+                                                y1="0"
+                                                x2="50%"
+                                                y2="50"
+                                                stroke="var(--app-green)"
+                                                strokeWidth="3"
+                                            />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                             <div className="message-container">
@@ -137,30 +149,14 @@ export default class SequencePage extends GetComponentsFromUrl {
                             </div>
                         </div>
 
-                        <div className="icon-row">
-                            <div className="icon-container">
-                                <div className="svg">
-                                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <line
-                                            x1="50%"
-                                            y1="0"
-                                            x2="50%"
-                                            y2="50"
-                                            stroke="var(--app-green)"
-                                            strokeWidth="3"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
+
 
 
                         <div className="icon-row">
                             <div className="svg-last">
-                                <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M25,0 V50 Q25,70 50,70 H50"
+                                        d="M25,0 Q25,25 50,25 H50"
                                         fill="none"
                                         stroke="var(--app-green)"
                                         strokeWidth="3"
@@ -176,13 +172,18 @@ export default class SequencePage extends GetComponentsFromUrl {
                     </div>
                 </div>
                 <h4 style={{ marginBottom: "10px" }}>Steps for Sequence</h4>
-                Name:
+
+                <div className="input-container">
+                    <div className="input-bar">
+                        <div className="input-icon">Name:</div>
                 {this.propsState.currentSequence && (
                     <ParentFormComponent
                         obj={this.propsState.currentSequence}
                         name="name"
                     />
                 )}
+                    </div>
+                </div>
 
                 {/* MapComponent to display steps associated with the current sequence */}
                 <MapComponent
@@ -197,22 +198,34 @@ export default class SequencePage extends GetComponentsFromUrl {
 
 
                 {/* If there is a currentStep, show the form to edit it */}
-                <>subject</>
+                <div className="input-container">
+                    <div className="input-bar">
+                        <div className="input-icon">Subject:</div>
                 {this.propsState.currentStep && (
                     <ParentFormComponent
                         obj={this.propsState.currentStep}
                         name="subject"
                     />
                 )}
-                <>content</>
-                {this.propsState.currentStep && (
-                    <ParentFormComponent
-                        type="quill"
-                        obj={this.propsState.currentStep}
-                        name="content"
-                        wrapperClass="contentWrapper"
-                    />
-                )}
+                    </div>
+                </div>
+
+                <div className="input-container">
+                    <div className="input-bar">
+                        <div className="col col-left">
+                            <div style={{fontWeight:"700"}}>Content:</div>
+                            {this.propsState.currentStep && (
+                                <ParentFormComponent
+                                    type="quill"
+                                    obj={this.propsState.currentStep}
+                                    name="content"
+                                    wrapperClass="contentWrapper"
+                                />
+                            )}
+                        </div>
+
+                    </div>
+                </div>
                 <>next send in days</>
                 {this.propsState.currentStep && (
                     //     <Dropdown

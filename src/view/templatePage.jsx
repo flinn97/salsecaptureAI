@@ -31,12 +31,17 @@ export default class TemplatePage extends GetComponentsFromUrl {
         return (
             <div className="fit">
                 <h1>Template Details</h1>
+                <div className="input-container">
+                    <div className="input-bar">
                 {this.propsState.currentComponent&&
                 <ParentFormComponent type="quill" name="content" obj={this.propsState.currentComponent} />
                 }
+                    </div>
+                </div>
                 <RunButton
                         content="Save Template"
                     />
+
             </div>
         );
     }
