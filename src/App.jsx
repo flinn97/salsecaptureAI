@@ -3,7 +3,7 @@
  */
  import { db, auth, storage } from './firebase.config.js';
  import * as MyComponents from './models/myComponents.js';
- import { AppBaseClass, BaseComponent } from 'flinntech';
+ import { AppBaseClass, BaseComponent, navInterface } from 'flinntech';
  import logo from "./assets/flinntechlogo.svg";
  import ContactPopup from './view/popups/contactPopup.jsx';
  import { User } from './models/myComponents.js';
@@ -20,6 +20,7 @@
  import "./style.scss"
  import "./finalSCAICss.css"
  import CreateStepPopup from './view/popups/createStepPopup.jsx';
+ import Logo from "./assets/scailogofake.png"
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -46,15 +47,20 @@
  
      this.state = {
        ...this.state,
- 
+       navBarProps:{
+        style:{backgroundColor:"#35b593", color:"white"},
+        cardStyle:{backgroundColor:"#35b593",}, 
+        logoURL:Logo, linkItemStyle:{color:"white"}, },
        routes: [
-         { comp: Home, name: "Home", path: "/" },
-         { comp: Conversations, name: "Conversations", path: "conversation" },
+         { comp: Conversations, name: "Messages", path: "/" },
+        //  { comp: Conversations, name: "Messages", path: "conversation" },
  
-         { comp: Contacts, name: "contacts", path: "contacts" },
-         { comp: Content, name: "content", path: "content" },
-         { comp: SequencePage, name: "add sequence", path: "sequence" },
-         { comp: TemplatePage, name: "add template", path: "template" },
+         { comp: Contacts, name: "Contacts", path: "contacts" },
+         { comp: Contacts, name: "Research", path: "contacts" },
+
+         { comp: Content, name: "Content", path: "content" },
+        //  { comp: SequencePage, name: "add sequence", path: "sequence" },
+        //  { comp: TemplatePage, name: "add template", path: "template" },
          //  { comp: Settings, name: "settings" },
        ],
        popups: [
@@ -63,6 +69,10 @@
      };
  
      this.registerListWithFactory([...Object.values(MyComponents)]);
+     
+     let navList = navInterface.getNavList();
+     navList.update(0, {class:"SCAILogo"})
+     navList.update(1, {activeClass:"SCAILink"})
      
      //REMOVE
      this.getUser(user);

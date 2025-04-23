@@ -104,11 +104,13 @@ export default class Conversation extends BaseComponent {
                     />
                     {/* Form for sending new messages */}
                     <ParentFormComponent
+                        wrapperClass="search-bar"
+                        formClass= "search-input"
                         name="body" // Name for the input field
                         obj={this.propsState.currentComponent} // Connect to the current conversation
                     />
                     <RunButton
-                        content="Send"
+                        content={<img alt = "peterAddSend"/>}
                         callbackFunc={() => {
                             let obj = this.propsState.currentComponent
 

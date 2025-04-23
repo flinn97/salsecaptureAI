@@ -2,7 +2,7 @@
    CSS Variables & Global Reset
    ========================================================================== */
    :root {
-    --app-green: #5aaa95;
+    --app-green: #35b593;
     --app-brown: #69463a;
     --app-dark-gray: #848484;
     --app-light-gray: #e6e6e6;
@@ -618,3 +618,18 @@
   color: var(--app-green);
 }
   
+
+.SCAILogo{
+  width:80%
+}
+
+.SCAILink{
+  color: black;
+  background-color: #2a8f76;
+  height: 100%;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  justify-content: center;
+}
