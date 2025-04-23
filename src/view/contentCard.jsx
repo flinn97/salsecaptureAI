@@ -74,7 +74,7 @@ export default class ContentCard extends BaseComponent {
                 </div>
 
                 {/* Right Card for Templates */}
-                <div style={{ width: "45%" }}>
+                <div>
                     <Card theme="defaultCard" content={<Templates />} />
                 </div>
             </div>
