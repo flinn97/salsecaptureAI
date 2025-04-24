@@ -91,4 +91,7 @@ class Email extends BaseMessenger {
     };
 }
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email };
+
+
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, };
