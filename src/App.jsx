@@ -42,7 +42,7 @@
  
      }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
@@ -52,14 +52,14 @@
         cardStyle:{backgroundColor:"#35b593",}, 
         logoURL:Logo, linkItemStyle:{color:"white"}, },
        routes: [
-         { comp: Conversations, name: "Messages", path: "/" },
-        //  { comp: Conversations, name: "Messages", path: "conversation" },
+         { comp: Home, name: "Home", path: "/" },
+         { comp: Conversations, name: "Messages", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
          { comp: Contacts, name: "Research", path: "contacts" },
 
          { comp: Content, name: "Content", path: "content" },
-        //  { comp: SequencePage, name: "add sequence", path: "sequence" },
+         { comp: SequencePage, name: "", path: "sequence" },
         //  { comp: TemplatePage, name: "add template", path: "template" },
          //  { comp: Settings, name: "settings" },
        ],

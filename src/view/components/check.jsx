@@ -7,9 +7,41 @@ class CheckIt extends BaseComponent {
     this.state = {
       ...this.state,
       checked: false,
+      activeBool: false,
     };
 
 
+  }
+
+  componentDidMount(){
+    
+    this.checkIfActive();
+  }
+  async componentDidUpdate(props, state){
+    
+    let obj = this.props.obj;
+    if(obj){
+      
+      if(this.propsState[this.props.checkKey]?.includes(obj) && this.state.activeBool===false){
+        
+        this.setState({ checked: true, activeBool:true });
+      }
+      else if(!this.propsState[this.props.checkKey]?.includes(obj) && this.state.activeBool===true){
+        this.setState({checked:false, activeBool:false})
+      }
+      
+      
+    }
+    
+  }
+
+  checkIfActive(){
+    let obj = this.props.obj;
+    if(obj){
+      if(this.propsState[this.props.checkKey]?.includes(obj)){
+        this.setState({ checked: true });
+      }
+    }
   }
 
   async handleToggle() {
@@ -18,18 +50,18 @@ class CheckIt extends BaseComponent {
       checked: !prevState.checked,
     }));
     if(this.state.checked){
-      this.check();
+      this.check(this.props.obj);
     }
     else{
-      this.uncheck();
+      this.uncheck(this.props.obj);
     }
   }
 
   // Programmatically check the checkbox
-  check() {
+  check(obj) {
     this.setState({ checked: true });
     if(this.props.check){
-      this.props.check();
+      this.props.check(obj);
     }
     else{
       this.props.cell.check(this.props.obj);
@@ -38,11 +70,11 @@ class CheckIt extends BaseComponent {
   }
 
   // Programmatically uncheck the checkbox
-  uncheck() {
-    debugger
+  uncheck(obj) {
+    
     this.setState({ checked: false });
     if(this.props.uncheck){
-      this.props.uncheck();
+      this.props.uncheck(obj);
     }
     else{
       this.props.cell.uncheck(this.props.obj);

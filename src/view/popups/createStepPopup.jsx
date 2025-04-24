@@ -3,7 +3,7 @@
  * @extends {BaseComponent}
  * This component renders a popup for adding or editing OEM information.  It uses other components from 'flinntech' for form elements and buttons.
  */
- import { ParentFormComponent, RunButton, UpdateButton, UploadButton } from "flinntech";
+ import { DelButton, ParentFormComponent, RunButton, UpdateButton, UploadButton } from "flinntech";
  import {BaseComponent} from "flinntech";
  
  export default class CreateStepPopup extends BaseComponent{
@@ -34,6 +34,7 @@
        }
          return(
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
+          
           <>subject</>
                     <ParentFormComponent
                         obj={this.propsState.currentPopupComponent}
@@ -54,8 +55,9 @@
                         obj={this.propsState.currentPopupComponent}
                         name="nextSend"
                     />
-                
+                {this.propsState.popupSwitch.includes("update")&&<DelButton obj={this.propsState.currentPopupComponent}  callbackFunc={()=>{this.dispatch({popupSwitch:"", currentPopupComponent:undefined})}}/>}
                 <UploadButton obj={this.propsState.currentPopupComponent} content={<img alt="PETER:addImage"/>}/>
+                
            <div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> {/*Container for the save button*/}
              <div style={{paddingRight:"50px", paddingBottom:"20px"}}> {/*Container for button spacing*/}
            {button}</div> {/*Button to save changes*/}

@@ -6,6 +6,7 @@
  import { Timestamp } from "firebase/firestore";
 import { MapComponent, ParentFormComponent, RunButton, UpdateButton, UploadButton } from "flinntech";
  import {BaseComponent} from "flinntech";
+import SequencePopupCustomItem from "../components/sequencePopupCustom";
  
  export default class AddToSequence extends BaseComponent{
      /**
@@ -30,7 +31,17 @@ import { MapComponent, ParentFormComponent, RunButton, UpdateButton, UploadButto
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
            <h2>Add to Sequence</h2> {/*Heading for the popup*/}
            contacts: {this.propsState.selectedContacts?.length||"0"} 
-           <MapComponent name="sequence" cells={[{type:"attribute", name:"name", itemClick:(obj)=>{
+           <MapComponent
+                    name="sequence"
+                    cells={[
+                        {type:"custom",
+                        custom:SequencePopupCustomItem
+                        }
+
+                    ]}
+                />
+           {/* <MapComponent name="sequence" cells={[{type:"attribute", name:"name", itemClick:(obj)=>{
+            debugger
             
             let contacts = this.propsState.selectedContacts;
             let step1 = this.componentList.getList("step", [obj.getJson()._id, 0], ["sequenceId", "step"])[0];
@@ -42,7 +53,7 @@ import { MapComponent, ParentFormComponent, RunButton, UpdateButton, UploadButto
                 c.setCompState({sequenceId:obj.getJson()._id, finished:false, emailNumber:0, nextSend: nextSend}, {run:true})
               }
             }
-           }}]}/>
+           }}]}/> */}
          
  
            
