@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseComponent } from 'flinntech';
+import { BaseComponent, DelButton } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png";
 import CheckIt from './check';
@@ -48,6 +48,7 @@ class SequenceCustomItem extends BaseComponent {
                     <div>7%</div>
                 </div>
             </div> */}
+            <DelButton obj={obj} />
         </div>
         );
     }

@@ -28,7 +28,7 @@
        // Set default button to RunButton
        let button = <RunButton   content="Save" isPopup={true} callbackFunc={this.props.callbackFunc} />
        //If an object is provided, change button to UpdateButton
-       if(this.propsState.popupSwitch.includes("updateContact")){
+       if(this.propsState.popupSwitch.includes("update")){
          
          button = <UpdateButton obj={this.propsState.currentPopupComponent} content="Save" isPopup={true} callbackFunc={this.props.callbackFunc}/>
        }
