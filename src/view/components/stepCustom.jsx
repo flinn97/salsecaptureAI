@@ -15,7 +15,7 @@ class StepCustomItem extends BaseComponent {
         
         
         return (
-            <div>
+            <div onClick={()=>{this.dispatch({popupSwitch:"updateStep", currentPopupComponent:this.props.obj})}}>
                         <div className="icon-row">
                             <div className="icon-container">
                                 <div className="icon">

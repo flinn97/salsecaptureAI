@@ -35,9 +35,15 @@
          return(
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
            <h2>{text} Contact</h2> {/*Heading for the popup*/}
-           Name:
+           First Name:
            <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-           <ParentFormComponent obj={this.props.obj} name="name" inPopup={true}/> {/*Component for title input*/}
+           <ParentFormComponent obj={this.props.obj} name="firstName" inPopup={true}/> {/*Component for title input*/}
+
+           </div>
+           Last Name:
+           <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+           <ParentFormComponent obj={this.props.obj} name="lastName" inPopup={true}/> {/*Component for title input*/}
+
            </div>
            email
            <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}

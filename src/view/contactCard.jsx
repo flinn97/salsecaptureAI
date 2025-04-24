@@ -30,14 +30,20 @@ export default class ContactsCard extends BaseComponent {
     }
 
     filterFunc() {
-        debugger
-        let filterText = this.propsState.tags.split(',');
+        
+        let filterText = this.propsState.tags?.split(',')||"";
         let contactList = this.componentList.getList("contact");
         let newList = []
-        for (let tag of filterText) {
-            let list = contactList.filter(obj => obj.getJson().tags.includes(tag))
-            newList = [...newList, ...list]
+        if(filterText){
+            for (let tag of filterText) {
+                let list = contactList.filter(obj => obj.getJson().tags.includes(tag))
+                newList = [...newList, ...list]
+            }
         }
+        else{
+            newList=[...contactList];
+        }
+        
         this.dispatch({ selectedContacts: newList })
 
     }
@@ -49,6 +55,7 @@ export default class ContactsCard extends BaseComponent {
      * @returns {JSX.Element} The inner content of the card.
      */
     getInnerContent() {
+        
         return (
             <div className="mobile-container">
                 <div className="top-nav-float">
@@ -100,7 +107,12 @@ export default class ContactsCard extends BaseComponent {
                                     return obj
 
                                 })
+                                this.dispatch({
+                                    uploadData: data,
+                                    popupSwitch: "uploadData"
+                                })
                                 await this.operationsFactory.prepare({ prepare: data });
+
                                 this.operationsFactory.run();
 
 
@@ -200,7 +212,9 @@ export default class ContactsCard extends BaseComponent {
                         <button onClick={()=>{
                             for(let contact of this.propsState.selectedContacts){
                                 contact.del();
+
                             }
+                            this.dispatch({selectedContacts:[]})
                         }}className="floating-select-btn" >
                             <span className="floating-select-btn-text">Delete</span>
                         </button>

@@ -34,7 +34,7 @@ class CsvUpload extends Component {
         <div className="" style={{position:'relative'}}>
 
           <label htmlFor="file-upload" className="custom-file-upload">
-            Custom Upload
+            Upload
           </label>
         <input id="file-upload" type="file" accept=".csv" onChange={this.handleFileUpload} />
 
