@@ -110,7 +110,12 @@ export default class Conversation extends BaseComponent {
                         obj={this.propsState.currentComponent} // Connect to the current conversation
                     />
                     <RunButton
-                        content={<img alt = "peterAddSend"/>}
+                        content={<div className="chat-footer">
+                            <button className="footer-btn">
+                                <i className="fa-solid fa-circle-plus"></i>
+                            </button>
+                            <input type="text" className="footer-input" placeholder="Start typing..." />
+                        </div>}
                         callbackFunc={() => {
                             let obj = this.propsState.currentComponent
 

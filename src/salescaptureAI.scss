@@ -14,7 +14,7 @@
 
   .header {
     background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
     text-align: center;
     padding: 1rem;
     font-size: 1.25rem;
@@ -25,7 +25,7 @@
   .search-bar {
     background-color: #fff;
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
 
     input[type='text'] {
       width: 100%;
@@ -53,7 +53,7 @@
       cursor: pointer;
       display: flex;
         justify-content: space-between;
-        align-items: baseline;
+        align-items: start;
 
       &:hover {
         background-color: #fafafa;
@@ -385,16 +385,16 @@
       line-height: 1.4;
       position: relative;
 
-      &.incoming {
+      &.outgoing {
         align-self: flex-start;
-        background-color: #fff;
-        color: #333;
-        border: 1px solid #eee;
+        background-color: #e6e6e6;
+        color: #000;
+        border: 1px solid #e6e6e6;
       }
 
-      &.outgoing {
+      &.incoming {
         align-self: flex-end;
-        background-color: #4caf50;
+        background-color: #5aaa95;
         color: #fff;
       }
     }
