@@ -385,17 +385,17 @@
       line-height: 1.4;
       position: relative;
 
-      &.outgoing {
-        align-self: flex-start;
+      &.incoming {
         background-color: #e6e6e6;
         color: #000;
-        border: 1px solid #e6e6e6;
       }
 
-      &.incoming {
-        align-self: flex-end;
+      &.outgoing {
+
+
         background-color: #5aaa95;
         color: #fff;
+
       }
     }
   }

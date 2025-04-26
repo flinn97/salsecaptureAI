@@ -19,7 +19,7 @@
 
 .message-list .message-item.outgoing{
     display:flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 message-item.outgoing message{
@@ -29,7 +29,7 @@ message-item.outgoing message{
 
 .message-list .message-item.incoming{
     display:flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .message.outgoing{
@@ -66,6 +66,7 @@ message-item.outgoing message{
     border:none;
     color:#2374ab;
     background-color:#9ad7ff;
+    cursor:pointer;
 }
 
 .footer-btn:hover {
