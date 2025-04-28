@@ -27,7 +27,6 @@
   
   body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--whatsapp-chat-bg);
     padding-bottom: 60px; /* leave space for nav */
     min-height: 100vh;
   }

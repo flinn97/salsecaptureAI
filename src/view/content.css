@@ -56,3 +56,32 @@
 .Map-Section {
     margin:0;
 }
+
+
+.defaultWrapper .delButton{
+    /*display:none;*/
+}
+
+.del-icon{
+    font-size:20px;
+}
+
+.del-icon{
+    display: flex;
+    position: relative;
+}
+
+.del-icon .fa-xmark{
+width:15px;
+    height:20px;
+}
+.del-icon .defaultWrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 20px;
+    opacity: 0;
+    overflow:hidden;
+    margin-bottom:0;
+}

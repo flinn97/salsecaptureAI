@@ -146,9 +146,9 @@
                                     this.getStepJson()
                                  }
                                  content={<>
-                                     <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
+                                     <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
                                      <path
-                                         d="M25,0 V50 Q25,70 50,70 H50"
+                                         d="M25,0 Q25,25 50,25 H50"
                                          fill="none"
                                          stroke="var(--app-green)"
                                          strokeWidth="3"
