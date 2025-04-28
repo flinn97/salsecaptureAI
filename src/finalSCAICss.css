@@ -688,3 +688,52 @@
   padding-left: 10px;
   justify-content: center;
 }
+
+
+.content-home-add>:nth-child(-n+3){
+  justify-content: left;
+  background-color: #f5f5f5;
+  border-radius:0.75rem;
+  padding:0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.content-home-add>:nth-child(-n+3)>:nth-child(1){
+  margin-right:1rem;
+}
+
+.content-home-add .defaultWrapper{
+  margin-bottom:0;
+}
+
+.content-home-add>:nth-child(4){
+  justify-content: left;
+}
+.content-home-add>:nth-child(4) .defaultButton{
+  background-color: var(--app-green);
+  color: var(--app-light-gray);
+  border-radius: 2rem;
+  font-size: 24px;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  cursor:pointer;
+}
+/*not working*/
+.content-home-add>:nth-child(4)>.wrapper{
+  cursor:pointer;
+}
+
+.content-home-add>:nth-child(4) .fa-plus{
+  font-weight: 900;
+
+}
+
+.content-home-add>:nth-child(4) .defaultWrapper{
+  height:40px;
+
+
+}

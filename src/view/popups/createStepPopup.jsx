@@ -34,36 +34,45 @@
        }
          return(
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
-          
-          <>subject</>
-                    <ParentFormComponent
-                        obj={this.propsState.currentPopupComponent}
-                        name="subject"
-                    />
-                <>content</>
+             <br/>
+            <div className="content-home-add">
+             <div className="row">
+
+                 <div>subject</div>
+
+                 <ParentFormComponent
+                     obj={this.propsState.currentPopupComponent}
+                     name="subject"
+                 />
+             </div>
+                <div className="row">
+                <div>content</div>
                     <ParentFormComponent
                         type="quill"
                         obj={this.propsState.currentPopupComponent}
                         name="content"
                         wrapperClass="contentWrapper"
                     />
-                
-                <>next send in days</>
+                </div>
+                <div className="row">
+                <div>next send in days</div>
                 
                     <ParentFormComponent
 
                         obj={this.propsState.currentPopupComponent}
                         name="nextSend"
                     />
+                </div>
                 {this.propsState.popupSwitch.includes("update")&&<DelButton obj={this.propsState.currentPopupComponent}  callbackFunc={()=>{this.dispatch({popupSwitch:"", currentPopupComponent:undefined})}}/>}
-                <UploadButton obj={this.propsState.currentPopupComponent} content={<img alt="PETER:addImage"/>}/>
-                
+                <div className="row">
+                <UploadButton obj={this.propsState.currentPopupComponent} content={<i className="fas fa-plus"></i>}/>
+                </div>
            <div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> {/*Container for the save button*/}
              <div style={{paddingRight:"50px", paddingBottom:"20px"}}> {/*Container for button spacing*/}
            {button}</div> {/*Button to save changes*/}
            </div>
- 
-           
+
+            </div>
  
          </div>
          )
