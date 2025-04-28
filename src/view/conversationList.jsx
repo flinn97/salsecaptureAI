@@ -39,7 +39,9 @@ export default class ConversationList extends BaseComponent {
                 mapContainerClass="message-list-scai"
                 mapSectionClass="message-item-scai"
                 cells={[
-                    { type: "customBuilt", custom: <img style={{ width: "50px" }} src={contactPng} />, wrapperStyle: { width: "50px"}, itemStyle: { width: "50px" }  },
+                    { type: "customBuilt", custom: <div className="chat-avatar">
+                            <i className="fa-solid fa-user"></i>
+                        </div>, wrapperStyle: { width: "50px"}, itemStyle: { width: "50px" }  },
                     {
                         type: "custom", custom: CustomMessageListItem, itemClick: (obj) => {
                             // Dispatch to set the currentConversation in global state
@@ -90,10 +92,14 @@ export default class ConversationList extends BaseComponent {
                 <div className="header">Messages</div>
                 
                 {/* Optional Search Bar */}
-                <div className="search-bar">
+                <div className="search-container">
+                    <div className="search-bar">
+                        <i className="fas fa-search search-icon"></i>
                     <input type="text" placeholder="Search messages..."  onChange={(e) => {
                     this.dispatch({ searchText: e.target.value })
-                }}/>
+                }}
+                           className="search-input"/>
+                </div>
                 </div>
                 {this.getInnerContent()}
             </div>

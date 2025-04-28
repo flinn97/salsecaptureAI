@@ -5,6 +5,7 @@
 import { Card } from "flinntech";
 import ConversationCard from "./ConversationCard"; // Custom component for individual conversation cards
 import { GetAllComponents } from "flinntech";
+import "./conversations.css";
 
 export default class Conversations extends GetAllComponents {
     /**
