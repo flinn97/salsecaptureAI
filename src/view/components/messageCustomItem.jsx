@@ -6,14 +6,20 @@ export default class CustomMessageItem extends BaseComponent{
         
         let str = this.props.obj.getJson().ownerMessage? "outgoing":"incoming"
         return(
-            <>
-            {/* Timestamps */}
-        <div className="timestamp">{this.props.obj.getJson().timeStamp}</div>
-        {/* Outgoing message (right-aligned, green bubble) */}
-        <div className={"message " + str}>
-          {this.props.obj.getJson().body}
-        </div>
-            </>
+            <div>
+                {/* Timestamps */}
+                <div className="date-divider">
+                    <span className="timestamp">{this.props.obj.getJson().timeStamp}</span>
+                </div>
+            <div className={"message-item " + str}>
+
+                {/* Outgoing message (right-aligned, green bubble) */}
+                <div className={"message " + str}>
+                    {this.props.obj.getJson().body}
+
+                </div>
+            </div>
+            </div>
         )
     }
 }
