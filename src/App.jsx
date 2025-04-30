@@ -22,6 +22,8 @@
  import CreateStepPopup from './view/popups/createStepPopup.jsx';
  import Logo from "./assets/scailogofake.png"
 import Settings from './view/settings.jsx';
+import ResearchPage from './view/researchPage.jsx';
+import ProspectPage from './view/potentialProspectPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -57,12 +59,12 @@ import Settings from './view/settings.jsx';
          { comp: Conversations, name: "Messages", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
-         { comp: Contacts, name: "Research", path: "contacts" },
+         { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
 
          { comp: Content, name: "Content", path: "content" },
          { comp: Settings, name: "Settings", path: "settings" },
 
-         { comp: SequencePage, name: "", path: "sequence" },
+         { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
         //  { comp: TemplatePage, name: "add template", path: "template" },
          //  { comp: Settings, name: "settings" },

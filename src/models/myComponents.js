@@ -91,7 +91,24 @@ class Email extends BaseMessenger {
     };
 }
 
+class PotentialProspect extends ComponentBase {
+    json = {
+        ...this.json,
+        type: 'potentialProspect',
+        phone: "",
+        email: "",
+        researchId:"",
+        conversationIds: [],
+        
+    };
+}
+
+class Research extends ComponentBase {
+    json={ 
+        ...this.json,
+        type:"research"
+    }
+}
 
 
-
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, };
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research };
