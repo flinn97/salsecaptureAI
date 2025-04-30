@@ -45,7 +45,7 @@ import ProspectPage from './view/potentialProspectPage.jsx';
  
      }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
