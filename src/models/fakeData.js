@@ -107,9 +107,21 @@ let data = [
         email:"taylormdavidson@gmail.com",
         owner:"alan@salescapture.com "
 
-    }
-
-    
+    },
+    {
+    type:"potentialProspect",
+    _id: "prospect1",
+    firstName:"Taylor Davidson",
+    email:"taylormdavidson@gmail.com",
+    owner:"alan@salescapture.com ",
+    researchId:"research1",
+    },
+    {
+        type:"research",
+        _id: "research1",
+        name:"research1",
+        owner:"alan@salescapture.com "
+        }
 ]
 
 export {data}
