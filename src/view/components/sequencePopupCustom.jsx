@@ -22,8 +22,10 @@ class SequencePopupCustomItem extends BaseComponent {
             let obj = this.props.obj
             
             let contacts = this.propsState.selectedContacts;
-            let step1 = this.componentList.getList("step", [obj.getJson()._id, 0], ["sequenceId", "step"])[0];
+            let step1 = this.componentList.getList("step", [obj.getJson()._id], ["sequenceId"]);
+            step1= step1.filter(obj=> obj.getJson().content!=="" && obj.getJson().content)[0]
             if(contacts?.length>0){
+                debugger
               let delay = parseFloat(step1.getJson().nextSend)
               let nextSend = new Date(Date.now() + delay * 60 * 60 * 1000);
               nextSend = Timestamp.fromDate(nextSend)

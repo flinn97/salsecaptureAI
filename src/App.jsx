@@ -21,6 +21,7 @@
  import "./finalSCAICss.css"
  import CreateStepPopup from './view/popups/createStepPopup.jsx';
  import Logo from "./assets/scailogofake.png"
+import Settings from './view/settings.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -42,7 +43,7 @@
  
      }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
@@ -59,7 +60,10 @@
          { comp: Contacts, name: "Research", path: "contacts" },
 
          { comp: Content, name: "Content", path: "content" },
+         { comp: Settings, name: "Settings", path: "settings" },
+
          { comp: SequencePage, name: "", path: "sequence" },
+
         //  { comp: TemplatePage, name: "add template", path: "template" },
          //  { comp: Settings, name: "settings" },
        ],
