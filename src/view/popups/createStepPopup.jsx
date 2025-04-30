@@ -33,7 +33,7 @@
          button = <UpdateButton obj={this.propsState.currentPopupComponent} content="Save" isPopup={true} callbackFunc={this.props.callbackFunc}/>
        }
          return(
-         <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
+         <div style={{padding:"10px", paddingBottom:"100px"}} className={this.props.pageClass||this.state.defaultClass}>
              <br/>
             <div className="content-home-add">
              <div className="row">
@@ -65,12 +65,17 @@
                 </div>
                 {this.propsState.popupSwitch.includes("update")&&<DelButton obj={this.propsState.currentPopupComponent}  callbackFunc={()=>{this.dispatch({popupSwitch:"", currentPopupComponent:undefined})}}/>}
                 <div className="row">
-                <UploadButton obj={this.propsState.currentPopupComponent} content={<i className="fas fa-plus"></i>}/>
+                    <div className="col"><UploadButton obj={this.propsState.currentPopupComponent} content={<i className="fas fa-plus"></i>}/></div>
+                    <div className="col">{button}</div>
+
                 </div>
-           <div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> {/*Container for the save button*/}
-             <div style={{paddingRight:"50px", paddingBottom:"20px"}}> {/*Container for button spacing*/}
-           {button}</div> {/*Button to save changes*/}
-           </div>
+                <div>
+
+                </div>
+           {/*<div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> /!*Container for the save button*!/*/}
+           {/*  <div style={{paddingRight:"50px", paddingBottom:"20px"}}> /!*Container for button spacing*!/*/}
+           {/*{button}</div> /!*Button to save changes*!/*/}
+           {/*</div>*/}
 
             </div>
  
