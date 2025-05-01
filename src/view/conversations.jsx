@@ -17,6 +17,7 @@ export default class Conversations extends GetAllComponents {
         this.state = {
             ...this.state,
             defaultClass: "fit",
+            owner:this.app.state.currentUser.getJson()._id
         };
     }
 
@@ -28,6 +29,7 @@ export default class Conversations extends GetAllComponents {
         await this.dispatch({ currentTopic: undefined, currentSubTopic: undefined, currentComponent: undefined });
         this.getComponentsFromBackend();
     }
+    
 
     /**
      * Renders the Conversations component.
@@ -38,7 +40,9 @@ export default class Conversations extends GetAllComponents {
             <div className={this.props.pageClass || this.state.defaultClass} style={{ padding: "20px" }}>
                 {/* Container for the conversations card */}
                 <div className="fit">
+                    {this.state.getComponentsFromBackend&&
                     <Card theme="defaultCard" content={<ConversationCard />} />
+                    }
                 </div>
             </div>
         );

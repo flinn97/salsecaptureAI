@@ -24,6 +24,7 @@
 import Settings from './view/settings.jsx';
 import ResearchPage from './view/researchPage.jsx';
 import ProspectPage from './view/potentialProspectPage.jsx';
+import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -35,6 +36,8 @@ import ProspectPage from './view/potentialProspectPage.jsx';
      super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
      this.popupComponents = { contact: ContactPopup, step: CreateStepPopup };
      this.popupComponentsProps = {};
+     navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
+    
      //REMOVE
      let user = {
        type: "user",
@@ -51,9 +54,11 @@ import ProspectPage from './view/potentialProspectPage.jsx';
      this.state = {
        ...this.state,
        navBarProps:{
-        style:{backgroundColor:"#35b593", color:"white"},
-        cardStyle:{backgroundColor:"#35b593",}, 
-        logoURL:Logo, linkItemStyle:{color:"white"}, },
+        mapType: window.innerWidth<600? "bottomNavMap":undefined,
+        type:window.innerWidth<600? "topBar":undefined,
+        style:{backgroundColor:"#35b593", color:"white", },
+        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
+        logoURL:window.innerWidth<600&&Logo, linkItemStyle:{color:"white"}, },
        routes: [
          { comp: Home, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
@@ -79,6 +84,11 @@ import ProspectPage from './view/potentialProspectPage.jsx';
      let navList = navInterface.getNavList();
      navList.update(0, {class:"SCAILogo"})
      navList.update(1, {activeClass:"SCAILink"})
+
+     if(window.innerWidth<600){
+      navList.remove(2)
+      navList.remove(0);
+    }
      
      //REMOVE
      this.getUser(user);

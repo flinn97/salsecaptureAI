@@ -203,7 +203,7 @@ export default class ResearchCard extends BaseComponent {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass} style={{ marginLeft: "300px", width: "80%" }}>
+            <div className={this.props.pageClass || this.state.defaultClass} >
                 {this.getInnerContent()}
             </div>
         );
