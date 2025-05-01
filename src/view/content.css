@@ -4,21 +4,25 @@
     padding: 0 1rem;
     margin: 0 1rem 1rem;
     border-radius: 1rem;
+    position:relative;
 }
 .sequence .title{
     display:flex;
     justify-content:space-between;
-    padding: 0.5rem 1rem 0 1rem;
+    padding: 1rem 1.5rem 0 1.5rem;
 }
 .sequence .title-left{
     font-weight:800;
 }
 .sequence .title-right{
     color:var(--app-dark-gray);
+    margin-right:2rem;
 }
 .sequence .col div:nth-child(2){
     font-weight:800;
 }
+
+
 
 
 /*switch-tab*/
@@ -63,13 +67,13 @@
 }
 
 .del-icon{
+    display: flex;
     font-size:20px;
+    position:absolute;
+    right:0.5rem;
+    top:0;
 }
 
-.del-icon{
-    display: flex;
-    position: relative;
-}
 
 .del-icon .fa-xmark{
 width:15px;

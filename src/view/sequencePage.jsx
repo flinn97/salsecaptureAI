@@ -80,16 +80,16 @@
                              <div className="title-icon">
                                  <i className="fas fa-angle-left"></i>
                              </div>
-                             {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<>
+                             {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<div className="name-a-sequence">
                              <ParentFormComponent obj={this.propsState.currentSequence} name="name"/>
                              
                              <RunButton callbackFunc={()=>{
                                 this.setState({edit:false})
                                 this.propsState.currentSequence.update();
-                                }}content="save"/>
-                             </>):(<><div className="title-name">{this.propsState.currentSequence?.getJson().name} 
+                                }} content="save"/>
+                             </div>):(<><div className="title-name">{this.propsState.currentSequence?.getJson().name}
                              <span onClick={()=>{
-                                this.setState({edit:true})}}>edit</span>
+                                this.setState({edit:true})}}><span className="name-a-sequence-edit-btn">edit</span></span>
                              </div></>)}
                              
                          </div>

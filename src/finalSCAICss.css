@@ -807,3 +807,53 @@
   transition: all 0.3s ease; /* 过渡效果 */
   width:100%
 }
+
+
+.name-a-sequence{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.name-a-sequence>:nth-child(1){
+  border:1px solid black;
+  border-radius:25px;
+  margin-right:1rem;
+}
+.name-a-sequence>:nth-child(1)>input{
+padding:0 1rem;
+  width:150px;
+}
+
+.name-a-sequence .defaultButton{
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background-color: #696969; /* 背景色 */
+  color: white; /* 文字颜色 */
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 25px; /* 圆角大小 */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 过渡效果 */
+  width:auto;
+}
+
+
+
+.name-a-sequence-edit-btn{
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background-color: #696969; /* 背景色 */
+  color: white; /* 文字颜色 */
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 25px; /* 圆角大小 */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 过渡效果 */
+  width:auto;
+  margin-left:1rem;
+}
