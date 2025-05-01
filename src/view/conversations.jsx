@@ -37,7 +37,7 @@ export default class Conversations extends GetAllComponents {
         return (
             <div className={this.props.pageClass || this.state.defaultClass} style={{ padding: "20px" }}>
                 {/* Container for the conversations card */}
-                <div className="fit" style={{width:"50%", marginLeft:"300px", height:"60%"}}>
+                <div className="fit">
                     <Card theme="defaultCard" content={<ConversationCard />} />
                 </div>
             </div>

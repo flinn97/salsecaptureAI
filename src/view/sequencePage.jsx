@@ -80,16 +80,16 @@
                              <div className="title-icon">
                                  <i className="fas fa-angle-left"></i>
                              </div>
-                             {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<>
+                             {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<div className="name-a-sequence">
                              <ParentFormComponent obj={this.propsState.currentSequence} name="name"/>
                              
                              <RunButton callbackFunc={()=>{
                                 this.setState({edit:false})
                                 this.propsState.currentSequence.update();
-                                }}content="save"/>
-                             </>):(<><div className="title-name">{this.propsState.currentSequence?.getJson().name} 
+                                }} content="save"/>
+                             </div>):(<><div className="title-name">{this.propsState.currentSequence?.getJson().name}
                              <span onClick={()=>{
-                                this.setState({edit:true})}}>edit</span>
+                                this.setState({edit:true})}}><span className="name-a-sequence-edit-btn">edit</span></span>
                              </div></>)}
                              
                          </div>
@@ -146,9 +146,9 @@
                                     this.getStepJson()
                                  }
                                  content={<>
-                                     <svg width="50" height="100" xmlns="http://www.w3.org/2000/svg">
+                                     <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
                                      <path
-                                         d="M25,0 V50 Q25,70 50,70 H50"
+                                         d="M25,0 Q25,25 50,25 H50"
                                          fill="none"
                                          stroke="var(--app-green)"
                                          strokeWidth="3"
@@ -212,7 +212,7 @@
       */
      render() {
          return (
-             <div className={this.props.pageClass || this.state.defaultClass} style={{ marginLeft: "300px" }}>
+             <div className={[this.props.pageClass || this.state.defaultClass, "sequence-margin"].join(" ")}>
                  {this.getInnerContent()}
              </div>
          );

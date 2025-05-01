@@ -52,7 +52,7 @@ export default class TemplatePage extends GetComponentsFromUrl {
      */
     render() {
         return (
-            <div className={this.props.pageClass || "fit"} style={{marginLeft:"300px"}}>
+            <div className={this.props.pageClass || "fit"}>
                 {this.state.gotComponents && this.getInnerContent()}
             </div>
         );

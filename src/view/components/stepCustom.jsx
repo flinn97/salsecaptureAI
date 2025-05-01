@@ -18,8 +18,23 @@ class StepCustomItem extends BaseComponent {
             <div onClick={()=>{this.dispatch({popupSwitch:"updateStep", currentPopupComponent:this.props.obj})}}>
                         <div className="icon-row">
                             <div className="icon-container">
-                                <div className="icon">
-                                    <i className="fa-solid fa-envelope"></i>
+                                <div className="col">
+                                    <div className="icon">
+
+                                        <i className="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div className="svg">
+                                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                            <line
+                                                x1="50%"
+                                                y1="0"
+                                                x2="50%"
+                                                y2="50"
+                                                stroke="var(--app-green)"
+                                                strokeWidth="3"
+                                            />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                             <div className="message-container">
@@ -30,26 +45,9 @@ class StepCustomItem extends BaseComponent {
                                 </span>
                             </div>
                         </div>
-
-                        <div className="icon-row">
-                            <div className="icon-container">
-                                <div className="svg">
-                                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <line
-                                            x1="50%"
-                                            y1="0"
-                                            x2="50%"
-                                            y2="50"
-                                            stroke="var(--app-green)"
-                                            strokeWidth="3"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
+            </div>
                         
-                        </div>
+
         );
     }
 }

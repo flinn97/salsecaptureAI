@@ -33,35 +33,63 @@
          button = <UpdateButton obj={this.propsState.currentPopupComponent} content="Save" isPopup={true} callbackFunc={this.props.callbackFunc}/>
        }
          return(
-         <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
-           <h2>{text} Contact</h2> {/*Heading for the popup*/}
-           First Name:
-           <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-           <ParentFormComponent obj={this.props.obj} name="firstName" inPopup={true}/> {/*Component for title input*/}
 
-           </div>
-           Last Name:
-           <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-           <ParentFormComponent obj={this.props.obj} name="lastName" inPopup={true}/> {/*Component for title input*/}
+         <div style={{padding:"10px", paddingBottom:"100px", height:"100%"}} className={this.props.pageClass||this.state.defaultClass}>
+             <h2>{text} Contact</h2> {/*Heading for the popup*/}
+             <div className="contact-Add-container">
 
-           </div>
-           email
-           <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-           <ParentFormComponent obj={this.props.obj} name="email" inPopup={true}/> {/*Component for title input*/}
-           </div>
-           tags 
-           <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-           <ParentFormComponent obj={this.props.obj} name="tags" inPopup={true}/> {/*Component for title input*/}
-           </div>
+                 <div className="row">
+                     <div>First Name</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={this.props.obj} name="firstName" inPopup={true}/> {/*Component for title input*/}
+
+                     </div>
+                 </div>
+
+
+
+                 <div className="row">
+                     <div>Last Name</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={this.props.obj} name="lastName" inPopup={true}/> {/*Component for title input*/}
+
+                     </div>
+                 </div>
+
+
+
+                 <div className="row">
+                     <div>Email</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={this.props.obj} name="email" inPopup={true}/> {/*Component for title input*/}
+                     </div>
+                 </div>
+
+
+
+                 <div className="row">
+                     <div>Tags</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={this.props.obj} name="tags" inPopup={true}/> {/*Component for title input*/}
+                     </div>
+                 </div>
+
+
+
+                 <div className="row">
+                     <div>Notes</div>
+                     <div style={{width:"90%", marginLeft:"10px"}}> {/*Container for the notes input*/}
+                         <ParentFormComponent obj={this.props.obj} type="quill" name="notes" inPopup={true}/> {/*Component for notes input (using Quill editor)*/}
+                     </div>
+                 </div>
    
-           Notes:
-           <div style={{width:"90%", backgroundColor:"white", marginLeft:"10px"}}> {/*Container for the notes input*/}
-           <ParentFormComponent obj={this.props.obj} type="quill" name="notes" inPopup={true}/> {/*Component for notes input (using Quill editor)*/}
-           </div>
+
+
            <div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> {/*Container for the save button*/}
              <div style={{paddingRight:"50px", paddingBottom:"20px"}}> {/*Container for button spacing*/}
            {button}</div> {/*Button to save changes*/}
            </div>
+         </div>
  
            
  

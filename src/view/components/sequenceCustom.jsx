@@ -48,7 +48,10 @@ class SequenceCustomItem extends BaseComponent {
                     <div>7%</div>
                 </div>
             </div> */}
-            <DelButton obj={obj} />
+                <div className="del-icon">
+                    <i className="fa-solid fa-xmark"></i>
+                    <DelButton obj={obj} />
+                </div>
         </div>
         );
     }

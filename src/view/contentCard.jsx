@@ -28,7 +28,7 @@ export default class ContentCard extends BaseComponent {
      */
     getInnerContent() {
         return (
-            <div className="mobile-container" style={{width:"80%", marginLeft:"300px"}}>
+            <div className="mobile-container">
                 <div className="top-nav-float">
                     <nav className="top-nav">
                         <div className="nav-left">
