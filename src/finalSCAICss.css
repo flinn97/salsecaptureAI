@@ -114,7 +114,6 @@
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  border-bottom: 1px solid var(--whatsapp-border);
 }
 
 .contact {
@@ -856,4 +855,32 @@ padding:0 1rem;
   transition: all 0.3s ease; /* 过渡效果 */
   width:auto;
   margin-left:1rem;
+}
+
+/*@media (max-width: 850px) {
+.fullScreen>.fit>div>.fit{
+  margin-left:0;
+  width:100%;
+}
+
+}
+
+@media (min-width: 850px) {
+
+  .fullScreen>.fit>div>.fit{
+    margin-left: 300px;
+    width:80%
+  }
+}*/
+
+.conversation-container {
+
+  height: 100%;
+}
+
+
+@media(min-width:850px){
+  .sequence-margin{
+    margin-left:300px;
+  }
 }

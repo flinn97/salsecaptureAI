@@ -212,7 +212,7 @@
       */
      render() {
          return (
-             <div className={this.props.pageClass || this.state.defaultClass} style={{ marginLeft: "300px" }}>
+             <div className={[this.props.pageClass || this.state.defaultClass, "sequence-margin"].join(" ")}>
                  {this.getInnerContent()}
              </div>
          );

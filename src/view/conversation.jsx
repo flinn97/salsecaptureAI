@@ -82,7 +82,7 @@ export default class Conversation extends BaseComponent {
         const { currentConversation } = this.propsState;
 
         return (
-            <div className="layoutColumn fit conversation-container" style={{ padding: "20px", width: "85%", height: "95%" }}>
+            <div className="layoutColumn fit conversation-container">
                 {this.state.message ? <>{this.state.message}</> : <>{this.state.start && <>
                     {/* MapComponent displaying messages connected to the current conversation */}
                     <MapComponent mapContainerClass="message-list"
