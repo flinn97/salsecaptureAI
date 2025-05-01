@@ -19,10 +19,10 @@ export default class ConversationCard extends BaseComponent {
             defaultClass: "fit", // Sets the default class for styling
         };
     }
-    async componentDidMount(){
-        await this.componentList.getComponentsFromBackend({type:"conversation", ids:this.propsState.currentUser.getJson()._id, filterKeys:"owner"});
+    async componentDidMount() {
+        await this.componentList.getComponentsFromBackend({ type: "conversation", ids: this.propsState.currentUser.getJson()._id, filterKeys: "owner" });
         this.setState({
-            start:true
+            start: true
         })
 
     }
@@ -37,15 +37,23 @@ export default class ConversationCard extends BaseComponent {
             <div className="layoutRow" style={{ width: "100%", height: "100%" }}>
                 {/* Left side card for the conversation list */}
                 <div style={{ width: "50%", padding: "10px" }}>
-                    {this.state.start&&<Card theme="defaultCard" content={<ConversationList />} />}
-                    
+                    {!this.propsState.showConversation&&<>
+                    {this.state.start && <Card theme="defaultCard" content={<ConversationList />} />}
+                    </>}
+
                 </div>
                 {/* Right side card for the selected conversation details */}
                 <div style={{ width: "50%", padding: "10px" }}>
-                {this.state.start&&<Card theme="defaultCard" content={<Conversation />} />}
-                
+                    {(window.innerWidth > 600 || this.propsState.showConversation!==undefined) && 
+                    <>
+                        {this.state.start && <Card theme="defaultCard" content={<Conversation />} />}
+                    </>
+                    }
+
                     
-                  
+
+
+
                 </div>
             </div>
         );
