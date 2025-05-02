@@ -58,7 +58,7 @@ import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
         type:window.innerWidth<600? "topBar":undefined,
         style:{backgroundColor:"#35b593", color:"white", },
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
-        logoURL:window.innerWidth<600&&Logo, linkItemStyle:{color:"white"}, },
+        logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
        routes: [
          { comp: Home, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
