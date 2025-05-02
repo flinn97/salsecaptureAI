@@ -857,21 +857,24 @@ padding:0 1rem;
   margin-left:1rem;
 }
 
-/*@media (max-width: 850px) {
-.fullScreen>.fit>div>.fit{
-  margin-left:0;
-  width:100%;
-}
-
-}
-
-@media (min-width: 850px) {
-
-  .fullScreen>.fit>div>.fit{
-    margin-left: 300px;
-    width:80%
+@media (max-width: 850px) {
+  .bottom-nav{
+    background-color: rgb(53, 181, 147);
   }
-}*/
+
+  .fullScreen>.topBarDefault{
+    height:0;
+    padding:0;
+    position:static;
+  }
+
+  .floating-select-set{
+    left:0;
+    right:0;
+  }
+}
+
+
 
 .conversation-container {
 
@@ -883,4 +886,6 @@ padding:0 1rem;
   .sequence-margin{
     margin-left:300px;
   }
+
+
 }
