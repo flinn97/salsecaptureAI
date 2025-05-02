@@ -24,8 +24,12 @@
       */
      render(){
         // Determine screen-based overrides
-        const isWideScreen = window.innerWidth > 600;
-        const obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
+        let isWideScreen = window.innerWidth > 600;
+        if(this.propsState.popupSwitch?.includes("addContact")){
+            isWideScreen = false
+        }
+        let obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
+
         const effectivePopupComponent = isWideScreen ? this.propsState.currentContact : this.propsState.currentPopupComponent;
         const inPopup = isWideScreen ? false : true;
 
@@ -34,7 +38,7 @@
        // Set default button to RunButton
        let button = <RunButton   content="Save" isPopup={inPopup} callbackFunc={this.props.callbackFunc} />
        //If an object is provided, change button to UpdateButton
-       if(this.propsState.popupSwitch.includes("updateContact")){
+       if(this.propsState.popupSwitch?.includes("updateContact")||(window.innerWidth > 600 && !this.propsState.popupSwitch?.includes("addContact"))){
          
          button = <UpdateButton obj={effectivePopupComponent} content="Save" isPopup={inPopup} callbackFunc={this.props.callbackFunc}/>
        }

@@ -7,8 +7,7 @@ import { Card } from "flinntech";
 import { GetAllComponents } from "flinntech";
 import ContactsCard from "./contactCard"; // Custom component for displaying contacts
 import "./contacts.css";
-import ContactPopup from "./contactPopup";
-
+import ContactPopup from "./popups/contactPopup";
 export default class Contacts extends GetAllComponents {
     /**
      * Constructor for the Contacts component.
@@ -43,7 +42,7 @@ export default class Contacts extends GetAllComponents {
                     {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
                     This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
                     */}
-                    {this.propsState.currentContact && window.innerWidth > 600 && <Card theme="NoBorder" type="fit"  content={ContactPopup}/>}
+                    {(this.propsState.currentContact && window.innerWidth > 600) && <Card theme="NoBorder" type="fit"  content={<ContactPopup/>}/>}
             </div>
         );
     }
