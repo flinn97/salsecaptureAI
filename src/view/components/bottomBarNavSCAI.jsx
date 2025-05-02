@@ -8,15 +8,36 @@ class BottomNavCustom extends NavMapContainer{
         console.log("this.mapList", this.mapList)
         
         // debugger
-        return <div style={{display:'flex', flexDirection:'row'}}>
-            <Link to="/conversation">Messages</Link>
-            <Link to="/contacts">Contacts</Link>
-            <div>Plus</div> 
-            {/* add functionality later. */}
-            <Link to="/research">Research</Link>
-            <Link to="/content">Content</Link>
+        return <div className="bottom-nav">
+                <Link to="/conversation" className="bottom-nav-item">
+                    <i className="fa-solid fa-message"></i>
+                    <span>Messages</span>
+                </Link>
+                <Link to="/contacts" className="bottom-nav-item">
+                    <i className="fa-solid fa-address-book"></i>
+                    <span>Contacts</span>
+                </Link>
 
-        </div>
+                <a href="#" className="bottom-nav-item">
+
+                    <div id="float-btn-plus" className="float-btn">
+                        <i className="fas fa-plus"></i>
+                    </div>
+                </a>
+
+                <Link to="/research" className="bottom-nav-item">
+                    <i className="fa-solid fa-graduation-cap"></i>
+                    <span>Research</span>
+                </Link>
+                <Link to="/content" className="bottom-nav-item">
+                    <i className="fa-solid fa-briefcase"></i>
+                    <span>Content</span>
+                </Link>
+
+
+            </div>
+
+
     }
     
    
