@@ -23,14 +23,20 @@
       * @returns {JSX.Element} The rendered component.
       */
      render(){
+        // Determine screen-based overrides
+        const isWideScreen = window.innerWidth > 600;
+        const obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
+        const effectivePopupComponent = isWideScreen ? this.propsState.currentContact : this.propsState.currentPopupComponent;
+        const inPopup = isWideScreen ? false : true;
+
        // Determine the text for the heading based on whether an object is provided
-       let text = this.props.obj?"Edit":"Add"
+       let text = obj?"Edit":"Add"
        // Set default button to RunButton
-       let button = <RunButton   content="Save" isPopup={true} callbackFunc={this.props.callbackFunc} />
+       let button = <RunButton   content="Save" isPopup={inPopup} callbackFunc={this.props.callbackFunc} />
        //If an object is provided, change button to UpdateButton
        if(this.propsState.popupSwitch.includes("updateContact")){
          
-         button = <UpdateButton obj={this.propsState.currentPopupComponent} content="Save" isPopup={true} callbackFunc={this.props.callbackFunc}/>
+         button = <UpdateButton obj={effectivePopupComponent} content="Save" isPopup={inPopup} callbackFunc={this.props.callbackFunc}/>
        }
          return(
 
@@ -41,7 +47,7 @@
                  <div className="row">
                      <div>First Name</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-                         <ParentFormComponent obj={this.props.obj} name="firstName" inPopup={true}/> {/*Component for title input*/}
+                         <ParentFormComponent obj={obj} name="firstName" inPopup={inPopup}/> {/*Component for title input*/}
 
                      </div>
                  </div>
@@ -51,7 +57,7 @@
                  <div className="row">
                      <div>Last Name</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-                         <ParentFormComponent obj={this.props.obj} name="lastName" inPopup={true}/> {/*Component for title input*/}
+                         <ParentFormComponent obj={obj} name="lastName" inPopup={inPopup}/> {/*Component for title input*/}
 
                      </div>
                  </div>
@@ -61,7 +67,7 @@
                  <div className="row">
                      <div>Email</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-                         <ParentFormComponent obj={this.props.obj} name="email" inPopup={true}/> {/*Component for title input*/}
+                         <ParentFormComponent obj={obj} name="email" inPopup={inPopup}/> {/*Component for title input*/}
                      </div>
                  </div>
 
@@ -70,7 +76,7 @@
                  <div className="row">
                      <div>Tags</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-                         <ParentFormComponent obj={this.props.obj} name="tags" inPopup={true}/> {/*Component for title input*/}
+                         <ParentFormComponent obj={obj} name="tags" inPopup={inPopup}/> {/*Component for title input*/}
                      </div>
                  </div>
 
@@ -79,7 +85,7 @@
                  <div className="row">
                      <div>Notes</div>
                      <div style={{width:"90%", marginLeft:"10px"}}> {/*Container for the notes input*/}
-                         <ParentFormComponent obj={this.props.obj} type="quill" name="notes" inPopup={true}/> {/*Component for notes input (using Quill editor)*/}
+                         <ParentFormComponent obj={obj} type="quill" name="notes" inPopup={inPopup}/> {/*Component for notes input (using Quill editor)*/}
                      </div>
                  </div>
    

@@ -55,7 +55,7 @@ import ProspectPage from './view/potentialProspectPage.jsx';
         cardStyle:{backgroundColor:"#35b593",}, 
         logoURL:Logo, linkItemStyle:{color:"white"}, },
        routes: [
-         { comp: Home, name: "Home", path: "/" },
+         { comp: Conversations, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
