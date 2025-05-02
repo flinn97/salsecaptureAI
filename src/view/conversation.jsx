@@ -83,6 +83,7 @@ export default class Conversation extends BaseComponent {
 
         return (
             <div className="layoutColumn fit conversation-container">
+                {window.innerWidth<600&&<div onClick={()=>{this.dispatch({showConversation:undefined})}}>Back</div>}
                 {this.state.message ? <>{this.state.message}</> : <>{this.state.start && <>
                     {/* MapComponent displaying messages connected to the current conversation */}
                     <MapComponent mapContainerClass="message-list"

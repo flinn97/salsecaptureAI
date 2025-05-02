@@ -45,7 +45,7 @@ export default class ConversationList extends BaseComponent {
                     {
                         type: "custom", custom: CustomMessageListItem, itemClick: (obj) => {
                             // Dispatch to set the currentConversation in global state
-                            this.dispatch({ currentConversation: obj });
+                            this.dispatch({ currentConversation: obj, showConversation:window.innerWidth<600? true:undefined });
                             // Set the seen attribute of the conversation to true
                             obj.setCompState({ seen: true });
                         }

@@ -8,6 +8,7 @@ import { BaseComponent } from "flinntech";
 import add from "../assets/add.png";
 import CheckIt from "./components/check";
 import ContactsCustomItem from "./components/contactsCustom";
+import SCAIPopupButtonTest from "./components/debug/CustomPopupButton";
 import CsvUpload from "./csvUpload";
 
 /**
@@ -123,7 +124,15 @@ export default class ContactsCard extends BaseComponent {
                             {/* <div id="toggleTags" className="btn-gray">
                                 Show Tags
                             </div> */}
-                            <PopupButton
+                            {/* <PopupButton
+                                formclassName="FCImgButton"
+                                wrapperclassName="none"
+                                content={<div  className="btn-gray">
+                                    Add Contact
+                                </div>}
+                                popupSwitch="addContact"
+                            /> */}
+                            <SCAIPopupButtonTest
                                 formclassName="FCImgButton"
                                 wrapperclassName="none"
                                 content={<div  className="btn-gray">
