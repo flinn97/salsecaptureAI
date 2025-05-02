@@ -867,6 +867,11 @@ padding:0 1rem;
     padding:0;
     position:static;
   }
+
+  .floating-select-set{
+    left:0;
+    right:0;
+  }
 }
 
 
