@@ -59,7 +59,7 @@ export default class ContactsCard extends BaseComponent {
     getInnerContent() {
         
         return (
-            <div className="mobile-container">
+            <div className="map-container">
                 <div className="top-nav-float">
                     <nav className="top-nav">
                         <div className="nav-left">
