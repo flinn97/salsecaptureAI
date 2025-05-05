@@ -30,6 +30,7 @@ export default class ContactsCard extends BaseComponent {
         };
     }
 
+
     filterFunc() {
         
         let filterText = this.propsState.tags?.split(',')||"";

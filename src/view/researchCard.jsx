@@ -5,11 +5,6 @@
 import { MapComponent, } from "flinntech";
 import { PopupButton } from "flinntech";
 import { BaseComponent } from "flinntech";
-import add from "../assets/add.png";
-import CheckIt from "./components/check";
-import ContactsCustomItem from "./components/contactsCustom";
-import CsvUpload from "./csvUpload";
-import ProspectCustomItem from "./components/prospectCustomItem";
 import ResearchCustomItem from "./components/researchCustomItem";
 
 /**
@@ -59,7 +54,7 @@ export default class ResearchCard extends BaseComponent {
     getInnerContent() {
         
         return (
-            <div className="mobile-container">
+            <div className="map-container">
                 <div className="top-nav-float">
                     <nav className="top-nav">
                         <div className="nav-left">
@@ -88,7 +83,7 @@ export default class ResearchCard extends BaseComponent {
                             <input onChange={(e) => {
                                 this.dispatch({ tags: e.target.value })
                             }}
-                                className="search-input" placeholder="Search" />
+                            className="search-input" placeholder="Search" />
                         </div>
                     </div>
 
