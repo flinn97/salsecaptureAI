@@ -48,7 +48,7 @@ import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
  
      }
      //REMOVE
-    //  this.componentList.addComponents([...data], true)
+     this.componentList.addComponents([...data], true)
  
  
      this.state = {
