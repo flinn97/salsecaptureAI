@@ -660,6 +660,13 @@ body {
   /* Selecting the definition that appears most frequently */
 }
 
+.card-header{
+  color: var(--unnamed-color-262626);
+  text-align: left;
+  font: normal normal 900 16px/22px Satoshi;
+  letter-spacing: 0px;
+  margin: 14px 14px 14px 6px;
+}
 
 .title-bar {
   height: 50px;
