@@ -66,8 +66,15 @@ class ContactsCustomItem extends BaseComponent {
                     <div className="contact-info">
                         {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
                         <div onClick={() => {
+                            // JARED if the size of the window is more than something like 600 px ask chat gpt. then change the logic to take the obj and dispatch it to the currentContact
                              // Assuming obj here refers to the current contact object being rendered
+                             debugger
+                             if(window.innerWidth > 600){
+                                this.dispatch({currentContact:obj})
+                             }
+                             else{
                             this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
+                            }
                         }} className="contact-name">{`${user.firstName} ${user.lastName}`}</div>
                         <div className="contact-desc">{user.company}</div>
                     </div>

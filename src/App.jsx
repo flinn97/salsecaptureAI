@@ -60,7 +60,7 @@ import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
         logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
        routes: [
-         { comp: Home, name: "Home", path: "/" },
+         { comp: Conversations, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
