@@ -221,6 +221,15 @@ body {
   color: #9a9a9a;
 }
 
+.count-desc{
+  font: normal normal bold 13px/17px Satoshi;
+  letter-spacing: 0.75px;
+  position: absolute;
+  right: 10px;
+  margin-top: 2px;
+  color: var(--app-dark-blue);
+}
+
 .profile-status {
   user-select: none;
   display: flex;
@@ -361,7 +370,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   border: none;
-  color: #2374ab;
+  color: var(--app-dark-blue);
   background-color: #9ad7ff;
 }
 
@@ -761,17 +770,24 @@ body {
   background: var(--app-darker-gray) 0% 0% no-repeat padding-box;
   background: var(--app-darker-gray) 0% 0% no-repeat padding-box;
   border-radius: 53px;
-  width: 101px;
+  width: fit-content;
   color: #F4F5F8;
-  font: normal normal 900 12px/16px Satoshi;
+  font: normal normal 900 10px/14px Satoshi;
   padding: 6px 17px;
   user-select: none;
   cursor: pointer;
+  transition: width 1s ease-in;
 }
 
 .dark-button-1:hover{
   background: var(--app-dark-gray) 0% 0% no-repeat padding-box;
 }
+
+.dark-button-1:active{
+  background: var(--app-background-color) 0% 0% no-repeat padding-box;
+  transform: scale(.95);
+}
+
 
 .SCAILogo {
   width: 80%

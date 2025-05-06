@@ -157,11 +157,13 @@
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    margin-top: 2px;
   }
   
-  /*.contact-tag-btn:hover {*/
-  /*  background-color: #d0d0d0;*/
-  /*}*/
+  .contact-tag-btn:hover {
+    background-color: var(--app-dark-blue);
+    color: #fff;
+  }
   
   .contact-tag-btn.active {
     background-color: #fff;

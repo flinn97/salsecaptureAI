@@ -86,7 +86,7 @@ class CheckIt extends BaseComponent {
   render() {
     const { checked } = this.state;
     return (
-      <label className="checkbox-container">
+      <label className={this.props.class||"checkbox-container"}>
         {this.props.label || ''}
         <input
           type="checkbox"
