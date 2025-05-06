@@ -105,7 +105,8 @@ body {
   border: none;
   border-radius: 25px;
   /* 圆角大小 */
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease;
   /* 过渡效果 */
@@ -623,7 +624,7 @@ body {
   position: absolute;
   bottom: 50px;
   left: 50px;
-  color: var(--app-light-gray);
+  color: var(--app-light-green);
   background-color: var(--app-green);
   width: 50px;
   height: 50px;
@@ -678,6 +679,12 @@ body {
   letter-spacing: 0px;
   margin: 14px 14px 14px 6px;
   user-select: none;
+}
+
+.underline-form{
+  border-bottom: 1px solid var(--whatsapp-chat-bg);
+  width: 98%;
+  padding-top: 3px;
 }
 
 .title-bar {
@@ -766,8 +773,7 @@ body {
   margin-bottom: 0;
 }
 
-.dark-button-1{
-  background: var(--app-darker-gray) 0% 0% no-repeat padding-box;
+.dark-button-1, .del-button-1{
   background: var(--app-darker-gray) 0% 0% no-repeat padding-box;
   border-radius: 53px;
   width: fit-content;
@@ -777,9 +783,15 @@ body {
   user-select: none;
   cursor: pointer;
   transition: width 1s ease-in;
+  letter-spacing: .5px;
 }
 
-.dark-button-1:hover{
+.del-button-1{
+  color: rgb(255, 141, 141);
+  background: #353535 0% 0% no-repeat padding-box;
+}
+
+.dark-button-1:hover, .del-button-1:hover{
   background: var(--app-dark-gray) 0% 0% no-repeat padding-box;
 }
 
@@ -788,6 +800,14 @@ body {
   transform: scale(.95);
 }
 
+.del-button-1:active{
+  background: #000 0% 0% no-repeat padding-box;
+  transform: scale(.95);
+}
+
+.hover-basic:hover{
+  transform: scale(1.05);
+}
 
 .SCAILogo {
   width: 80%
@@ -860,27 +880,28 @@ body {
   align-items: center;
 }
 
-.content-home-add>:nth-child(4)>:nth-child(2) .defaultButton {
+/* .content-home-add>:nth-child(4)>:nth-child(2) .defaultButton {
   display: inline-block;
-  padding: 0.3rem 1rem;
+  padding: 1rem 1rem;
   background-color: var(--app-darker-gray);
-  /* 背景色 */
+  
   color: white;
-  /* 文字颜色 */
+  
   text-align: center;
   text-decoration: none;
   border: none;
-  border-radius: 25px;
-  /* 圆角大小 */
-  font-size: 14px;
+  border-radius: 50%;
+  
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* 过渡效果 */
+  
   width: 100%
-}
+} */
 
 
-.contact-Add-container {}
+/* .contact-Add-container {} */
 
 
 .contact-Add-container>:nth-child(-n+5) {
@@ -915,7 +936,8 @@ body {
   border: none;
   border-radius: 25px;
   /* 圆角大小 */
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease;
   /* 过渡效果 */
@@ -952,7 +974,8 @@ body {
   border: none;
   border-radius: 25px;
   /* 圆角大小 */
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease;
   /* 过渡效果 */

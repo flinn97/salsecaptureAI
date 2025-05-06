@@ -12,17 +12,19 @@ class StepCustomItem extends BaseComponent {
     }
 
     render() {
-        
+        let html = this.props.obj?.getJson().content;
+        let stripHtml = html.replace(/<[^>]+>/g, "");
         
         return (
             <div onClick={()=>{this.dispatch({popupSwitch:"updateStep", currentPopupComponent:this.props.obj})}}>
                         <div className="icon-row">
                             <div className="icon-container">
                                 <div className="col">
-                                    <div className="icon">
 
+                                    <div className="icon" style={{cursor:"pointer"}}>
                                         <i className="fa-solid fa-envelope"></i>
                                     </div>
+                                    
                                     <div className="svg">
                                         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                                             <line
@@ -41,7 +43,7 @@ class StepCustomItem extends BaseComponent {
                                 <b>{this.props.obj.getJson().subject}</b>
                                 <br />
                                 <span>
-                                   {this.props.obj.getJson().content}
+                                   {stripHtml}
                                 </span>
                             </div>
                         </div>
