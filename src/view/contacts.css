@@ -1,15 +1,17 @@
 .top-nav-float {
-
+    position: sticky;
+    top: 0;
     background-color: #fff;
+    z-index: 300;
   }
   
   .top-nav {
-    height: 50px;
+    min-height: 50px;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 10px 0px 9px;
     z-index: 100;
   }
   
@@ -23,12 +25,14 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    user-select: none;
   }
   
   .nav-title {
     font-size: 18px;
     font-weight: 600;
     color: #333;
+    user-select: none;
   }
   
   .nav-icon {
@@ -153,11 +157,13 @@
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    margin-top: 2px;
   }
   
-  /*.contact-tag-btn:hover {*/
-  /*  background-color: #d0d0d0;*/
-  /*}*/
+  .contact-tag-btn:hover {
+    background-color: var(--app-dark-blue);
+    color: #fff;
+  }
   
   .contact-tag-btn.active {
     background-color: #fff;
@@ -260,7 +266,7 @@ input[type="file"] {
 }
 
 
-@media (max-width: 850px) {
+@media (max-width: 1280px) {
 
   .fullScreen>.fit>div>.fit{
     margin-left: 0;

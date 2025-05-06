@@ -5,7 +5,6 @@ export default class SCAIPopupButtonTest extends BaseButton{
      *Ok so this is just a temp fix. Somthing is up with the library.
      */
     async buttonClickFunc(){
-        debugger
             
             let obj = this.obj;
             let type = obj.type;

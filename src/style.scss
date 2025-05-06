@@ -103,21 +103,41 @@ $card-sizes: (
   }
   
 @mixin fonts {
-    font-family: "inria";
+    font-family: 'Satoshi-Variable', sans-serif;
     font-size: 1.1rem;
   }
+
 .text{
+     font-family: 'Satoshi-Variable', sans-serif;
     font-size: 12px;
-
 }
 
-.textBold{
-    @extend .text;
-    font-weight: bold;
+.textBold {
+  @extend .text;
+  font-weight: 700; /* Use variable font weight */
 }
-.Map-Attribute-Item{
-    font-size: 12px;
 
+.textLight {
+  font-family: 'Satoshi-Variable', sans-serif;
+  font-variation-settings: 'wght' 300; /* Equivalent to Satoshi-Light */
+}
+
+.Map-Attribute-Item {
+  font-family: 'Satoshi-Variable', sans-serif;
+  font-size: 12px;
+}
+
+/* Exempt Font Awesome */
+.fa, .fas, .far, .fab {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900;
+}
+
+/* Override FlinnTech card styles */
+.normalCardDefault,
+.bigCardDefault,
+.tallCardDefault {
+  font-family: 'Satoshi-Variable', sans-serif !important;
 }
 
 .Map-Section-ei{
