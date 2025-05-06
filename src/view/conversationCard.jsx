@@ -49,7 +49,7 @@ export default class ConversationCard extends BaseComponent {
           )}
         </div>
         {/* Right side card for the selected conversation details */}
-        <div>
+        <div style={{minWidth:"50%"}}>
           {(window.innerWidth > 600 ||
             this.propsState.showConversation !== undefined) && (
             <>
