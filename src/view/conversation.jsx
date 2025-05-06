@@ -86,109 +86,136 @@ export default class Conversation extends BaseComponent {
     const { currentConversation } = this.propsState;
 
     return (
-      <div className="layoutColumn fit conversation-container">
+      <div>
         {window.innerWidth < 600 && (
           <div
-            className="dark-button-1"
-            onClick={() => {
-              this.dispatch({ showConversation: undefined });
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 200,
+              marginBottom: "-20px",
             }}
           >
-            {`< Back`}
+            <div
+              className="dark-button-1"
+              onClick={() => {
+                this.dispatch({ showConversation: undefined });
+              }}
+            >
+              {`< Back`}
+            </div>
           </div>
         )}
-        {this.state.message ? (
-          <>{this.state.message}</>
-        ) : (
-          <>
-            {this.state.start && (
-              <div style={{width:"100%"}}>
-                {/* MapComponent displaying messages connected to the current conversation */}
-                <MapComponent
-                  mapContainerClass="message-list"
-                  // mapSectionClass="Map-Section-ei"
+        <div className="layoutColumn conversation-container">
+          {this.state.message ? (
+            <>{this.state.message}</>
+          ) : (
+            <>
+              {this.state.start && (
+                <div style={{ width: "100%", marginTop:"-20px", }}>
+                  {/* MapComponent displaying messages connected to the current conversation */}
+                  <MapComponent
+                    mapContainerClass="message-list"
+                    // mapSectionClass="Map-Section-ei"
 
-                  // mapSectionStyle={{
-                  //     flex: "1",          /* take up remaining space */
-                  //     overflowY: 'auto',  /* scrollable if needed */
-                  //     padding: "0px",
-                  //     margin: "0px",
-                  // }}
-                  name={currentConversation?.getJson().messageType || "email"} // Use messageType for the MapComponent
-                  cells={[
-                    // { type: "attribute", name: "body" }
-                    { type: "custom", custom: CustomMessageItem },
-                  ]} // Custom component type for chat messages
-                  filter={{
-                    search: this.propsState.currentConversation.getJson()._id,
-                    attribute: "conversationId",
-                  }}
-                />
-                {/* Form for sending new messages */}
-                <ParentFormComponent
-                  wrapperClass="search-bar"
-                  formClass="search-input"
-                  name="body" // Name for the input field
-                  obj={this.propsState.currentComponent} // Connect to the current conversation
-                />
-                <RunButton
-                  content={
-                    <div className="chat-footer">
-                      <button className="footer-btn">
-                        <i className="fa-solid fa-circle-plus"></i>
-                      </button>
-                      <input
-                        type="text"
-                        className="footer-input"
-                        placeholder="Start typing..."
-                      />
-                    </div>
-                  }
-                  callbackFunc={() => {
-                    let obj = this.propsState.currentComponent;
+                    // mapSectionStyle={{
+                    //     flex: "1",          /* take up remaining space */
+                    //     overflowY: 'auto',  /* scrollable if needed */
+                    //     padding: "0px",
+                    //     margin: "0px",
+                    // }}
+                    name={currentConversation?.getJson().messageType || "email"} // Use messageType for the MapComponent
+                    cells={[
+                      // { type: "attribute", name: "body" }
+                      { type: "custom", custom: CustomMessageItem },
+                    ]} // Custom component type for chat messages
+                    filter={{
+                      search: this.propsState.currentConversation.getJson()._id,
+                      attribute: "conversationId",
+                    }}
+                  />
 
-                    this.prepNewMessage();
-
-                    // const { originalMessageId, from, to, subject, text } = req.body;
-                    let body = {
-                      originalMessageId: obj.getJson().originalMessageId,
-                      from: obj.getJson().owner,
-                      to: this.propsState.currentConversation.getJson()
-                        .recipient,
-                      subject: obj.getJson().subject,
-                      text: obj.getJson().body,
-                    };
-                    // Make the POST request
-                    fetch(
-                      "https://sendgridreplythread-7c5i3vsqma-uc.a.run.app",
-                      {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(body),
+                  <div
+                    style={{
+                      position: "sticky",
+                      bottom: 0,
+                      zIndex: 1,
+                      width: "100%",
+                      minHeight: "60px",
+                      paddingBottom: "65px",
+                      background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
+                    }}
+                  >
+                    {/* Form for sending new messages */}
+                    <ParentFormComponent
+                      wrapperClass="search-bar"
+                      formClass="search-input"
+                      name="body" // Name for the input field
+                      obj={this.propsState.currentComponent} // Connect to the current conversation
+                    />
+                    <RunButton
+                      content={
+                        <div className="chat-footer">
+                          <button className="footer-btn">
+                            <i className="fa-solid fa-circle-plus"></i>
+                          </button>
+                          <input
+                            type="text"
+                            className="footer-input"
+                            placeholder="Start typing..."
+                          />
+                        </div>
                       }
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error(
-                            `HTTP error! Status: ${response.status}`
-                          );
-                        }
-                        return response.json();
-                      })
-                      .then((data) => {
-                        console.log("Reply sent successfully in thread.", data);
-                      })
-                      .catch((error) => {
-                        console.error("Error sending reply:", error);
-                      });
-                  }} // Callback to re-run the prepareMessages function
-                />
-              </div>
-            )}
-          </>
-        )}
+                      callbackFunc={() => {
+                        let obj = this.propsState.currentComponent;
+
+                        this.prepNewMessage();
+
+                        // const { originalMessageId, from, to, subject, text } = req.body;
+                        let body = {
+                          originalMessageId: obj.getJson().originalMessageId,
+                          from: obj.getJson().owner,
+                          to: this.propsState.currentConversation.getJson()
+                            .recipient,
+                          subject: obj.getJson().subject,
+                          text: obj.getJson().body,
+                        };
+                        // Make the POST request
+                        fetch(
+                          "https://sendgridreplythread-7c5i3vsqma-uc.a.run.app",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(body),
+                          }
+                        )
+                          .then((response) => {
+                            if (!response.ok) {
+                              throw new Error(
+                                `HTTP error! Status: ${response.status}`
+                              );
+                            }
+                            return response.json();
+                          })
+                          .then((data) => {
+                            console.log(
+                              "Reply sent successfully in thread.",
+                              data
+                            );
+                          })
+                          .catch((error) => {
+                            console.error("Error sending reply:", error);
+                          });
+                      }} // Callback to re-run the prepareMessages function
+                    />
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     );
   }

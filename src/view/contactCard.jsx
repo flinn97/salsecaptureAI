@@ -30,6 +30,10 @@ export default class ContactsCard extends BaseComponent {
     };
   }
 
+  componentDidMount(){
+    this.dispatch({ selectedContacts: [] })
+  }
+
   filterFunc() {
     let filterText = this.propsState.tags?.split(",") || "";
     let contactList = this.componentList.getList("contact");
@@ -57,6 +61,7 @@ export default class ContactsCard extends BaseComponent {
     let allCon = this.propsState.componentList.getList("contact");
     let showChecked = selCon?.length > 0;
     let allTotal = allCon?.length?"/"+allCon?.length:"";
+    let allSelect = selCon?.length===allCon?.length;
 
     return (
       <div className="map-container">
@@ -108,7 +113,7 @@ export default class ContactsCard extends BaseComponent {
                   }}
                 >
                   <CheckIt
-                    label={showChecked ? `Deselect All` : `Select All`}
+                    label={allSelect?`Deselect All`:`Select All`}
                     check={this.filterFunc}
                     uncheck={() => {
                       this.dispatch({ selectedContacts: [] });
