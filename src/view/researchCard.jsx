@@ -88,7 +88,10 @@ export default class ResearchCard extends BaseComponent {
           </div>
 
           <div className="filter-nav"></div>
-          <div className="dark-button-1">New Profile</div>
+          
+          <div className="dark-button-1"
+          // TODO: Taylor
+          >New Research Profile</div>
         </div>
 
         <div className="card-header">Customer Profiles</div>

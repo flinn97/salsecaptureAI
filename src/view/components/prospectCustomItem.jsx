@@ -80,9 +80,9 @@ class ProspectCustomItem extends BaseComponent {
             >{`${user.firstName} ${user.lastName}`}</div>
             <div className="contact-desc">{user.company}</div>
           </div>
-          <div  style={{ cursor: "pointer", width:"fit-content", background:"red" }}>
+          <div  style={{ cursor: "pointer", width:"fit-content", }}>
             <div
-              // TODO: Taylor? this needs to open up messaging to that contact
+             
               className="contact-icon"
             >
               <i className="fa-solid fa-message" />
