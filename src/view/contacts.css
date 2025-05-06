@@ -1,10 +1,12 @@
 .top-nav-float {
-
+    position: sticky;
+    top: 0;
     background-color: #fff;
+    z-index: 300;
   }
   
   .top-nav {
-    height: 50px;
+    min-height: 50px;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
@@ -23,12 +25,14 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    user-select: none;
   }
   
   .nav-title {
     font-size: 18px;
     font-weight: 600;
     color: #333;
+    user-select: none;
   }
   
   .nav-icon {

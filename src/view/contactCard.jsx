@@ -153,7 +153,7 @@ export default class ContactsCard extends BaseComponent {
 
                 {/* Header row for the contacts data table */}
 
-                {/* Scrollable section for the contacts data */}
+                <div> {/*scrollable section */}
                 <MapComponent
 
                     filterFunc={(o) => {
@@ -212,8 +212,7 @@ export default class ContactsCard extends BaseComponent {
                         // { type: "attribute", name: "status" },
                     ]}
                     hasLink={true}
-
-                />
+                /> </div>
                 {this.propsState.selectedContacts?.length > 0 &&
                     <div id="floating-select-set" className="floating-select-set">
                         <button className="floating-select-btn">

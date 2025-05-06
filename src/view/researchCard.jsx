@@ -88,12 +88,12 @@ export default class ResearchCard extends BaseComponent {
           </div>
 
           <div className="filter-nav"></div>
+          <div className="dark-button-1">New Profile</div>
         </div>
 
         <div className="card-header">Customer Profiles</div>
-        {/* Header row for the contacts data table */}
 
-        {/* Scrollable section for the contacts data */}
+    <div> {/* Scrollable section for the contacts data */}
         <MapComponent
           filterFunc={(o) => {
             if (!this.propsState.tags) {
@@ -149,7 +149,7 @@ export default class ResearchCard extends BaseComponent {
             // { type: "attribute", name: "status" },
           ]}
           hasLink={true}
-        />
+        /></div> 
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
             <button className="floating-select-btn">
