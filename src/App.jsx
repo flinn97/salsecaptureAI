@@ -20,11 +20,13 @@
  import "./style.scss"
  import "./finalSCAICss.css"
  import CreateStepPopup from './view/popups/createStepPopup.jsx';
- import Logo from "./assets/scailogofake.png"
+ import Logo from "./assets/viridianLogo.png"
 import Settings from './view/settings.jsx';
 import ResearchPage from './view/researchPage.jsx';
 import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
+import TaskPage from './view/TaskPage.jsx';
+import SchedulePage from './view/schedule.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -60,16 +62,16 @@ import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
         logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
        routes: [
-         { comp: Conversations, name: "Home", path: "/" },
+         { comp: TaskPage, name: "Tasks", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
- 
-         { comp: Contacts, name: "Contacts", path: "contacts" },
-         { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
+         { comp: SchedulePage, name: "Schedule", path: "schedule" },
+
+         { comp: Contacts, name: "Clients", path: "clients" },
 
          { comp: Content, name: "Content", path: "content" },
-         { comp: Settings, name: "Settings", path: "settings" },
+         { comp: Settings, name: "Billing", path: "billing" },
 
-         { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
+        //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
         //  { comp: TemplatePage, name: "add template", path: "template" },
          //  { comp: Settings, name: "settings" },

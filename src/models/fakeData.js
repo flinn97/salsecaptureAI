@@ -121,7 +121,19 @@ let data = [
         _id: "research1",
         name:"research1",
         owner:"alan@salescapture.com "
-        }
+        },
+        {
+            type:"task",
+            name:"my task",
+            dueDate:"April 25, 2025",
+            _id:"task1",
+            
+        },
+        { _id: 1, name: 'Jodie Soultfair', dayIndex: 0, startTime: '10:00', duration: 90, type:"calendarEvent" }, // Monday 10:00 - 11:30
+                { _id: 2, name: 'Cameron Bates', dayIndex: 0, startTime: '11:30', duration: 45, type:"calendarEvent" }, // Monday 11:30 - 12:15
+                { _id: 3, name: 'Tyler Sinclair', dayIndex: 3, startTime: '13:00', duration: 60, type:"calendarEvent" }, // Thursday 1:00 - 2:00
+                { _id: 4, name: 'Stephanie Moore', dayIndex: 5, startTime: '14:30', duration: 60, type:"calendarEvent" }, // Saturday 2:30 - 3:30
+                { _id: 5, name: 'Kevin Landry', dayIndex: 4, startTime: '17:00', duration: 60,type:"calendarEvent" }, // Friday 5:00 - 6:00
 ]
 
 export {data}

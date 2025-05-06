@@ -109,6 +109,24 @@ class Research extends ComponentBase {
         type:"research"
     }
 }
+class CalendarEvent extends ComponentBase{
+    json={
+        ...this.json,
+        type:"calendarEvent",
+        name: 'Jodie Soultfair', dayIndex: 0, startTime: '10:00', duration: 90,
+    }
+}
+class Task extends ComponentBase{
+    json={
+        ...this.json,
+        type:"task",
+        dueDate:"",
+        completed:false,
+        completeDate:"",
+        name: ""
+    }
+}
 
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research };
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task };

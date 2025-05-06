@@ -1,0 +1,146 @@
+/* Base container */
+.weekly-calendar {
+    font-family: sans-serif;
+    color: #333; /* Dark grey text */
+    margin: 20px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    overflow: hidden; /* Hide overflowing grid lines */
+    background-color: #fff;
+}
+
+/* Header styles */
+.weekly-calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa; /* Light grey background */
+    border-bottom: 1px solid #ddd;
+}
+
+.weekly-calendar__title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #00796b; /* Teal color from image */
+}
+
+.weekly-calendar__nav button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #555;
+    transition: background-color 0.2s ease;
+}
+
+.weekly-calendar__nav button:hover {
+    background-color: #eee;
+}
+
+/* Grid layout */
+.weekly-calendar__grid {
+    display: grid;
+    grid-template-columns: 60px 1fr; /* Time axis width, then remaining for days */
+    gap: 0; /* No gap between time axis and days */
+}
+
+/* Time axis styles */
+.weekly-calendar__time-axis {
+    padding-top: 30px; /* Align time labels with the grid lines */
+    text-align: right;
+    padding-right: 10px;
+    font-size: 0.9em;
+    color: #777; /* Grey color */
+    border-right: 1px solid #eee; /* Separator line */
+}
+
+.weekly-calendar__time-slot-label {
+    height: 60px; /* Match hour slot height */
+    line-height: 60px; /* Vertically center text */
+    transform: translateY(-50%); /* Pull the label up to align with the line above */
+    position: relative; /* Needed for transform */
+}
+
+/* Days container */
+.weekly-calendar__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 equal columns for days */
+    border-left: 1px solid #eee; /* Separator line from time axis */
+}
+
+/* Individual day column */
+.weekly-calendar__day {
+    border-right: 1px solid #eee; /* Separator between days */
+    position: relative; /* Needed for absolute positioning of events */
+}
+
+.weekly-calendar__day:last-child {
+    border-right: none; /* No border on the last day */
+}
+
+/* Day header styles */
+.weekly-calendar__day-header {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9em;
+    border-bottom: 1px solid #ddd; /* Separator below header */
+    background-color: #f8f9fa; /* Match header background */
+    position: sticky; /* Keep header visible when scrolling horizontally */
+    top: 0;
+    z-index: 1; /* Ensure it's above event containers */
+}
+
+/* Events container (main grid area for events) */
+.weekly-calendar__events-container {
+    position: relative; /* Needed for absolute event positioning */
+    height: 600px; /* Total height for 10 hours (10 AM to 8 PM), adjust as needed */
+    /* This height determines the scale. 10 hours * 60px/hour = 600px */
+}
+
+/* Horizontal hour lines */
+.weekly-calendar__hour-line {
+    position: absolute;
+    top: 60px; /* First line after 10 AM label */
+    left: 0;
+    right: 0;
+    border-top: 1px solid #eee; /* Light grey line */
+    height: 60px; /* Spacing between lines */
+}
+/* Add more lines */
+.weekly-calendar__hour-line:nth-child(2) { top: 120px; }
+.weekly-calendar__hour-line:nth-child(3) { top: 180px; }
+.weekly-calendar__hour-line:nth-child(4) { top: 240px; }
+.weekly-calendar__hour-line:nth-child(5) { top: 300px; }
+.weekly-calendar__hour-line:nth-child(6) { top: 360px; }
+.weekly-calendar__hour-line:nth-child(7) { top: 420px; }
+.weekly-calendar__hour-line:nth-child(8) { top: 480px; }
+.weekly-calendar__hour-line:nth-child(9) { top: 540px; }
+/* Note: The last time label (7 PM) is at the bottom, so we need 9 lines for 10 hour slots */
+
+
+/* Individual event block styles */
+.weekly-calendar__event {
+    position: absolute; /* Position relative to .weekly-calendar__events-container */
+    left: 5px; /* Small padding from the left edge */
+    right: 5px; /* Small padding from the right edge */
+    background-color: #e0f2f7; /* Light teal background */
+    border: 1px solid #b2ebf2; /* Slightly darker teal border */
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.9em;
+    overflow: hidden; /* Hide text if event is too short */
+    z-index: 2; /* Ensure events are above grid lines */
+    color: #004d40; /* Darker teal text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+.weekly-calendar__event-name {
+    font-weight: bold;
+}
+
+/* You can add more styles for different event types or states */
