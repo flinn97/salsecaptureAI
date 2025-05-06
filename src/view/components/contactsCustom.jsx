@@ -7,8 +7,6 @@ import CheckIt from './check';
 class ContactsCustomItem extends BaseComponent {
     constructor(props) {
         super(props);
-        // preserve any initial state from BaseComponent
-        // No explicit state needed here if using propsState for selectedContacts
     }
 
     // Use arrow function for auto-binding 'this'
@@ -43,10 +41,14 @@ class ContactsCustomItem extends BaseComponent {
         const { obj } = this.props;
         // Assuming obj.getJson() is necessary and works
         let user = obj.getJson();
+        const cons = this.props.app.state.selectedContacts 
+            ? [...this.props.app.state.selectedContacts] 
+            : [];
+        let selected = cons.includes(obj);
 
         return (
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <div className="contact-item">
+                <div className="contact-item" style={{background:selected?"#2374ab10":"white"}}>
                     <CheckIt
                         checkKey="selectedContacts"
                         obj={obj}
