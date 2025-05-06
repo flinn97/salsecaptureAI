@@ -30,6 +30,10 @@ export default class ProspectCard extends BaseComponent {
     };
   }
 
+  componentDidMount(){
+    this.dispatch({ selectedContacts: [] })
+  }
+
   filterFunc() {
     let id = urlService.getIdFromURL();
     let filterText = this.propsState.tags?.split(",") || "";
@@ -67,6 +71,8 @@ export default class ProspectCard extends BaseComponent {
     );
     let showChecked = selCon?.length > 0;
     let allTotal = allCon?.length ? "/" + allCon?.length : "";
+    let allSelect = selCon?.length===allCon?.length;
+
     return (
       <div className="mobile-container">
         <div className="top-nav-float">
@@ -117,7 +123,7 @@ export default class ProspectCard extends BaseComponent {
                   }}
                 >
                   <CheckIt
-                    label={showChecked ? `Deselect All` : `Select All`}
+                    label={allSelect?"Deselect All":`Select All`}
                     check={this.filterFunc}
                     uncheck={() => {
                       this.dispatch({ selectedContacts: [] });
