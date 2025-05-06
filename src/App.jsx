@@ -73,7 +73,7 @@ import SchedulePage from './view/schedule.jsx';
 
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
-        //  { comp: TemplatePage, name: "add template", path: "template" },
+         { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
          //  { comp: Settings, name: "settings" },
        ],
        popups: [

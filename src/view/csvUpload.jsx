@@ -31,9 +31,9 @@ class CsvUpload extends Component {
     const { data } = this.state;
 
     return (
-        <div className="" style={{position:'relative'}}>
+        <div className="dark-button-1" style={{position:'relative', width:"fit-content"}}>
 
-          <label htmlFor="file-upload" className="custom-file-upload">
+          <label htmlFor="file-upload" className="">
             Upload
           </label>
         <input id="file-upload" type="file" accept=".csv" onChange={this.handleFileUpload} />

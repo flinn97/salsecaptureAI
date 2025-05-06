@@ -77,7 +77,7 @@
                  <div className="mobile-container">
                      <div className="title-bar">
                          <div className="title-left">
-                             <div className="title-icon">
+                             <div className="title-icon" style={{fontSize:"702px"}}>
                                  <i className="fas fa-angle-left"></i>
                              </div>
                              {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<div className="name-a-sequence">
@@ -86,10 +86,10 @@
                              <RunButton callbackFunc={()=>{
                                 this.setState({edit:false})
                                 this.propsState.currentSequence.update();
-                                }} content="save"/>
+                                }} content="save" className={"dark-button-1"}/>
                              </div>):(<><div className="title-name">{this.propsState.currentSequence?.getJson().name}
                              <span onClick={()=>{
-                                this.setState({edit:true})}}><span className="name-a-sequence-edit-btn">edit</span></span>
+                                this.setState({edit:true})}}><span className="name-a-sequence-edit-btn">Edit</span></span>
                              </div></>)}
                              
                          </div>
