@@ -18,7 +18,7 @@ class TemplateCustomItem extends BaseComponent {
             <div className="sequence">
             <div className="title">
                 <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
-                    {template.name}
+                    {template.content}
                 </Link>
     
                 <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}}  className="title-right">
