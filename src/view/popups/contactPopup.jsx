@@ -150,7 +150,7 @@ export default class ContactPopup extends BaseComponent {
           </div>
 
           <div
-            className="popupButton"
+            // className="popupButton"
             style={{
               width: "100%",
               display: "flex",
@@ -160,7 +160,7 @@ export default class ContactPopup extends BaseComponent {
           >
             {" "}
             {/*Container for the save button*/}
-            <div style={{ paddingRight: "50px", paddingBottom: "20px" }}>
+            <div style={{ paddingBottom: "20px" }}>
               {" "}
               {/*Container for button spacing*/}
               {button}
