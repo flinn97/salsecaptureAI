@@ -107,7 +107,7 @@ export default class ConversationList extends BaseComponent {
     return (
       <div
         className={this.props.pageClass || this.state.defaultClass}
-        style={{ marginLeft: "-10px" }}
+        style={{ marginLeft: "-10px", minWidth:"fit-content" }}
       >
         {/* Header */}
         <div className="header">Messages</div>
