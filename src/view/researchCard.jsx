@@ -5,6 +5,7 @@
 import { MapComponent } from "flinntech";
 import { PopupButton } from "flinntech";
 import { BaseComponent } from "flinntech";
+import SCAIPopupButtonTest from "./components/debug/CustomPopupButton";
 import ResearchCustomItem from "./components/researchCustomItem";
 
 /**
@@ -88,10 +89,11 @@ export default class ResearchCard extends BaseComponent {
           </div>
 
           <div className="filter-nav"></div>
-          <PopupButton
+          <SCAIPopupButtonTest
                                  formClass="svg-last"
                                  wrapperClass="icon-row"
                                  newProp="asdf"
+
                                
                                  content={<div
                                     className="dark-button-1"
