@@ -90,84 +90,85 @@ export default class ResearchCard extends BaseComponent {
 
           <div className="filter-nav"></div>
           <SCAIPopupButtonTest
-                                 formClass="svg-last"
-                                 wrapperClass="icon-row"
-                                 newProp="asdf"
-
-                               
-                                 content={<div
-                                    className="dark-button-1"
-                                    style={{
-                                      position: "relative",
-                                      width: "fit-content",
-                                    }}
-                                  >
-                                    New Research Profile
-                                  </div>}
-                                 popupSwitch="addResearch"
-                             />
-         
+            wrapperClass="icon-row"
+            newProp="asdf"
+            content={
+              <div
+                className="dark-button-1"
+                style={{
+                  position: "relative",
+                  width: "fit-content",
+                }}
+              >
+                New Research Profile
+              </div>
+            }
+            popupSwitch="addResearch"
+          />
         </div>
 
         <div className="card-header">Customer Profiles</div>
 
-    <div> {/* Scrollable section for the contacts data */}
-        <MapComponent
-          filterFunc={(o) => {
-            if (!this.propsState.tags) {
-              return true;
-            }
-            let filterText = this.propsState.tags.split(",");
-            for (let tag of filterText) {
-              if (tag === "") {
-                continue;
-              }
-              if (o.getJson().tags.includes(tag)) {
+        <div>
+          {" "}
+          {/* Scrollable section for the contacts data */}
+          <MapComponent
+            filterFunc={(o) => {
+              if (!this.propsState.tags) {
                 return true;
               }
-            }
+              let filterText = this.propsState.tags.split(",");
+              for (let tag of filterText) {
+                if (tag === "") {
+                  continue;
+                }
+                if (o.getJson().tags.includes(tag)) {
+                  return true;
+                }
+              }
 
-            return false;
-          }}
-          name="research"
-          mapContainerclassName="contact-list"
-          mapSectionclassName="contact"
-          cells={[
-            {
-              type: "custom",
-              hasLink: true,
-              custom: ResearchCustomItem,
-            },
-            // {
-            //     type: "custom",
-            //     custom: CheckIt,
-            //     check: (obj) => {
+              return false;
+            }}
+            name="research"
+            mapContainerclassName="contact-list"
+            mapSectionclassName="contact"
+            cells={[
+              {
+                type: "custom",
+                hasLink: true,
+                custom: ResearchCustomItem,
+              },
+              // {
+              //     type: "custom",
+              //     custom: CheckIt,
+              //     check: (obj) => {
 
-            //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
-            //         contacts.push(obj);
-            //         this.dispatch({ selectedContacts: contacts });
-            //     },
-            //     uncheck: (obj) => {
-            //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
-            //         contacts = contacts.filter(contact => contact !== obj);
-            //         this.dispatch({ selectedContacts: contacts });
-            //     }
-            // },
+              //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
+              //         contacts.push(obj);
+              //         this.dispatch({ selectedContacts: contacts });
+              //     },
+              //     uncheck: (obj) => {
+              //         let contacts = this.propsState.selectedContacts ? [...this.propsState.selectedContacts] : [];
+              //         contacts = contacts.filter(contact => contact !== obj);
+              //         this.dispatch({ selectedContacts: contacts });
+              //     }
+              // },
 
-            // {
-            //     type: "attribute",
-            //     name: "name",
-            //     style: { cursor: "pointer" },
-            //     itemClick: (obj) => {
-            //         this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
-            //     }
-            // },
-            // { type: "attribute", name: "email" },
-            // { type: "attribute", name: "phone" },
-            // { type: "attribute", name: "status" },
-          ]}
-          hasLink={true}
-        /></div> 
+              // {
+              //     type: "attribute",
+              //     name: "name",
+              //     style: { cursor: "pointer" },
+              //     itemClick: (obj) => {
+              //         this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
+              //     }
+              // },
+              // { type: "attribute", name: "email" },
+              // { type: "attribute", name: "phone" },
+              // { type: "attribute", name: "status" },
+            ]}
+            hasLink={true}
+          />
+        </div>
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
             <button className="floating-select-btn">
