@@ -810,6 +810,10 @@ body {
   transform: scale(1.05);
 }
 
+.hover-darken:hover{
+  filter: brightness(.98);
+}
+
 .SCAILogo {
   width: 80%
 }
