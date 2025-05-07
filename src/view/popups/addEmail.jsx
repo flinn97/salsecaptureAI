@@ -45,7 +45,7 @@ import Conversation from "../conversation";
          </div>
        }
        callbackFunc={() => {
-        debugger
+        
         let obj = this.state.email
 
         //  this.prepNewMessage();
@@ -54,7 +54,7 @@ import Conversation from "../conversation";
          let body = {
            from: obj.getJson().owner,
            to: this.propsState.currentConversation.getJson()
-             .recipient,
+             .contact,
            subject: obj.getJson().subject,
            text: obj.getJson().body,
          };
@@ -97,13 +97,13 @@ import Conversation from "../conversation";
                  <div className="row">
                      <div>To:</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the name input*/}
-                         {this.propsState.currentConversation?.getJson().recipientName}
+                         {this.propsState.currentConversation?.getJson().contactName}
                      </div>
                  </div>
                  <div className="row">
                      <div>from:</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the name input*/}
-                         {this.propsState.currentConversation?.getJson().sender}
+                         {this.propsState.currentConversation?.getJson().conversationOwner}
                      </div>
                  </div>
                  <div className="row">

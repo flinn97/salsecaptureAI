@@ -146,29 +146,24 @@ export default class Conversation extends BaseComponent {
                       background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
                     }}
                   >
-                    {/* Form for sending new messages */}
-                    <ParentFormComponent
-                      wrapperClass="search-bar"
-                      formClass="search-input"
-                      name="body" // Name for the input field
-                      obj={this.propsState.currentComponent} // Connect to the current conversation
-                    />
+                   
                     <RunButton
                       content={
                         <div className="chat-footer">
                           <button className="footer-btn">
                             <i className="fa-solid fa-circle-plus"></i>
                           </button>
-                          <input
-                            type="text"
-                            className="footer-input"
-                            placeholder="Start typing..."
-                          />
+                         
                         </div>
                       }
                       callbackFunc={() => {
+                        
+                        
                         let obj = this.propsState.currentComponent;
-
+                        if(obj.getJson().body===""){
+                            return
+                        }
+                        
                         this.prepNewMessage();
 
                         // const { originalMessageId, from, to, subject, text } = req.body;
@@ -176,13 +171,13 @@ export default class Conversation extends BaseComponent {
                           originalMessageId: obj.getJson().originalMessageId,
                           from: obj.getJson().owner,
                           to: this.propsState.currentConversation.getJson()
-                            .recipient,
+                            .contact,
                           subject: obj.getJson().subject,
                           text: obj.getJson().body,
                         };
                         // Make the POST request
                         fetch(
-                          "https://sendgridreplythread-7c5i3vsqma-uc.a.run.app",
+                          "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
                           {
                             method: "POST",
                             headers: {
@@ -209,6 +204,13 @@ export default class Conversation extends BaseComponent {
                             console.error("Error sending reply:", error);
                           });
                       }} // Callback to re-run the prepareMessages function
+                    />
+                     {/* Form for sending new messages */}
+                     <ParentFormComponent
+                      wrapperClass="footer-input"
+                      formClass="search-input"
+                      name="body" // Name for the input field
+                      obj={this.propsState.currentComponent} // Connect to the current conversation
                     />
                   </div>
                 </div>

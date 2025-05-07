@@ -76,8 +76,8 @@ let data = [
     {
         type:"conversation",
         _id:"123",
-        recipient: "taylormdavidson@gmail.com",
-        senderName: "John Doe",
+        contact: "taylormdavidson@gmail.com",
+        contactName: "John Doe",
         timeStamp: "Today 2:15 pm",
         recentMessage:"Hey, how's it going?",
         owner:"alan@salescapture.com"
@@ -85,8 +85,8 @@ let data = [
     {
         type:"conversation",
         _id:"1234",
-        recipient: "taylormdavidson@gmail.com",
-        senderName: "Jane Doe",
+        contact: "taylormdavidson@gmail.com",
+        contactName: "Jane Doe",
         timeStamp: "Today 2:15 pm",
         recentMessage:"Hey, how's it going?",
         owner:"alan@salescapture.com"
@@ -94,8 +94,8 @@ let data = [
     {
         type:"conversation",
         _id:"1235",
-        recipient: "taylormdavidson@gmail.com",
-        senderName: "Taylor Davidson",
+        contact: "taylormdavidson@gmail.com",
+        contactName: "Taylor Davidson",
         timeStamp: "Today 2:15 pm",
         recentMessage:"Can you get me a price estimate that I can bring back to my team?",
         owner:"alan@salescapture.com"

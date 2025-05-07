@@ -78,7 +78,6 @@ class ContactsCustomItem extends BaseComponent {
                             onClick={() => {
                                 // JARED if the size of the window is more than something like 600 px ask chat gpt. then change the logic to take the obj and dispatch it to the currentContact
                                 // Assuming obj here refers to the current contact object being rendered
-                                debugger;
                                 if (window.innerWidth > 600) {
                                     this.dispatch({ currentContact: obj });
                                 } else {
@@ -101,17 +100,17 @@ class ContactsCustomItem extends BaseComponent {
                             onClick={async () => {
                                 
                                 let contact = obj;
-                                let conversation = this.componentList.getComponent("conversation", contact.getJson().email, "recipient");
+                                let conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
                                 if (!conversation) {
                                     await this.componentList.addComponents(
                                         {
                                             type: "conversation",
-                                            recipient: contact.getJson().email,
-                                            recipientName: `${contact.getJson().firstName} ${contact.getJson().lastName}`,
-                                            sender: this.propsState.currentUser.getJson()._id,
-                                            senderName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
+                                            contact: contact.getJson().email,
+                                            contactName: `${contact.getJson().firstName} ${contact.getJson().lastName}`,
+                                            conversationOwner: this.propsState.currentUser.getJson()._id,
+                                            ownerName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
                                         });
-                                    conversation = this.componentList.getComponent("conversation", contact.getJson().email, "recipient");
+                                    conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
 
 
                                 }
