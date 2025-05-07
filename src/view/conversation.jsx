@@ -137,24 +137,27 @@ export default class Conversation extends BaseComponent {
 
                   <div
                     style={{
+                      display:"flex",
+                      flexDirection:"row",
                       position: "sticky",
                       bottom: 0,
                       zIndex: 1,
                       width: "100%",
                       minHeight: "60px",
                       paddingBottom: "65px",
+                      paddingLeft:"12px",
                       background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
                     }}
                   >
-                   
+                   <div style={{ position:"relative",
+                    width:"40px", zIndex:2,
+                    }}>
                     <RunButton
                       content={
-                        <div className="chat-footer">
-                          <button className="footer-btn">
+                          <button className="footer-btn"
+                          style={{marginBottom:"-15px", position:"absolute", left:0}}>
                             <i className="fa-solid fa-circle-plus"></i>
                           </button>
-                         
-                        </div>
                       }
                       callbackFunc={() => {
                         
@@ -203,14 +206,16 @@ export default class Conversation extends BaseComponent {
                             console.error("Error sending reply:", error);
                           });
                       }} // Callback to re-run the prepareMessages function
-                    />
+                    /></div>
                      {/* Form for sending new messages */}
-                     <ParentFormComponent
-                      wrapperClass="footer-input"
-                      formClass="search-input"
-                      name="body" // Name for the input field
-                      obj={this.propsState.currentComponent} // Connect to the current conversation
-                    />
+                     <div style={{zIndex:3, width:"100%"}}>
+                      <ParentFormComponent
+                        wrapperClass="footer-input"
+                        formClass="search-input"
+                        name="body" // Name for the input field
+                        obj={this.propsState.currentComponent} // Connect to the current conversation
+                      />
+                    </div>
                   </div>
                 </div>
               )}
