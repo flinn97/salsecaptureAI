@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "firebase": "^11.2.0",
     "flinntech": "^1.0.4-e",
+    "he": "^1.2.0",
     "papaparse": "^5.5.2",
     "react": "^18.3.1",
     "react-datepicker": "^7.6.0",
