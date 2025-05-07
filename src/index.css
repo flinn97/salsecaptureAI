@@ -9,7 +9,8 @@ body {
 }
 
 .fit{
- min-width: fit-content;
+ /* min-width: fit-content; */
+ /* yeah the min width fit-content doesn't work across the app. */
 }
 
 code {
