@@ -377,6 +377,12 @@ body {
 
 .footer-btn:hover {
   background-color: #e5e5e5;
+  transform: scale(1.05);
+}
+
+.footer-btn:active {
+  background-color: var(--app-green);
+  transform: scale(1.08);
 }
 
 .footer-input {
