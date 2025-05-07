@@ -3,6 +3,7 @@ import { BaseComponent } from "flinntech";
 export default class CustomMessageItem extends BaseComponent{
 
     render(){
+        const stripHtml = this.props.obj.getJson().body.replace(/<[^>]+>/g, "");
         
         let str = this.props.obj.getJson().ownerMessage? "outgoing":"incoming"
         return(
@@ -15,7 +16,7 @@ export default class CustomMessageItem extends BaseComponent{
 
                 {/* Outgoing message (right-aligned, green bubble) */}
                 <div className={"message " + str}>
-                    {this.props.obj.getJson().body}
+                    {stripHtml}
 
                 </div>
             </div>
