@@ -50,7 +50,7 @@ export default class CustomMessageListItem extends BaseComponent{
         return(
             <>
             <div className="message-header">
-            <span className="sender">{this.props.obj.getJson().senderName}</span>
+            <span className="sender">{this.props.obj.getJson().contactName}</span>
             <span className="date">{this.getTimeStampStr()}</span>
           </div>
           <div className="snippet">{this.props.obj.getJson().recentMessage}</div>

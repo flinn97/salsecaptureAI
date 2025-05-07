@@ -97,36 +97,21 @@ class ContactsCustomItem extends BaseComponent {
               <div
                 style={{width:"fit-content"}}
                 onClick={async () => {
-                  let contact = obj;
-                  let conversation = this.componentList.getComponent(
-                    "conversation",
-                    contact.getJson().email,
-                    "recipient"
-                  );
-                  if (!conversation) {
-                    await this.componentList.addComponents({
-                      type: "conversation",
-                      recipient: contact.getJson().email,
-                      recipientName: `${contact.getJson().firstName} ${
-                        contact.getJson().lastName
-                      }`,
-                      sender: this.propsState.currentUser.getJson()._id,
-                      senderName: `${
-                        this.propsState.currentUser.getJson().firstName
-                      } ${this.propsState.currentUser.getJson().lastName}`,
-                    });
-                    conversation = this.componentList.getComponent(
-                      "conversation",
-                      contact.getJson().email,
-                      "recipient"
-                    );
-                  }
-
-                  this.dispatch({
-                    currentEmailContact: obj,
-                    currentConversation: conversation,
-                  });
-                }}
+                    let contact = obj;
+                    let conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
+                    if (!conversation) {
+                        await this.componentList.addComponents(
+                            {
+                                type: "conversation",
+                                contact: contact.getJson().email,
+                                contactName: `${contact.getJson().firstName} ${contact.getJson().lastName}`,
+                                conversationOwner: this.propsState.currentUser.getJson()._id,
+                                ownerName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
+                            });
+                        conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
+                }
+                this.dispatch({currentConversation:conversation, currentContact:contact})
+            }}
                 //   onClick={()=>{
                 //     let conversation = this.componentList.getComponent("conversations", user.getJson().email, "recipient");
                 //     let newEmail = this.operationsFactory.prepare();
