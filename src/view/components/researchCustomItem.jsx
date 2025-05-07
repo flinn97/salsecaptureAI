@@ -61,11 +61,12 @@ class ResearchCustomItem extends BaseComponent {
               }}
               className="contact-name"
             >{`${research.name} `}</div>
-            {this.state.count && (
+
+            
               <div className="contact-desc">
-                {`${this.state.count} Contacts Found`}
+                {`${this.state.count} Contact${this.state.count!==1?'s':''} Found`}
               </div>
-            )}
+            
           </div>
           <div
             className={`profile-status ${
