@@ -69,12 +69,23 @@ export default class Conversation extends BaseComponent {
         originalMessageId: replyToId,
         subject: subject,
         ownerMessage: true,
-      }, // Prepare with messageType and conversationId
+      }, clean: true // Prepare with messageType and conversationId
     });
     // Dispatch to set the current component in the global state
     this.dispatch({
       currentComponent: prepared[0], // Set the first prepared item as the current component
     });
+    this.setState({
+        currentConversation:currentConversation
+    })
+  }
+
+  componentDidUpdate(props, state){
+    if(this.propsState.currentConversation!==this.state.currentConversation){
+        this.prepNewMessage()
+    }
+
+
   }
 
   /**
