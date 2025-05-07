@@ -4,16 +4,33 @@ import './Checkbox.css';
 import contactImg from "../../assets/contact.png";
 import CheckIt from './check';
 import { Link } from 'react-router-dom';
+import stripHTML from '../../service/heDecoderService';
 
 class StepCustomItem extends BaseComponent {
     constructor(props) {
         super(props);
-        // preserve any initial state from BaseComponent
+        this.state = {
+            ...this.state,
+            plainText: "", // Store the stripped text
+          };
+    }
+
+    componentDidMount() {
+        const body = this.props.obj?.getJson().content;
+        const plainText = stripHTML(body);
+        this.setState({ plainText });
+      }
+
+    componentDidUpdate(prevProps) {
+        const currentBody = this.props.obj?.getJson().content;
+        const prevBody = this.props.obj?.getJson().content;
+        if (currentBody !== prevBody) {
+          const plainText = stripHTML(currentBody);
+          this.setState({ plainText });
+        }
     }
 
     render() {
-        let html = this.props.obj?.getJson().content;
-        let stripHtml = html.replace(/<[^>]+>/g, "");
         
         return (
             <div onClick={()=>{this.dispatch({popupSwitch:"updateStep", currentPopupComponent:this.props.obj})}}>
@@ -43,7 +60,7 @@ class StepCustomItem extends BaseComponent {
                                 <b>{this.props.obj.getJson().subject}</b>
                                 <br />
                                 <span>
-                                   {stripHtml}
+                                   {this.state.plainText}
                                 </span>
                             </div>
                         </div>
