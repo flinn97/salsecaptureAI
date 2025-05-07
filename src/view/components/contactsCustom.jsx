@@ -54,7 +54,7 @@ class ContactsCustomItem extends BaseComponent {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
           className="contact-item hover-darken"
-          style={{ background: selected ? "#2374ab10" : "white" }}
+          style={{ background: selected ? "#2374ab10" : "white",}}
         >
           <CheckIt
             checkKey="selectedContacts"
@@ -69,26 +69,29 @@ class ContactsCustomItem extends BaseComponent {
           {/* className="contact-avatar"*/}
           {/*/>*/}
 
+<div className="contact-info-expanded" 
+style={{cursor:"pointer", display:"flex", width:"100%"}}
+onClick={() => {
+            if (window.innerWidth > 600) {
+              this.dispatch({ currentContact: obj });
+            } else {
+              this.dispatch({
+                currentPopupComponent: obj,
+                popupSwitch: "updateContact",
+              });
+            }
+          }}>
           <div className="contact-avatar">
             <i className="fa-solid fa-user"></i>
           </div>
           <div className="contact-info">
             {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
             <div
-              onClick={() => {
-                if (window.innerWidth > 600) {
-                  this.dispatch({ currentContact: obj });
-                } else {
-                  this.dispatch({
-                    currentPopupComponent: obj,
-                    popupSwitch: "updateContact",
-                  });
-                }
-              }}
               className="contact-name"
             >{`${user.firstName} ${user.lastName}`}</div>
-            <div className="contact-desc">{user.company}</div>
+            <div className="contact-desc">{user?.company||user?.email||""}</div>
           </div>
+</div>
           <SCAIPopupButtonTest
             formClass="hover-basic"
             wrapperClass="icon-row"

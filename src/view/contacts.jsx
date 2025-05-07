@@ -37,12 +37,18 @@ export default class Contacts extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass}>
+            <div className={this.props.pageClass || this.state.defaultClass}
+            style={{display:"flex"}}>
+                <div style={{width: window.innerWidth > 600?"50%":"100%"}}>
                     <Card theme="NoBorder" type="fit" content={<ContactsCard />} />
+                </div>
+                    
                     {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
                     This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
                     */}
+                <div style={{width: window.innerWidth > 600?"50%":"100%", position:"relative"}}>
                     {(this.propsState.currentContact && window.innerWidth > 600) && <Card theme="NoBorder" type="fit"  content={<ContactPopup/>}/>}
+                </div>
             </div>
         );
     }

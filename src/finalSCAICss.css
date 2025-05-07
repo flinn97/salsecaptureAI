@@ -913,7 +913,16 @@ body {
 
 
 /* .contact-Add-container {} */
+.contact-info-expanded:hover{
+  border-radius: 25px;
+  mix-blend-mode: multiply;
+  background-color: #f8f8f8;
+}
 
+.contact-info-expanded:active{
+  border-radius: 25px;
+  filter: hue-rotate(63deg) contrast(88%);
+}
 
 .contact-Add-container>:nth-child(-n+5) {
   justify-content: left;

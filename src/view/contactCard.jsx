@@ -186,7 +186,7 @@ export default class ContactsCard extends BaseComponent {
 
         {/* Header row for the contacts data table */}
 
-        <div>
+        <div style={{paddingBottom:'60px'}}>
           {" "}
           {/*scrollable section */}
           <MapComponent
