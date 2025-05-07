@@ -26,6 +26,7 @@ import ResearchPage from './view/researchPage.jsx';
 import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
+import AddEmail from './view/popups/addEmail.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -35,7 +36,7 @@ import ResearchPopup from './view/popups/addResearchPopup.jsx';
  export default class App extends AppBaseClass {
    constructor(props) {
      super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
-     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup };
+     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup, email:AddEmail };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
