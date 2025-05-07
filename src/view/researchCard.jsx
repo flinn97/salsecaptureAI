@@ -88,10 +88,23 @@ export default class ResearchCard extends BaseComponent {
           </div>
 
           <div className="filter-nav"></div>
-          
-          <div className="dark-button-1"
-          // TODO: Taylor
-          >New Research Profile</div>
+          <PopupButton
+                                 formClass="svg-last"
+                                 wrapperClass="icon-row"
+                                 newProp="asdf"
+                               
+                                 content={<div
+                                    className="dark-button-1"
+                                    style={{
+                                      position: "relative",
+                                      width: "fit-content",
+                                    }}
+                                  >
+                                    New Research Profile
+                                  </div>}
+                                 popupSwitch="addResearch"
+                             />
+         
         </div>
 
         <div className="card-header">Customer Profiles</div>

@@ -106,7 +106,10 @@ class PotentialProspect extends ComponentBase {
 class Research extends ComponentBase {
     json={ 
         ...this.json,
-        type:"research"
+        type:"research",
+        searchFrequency:"",
+        AIPrompt:"",
+        
     }
 }
 
