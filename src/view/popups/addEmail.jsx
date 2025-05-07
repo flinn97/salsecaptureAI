@@ -20,7 +20,9 @@
      };
    }
    componentDidMount(){
-    this.propsState.currentPopupComponent.setCompState({conversationId: this.propsState.currentConversation.getJson()._id, originalMessageId:false});
+    
+    debugger
+    this.propsState.currentPopupComponent?.setCompState({conversationId: this.propsState.currentConversation?.getJson()._id, originalMessageId:false});
     this.setState({email:this.propsState.currentPopupComponent})
     
  }

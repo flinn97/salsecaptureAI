@@ -110,6 +110,7 @@ class ContactsCustomItem extends BaseComponent {
                             });
                         conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
                 }
+                this.dispatch({currentConversation:conversation, currentContact:contact})
             }}
                 //   onClick={()=>{
                 //     let conversation = this.componentList.getComponent("conversations", user.getJson().email, "recipient");

@@ -158,7 +158,6 @@ export default class Conversation extends BaseComponent {
                       }
                       callbackFunc={() => {
                         
-                        
                         let obj = this.propsState.currentComponent;
                         if(obj.getJson().body===""){
                             return
