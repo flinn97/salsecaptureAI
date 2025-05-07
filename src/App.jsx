@@ -50,7 +50,7 @@ import AddEmail from './view/popups/addEmail.jsx';
  
      }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {

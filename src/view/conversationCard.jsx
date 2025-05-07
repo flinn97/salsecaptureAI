@@ -24,7 +24,40 @@ export default class ConversationCard extends BaseComponent {
       type: "conversation",
       ids: this.propsState.currentUser.getJson()._id,
       filterKeys: "owner",
+      snapshot:true,
     });
+    await this.componentList.getComponentsFromBackend({
+        type: "email",
+        ids: this.propsState.currentUser.getJson()._id,
+        filterKeys: "owner",
+        snapshot:true,
+
+      });
+    await this.componentList.sortSelectedListbyFirebaseDate('conversation');
+    this.componentList.getAPIService().subscribeToReadObserver(async (l, l2)=>{
+        this.setState({start:false})
+
+        let idObj = {}
+        for(let obj of l2){
+            idObj[obj._id] = obj
+        }
+        let list = this.componentList.getList("conversation");
+        list = list.map((obj)=>{
+            let o = idObj[obj.getJson()._id];
+                if(o){
+                    obj.setCompState({...o})
+                }
+            return obj
+        })
+        await this.componentList.clearSelectedList('conversation', list);
+        await this.componentList.sortSelectedListbyFirebaseDate('conversation', true)
+
+        this.dispatch({ranConversationRead:true});
+        this.setState({start:true})
+    
+
+    })
+
     this.setState({
       start: true,
     });
