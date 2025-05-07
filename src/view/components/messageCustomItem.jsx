@@ -1,6 +1,29 @@
 import { BaseComponent } from "flinntech";
+import stripHTML from "../../service/heDecoderService";
 
 export default class CustomMessageItem extends BaseComponent{
+    constructor(props) {
+        super(props);
+        this.state = {
+          ...this.state,
+          plainText: "", // Store the stripped text
+        };
+      }
+
+    componentDidMount() {
+        const body = this.props.obj?.getJson().body;
+        const plainText = stripHTML(body);
+        this.setState({ plainText });
+      }
+
+    componentDidUpdate(prevProps) {
+        const currentBody = this.props.obj.getJson().body;
+        const prevBody = prevProps.obj.getJson().body;
+        if (currentBody !== prevBody) {
+          const plainText = stripHTML(currentBody);
+          this.setState({ plainText });
+        }
+    }
 
     render(){
         const stripHtml = this.props.obj.getJson().body.replace(/<[^>]+>/g, "");
@@ -16,7 +39,7 @@ export default class CustomMessageItem extends BaseComponent{
 
                 {/* Outgoing message (right-aligned, green bubble) */}
                 <div className={"message " + str}>
-                    {stripHtml}
+                {this.state.plainText}
 
                 </div>
             </div>
