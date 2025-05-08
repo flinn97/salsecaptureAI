@@ -26,6 +26,7 @@
     this.setState({email:this.propsState.currentPopupComponent})
     
  }
+ componentDidUpdate(){}
  
 
  
@@ -47,12 +48,13 @@
          content={<div>Send</div>}
          callbackFunc={() => {
            let obj = this.state.email;
+           
  
            //  this.prepNewMessage();
  
            // const { originalMessageId, from, to, subject, text } = req.body;
            let body = {
-            from: obj.getJson().owner,
+            from: this.propsState.currentUser.getJson()._id,
             to: this.propsState.currentConversation.getJson()
               .contact,
             subject: obj.getJson().subject,
@@ -78,6 +80,7 @@
              .catch((error) => {
                console.error("Error sending reply:", error);
              });
+             this.dispatch({currentPopupComponent:undefined, popupSwitch:""})
          }} // Callback to re-run the prepareMessages function
        />
      );

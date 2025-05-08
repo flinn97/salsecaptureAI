@@ -6,144 +6,155 @@ import CheckIt from "./check";
 import SCAIPopupButtonTest from "./debug/CustomPopupButton";
 
 class ContactsCustomItem extends BaseComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  // Use arrow function for auto-binding 'this'
-  handleCheckContact = (obj) => {
-    // Ensure we get the latest state within the handler
-    // Although BaseComponent's dispatch might handle this, accessing state inside the handler
-    // defined as a class method is safer.
-    //for some reason propsState didn't update in this component though it did for all the other components
-    let contacts = this.props.app.state.selectedContacts
-      ? [...this.props.app.state.selectedContacts]
-      : [];
-
-    // Add the object if it's not already there (filter below handles removal, but prevent duplicates)
-    if (!contacts.includes(obj)) {
-      contacts.push(obj);
+    constructor(props) {
+        super(props);
     }
-    //same here something seems up with this component making it use a completely seperate dispatch.
-    this.dispatch({ selectedContacts: contacts });
-  };
 
-  // Use arrow function for auto-binding 'this'
-  handleUncheckContact = (obj) => {
-    // Ensure we get the latest state within the handler
-    let contacts = this.props.app.state.selectedContacts
-      ? [...this.props.app.state.selectedContacts]
-      : [];
+    // Use arrow function for auto-binding 'this'
+    handleCheckContact = (obj) => {
+        // Ensure we get the latest state within the handler
+        // Although BaseComponent's dispatch might handle this, accessing state inside the handler
+        // defined as a class method is safer.
+        //for some reason propsState didn't update in this component though it did for all the other components
+        let contacts = this.props.app.state.selectedContacts
+            ? [...this.props.app.state.selectedContacts]
+            : [];
 
-    // Filter out the object
-    contacts = contacts.filter((contact) => contact !== obj);
+        // Add the object if it's not already there (filter below handles removal, but prevent duplicates)
+        if (!contacts.includes(obj)) {
+            contacts.push(obj);
+        }
+        //same here something seems up with this component making it use a completely seperate dispatch.
+        this.dispatch({ selectedContacts: contacts });
+    };
 
-    this.dispatch({ selectedContacts: contacts });
-  };
+    // Use arrow function for auto-binding 'this'
+    handleUncheckContact = (obj) => {
+        // Ensure we get the latest state within the handler
+        let contacts = this.props.app.state.selectedContacts
+            ? [...this.props.app.state.selectedContacts]
+            : [];
 
-  render() {
-    const { obj } = this.props;
-    // Assuming obj.getJson() is necessary and works
-    let user = obj.getJson();
-    const cons = this.props.app.state.selectedContacts
-      ? [...this.props.app.state.selectedContacts]
-      : [];
-    let selected = cons.includes(obj);
+        // Filter out the object
+        contacts = contacts.filter((contact) => contact !== obj);
 
-    return (
-      <div style={{ display: "flex", flexDirection: "column",}}>
-        <div
-          className="contact-item hover-darken" 
-          style={{ background: selected ? "#2374ab10" : "white",}}
-        >
-          <CheckIt
-            checkKey="selectedContacts"
-            obj={obj}
-            // Pass references to the class methods
-            check={this.handleCheckContact}
-            uncheck={this.handleUncheckContact}
-          />
-          {/*<img*/}
-          {/* src={user.picURL !== "" ? user.picURL || contactImg : contactImg}*/}
-          {/* alt="头像"*/}
-          {/* className="contact-avatar"*/}
-          {/*/>*/}
+        this.dispatch({ selectedContacts: contacts });
+    };
 
-<div className="contact-info-expanded" 
-onClick={() => {
-            if (window.innerWidth > 600) {
-              this.dispatch({ currentContact: obj });
-            } else {
-              this.dispatch({
-                currentPopupComponent: obj,
-                popupSwitch: "updateContact",
-              });
-            }
-          }}>
-          <div className="contact-avatar">
-            <i className="fa-solid fa-user"></i>
-          </div>
-          <div className="contact-info">
-            {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
-            <div
-              className="contact-name"
-            >{`${user.firstName} ${user.lastName}`}</div>
-            <div className="contact-desc">{user?.company||user?.email||""}</div>
-          </div>
-</div>
-          <SCAIPopupButtonTest
-            formClass="hover-basic"
-            wrapperClass="icon-row"
-            newProp="asdf"
-            content={
-              <div
-                style={{width:"fit-content"}}
-                onClick={async () => {
-                    let contact = obj;
-                    let conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
-                    if (!conversation) {
-                        await this.componentList.addComponents(
-                            {
-                                type: "conversation",
-                                contact: contact.getJson().email,
-                                contactName: `${contact.getJson().firstName} ${contact.getJson().lastName}`,
-                                conversationOwner: this.propsState.currentUser.getJson()._id,
-                                ownerName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
-                            });
-                        conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
-                }
-                this.dispatch({currentConversation:conversation, currentContact:contact})
-            }}
-                //   onClick={()=>{
-                //     let conversation = this.componentList.getComponent("conversations", user.getJson().email, "recipient");
-                //     let newEmail = this.operationsFactory.prepare();
+    render() {
+        const { obj } = this.props;
+        // Assuming obj.getJson() is necessary and works
+        let user = obj.getJson();
+        const cons = this.props.app.state.selectedContacts
+            ? [...this.props.app.state.selectedContacts]
+            : [];
+        let selected = cons.includes(obj);
 
-                //   }}
-                // TODO: Taylor? this needs to open up messaging to that contact
+        return (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+                <div
+                    className="contact-item hover-darken"
+                    style={{ background: selected ? "#2374ab10" : "white", }}
+                >
+                    <CheckIt
+                        checkKey="selectedContacts"
+                        obj={obj}
+                        // Pass references to the class methods
+                        check={this.handleCheckContact}
+                        uncheck={this.handleUncheckContact}
+                    />
+                    {/*<img*/}
+                    {/* src={user.picURL !== "" ? user.picURL || contactImg : contactImg}*/}
+                    {/* alt="头像"*/}
+                    {/* className="contact-avatar"*/}
+                    {/*/>*/}
 
-                className="contact-icon"
-              >
-                <i className="fa-solid fa-message" />
-              </div>
-            }
-            popupSwitch="addEmail"
-          />
-        </div>
-        <div
-          // The 'active' class here might need dynamic logic if it depends on selection state
-          className="contact-tag-container active"
-        >
-          {/* Use optional chaining and check if tags exist before splitting */}
-          {user.tags?.split(",").map((text, index) => (
-            // Add a key prop when mapping lists for performance and stability
-            <button key={index} className="contact-tag-btn">
-              {text}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
+                    <div className="contact-info-expanded"
+                        style={{ cursor: "pointer", display: "flex", width: "100%" }}
+                        onClick={() => {
+                            if (window.innerWidth > 600) {
+                                this.dispatch({ currentContact: obj });
+                            } else {
+                                this.dispatch({
+                                    currentPopupComponent: obj,
+                                    popupSwitch: "updateContact",
+                                });
+                            }
+                        }}>
+                        <div className="contact-avatar">
+                            <i className="fa-solid fa-user"></i>
+                        </div>
+                        <div className="contact-info">
+                            {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
+                            <div
+                                className="contact-name"
+                            >{`${user.firstName} ${user.lastName}`}</div>
+                            <div className="contact-desc">{user?.company || user?.email || ""}</div>
+                        </div>
+                    </div>
+                    <SCAIPopupButtonTest
+                        formClass="hover-basic"
+                        wrapperClass="icon-row"
+                        newProp="asdf"
+                        content={
+                            <div
+                                style={{ width: "fit-content" }}
+                                onClick={async () => {
+                                    debugger
+                                    await this.operationsFactory.clear();
+                                    let contact = obj;
+                                    let conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
+                                    if (!conversation) {
+                                        await this.componentList.addComponents(
+                                            {
+                                                type: "conversation",
+                                                contact: contact.getJson().email,
+                                                contactName: `${contact.getJson().firstName} ${contact.getJson().lastName}`,
+                                                conversationOwner: this.propsState.currentUser.getJson()._id,
+                                                ownerName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
+                                            });
+                                        conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
+                                    }
+                                    debugger
+                                    let dm = { type: "email" }
+                                    dm = { prepare: { ...dm }, clean: true };
+                                    dm = await this.operationsFactory.prepare(dm);
+
+                                    if (Array.isArray(dm) && dm.length === 1) {
+                                        dm = dm[0];
+                                    }
+                                    let dispatchObj = { popupSwitch: "addEmail", currentPopupComponent: dm }
+                                    await this.dispatch({ ...dispatchObj, currentConversation: conversation, currentContact: contact})
+                                }}
+                                //   onClick={()=>{
+                                //     let conversation = this.componentList.getComponent("conversations", user.getJson().email, "recipient");
+                                //     let newEmail = this.operationsFactory.prepare();
+
+                                //   }}
+                                // TODO: Taylor? this needs to open up messaging to that contact
+
+                                className="contact-icon"
+                            >
+                                <i className="fa-solid fa-message" />
+                            </div>
+                        }
+                    />
+                </div>
+                <div
+                    // The 'active' class here might need dynamic logic if it depends on selection state
+                    className="contact-tag-container active"
+                >
+                    {/* Use optional chaining and check if tags exist before splitting */}
+                    {user.tags?.split(",").map((text, index) => (
+                        // Add a key prop when mapping lists for performance and stability
+                        <button key={index} className="contact-tag-btn">
+                            {text}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        );
+    }
 }
 
 export default ContactsCustomItem;
