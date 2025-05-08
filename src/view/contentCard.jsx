@@ -28,7 +28,7 @@ export default class ContentCard extends BaseComponent {
      */
     getInnerContent() {
         return (
-            <div className="map-container">
+            <div className="map-container" style={{paddingBottom:"62px"}}>
                 <div className="top-nav-float">
                     <nav className="top-nav">
                         <div className="nav-left">
