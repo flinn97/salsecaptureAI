@@ -27,7 +27,7 @@ export default class Templates extends BaseComponent {
     getInnerContent() {
         return (
             <>
-                <h4 style={{ marginBottom: "10px" }}>Templates</h4>
+                <h4 style={{ marginBottom: "10px", font: "normal normal 900 16px/22px Satoshi" }}>Templates</h4>
                 
                 {/* MapComponent to display templates with links */}
                 <MapComponent

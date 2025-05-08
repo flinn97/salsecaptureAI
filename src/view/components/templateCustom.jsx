@@ -16,12 +16,20 @@ class TemplateCustomItem extends BaseComponent {
         let template = obj.getJson();
         return (
             <div className="sequence">
-            <div className="title">
-                <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
+            <div className="title"  style={{
+                justifyContent:"space-between",
+                padding:"2px"}}> 
+                <Link 
+                style={{color:"#262626",}} 
+                to={"/template/"+template._id} 
+                onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
                     {template.content}
                 </Link>
     
-                <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}}  className="title-right">
+                <Link 
+                style={{marginRight:"0px"}}
+                to={"/template/"+template._id} 
+                onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}}  className="title-right">
                     View Details
                 </Link>
     
