@@ -4,11 +4,30 @@ import './Checkbox.css';
 import contactImg from "../../assets/contact.png";
 import CheckIt from './check';
 import { Link } from 'react-router-dom';
+import stripHTML from '../../service/heDecoderService';
 
 class TemplateCustomItem extends BaseComponent {
     constructor(props) {
         super(props);
-        // preserve any initial state from BaseComponent
+        this.state = {
+            ...this.state,
+            plainText: "", // Store the stripped text
+          };
+    }
+
+    componentDidMount() {
+        const body = this.props.obj?.getJson().content;
+        const plainText = stripHTML(body);
+        this.setState({ plainText });
+      }
+
+    componentDidUpdate(prevProps) {
+        const currentBody = this.props.obj?.getJson().content;
+        const prevBody = this.props.obj?.getJson().content;
+        if (currentBody !== prevBody) {
+          const plainText = stripHTML(currentBody);
+          this.setState({ plainText });
+        }
     }
 
     render() {
@@ -16,12 +35,31 @@ class TemplateCustomItem extends BaseComponent {
         let template = obj.getJson();
         return (
             <div className="sequence">
-            <div className="title">
-                <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
-                    {template.content}
+            <div className="title"  style={{
+                justifyContent:"space-between",
+                padding:"2px"}}> 
+                <Link 
+                style={{ color: "#262626", maxWidth: "50%", minWidth:"50%", }}
+                to={"/template/"+template._id} 
+                onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
+                    <span
+                style={{
+                width:"100%",
+                display: "inline-block",
+                overflow: "hidden",
+                lineBreak:"anywhere",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                }}
+                    >
+                    {this.state.plainText}
+                </span>
                 </Link>
     
-                <Link to={"/template/"+template._id} onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}}  className="title-right">
+                <Link 
+                style={{marginRight:"0px"}}
+                to={"/template/"+template._id} 
+                onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}}  className="title-right">
                     View Details
                 </Link>
     

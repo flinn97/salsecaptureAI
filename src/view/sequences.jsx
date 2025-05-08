@@ -28,7 +28,7 @@ export default class Sequences extends BaseComponent {
     getInnerContent() {
         return (
             <div className="fit">
-                <h4 style={{ marginBottom: "10px" }}>Sequences</h4>
+                <h4 style={{ marginBottom: "10px", font: "normal normal 900 16px/22px Satoshi" }}>Sequences</h4>
                 {/* Link to navigate to the sequences page */}
                 
                 
