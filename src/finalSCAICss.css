@@ -147,14 +147,18 @@ body {
 }
 
 .contact-item {
+  max-height: 73px;
   min-height: 73px;
   display: flex;
-  padding: 15px;
   border-radius: 10px;
   align-items: center;
   /* margin: 0 0 10px 0; */
   transition: background-color 0.2s;
   background-color: var(--app-light-gray);
+  min-width: 100%;
+  overflow: hidden;
+  justify-content:flex-end;
+  width: 100%;
   
   &.contact-item-active {
     background-color: var(--app-light-green);
@@ -439,6 +443,7 @@ body {
 
 .icon-row {
   display: flex;
+  margin-left: auto;
 }
 
 .icon-row>div:nth-child(1) {
@@ -911,6 +916,14 @@ body {
   width: 100%
 } */
 
+.contact-info-expanded{
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  transition: border-radius .73s ease, background-color .3s ease;
+}
 
 /* .contact-Add-container {} */
 .contact-info-expanded:hover{

@@ -51,9 +51,9 @@ class ContactsCustomItem extends BaseComponent {
     let selected = cons.includes(obj);
 
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column",}}>
         <div
-          className="contact-item hover-darken"
+          className="contact-item hover-darken" 
           style={{ background: selected ? "#2374ab10" : "white",}}
         >
           <CheckIt
@@ -70,7 +70,6 @@ class ContactsCustomItem extends BaseComponent {
           {/*/>*/}
 
 <div className="contact-info-expanded" 
-style={{cursor:"pointer", display:"flex", width:"100%"}}
 onClick={() => {
             if (window.innerWidth > 600) {
               this.dispatch({ currentContact: obj });
