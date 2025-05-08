@@ -20,10 +20,21 @@ class TemplateCustomItem extends BaseComponent {
                 justifyContent:"space-between",
                 padding:"2px"}}> 
                 <Link 
-                style={{color:"#262626",}} 
+                style={{ color: "#262626", maxWidth: "50%", minWidth:"50%", }}
                 to={"/template/"+template._id} 
                 onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} className="title-left">
+                    <span
+                style={{
+                width:"100%",
+                display: "inline-block",
+                overflow: "hidden",
+                lineBreak:"anywhere",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                }}
+                    >
                     {template.content}
+                </span>
                 </Link>
     
                 <Link 

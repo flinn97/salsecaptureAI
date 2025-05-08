@@ -19,12 +19,24 @@ class SequenceCustomItem extends BaseComponent {
             <div className="title" 
             style={{
                 justifyContent:"space-between",
-                padding:"2px"}}>
+                padding:"2px"
+                }}>
                 <Link to={"/sequence/"+sequence._id}
-                style={{color:"#262626",}} 
+                style={{ color: "#262626", maxWidth: "50%", minWidth:"50%", }}
                 onClick={()=>{this.dispatch({popupSwitch: "", currentPopupComponent: undefined })}} 
                 className="title-left">
-                    {sequence.name}
+                    <span
+                style={{
+                width:"100%",
+                display: "inline-block",
+                overflow: "hidden",
+                lineBreak:"anywhere",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                }}
+                    >
+                {sequence.name}
+                </span>
                 </Link>
     
                 <Link to={"/sequence/"+sequence._id}
