@@ -20,6 +20,7 @@ export default class ConversationCard extends BaseComponent {
     };
   }
   async componentDidMount() {
+    if(!this.propsState.convoSnapped){
     await this.componentList.getComponentsFromBackend({
       type: "conversation",
       ids: this.propsState.currentUser.getJson()._id,
@@ -33,6 +34,10 @@ export default class ConversationCard extends BaseComponent {
         snapshot:true,
 
       });
+    }
+    else{
+        this.dispatch({convoSnapped:true})
+    }
     await this.componentList.sortSelectedListbyFirebaseDate('conversation');
     this.componentList.getAPIService().subscribeToReadObserver(async (l, l2)=>{
         this.setState({start:false})
