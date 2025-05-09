@@ -114,7 +114,7 @@
                {" "}
                {/*Container for the subject input*/}
                <ParentFormComponent
-                 wrapperClass="underline-form"
+                 formClass="underline-form"
                  obj={obj}
                  name="subject"
                  inPopup={true}

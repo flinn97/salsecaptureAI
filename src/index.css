@@ -21,8 +21,12 @@ code {
   font-family: 'Satoshi-Variable', sans-serif;
 }
 
+.Map-Container, .SB-link, .SB-Map-Link{
+  font-family: 'Satoshi-Variable', sans-serif;
+}
+
 /* Exempt Font Awesome */
-.fa, .fas, .far, .fab {
+.fa, .fas, .far, .fab{
   font-family: 'Font Awesome 6 Free' !important;
   font-weight: 900;
 }

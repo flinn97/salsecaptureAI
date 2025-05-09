@@ -36,8 +36,8 @@ class ResearchCustomItem extends BaseComponent {
     let isActive = research.isActive;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
+      <div style={{ display: "flex", flexDirection: "column", }}>
+        <div style={{padding:"20px" }}
           className={`contact-item ${isActive ? "contact-item-active" : ""}`}
         >
           {/*<img*/}

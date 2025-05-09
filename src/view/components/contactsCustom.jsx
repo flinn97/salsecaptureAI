@@ -89,7 +89,7 @@ class ContactsCustomItem extends BaseComponent {
                             <div
                                 className="contact-name"
                             >{`${user.firstName} ${user.lastName}`}</div>
-                            <div className="contact-desc">{user?.company || user?.email || ""}</div>
+                            <div className="contact-desc">{user?.company || user?.title ||user?.email || user?.mobile||""}</div>
                         </div>
                     </div>
                     <SCAIPopupButtonTest

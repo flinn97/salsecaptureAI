@@ -77,7 +77,7 @@
                  <div className="mobile-container">
                      <div className="title-bar">
                          <div className="title-left">
-                             <div className="title-icon" style={{fontSize:"702px"}}>
+                             <div className="title-icon">
                                  <i className="fas fa-angle-left"></i>
                              </div>
                              {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<div className="name-a-sequence">
@@ -140,7 +140,7 @@
                  /> 
                  <PopupButton
                                  formClass="svg-last"
-                                 wrapperClass="icon-row"
+                                //  wrapperClass="icon-row"
                                  newProp="asdf"
                                  obj={
                                     this.getStepJson()
