@@ -26,6 +26,17 @@ class Contact extends ComponentBase {
         type: 'contact',
         phone: "",
         email: "",
+        title:"",
+        company:"",
+        mobile:"",
+        firstName:"",
+        lastName:"",
+        address:"",
+        city:"",
+        state:"",
+        zip:"",
+        source:"",
+        tags:"",
         conversationIds: [],
         
     };
