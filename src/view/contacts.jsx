@@ -9,47 +9,57 @@ import ContactsCard from "./contactCard"; // Custom component for displaying con
 import "./contacts.css";
 import ContactPopup from "./popups/contactPopup";
 export default class Contacts extends GetAllComponents {
-    /**
-     * Constructor for the Contacts component.
-     * @param {object} props - Properties passed to the component.
-     */
-    constructor(props) {
-        super(props);
+  /**
+   * Constructor for the Contacts component.
+   * @param {object} props - Properties passed to the component.
+   */
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            ...this.state,
-            defaultClass: "fit",
-            owner:this.app.state.currentUser.getJson()._id
-        };
-    }
+    this.state = {
+      ...this.state,
+      defaultClass: "fit",
+      owner: this.app.state.currentUser.getJson()._id,
+      visible:true,
+    };
+  }
 
-    /**
-     * Lifecycle method that runs after the component is mounted.
-     * Fetches components data from the backend.
-     */
-    async componentDidMount() {
-        await this.getComponentsFromBackend();
-    }
+  /**
+   * Lifecycle method that runs after the component is mounted.
+   * Fetches components data from the backend.
+   */
+  async componentDidMount() {
+    await this.getComponentsFromBackend();
+  }
 
-    /**
-     * Renders the Contacts component.
-     * @returns {JSX.Element} The rendered component.
-     */
-    render() {
-        return (
-            <div className={this.props.pageClass || this.state.defaultClass}
-            style={{display:"flex"}}>
-                <div style={{width: window.innerWidth > 600?"50%":"100%"}}>
-                    <Card theme="NoBorder" type="fit" content={<ContactsCard />} />
-                </div>
-                    
-                    {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
+  /**
+   * Renders the Contacts component.
+   * @returns {JSX.Element} The rendered component.
+   */
+  render() {
+    return (
+      <div
+        className={this.props.pageClass || this.state.defaultClass}
+        style={{ display: "flex" }}
+      >
+        <div style={{ width: window.innerWidth > 600 ? "50%" : "100%" }}>
+          <Card theme="NoBorder" type="fit" content={<ContactsCard />} />
+        </div>
+
+        {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
                     This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
                     */}
-                <div style={{width: window.innerWidth > 600?"50%":"100%", position:"relative"}}>
-                    {(this.propsState.currentContact && window.innerWidth > 600) && <Card theme="NoBorder" type="fit"  content={<ContactPopup/>}/>}
-                </div>
-            </div>
-        );
-    }
+        <div
+          style={{
+            width: window.innerWidth > 600 ? "50%" : "100%",
+            position: "relative",
+          }}
+        >
+          {this.propsState.currentContact && window.innerWidth > 600 && this.state.visible &&(
+            <Card theme="NoBorder" type="fit" content={<ContactPopup />} />
+          )}
+        </div>
+      </div>
+    );
+  }
 }

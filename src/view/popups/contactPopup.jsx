@@ -10,6 +10,8 @@ import {
   UploadButton,
 } from "flinntech";
 import { BaseComponent } from "flinntech";
+import email from "../../assets/email_24dp_05050.svg";
+import phone from "../../assets/phone.svg";
 
 export default class ContactPopup extends BaseComponent {
   /**
@@ -23,6 +25,31 @@ export default class ContactPopup extends BaseComponent {
       defaultClass: "fit scroller", //Sets a default class for styling
     };
   }
+
+  //or we can import date-fns library
+  formatDate(timestamp) {
+    const date = new Date(
+      timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+    );
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
+  }
   /**
    * Renders the OemPopupContent component.
    * @returns {JSX.Element} The rendered component.
@@ -33,7 +60,11 @@ export default class ContactPopup extends BaseComponent {
     if (this.propsState.popupSwitch?.includes("addContact")) {
       isWideScreen = false;
     }
+
     let obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
+    //TODO: switching contact needs to refresh all the parentFormComponents
+
+    let createDate = obj ? this.formatDate(obj?.getJson().date) : "";
 
     const effectivePopupComponent = isWideScreen
       ? this.propsState.currentContact
@@ -42,6 +73,7 @@ export default class ContactPopup extends BaseComponent {
 
     // Determine the text for the heading based on whether an object is provided
     let text = obj ? "Edit" : "Add";
+    console.log(obj ? obj : "");
     // Set default button to RunButton
     let button = (
       <RunButton
@@ -68,107 +100,305 @@ export default class ContactPopup extends BaseComponent {
       );
     }
     return (
-      <div
-        style={{ padding: "10px", paddingBottom: "100px", height: "100%" }}
-        className={this.props.pageClass || this.state.defaultClass}
-      >
-        <h2>{text} Contact</h2> {/*Heading for the popup*/}
-        <div className="contact-Add-container">
-          <div className="row">
-            <div>First Name:</div>
-            <div style={{ width: "70%", marginLeft: "7px" }}>
-              {" "}
-              {/*Container for the title input*/}
-              <ParentFormComponent
-                obj={obj}
-                wrapperClass="underline-form"
-                name="firstName"
-                inPopup={inPopup}
-              />{" "}
-              {/*Component for title input*/}
-            </div>
-          </div>
-
-          <div className="row">
-            <div>Last Name:</div>
-            <div style={{ width: "70%", marginLeft: "7px" }}>
-              {" "}
-              {/*Container for the title input*/}
-              <ParentFormComponent
-                obj={obj}
-                wrapperClass="underline-form"
-                name="lastName"
-                inPopup={inPopup}
-              />{" "}
-              {/*Component for title input*/}
-            </div>
-          </div>
-
-          <div className="row">
-            <div>Email:</div>
-            <div style={{ width: "70%", marginLeft: "7px" }}>
-              {" "}
-              {/*Container for the title input*/}
-              <ParentFormComponent
-                wrapperClass="underline-form"
-                obj={obj}
-                name="email"
-                inPopup={inPopup}
-              />{" "}
-              {/*Component for title input*/}
-            </div>
-          </div>
-
-          <div className="row" title={"Comma seperated"}>
-            <div>Tags:</div>
-            <div style={{ width: "70%", marginLeft: "7px" }}>
-              {" "}
-              {/*Container for the title input*/}
-              <ParentFormComponent
-                wrapperClass="underline-form"
-                obj={obj}
-                name="tags"
-                inPopup={inPopup}
-              />{" "}
-              {/*Component for title input*/}
-            </div>
-          </div>
-
-          <div className="row">
-            <div>Notes</div>
-            <div style={{ width: "90%", marginLeft: "10px" }}>
-              {" "}
-              {/*Container for the notes input*/}
-              <ParentFormComponent
-                obj={obj}
-                type="quill"
-                name="notes"
-                inPopup={inPopup}
-              />{" "}
-              {/*Component for notes input (using Quill editor)*/}
-            </div>
-          </div>
-
-          <div
-            // className="popupButton"
+      <>
+        <h2 style={{ position: "sticky", top: 0, padding: "2%" }}>
+          {text} Contact
+        </h2>
+        {obj && (
+          <h3
             style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignContent: "flex-end",
+              padding: "10px",
+              font: "normal normal 900 15px/16px Satoshi",
             }}
           >
-            {" "}
-            {/*Container for the save button*/}
-            <div style={{ paddingBottom: "20px" }}>
+            {obj.getJson().firstName} {obj.getJson().lastName}
+          </h3>
+        )}
+        <div
+          style={{
+            padding: "2%",
+            paddingBottom: "80px",
+            height: "100%",
+            paddingTop: "12px",
+          }}
+          className={this.props.pageClass || this.state.defaultClass}
+        >
+          {}
+          {/*Heading for the popup*/}
+          <div className="contact-Add-container">
+            <div className="contact-contact-data">
+              <div
+                className={`row-container ${
+                  obj?.getJson().firstName ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">First Name:</div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    obj={obj}
+                    formClass="underline-form"
+                    name="firstName"
+                    placeholder="FirstName"
+                    inPopup={inPopup}
+                  />
+                </div>
+              </div>
+
+              <div
+                className={`row-container ${
+                  obj?.getJson().lastName ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">Last Name:</div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    obj={obj}
+                    placeholder="LastName"
+                    formClass="underline-form"
+                    name="lastName"
+                    inPopup={inPopup}
+                  />
+                </div>
+              </div>
+
+              <div
+                className={`row-container ${
+                  obj?.getJson().email ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">
+                  <span>
+                    <img src={email} className="contact-img-ico" />
+                  </span>
+                </div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    name="email"
+                    inPopup={inPopup}
+                    placeholder="1234@mail.com"
+                  />
+                </div>
+              </div>
+
+              <div
+                className={`row-container ${
+                  obj?.getJson().mobile ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">
+                  <span>
+                    <img src={phone} className="contact-img-ico" />
+                  </span>
+                </div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    name="mobile"
+                    inPopup={inPopup}
+                    placeholder="XXX-XXX-XXXX"
+                  />
+                </div>
+              </div>
+
+              <div
+                className={`row-container ${
+                  obj?.getJson().company ? "" : "unfilled-container"
+                }`}
+                style={{
+                  marginTop: "24px",
+                }}
+              >
+                <div className="row-name">Company:</div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    name="company"
+                    inPopup={inPopup}
+                    placeholder="SalesCapture AI"
+                  />
+                </div>
+              </div>
+              <div
+                className={`row-container ${
+                  obj?.getJson().title ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">Title:</div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    placeholder="ie. Vice President of People"
+                    name="title"
+                    inPopup={inPopup}
+                  />
+                </div>
+              </div>
+
+              {obj && (
+                <>
+                  <div
+                    className={`row-container ${
+                      obj?.getJson().address ? "" : "unfilled-container"
+                    }`}
+                    style={{ marginTop: "24px" }}
+                  >
+                    <div className="row-name">Address:</div>
+                    <div className="row-field">
+                      <ParentFormComponent
+                        formClass="underline-form"
+                        obj={obj}
+                        name="address"
+                        inPopup={inPopup}
+                        placeholder="123 Street Way"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className={`row-container ${
+                      obj?.getJson().city ? "" : "unfilled-container"
+                    }`}
+                  >
+                    <div className="row-name">City:</div>
+                    <div className="row-field">
+                      <ParentFormComponent
+                        formClass="underline-form"
+                        obj={obj}
+                        name="city"
+                        inPopup={inPopup}
+                        placeholder="Sales Lake City"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className={`row-container ${
+                      obj?.getJson().state ? "" : "unfilled-container"
+                    }`}
+                  >
+                    <div className="row-name">State:</div>
+                    <div className="row-field">
+                      <ParentFormComponent
+                        formClass="underline-form"
+                        obj={obj}
+                        name="state"
+                        inPopup={inPopup}
+                        placeholder="State/Territory"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className={`row-container ${
+                      obj?.getJson().zip ? "" : "unfilled-container"
+                    }`}
+                  >
+                    <div className="row-name">ZIPcode:</div>
+                    <div className="row-field">
+                      <ParentFormComponent
+                        formClass="underline-form"
+                        obj={obj}
+                        name="zip"
+                        inPopup={inPopup}
+                        placeholder="ZIP"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="contact-contact-data">
+              <div
+                className={`row-container ${
+                  obj?.getJson().source ? "" : "unfilled-container"
+                }`}
+              >
+                <div className="row-name">Lead Source:</div>
+                <div className="row-field">
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    name="source"
+                    inPopup={inPopup}
+                    placeholder="unknown"
+                  />
+                </div>
+              </div>
+              <div className="row-container" title={"Comma separated"}>
+                <div className="row-name" style={{ width: "fit-content" }}>
+                  Tags:
+                </div>
+                <div className="row-field" title={"comma seperated"}>
+                  <ParentFormComponent
+                    formClass="underline-form"
+                    obj={obj}
+                    placeholder="ie. contacted, tag1, tag3"
+                    name="tags"
+                    inPopup={inPopup}
+                  />
+                </div>
+              </div>
+
+              <div
+                className="row-container"
+                style={{ flexDirection: "column", marginTop: "12px" }}
+              >
+                <div className="row-name" style={{ borderRight: "none" }}>
+                  Notes
+                </div>
+                <div>
+                  <ParentFormComponent
+                    obj={obj}
+                    type="quill"
+                    name="notes"
+                    inPopup={inPopup}
+                  />
+                </div>
+              </div>
+
+              {obj && (
+                <>
+                  <div
+                    className="row-container"
+                    style={{ flexDirection: "column", marginTop: "12px" }}
+                  >
+                    <div className="row-name" style={{ borderRight: "none" }}>
+                      Contact Create Date
+                    </div>
+                    <div style={{ fontSize: "14px" }}>{createDate}</div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div
+              // className="popupButton"
+              style={{
+                background: "transparent",
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignContent: "flex-end",
+              }}
+            >
               {" "}
-              {/*Container for button spacing*/}
-              {button}
-            </div>{" "}
-            {/*Button to save changes*/}
+              {/*Container for the save button*/}
+              <div style={{ paddingBottom: "20px" }}>
+                {" "}
+                {/*Container for button spacing*/}
+                {button}
+              </div>{" "}
+              {/*Button to save changes*/}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

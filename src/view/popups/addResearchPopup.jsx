@@ -50,51 +50,58 @@ export default class ResearchPopup extends BaseComponent {
 
     return (
       <div
-        style={{ padding: "10px", paddingBottom: "100px", height: "100%" }}
+        style={{ padding: "1px", paddingBottom: "100px", height: "100%" }}
         className={this.props.pageClass || this.state.defaultClass}
       >
         <h2>{text} Research Prompt</h2> {/*Heading for the popup*/}
-        <div className="contact-Add-container">
-          <div className="row">
-            <div style={{ width: "40%" }}>Profile Name:</div>
-            <div style={{ width: "100%", marginLeft: "7px" }}>
+        <div
+          className="contact-contact-data"
+          style={{ padding: "10px", background: "rgb(245, 244, 244)", borderRadius:"12px" }}
+        >
+          <div className="row-container" style={{flexDirection:"column"}}>
+            <div className="row-name">Profile Name:</div>
+            <div className="row-field">
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
                 obj={obj}
-                wrapperClass="underline-form"
+                placeholder="ie: Daily Research"
+                // formClass="underline-form"
                 name="name"
                 inPopup={true}
               />{" "}
               {/*Component for name input*/}
             </div>
           </div>
-          <div className="row">
-            <div style={{ width: "30%" }}>Search Frequency:</div>
-            <div style={{ width: "50%", marginLeft: "7px" }}>
+          <div className="row-container" style={{flexDirection:"column"}}>
+            <div className="row-name">Search Frequency:</div>
+            <div className="row-field">
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
                 obj={obj}
-                wrapperClass="underline-form"
+                placeholder="Daily"
+                // formClass="underline-form"
                 name="searchFrequency"
                 inputType="select"
                 inPopup={true}
-                selectOptions={["daily", "weekly", "monthly"]}
+                selectOptions={["Daily", "Weekly", "Monthly"]}
               />{" "}
               {/*Component for name input*/}
             </div>
           </div>
 
-          <div className="row">
-            <div style={{ width: "20%" }}>AI Prompt:</div>
-            <div style={{ width: "100%", marginLeft: "10px" }}>
+          <div className="row-container" style={{flexDirection:"column"}}>
+            <div className="row-name">AI Prompt:</div>
+            <div className="row-field">
               {" "}
               {/*Container for the AI Prompt input*/}
               <ParentFormComponent
                 obj={obj}
-                wrapperClass="underline-form"
+                placeholder={`ie: "Research VP of Sales at Tech Companies in Utah"`}
+                // formClass="underline-form"
                 name="AIPrompt"
+                // type="quill"
                 inPopup={true}
               />{" "}
               {/*Component for AI Prompt input (using Quill editor)*/}
@@ -104,13 +111,13 @@ export default class ResearchPopup extends BaseComponent {
           <div
             style={{
               background: "white",
-              width: "100%",
+              width: "80%",
               display: "flex",
               justifyContent: "flex-end",
               alignSelf: "flex-end",
-              position:"absolute",
-              bottom:0,
-              right:0
+              position: "absolute",
+              bottom: 20,
+              right: 20,
             }}
           >
             {" "}
