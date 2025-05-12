@@ -65,7 +65,7 @@ export default class CreateStepPopup extends BaseComponent {
             <ParentFormComponent
               obj={this.propsState.currentPopupComponent}
               name="subject"
-              wrapperClass="underline-form"
+              formClass="underline-form"
             />
           </div>
           <div className="row">
@@ -82,7 +82,7 @@ export default class CreateStepPopup extends BaseComponent {
             <ParentFormComponent
               obj={this.propsState.currentPopupComponent}
               name="nextSend"
-              wrapperClass="underline-form"
+              formClass="underline-form"
               wrapperStyle={{ width: "10%", marginRight: "8px" }}
               //This needs to accept only numbers
               //TODO: Jared or Taylor

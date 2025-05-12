@@ -42,6 +42,12 @@ export default class ConversationCard extends BaseComponent {
     this.componentList.getAPIService().subscribeToReadObserver(async (l, l2)=>{
         this.setState({start:false})
 
+        if (!Array.isArray(l2)) {
+          console.error('l2 is not an array:', l2);
+          this.setState({ start: true });
+          return;
+        }
+
         let idObj = {}
         for(let obj of l2){
             idObj[obj._id] = obj
