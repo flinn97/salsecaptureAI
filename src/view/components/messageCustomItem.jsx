@@ -31,7 +31,7 @@ export default class CustomMessageItem extends BaseComponent{
         let str = this.props.obj.getJson().ownerMessage? "outgoing":"incoming"
         return(
             <div>
-              {this.props.obj.getJson().suggestion&& <div>this one is a suggestions<div onClick={()=>{
+              {this.props.obj.getJson().suggestion&& <div>this one is a suggestion<div onClick={()=>{
                  // const { originalMessageId, from, to, subject, text } = req.body;
                  debugger
                  let obj = this.props.obj;

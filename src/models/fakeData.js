@@ -54,10 +54,12 @@ let data = [
     //Taylor emails
     {
         type:"email",
+
         body: "Hey Taylor Just let me know if it would be good to meet today or not.",
         conversationId: '1235',
+        suggestion:true,
         _id:"email5",
-        owner: "alan@salescapture.ai",
+        owner:"taylor@flinnapps.com",
         timeStamp: "Yesterday 10:14 AM",
         subject: "hi",
         ownerMessage:true,
@@ -85,6 +87,7 @@ let data = [
     {
         type:"conversation",
         _id:"1234",
+        suggestion:true,
         contact: "taylormdavidson@gmail.com",
         contactName: "Jane Doe",
         timeStamp: "Today 2:15 pm",
