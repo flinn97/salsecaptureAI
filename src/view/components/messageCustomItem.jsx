@@ -25,6 +25,7 @@ export default class CustomMessageItem extends BaseComponent {
     }
   }
 
+
   render() {
     let str = this.props.obj.getJson().ownerMessage ? "outgoing" : "incoming";
     return (
