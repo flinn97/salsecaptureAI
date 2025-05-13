@@ -53,7 +53,7 @@
                              <i className="fa-solid fa-user"></i>
                          </div>
                          <div className="client-info">
-                             <div className="client-name">Jodie Soultair</div>
+                             <div className="client-name">{this.propsState.currentContact?.getJson().firstName} {this.propsState?.currentContact?.getJson().lastName}</div>
                              <div className="client-desc">Edit Profile</div>
                          </div>
                      </div>
@@ -61,11 +61,11 @@
                          <div className="client-contact col col-left padding-0">
                              <div className="client-contact-phone row">
                                  <div><i className="fa-solid fa-phone"></i></div>
-                                 <div>(365)446-2581</div>
+                                 <div>{this.propsState.currentContact?.getJson().mobile}</div>
                              </div>
                              <div className="client-contact-email row">
                                  <div><i className="fa-solid fa-envelope"></i></div>
-                                 <div>j.soultair@gmail.com</div>
+                                 <div>{this.propsState.currentContact?.getJson().email}</div>
                              </div>
                          </div>
                      </div>

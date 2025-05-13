@@ -851,7 +851,7 @@ body {
 
 .SCAILink {
   color: black;
-  background-color: #2a8f76;
+  background-color: #daece7;
   height: 100%;
   border-radius: 7px;
   display: flex;
@@ -1140,7 +1140,7 @@ body {
 
 
 .messages-list-container{
-  width:35%;
+  width:30%;
 }
 
 .message-detail-container{

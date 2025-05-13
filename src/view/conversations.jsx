@@ -37,7 +37,7 @@ export default class Conversations extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass} style={{ padding: "20px" }}>
+            <div className={this.props.pageClass || this.state.defaultClass} >
                 {/* Container for the conversations card */}
                 <div className="fit">
                     {this.state.getComponentsFromBackend&&

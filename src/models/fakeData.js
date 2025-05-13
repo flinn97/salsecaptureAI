@@ -103,6 +103,9 @@ let data = [
     {
         type:"contact",
         _id: "contact1",
+        mobile: "(365)446-2581",
+        firstName:"Taylor",
+        lastName:"Davidson",
         name:"Taylor Davidson",
         email:"taylormdavidson@gmail.com",
         owner:"alan@salescapture.com "
@@ -127,6 +130,13 @@ let data = [
             name:"my task",
             dueDate:"April 25, 2025",
             _id:"task1",
+            
+        },
+        {
+            type:"task",
+            name:"my task",
+            dueDate:"April 25, 2025",
+            _id:"task2",
             
         },
         { _id: 1, name: 'Jodie Soultfair', dayIndex: 0, startTime: '10:00', duration: 90, type:"calendarEvent" }, // Monday 10:00 - 11:30

@@ -207,7 +207,7 @@ export default class Conversation extends BaseComponent {
             <i className="fa-solid fa-user"></i>
           </div>
           <div className="header-info">
-            <div className="header-name">Kyle Davrin</div>
+            <div className="header-name">{this.propsState?.currentConversation?.getJson().senderName}</div>
             <div className="header-status">View Profile</div>
           </div>
 

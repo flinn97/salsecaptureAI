@@ -58,9 +58,9 @@ import SchedulePage from './view/schedule.jsx';
        navBarProps:{
         mapType: window.innerWidth<600? "bottomNavMap":undefined,
         type:window.innerWidth<600? "topBar":undefined,
-        style:{backgroundColor:"#35b593", color:"white", },
-        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
-        logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
+        style:{backgroundColor:"white", color:"black", },
+        cardStyle:{backgroundColor:"white", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
+        logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"black"}, },
        routes: [
          { comp: TaskPage, name: "Tasks", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },

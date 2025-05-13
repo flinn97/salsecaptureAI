@@ -90,7 +90,7 @@ message-item.outgoing message{
 @media (min-width: 850px) {
 
     .fullScreen>.fit{
-        margin-left: 300px;
-        width:50%;
+        margin-left: 200px;
+        width:80%;
     }
 }
