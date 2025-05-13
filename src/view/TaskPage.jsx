@@ -19,7 +19,7 @@ export default class TaskPage extends GetAllComponents {
 
         this.state = {
             ...this.state,
-            defaultClass: "fit",
+            defaultClass: "fit task-container-div",
             owner:this.app.state.currentUser.getJson()._id
         };
     }

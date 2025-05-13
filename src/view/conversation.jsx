@@ -134,9 +134,9 @@ export default class Conversation extends BaseComponent {
                 <RunButton
                   content={
                     <div className="chat-footer">
-                      <button className="footer-btn">
-                        <i className="fa-solid fa-circle-plus"></i>
-                      </button>
+                      {/*<button className="footer-btn">*/}
+                      {/*  <i className="fa-solid fa-circle-plus"></i>*/}
+                      {/*</button>*/}
                       <input
                         type="text"
                         className="footer-input"
@@ -200,6 +200,18 @@ export default class Conversation extends BaseComponent {
   render() {
     return (
       <div className={this.props.pageClass || this.state.defaultClass}>
+
+        <div className="chat-header">
+
+          <div className="header-avatar">
+            <i className="fa-solid fa-user"></i>
+          </div>
+          <div className="header-info">
+            <div className="header-name">Kyle Davrin</div>
+            <div className="header-status">View Profile</div>
+          </div>
+
+        </div>
         {this.getInnerContent()}
       </div>
     );

@@ -39,7 +39,7 @@ export default class ConversationCard extends BaseComponent {
     return (
       <div className="layoutRow" style={{ width: "100%", height: "100%" }}>
         {/* Left side card for the conversation list */}
-        <div>
+        <div className="messages-list-container">
           {!this.propsState.showConversation && (
             <>
               {this.state.start && (
@@ -49,7 +49,7 @@ export default class ConversationCard extends BaseComponent {
           )}
         </div>
         {/* Right side card for the selected conversation details */}
-        <div style={{minWidth:"50%"}}>
+        <div className="message-detail-container">
           {(window.innerWidth > 600 ||
             this.propsState.showConversation !== undefined) && (
             <>

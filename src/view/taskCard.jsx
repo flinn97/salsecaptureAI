@@ -60,91 +60,79 @@ export default class TaskCard extends BaseComponent {
         
         return (
             <div className="mobile-container">
-                <div className="top-nav-float">
-                    <nav className="top-nav">
-                        <div className="nav-left">
-                            <div className="nav-icon">
-                                <i className="fas fa-circle"></i>
-                            </div>
-                            <div className="nav-title">Task</div>
-                        </div>
+                <div className="task-name"><div>Tasks</div></div>
+                {/*<div className="top-nav-float">*/}
+                {/*    <nav className="top-nav">*/}
+                {/*        <div className="nav-left">*/}
+                {/*            <div className="nav-icon">*/}
+                {/*                <i className="fas fa-circle"></i>*/}
+                {/*            </div>*/}
+                {/*            <div className="nav-title">Task</div>*/}
+                {/*        </div>*/}
 
-                        <div className="nav-right">
-                            <div className="nav-icon">
-                                <button className="btn">A to Z <i className="fa-solid fa-angle-down"></i></button>
-                            </div>
-                            <div className="nav-icon">
-                                <button className="btn"><i className="fa-solid fa-filter"></i></button>
-                            </div>
-                        </div>
-
-
-                    </nav>
+                {/*        <div className="nav-right">*/}
+                {/*            <div className="nav-icon">*/}
+                {/*                <button className="btn">A to Z <i className="fa-solid fa-angle-down"></i></button>*/}
+                {/*            </div>*/}
+                {/*            <div className="nav-icon">*/}
+                {/*                <button className="btn"><i className="fa-solid fa-filter"></i></button>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
 
 
-                    <div className="search-container">
-                        <div className="search-bar">
-                            <i className="fas fa-search search-icon"></i>
-                            <input onChange={(e) => {
-                                this.dispatch({ tags: e.target.value })
-                            }}
-                                className="search-input" placeholder="Search" />
-                        </div>
-                    </div>
-
-                    <div className="filter-nav">
-                        <div className="filter-nav-left">
-                            <CheckIt check={this.filterFunc} uncheck={() => { this.dispatch({ selectedContacts: [] }) }} />
-                            {/* <div id="selectBtn" className="btn-gray">
-                                Select
-                            </div> */}
-                            Select all {this.propsState.selectedContacts?.length? this.propsState.selectedContacts.length +" Selected":""}
-                        </div>
-
-                        <div className="filter-nav-right">
-                            <CsvUpload callBack={async (data) => {
-                                data = data.data.map((obj, i) => {
-                                    obj.owner = this.propsState.currentUser.getJson()._id;
-                                    obj.type = "contact";
-                                    return obj
-
-                                })
-                                this.dispatch({
-                                    uploadData: data,
-                                    popupSwitch: "uploadData"
-                                })
-                                await this.operationsFactory.prepare({ prepare: data });
-
-                                this.operationsFactory.run();
+                {/*    </nav>*/}
 
 
-                            }} />
-                            {/* <div className="btn-gray">
-                                Views
-                            </div> */}
-                            {/* <div id="toggleTags" className="btn-gray">
-                                Show Tags
-                            </div> */}
-                            {/* <PopupButton
-                                formclassName="FCImgButton"
-                                wrapperclassName="none"
-                                content={<div  className="btn-gray">
-                                    Add Contact
-                                </div>}
-                                popupSwitch="addContact"
-                            /> */}
-                            <SCAIPopupButtonTest
-                                formclassName="FCImgButton"
-                                wrapperclassName="none"
-                                content={<div  className="btn-gray">
-                                    Add Contact
-                                </div>}
-                                popupSwitch="addContact"
-                            />
-                        </div>
-                    </div>
+                {/*    <div className="search-container">*/}
+                {/*        <div className="search-bar">*/}
+                {/*            <i className="fas fa-search search-icon"></i>*/}
+                {/*            <input onChange={(e) => {*/}
+                {/*                this.dispatch({ tags: e.target.value })*/}
+                {/*            }}*/}
+                {/*                className="search-input" placeholder="Search" />*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                </div>
+                {/*    <div className="filter-nav">*/}
+                {/*        <div className="filter-nav-left">*/}
+                {/*            <CheckIt check={this.filterFunc} uncheck={() => { this.dispatch({ selectedContacts: [] }) }} />*/}
+                {/*            /!* <div id="selectBtn" className="btn-gray">*/}
+                {/*                Select*/}
+                {/*            </div> *!/*/}
+                {/*            Select all {this.propsState.selectedContacts?.length? this.propsState.selectedContacts.length +" Selected":""}*/}
+                {/*        </div>*/}
+
+                {/*        <div className="filter-nav-right">*/}
+                {/*            <CsvUpload callBack={async (data) => {*/}
+                {/*                data = data.data.map((obj, i) => {*/}
+                {/*                    obj.owner = this.propsState.currentUser.getJson()._id;*/}
+                {/*                    obj.type = "contact";*/}
+                {/*                    return obj*/}
+
+                {/*                })*/}
+                {/*                this.dispatch({*/}
+                {/*                    uploadData: data,*/}
+                {/*                    popupSwitch: "uploadData"*/}
+                {/*                })*/}
+                {/*                await this.operationsFactory.prepare({ prepare: data });*/}
+
+                {/*                this.operationsFactory.run();*/}
+
+
+                {/*            }} />*/}
+                {/*            */}
+                {/*            <SCAIPopupButtonTest*/}
+                {/*                formclassName="FCImgButton"*/}
+                {/*                wrapperclassName="none"*/}
+                {/*                content={<div  className="btn-gray">*/}
+                {/*                    Add Contact*/}
+                {/*                </div>}*/}
+                {/*                popupSwitch="addContact"*/}
+                {/*            />*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+
+                {/*</div>*/}
 
 
                 
