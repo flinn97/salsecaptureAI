@@ -10,6 +10,7 @@ import "./contacts.css";
 import ContactPopup from "./popups/contactPopup";
 import ScheduleCard from "./scheduleCard";
 import TaskCard from "./taskCard";
+
 export default class SchedulePage extends GetAllComponents {
     /**
      * Constructor for the Contacts component.
@@ -20,7 +21,7 @@ export default class SchedulePage extends GetAllComponents {
 
         this.state = {
             ...this.state,
-            defaultClass: "fit",
+            defaultClass: "fit schedule-div",
             owner:this.app.state.currentUser.getJson()._id
         };
     }

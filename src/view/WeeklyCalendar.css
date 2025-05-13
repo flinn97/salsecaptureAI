@@ -144,3 +144,11 @@
 }
 
 /* You can add more styles for different event types or states */
+
+
+.weekly-calendar__event{
+    background-color:#dff0ea;
+    border: 1px solid #6baa97;
+    display:flex;
+    align-items:center;
+}

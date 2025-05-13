@@ -47,13 +47,13 @@ class TaskCustomItem extends BaseComponent {
         return (
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <div className="contact-item">
-                    <CheckIt
-                        checkKey="selectedContacts"
-                        obj={obj}
-                        // Pass references to the class methods
-                        check={this.handleCheckContact}
-                        uncheck={this.handleUncheckContact}
-                    />
+                    {/*<CheckIt*/}
+                    {/*    checkKey="selectedContacts"*/}
+                    {/*    obj={obj}*/}
+                    {/*    // Pass references to the class methods*/}
+                    {/*    check={this.handleCheckContact}*/}
+                    {/*    uncheck={this.handleUncheckContact}*/}
+                    {/*/>*/}
                     {/*<img*/}
                     {/* src={user.picURL !== "" ? user.picURL || contactImg : contactImg}*/}
                     {/* alt="头像"*/}
@@ -76,9 +76,9 @@ class TaskCustomItem extends BaseComponent {
                         }} className="contact-name">{`${task.name}`}</div>
                         <div className="contact-desc">{task.dueDate}</div>
                     </div>
-                    <div className="contact-icon">
-                        <i className="fa-solid fa-message" />
-                    </div>
+                    {/*<div className="contact-icon">*/}
+                    {/*    <i className="fa-solid fa-message" />*/}
+                    {/*</div>*/}
                 </div>
                 <div
                     // The 'active' class here might need dynamic logic if it depends on selection state

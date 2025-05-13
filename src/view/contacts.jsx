@@ -9,6 +9,7 @@ import ContactsCard from "./contactCard"; // Custom component for displaying con
 import ContactProfileCard from "./contactProfileCard";
 import "./contacts.css";
 import ContactPopup from "./popups/contactPopup";
+import ContactProfileDetailCard from "./contactProfileDetailCard.jsx";
 export default class Contacts extends GetAllComponents {
     /**
      * Constructor for the Contacts component.
@@ -19,7 +20,7 @@ export default class Contacts extends GetAllComponents {
 
         this.state = {
             ...this.state,
-            defaultClass: "fit",
+            defaultClass: "fit client-dash-div",
             owner:this.app.state.currentUser.getJson()._id
         };
     }
@@ -43,6 +44,7 @@ export default class Contacts extends GetAllComponents {
                     {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
                     This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
                     */}
+                <Card theme="NoBorder" type="fit" content={<ContactProfileDetailCard />} />
                     {(this.propsState.currentContact && window.innerWidth > 600) && <Card theme="NoBorder" type="fit"  content={<ContactProfileCard/>}/>}
             </div>
         );
