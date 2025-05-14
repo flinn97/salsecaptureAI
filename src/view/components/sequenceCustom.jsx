@@ -11,6 +11,7 @@ class SequenceCustomItem extends BaseComponent {
         // preserve any initial state from BaseComponent
     }
 
+   
     render() {
         const { obj } = this.props;
         let sequence = obj.getJson();
@@ -50,7 +51,7 @@ class SequenceCustomItem extends BaseComponent {
             <div className="row row-space-around" style={{fontSize:"14px"}}>
                 <div className="col">
                     <div>Active</div>
-                    <div>{sequence?.activeCount||`-`}</div>
+                    <div>{this.componentList.getList("contact", sequence._id, "sequenceId")?.filter(contact=>contact.getJson().finished===false)?.length||`0`}</div>
                 </div>
                 <div className="col">
                     <div>Completed</div>
