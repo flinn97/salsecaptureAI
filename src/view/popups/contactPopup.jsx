@@ -377,7 +377,7 @@ export default class ContactPopup extends BaseComponent {
             </div>
 
 
-            <div style={{ paddingBottom: "20px",}}>
+            {/* <div style={{ paddingBottom: "20px",}}> */}
 
             <div
               // className="popupButton"
@@ -457,11 +457,8 @@ export default class ContactPopup extends BaseComponent {
                     Remove From Sequence
                   </div>
                 )}
-                {/*Container for the save button*/}{" "}
-                {/*Container for button spacing*/}
                 {button}
-              </div>{" "}
-              {/*Button to save changes*/}
+              </div>}
             </div>
           </div>
         </div>
