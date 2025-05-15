@@ -38,6 +38,7 @@ export default class CustomMessageItem extends BaseComponent {
                   // const { originalMessageId, from, to, subject, text } = req.body;
                   debugger;
                   let obj = this.props.obj;
+                  obj.setCompState({suggestion:false}, {run:true})
 
                   let body = {
                     originalMessageId: obj.getJson().originalMessageId,
@@ -46,6 +47,7 @@ export default class CustomMessageItem extends BaseComponent {
                     subject: obj.getJson().subject,
                     text: obj.getJson().body,
                   };
+
                   // Make the POST request
                   await fetch(
                     "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
@@ -71,7 +73,6 @@ export default class CustomMessageItem extends BaseComponent {
                     .catch((error) => {
                       console.error("Error sending reply:", error);
                     });
-                    obj.setCompState({suggestion:false}, {run:true})
                 }}
               >
                 <i className="fas fa-check" />

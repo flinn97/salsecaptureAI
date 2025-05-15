@@ -102,7 +102,7 @@ class Email extends BaseMessenger {
         type: 'email',
         subject: "",
         body: "",
-        timestamp: "",
+        timeStamp: "",
     };
 }
 
