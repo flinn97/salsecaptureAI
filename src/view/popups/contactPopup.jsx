@@ -376,9 +376,6 @@ export default class ContactPopup extends BaseComponent {
               )}
             </div>
 
-
-            {/* <div style={{ paddingBottom: "20px",}}> */}
-
             <div
               // className="popupButton"
               style={{
@@ -390,75 +387,82 @@ export default class ContactPopup extends BaseComponent {
               }}
             >
               {" "}
-              {this.propsState.currentContact?.getJson()?.autoAI?
-      ( <div
-        onClick={()=>{
-          this.propsState.currentContact.setCompState({autoAI:false}, {run:true}, true);
-          
-
-        }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn off AI
-        </div>):
-        (<div
-          onClick={()=>{
-            this.propsState.currentContact.setCompState({autoAI:true}, {run:true}, true);
-            
-
-          }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn on AI
-        </div>)}
-              {!this.propsState.currentContact.getJson().finished&&
-
-              <div
-                // className="popupButton"
-                style={{
-                  background: "transparent",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignContent: "flex-end",
-                  gap:"8px"
-                }}
-              >
-                {" "}
-                {!this.propsState.currentContact?.getJson().finished && (
-                  <div
-                    onClick={() => {
-                      this.propsState.currentContact.setCompState({
-                        finished: true,
-                      });
-                      this.propsState.currentContact.update();
-                      let sequence = this.componentList.getComponent(
-                        "sequence",
-                        this.propsState.currentContact.getJson().sequenceId
-                      );
-                      let finished = parseInt(sequence.getJson().finished) + 1;
-                      sequence.setCompState({ finished: finished });
-                      sequence.update();
-                    }}
-                    className="dark-button-1"
-                    style={{
-                      position: "relative",
-                      width: "fit-content",
-                    }}
-                  >
-                    Remove From Sequence
-                  </div>
-                )}
-                {button}
-              </div>}
+              {this.propsState.currentContact?.getJson()?.autoAI ? (
+                <div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState(
+                      { autoAI: false },
+                      { run: true },
+                      true
+                    );
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn off AI
+                </div>
+              ) : (
+                <div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState(
+                      { autoAI: true },
+                      { run: true },
+                      true
+                    );
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn on AI
+                </div>
+              )}
+              {!this.propsState.currentContact.getJson().finished && (
+                <div
+                  // className="popupButton"
+                  style={{
+                    background: "transparent",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignContent: "flex-end",
+                    gap: "8px",
+                  }}
+                >
+                  {" "}
+                  {!this.propsState.currentContact?.getJson().finished && (
+                    <div
+                      onClick={() => {
+                        this.propsState.currentContact.setCompState({
+                          finished: true,
+                        });
+                        this.propsState.currentContact.update();
+                        let sequence = this.componentList.getComponent(
+                          "sequence",
+                          this.propsState.currentContact.getJson().sequenceId
+                        );
+                        let finished =
+                          parseInt(sequence.getJson().finished) + 1;
+                        sequence.setCompState({ finished: finished });
+                        sequence.update();
+                      }}
+                      className="dark-button-1"
+                      style={{
+                        position: "relative",
+                        width: "fit-content",
+                      }}
+                    >
+                      Remove From Sequence
+                    </div>
+                  )}
+                  {button}
+                </div>
+              )}
             </div>
           </div>
         </div>
