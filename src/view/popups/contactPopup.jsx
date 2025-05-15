@@ -3,7 +3,7 @@
  * @extends {BaseComponent}
  * This component renders a popup for adding or editing OEM information.  It uses other components from 'flinntech' for form elements and buttons.
  */
-import {
+ import {
   ParentFormComponent,
   RunButton,
   UpdateButton,
@@ -29,7 +29,7 @@ export default class ContactPopup extends BaseComponent {
   //or we can import date-fns library
   formatDate(timestamp) {
     const date = new Date(
-      timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+      timestamp?.seconds * 1000 + timestamp?.nanoseconds / 1000000
     );
     const months = [
       "January",
@@ -62,9 +62,9 @@ export default class ContactPopup extends BaseComponent {
     }
 
     let obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
-    //TODO: switching contact needs to refresh all the parentFormComponents
 
-    let createDate = obj ? this.formatDate(obj?.getJson().date) : "";
+    let createDate =
+      obj && obj?.getJson().date ? this.formatDate(obj?.getJson().date) : "";
 
     const effectivePopupComponent = isWideScreen
       ? this.propsState.currentContact
@@ -73,7 +73,6 @@ export default class ContactPopup extends BaseComponent {
 
     // Determine the text for the heading based on whether an object is provided
     let text = obj ? "Edit" : "Add";
-    console.log(obj ? obj : "");
     // Set default button to RunButton
     let button = (
       <RunButton
@@ -362,7 +361,7 @@ export default class ContactPopup extends BaseComponent {
                 </div>
               </div>
 
-              {obj && (
+              {obj && obj?.getJson().date && (
                 <>
                   <div
                     className="row-container"
@@ -376,78 +375,78 @@ export default class ContactPopup extends BaseComponent {
                 </>
               )}
             </div>
-            
 
+            {/* Corrected placement of button container */}
             <div
-              // className="popupButton"
               style={{
-                background: "transparent",
-                width: "100%",
+                paddingBottom: "20px",
+                width: "100%", // Ensure container takes full width for flex justification
                 display: "flex",
-                justifyContent: "flex-end",
-                alignContent: "flex-end",
+                justifyContent: "flex-end", // Justify content to the right
+                alignItems: "center", // Align items vertically in the center
+                gap: "8px", // Add some gap between buttons
               }}
             >
               {" "}
-              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch.includes("add"))?
-      ( <div
-        onClick={()=>{
-          this.propsState.currentContact.setCompState({autoAI:false}, {run:true}, true);
-          
-
-        }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn off AI
-        </div>):
-        (<div
-          onClick={()=>{
-            this.propsState.currentContact.setCompState({autoAI:true}, {run:true}, true);
-            
-
-          }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn on AI
-        </div>)}
-              {!this.propsState?.currentContact?.getJson().finished&&
-              <div
-              onClick={()=>{
-                this.propsState.currentContact.setCompState({finished:true})
-                this.propsState.currentContact.update();
-                let sequence = this.componentList.getComponent("sequence", this.propsState.currentContact.getJson().sequenceId)
-                let finished = parseInt(sequence.getJson().finished) +1;
-                sequence.setCompState({finished:finished});
-                sequence.update();
-              }}
-
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Remove From Sequence
-        </div>}
+              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch?.includes("add")) ?
+                (<div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState({ autoAI: false }, { run: true }, true);
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn off AI
+                </div>) :
+                (<div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState({ autoAI: true }, { run: true }, true);
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn on AI
+                </div>)}
+              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add") && // Added condition to not show in add mode
+                (
+                  <div
+                    onClick={() => {
+                      this.propsState.currentContact.setCompState({
+                        finished: true,
+                      });
+                      this.propsState.currentContact.update();
+                      let sequence = this.componentList.getComponent(
+                        "sequence",
+                        this.propsState.currentContact.getJson().sequenceId
+                      );
+                      if(sequence) { // Check if sequence exists before updating
+                         let finished = parseInt(sequence.getJson().finished) + 1;
+                         sequence.setCompState({ finished: finished });
+                         sequence.update();
+                      }
+                    }}
+                    className="dark-button-1"
+                    style={{
+                      position: "relative",
+                      width: "fit-content",
+                    }}
+                  >
+                    Remove From Sequence
+                  </div>
+                )}
               {/*Container for the save button*/}
-              <div style={{ paddingBottom: "20px" }}>
-                {" "}
-                {/*Container for button spacing*/}
-                {button}
-              </div>{" "}
-              {/*Button to save changes*/}
+              {button}
             </div>
+
+          </div> {/* Correctly closes the main content div with padding and scroller class */}
           </div>
-        </div>
-      </>
+        </>
     );
   }
 }

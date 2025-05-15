@@ -93,8 +93,10 @@ class ContactsCustomItem extends BaseComponent {
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <div
                     className="contact-item hover-darken"
-                    style={{ background: selected ? "#2374ab10" : "white", }}
+                    style={{ background: selected ? "#2374ab10" : "white", 
+                      position:"relative", paddingLeft:"5px" }}
                 >
+    
                     <CheckIt
                         checkKey="selectedContacts"
                         obj={obj}
