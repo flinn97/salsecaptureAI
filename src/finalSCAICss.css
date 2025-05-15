@@ -181,8 +181,9 @@ body {
 }
 
 .contact-avatar {
-  width: 50px;
+  min-width: 50px;
   min-height: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 15px;
@@ -469,6 +470,22 @@ body {
   margin-bottom: 10px;
 }
 
+.message-header-title{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.sender-title {
+  font-weight: 900;
+  font-size: 1rem;
+  color: #262626;
+}
+.sender-details-button{
+  font: normal normal medium 14px/18px Satoshi;
+  font-size: .8rem;
+  color:#9A9A9A;
+}
+
 .message-bubble {
   max-width: 70%;
   padding: 8px 12px;
@@ -480,6 +497,7 @@ body {
 }
 
 .message-item-suggested{
+  margin-top: 18px;
   border: 3px dashed var(--app-green-3);
   border-radius: 11px;
   font: normal normal medium 18px/24px Satoshi;
