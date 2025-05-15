@@ -939,6 +939,7 @@ body {
   cursor: pointer;
   transition: width 1s ease-in;
   letter-spacing: .5px;
+  height: fit-content;
 }
 
 .del-button-1 {

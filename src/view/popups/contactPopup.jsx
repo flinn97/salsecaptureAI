@@ -377,77 +377,61 @@ export default class ContactPopup extends BaseComponent {
             </div>
 
             <div
-              // className="popupButton"
+              //#region Buttons
               style={{
                 background: "transparent",
                 width: "100%",
                 display: "flex",
                 justifyContent: "flex-end",
                 alignContent: "flex-end",
+                gap: "8px",
               }}
             >
-              {" "}
-              {this.propsState.currentContact?.getJson()?.autoAI ? (
-                <div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState(
-                      { autoAI: false },
-                      { run: true },
-                      true
-                    );
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn off AI
-                </div>
-              ) : (
-                <div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState(
-                      { autoAI: true },
-                      { run: true },
-                      true
-                    );
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn on AI
-                </div>
-              )}
-              {!this.propsState.currentContact.getJson().finished && (
-                <div
-                  // className="popupButton"
-                  style={{
-                    background: "transparent",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignContent: "flex-end",
-                    gap: "8px",
-                  }}
-                >
+              <div style={{marginRight:"0px"}}>
+                {this.propsState.currentContact?.getJson()?.autoAI ? (
+                  <div
+                    onClick={() => {
+                      this.propsState.currentContact?.setCompState(
+                        { autoAI: false },
+                        { run: true },
+                        true
+                      );
+                    }}
+                    className="dark-button-1"
+                  >
+                    Turn off AI
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      this.propsState.currentContact?.setCompState(
+                        { autoAI: true },
+                        { run: true },
+                        true
+                      );
+                    }}
+                    className="dark-button-1"
+                  >
+                    Turn on AI
+                  </div>
+                )}
+              </div>
+              {!this.propsState.currentContact?.getJson().finished && (
+                <>
                   {" "}
                   {!this.propsState.currentContact?.getJson().finished && (
                     <div
                       onClick={() => {
-                        this.propsState.currentContact.setCompState({
+                        this.propsState.currentContact?.setCompState({
                           finished: true,
                         });
-                        this.propsState.currentContact.update();
+                        this.propsState.currentContact?.update();
                         let sequence = this.componentList.getComponent(
                           "sequence",
-                          this.propsState.currentContact.getJson().sequenceId
+                          this.propsState.currentContact?.getJson().sequenceId
                         );
                         let finished =
-                          parseInt(sequence.getJson().finished) + 1;
+                          parseInt(sequence?.getJson().finished) + 1;
                         sequence.setCompState({ finished: finished });
                         sequence.update();
                       }}
@@ -455,13 +439,14 @@ export default class ContactPopup extends BaseComponent {
                       style={{
                         position: "relative",
                         width: "fit-content",
+                        height: "fit-content",
                       }}
                     >
                       Remove From Sequence
                     </div>
                   )}
                   {button}
-                </div>
+                </>
               )}
             </div>
           </div>
