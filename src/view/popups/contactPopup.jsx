@@ -389,7 +389,25 @@ export default class ContactPopup extends BaseComponent {
               }}
             >
               {" "}
-              <div>content</div>
+              {!this.propsState.currentContact.getJson().finished&&
+              <div
+              onClick={()=>{
+                this.propsState.currentContact.setCompState({finished:true})
+                this.propsState.currentContact.update();
+                let sequence = this.componentList.getComponent("sequence", this.propsState.currentContact.getJson().sequenceId)
+                let finished = parseInt(sequence.getJson().finished) +1;
+                sequence.setCompState({finished:finished});
+                sequence.update();
+              }}
+
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Remove From Sequence
+        </div>}
               {/*Container for the save button*/}
               <div style={{ paddingBottom: "20px" }}>
                 {" "}
