@@ -3,7 +3,7 @@
  * @extends {BaseComponent}
  * This component renders a popup for adding or editing OEM information.  It uses other components from 'flinntech' for form elements and buttons.
  */
-import {
+ import {
   ParentFormComponent,
   RunButton,
   UpdateButton,
@@ -100,7 +100,7 @@ export default class ContactPopup extends BaseComponent {
     }
     return (
       <>
-        <h2 style={{ position: "sticky", top: 0, padding: "2%" }}>
+        <h2 style={{ position: "sticky", top: 0, padding: "2%", width:"80%" }}>
           {text} Contact
         </h2>
         {obj && (
@@ -376,12 +376,15 @@ export default class ContactPopup extends BaseComponent {
               )}
             </div>
 
+
             <div
               //#region Buttons
+
               style={{
-                background: "transparent",
-                width: "100%",
+                paddingBottom: "20px",
+                width: "100%", // Ensure container takes full width for flex justification
                 display: "flex",
+
                 justifyContent: "flex-end",
                 alignContent: "flex-end",
                 gap: "8px",
@@ -389,6 +392,41 @@ export default class ContactPopup extends BaseComponent {
             >
               <div style={{marginRight:"0px"}}>
                 {this.propsState.currentContact?.getJson()?.autoAI ? (
+
+                justifyContent: "flex-end", // Justify content to the right
+                alignItems: "center", // Align items vertically in the center
+                gap: "8px", // Add some gap between buttons
+              }}
+            >
+              {" "}
+              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch?.includes("add")) ?
+                (<div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState({ autoAI: false }, { run: true }, true);
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn off AI
+                </div>) :
+                (<div
+                  onClick={() => {
+                    this.propsState.currentContact.setCompState({ autoAI: true }, { run: true }, true);
+                  }}
+                  className="dark-button-1"
+                  style={{
+                    position: "relative",
+                    width: "fit-content",
+                  }}
+                >
+                  Turn on AI
+                </div>)}
+              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add") && // Added condition to not show in add mode
+                (
+
                   <div
                     onClick={() => {
                       this.propsState.currentContact?.setCompState(
@@ -396,6 +434,14 @@ export default class ContactPopup extends BaseComponent {
                         { run: true },
                         true
                       );
+
+
+                      if(sequence) { // Check if sequence exists before updating
+                         let finished = parseInt(sequence.getJson().finished) + 1;
+                         sequence.setCompState({ finished: finished });
+                         sequence.update();
+                      }
+
                     }}
                     className="dark-button-1"
                   >
@@ -415,6 +461,7 @@ export default class ContactPopup extends BaseComponent {
                     Turn on AI
                   </div>
                 )}
+
               </div>
               {!this.propsState.currentContact?.getJson().finished && (
                 <>
@@ -448,10 +495,14 @@ export default class ContactPopup extends BaseComponent {
                   {button}
                 </>
               )}
+
+              {/*Container for the save button*/}
+              {button}
             </div>
+
+          </div> {/* Correctly closes the main content div with padding and scroller class */}
           </div>
-        </div>
-      </>
+        </>
     );
   }
 }

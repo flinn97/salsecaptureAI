@@ -34,7 +34,7 @@ export default class CustomMessageItem extends BaseComponent {
           <div className="message-item outgoing">
             <div className="close-or-accept">
               <div className="accept-suggested-message hover-darken"
-                onClick={() => {
+                onClick={async () => {
                   // const { originalMessageId, from, to, subject, text } = req.body;
                   debugger;
                   let obj = this.props.obj;
@@ -47,7 +47,7 @@ export default class CustomMessageItem extends BaseComponent {
                     text: obj.getJson().body,
                   };
                   // Make the POST request
-                  fetch(
+                  await fetch(
                     "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
                     {
                       method: "POST",
@@ -71,6 +71,7 @@ export default class CustomMessageItem extends BaseComponent {
                     .catch((error) => {
                       console.error("Error sending reply:", error);
                     });
+                    obj.setCompState({suggestion:false}, {run:true})
                 }}
               >
                 <i className="fas fa-check" />
