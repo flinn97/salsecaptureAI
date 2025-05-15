@@ -247,8 +247,8 @@ export default class ContactsCard extends BaseComponent {
         </div>
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
-            <button className="floating-select-btn">
-              <span className="floating-select-btn-text">Export</span>
+            <button  onClick = {()=>{this.dispatch({popupSwitch:"addTags"})}} className="floating-select-btn">
+              <span className="floating-select-btn-text">Add Tags</span>
             </button>
             <button
               onClick={() => {

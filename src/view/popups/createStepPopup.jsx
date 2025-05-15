@@ -57,6 +57,16 @@ export default class CreateStepPopup extends BaseComponent {
         style={{ padding: "10px", paddingBottom: "100px" }}
         className={this.props.pageClass || this.state.defaultClass}
       >
+        <div
+                    
+                    className="dark-button-1"
+                    style={{
+                      position: "relative",
+                      width: "fit-content",
+                    }}
+                  >
+                    Draft With AI
+                  </div>
         <br />
         <div className="content-home-add">
           <div className="row">

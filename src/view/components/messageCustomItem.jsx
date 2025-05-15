@@ -1,4 +1,4 @@
-import { BaseComponent } from "flinntech";
+import { BaseComponent, DelButton } from "flinntech";
 import stripHTML from "../../service/heDecoderService";
 
 export default class CustomMessageItem extends BaseComponent {
@@ -30,7 +30,7 @@ export default class CustomMessageItem extends BaseComponent {
     let str = this.props.obj.getJson().ownerMessage ? "outgoing" : "incoming";
     return (
       <div>
-        {this.props.obj.getJson().suggestion && (
+        {this.props.obj.getJson().suggestion ? (
           <div className="message-item outgoing">
             <div className="close-or-accept">
               <div className="accept-suggested-message hover-darken"
@@ -75,27 +75,36 @@ export default class CustomMessageItem extends BaseComponent {
               >
                 <i className="fas fa-check" />
               </div>
-              <div className="decline-suggested-message hover-darken">
-              <i className="fas fa-times" />
-              </div>
+              <DelButton
+                obj={this.props.obj}
+                formClass="none"
+                content={<div  className="decline-suggested-message hover-darken">
+                  <i className="fas fa-times" />
+                </div>}
+                
+              />
+              
             </div>
 
             <div className="message message-item-suggested">
-              This is a suggested message.
+              {this.state.plainText}
             </div>
           </div>
+        ) : (
+          <>
+            {/* Timestamps */}
+            <div className="date-divider">
+              <span className="timestamp">
+                {this.props.obj.getJson().timeStamp}
+              </span>
+            </div>
+            <div className={"message-item " + str}>
+              {/* Outgoing message (right-aligned, green bubble) */}
+              <div className={"message " + str}>{this.state.plainText}</div>
+            </div>
+          </>
         )}
 
-        {/* Timestamps */}
-        <div className="date-divider">
-          <span className="timestamp">
-            {this.props.obj.getJson().timeStamp}
-          </span>
-        </div>
-        <div className={"message-item " + str}>
-          {/* Outgoing message (right-aligned, green bubble) */}
-          <div className={"message " + str}>{this.state.plainText}</div>
-        </div>
       </div>
     );
   }

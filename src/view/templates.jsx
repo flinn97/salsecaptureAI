@@ -32,6 +32,31 @@ export default class Templates extends BaseComponent {
                 {/* MapComponent to display templates with links */}
                 <MapComponent
                     name="template"
+                    filterFunc={(obj)=>{
+                        if(obj.getJson().content===undefined){
+                            return false
+                        }
+                        if(obj.getJson().content===""){
+                            return false
+                        }
+                        let retVal = false;
+                        if (!this.propsState.searchText) {
+                          retVal = true;
+                        }
+                        let filterText = this.propsState.searchText;
+          
+                        if (
+                          obj
+                            .getJson()
+                            .content?.toLowerCase()
+                            .includes(filterText?.toLowerCase())
+                        ) {
+                          retVal = true;
+                        }
+          
+          
+                        return retVal;
+                    }}
                     cells={[
                         {type:"custom",
                         custom:TemplateCustomItem

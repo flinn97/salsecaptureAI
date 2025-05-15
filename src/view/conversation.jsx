@@ -144,6 +144,15 @@ export default class Conversation extends BaseComponent {
                       search: this.propsState.currentConversation.getJson()._id,
                       attribute: "conversationId",
                     }}
+                    filterFunc={(obj)=>{
+                      if(obj.getJson().body===undefined){
+                          return false
+                      }
+                      if(obj.getJson().body===""){
+                          return false
+                      }
+                      return true
+                  }}
                   />
 
                   <div

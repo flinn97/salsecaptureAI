@@ -63,6 +63,8 @@ class Sequence extends ComponentBase {
         ...this.json,
         type: 'sequence',
         steps: [],
+        finished:0,
+        replyRate: 0,
     };
 }
 

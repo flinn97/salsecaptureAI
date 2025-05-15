@@ -27,6 +27,7 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
+import AddTags from './view/popups/addTags.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -56,11 +57,11 @@ import AddEmail from './view/popups/addEmail.jsx';
      this.state = {
        ...this.state,
        navBarProps:{
-        mapType: window.innerWidth<600? "bottomNavMap":undefined,
-        type:window.innerWidth<600? "topBar":undefined,
-        style:{backgroundColor:"#35b593", color:"white", },
-        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
-        logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
+        mapType: window.innerWidth<1000? "bottomNavMap":undefined,
+        type:window.innerWidth<1000? "topBar":undefined,
+        style:{backgroundColor:"#35b593", color:"white", fontFamily:"'Satoshi-Variable', sans-serif"},
+        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<1000&& "absolute",bottom:window.innerWidth<1000&& "0px", fontFamily:"'Satoshi-Variable', sans-serif" }, 
+        logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white"}, },
        routes: [
          { comp: Conversations, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
@@ -78,6 +79,8 @@ import AddEmail from './view/popups/addEmail.jsx';
        ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
+         { content: AddTags, popupSwitch: "addTags" },
+
        ],
      };
  
@@ -87,7 +90,7 @@ import AddEmail from './view/popups/addEmail.jsx';
      navList.update(0, {class:"SCAILogo"})
      navList.update(1, {activeClass:"SCAILink"})
 
-     if(window.innerWidth<600){
+     if(window.innerWidth<1000){
       navList.remove(2)
       navList.remove(0);
     }

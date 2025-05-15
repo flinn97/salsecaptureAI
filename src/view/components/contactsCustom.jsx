@@ -114,6 +114,7 @@ class ContactsCustomItem extends BaseComponent {
                                                 ownerName: `${this.propsState.currentUser.getJson().firstName} ${this.propsState.currentUser.getJson().lastName}`
                                             });
                                         conversation = this.componentList.getComponent("conversation", contact.getJson().email, "contact");
+
                                     }
                                     debugger
                                     let dm = { type: "email" }
@@ -135,7 +136,27 @@ class ContactsCustomItem extends BaseComponent {
 
                                 className="contact-icon"
                             >
-                                <i className="fa-solid fa-message" />
+                                <i className="fa-solid fa-message" 
+                                // onClick={()=>{
+                                    // let conversation = this.componentList.getComponent("conversation", user._id, "contact");
+                                    // if(!conversation){
+                                    //     let convoJson = {
+                                    //         type: "conversation",
+                                    //         ownerName: this.propsState.currentUser.getJson()._id,
+                                    //         conversationOwner: this.propsState.currentUser.getJson()._id,
+                                    //         contact:user._id,
+                                    //         contactName: user.firstName + " "+ user.lastName,
+                                    //     }
+                                    //     conversation = this.operationsFactory.prepare({prepare:convoJson, clean:true, run:true});
+                                    //     conversation = conversation[0];
+                                    //     this.dispatch({currentConversation:conversation, newConvo:true})
+                                        //navigate
+
+
+
+                                    // }
+                                // }}
+                                />
                             </div>
                         }
                     />
@@ -152,9 +173,23 @@ class ContactsCustomItem extends BaseComponent {
                         </button>
                     ))}
                 </div>
+                {/* {this.state.redirect&& <RedirectMessage/>} */}
             </div>
         );
     }
 }
+
+
+// function RedirectMessage() {
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     // Navigate to home ('/') when this component is mounted
+//     navigate('/conversation');
+//   }, [navigate]);
+
+//   // Optionally, render nothing or a loading indicator
+//   return null;
+// }
 
 export default ContactsCustomItem;

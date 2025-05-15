@@ -10,8 +10,17 @@
  import { Timestamp } from "firebase/firestore";
  import Dropdown from "./components/dropdown";
  import StepCustomItem from "./components/stepCustom";
+import AssignedProspectsCustom from "./components/assignedProspectsCustom";
  
  export default class SequencePage extends GetComponentsFromUrl {
+    constructor(props){
+        super(props);
+        this.state={
+            ...this.state,
+            spState:"sequenceSteps"
+            
+        }
+    }
      /**
       * Fetches the necessary components from the backend based on the URL
       * and prepares a new Step object if no ID is provided.
@@ -29,12 +38,16 @@
              sequence = sequence[0]
          }
          else {
-             await this.componentList.getComponentsFromBackend({ type: "step", ids: sequence.getJson()._id, filterKeys: "sequenceId" });
+            //  await this.componentList.getComponentsFromBackend({ type: "step", ids: sequence.getJson()._id, filterKeys: "sequenceId" });
          }
  
          await this.dispatch({ currentSequence: sequence });
+         this.componentList.sortSelectedList("step", "order");
         //  this.createStep(sequence);
  
+     }
+     componentWillUnmount(){
+        this.operationsFactory.clear();
      }
  
      async createStep(sequence) {
@@ -105,19 +118,21 @@
  
                      <div className="switch-tab">
                          <div className="row row-space-around">
-                             <div className="switch-tab-btn">
+                             <div onClick={()=>{this.setState({spState:"assignedProspects"})}} 
+                             className={this.state.spState==="sequenceSteps"?"switch-tab-btn":"switch-tab-btn active"}>
                                  Assigned
                                  <br />
                                  Prospects
                              </div>
-                             <div className="switch-tab-btn active">
+                             <div onClick={()=>{this.setState({spState:"sequenceSteps"})}} 
+                             className={this.state.spState==="assignedProspects"?"switch-tab-btn":"switch-tab-btn active"}>
                                  Sequence
                                  <br />
                                  Steps
                              </div>
                          </div>
                      </div>
- 
+                        {this.state.spState==="sequenceSteps"?(
                      <div className="icon-list">
                      <MapComponent
                      name="step"
@@ -169,6 +184,19 @@
                              </div>
                          </div>
                      </div>
+                     ):(
+                        <MapComponent
+                     name="contact"
+                     mapSectionClass="none"
+                     mapContainerClass = "none"
+                     filter={{ search: this.propsState.currentSequence?.getJson()._id, attribute: "sequenceId" }}
+                     
+                     cells={[
+                         { type: "custom", custom: AssignedProspectsCustom, wrapperClass:"none" },
+ 
+                     ]}
+                 /> 
+                     )}
 
                  </div>
                  {/* <h4 style={{ marginBottom: "10px" }}>Steps for Sequence</h4>

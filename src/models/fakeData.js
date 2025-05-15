@@ -311,12 +311,7 @@ let data = [
         "connectedOn": "06 Jul 2018",
         "tags": "linkedin"
     },
-    {
-        type:"research",
-        _id: "research1",
-        name:"research1",
-        owner:"alan@salescapture.com "
-        }
+    
 ]
 
 export {data}

@@ -80,7 +80,7 @@ export default class ResearchCard extends BaseComponent {
               <i className="fas fa-search search-icon"></i>
               <input
                 onChange={(e) => {
-                  this.dispatch({ tags: e.target.value });
+                  this.dispatch({ searchText: e.target.value });
                 }}
                 className="search-input"
                 placeholder="Search"
@@ -114,20 +114,24 @@ export default class ResearchCard extends BaseComponent {
           {/* Scrollable section for the contacts data */}
           <MapComponent
             filterFunc={(o) => {
-              if (!this.propsState.tags) {
-                return true;
+
+              let retVal = false;
+              if (!this.propsState.searchText) {
+                retVal = true;
               }
-              let filterText = this.propsState.tags.split(",");
-              for (let tag of filterText) {
-                if (tag === "") {
-                  continue;
-                }
-                if (o.getJson().tags.includes(tag)) {
-                  return true;
-                }
+              let filterText = this.propsState.searchText;
+
+              if (
+                o
+                  .getJson()
+                  .name?.toLowerCase()
+                  .includes(filterText?.toLowerCase())
+              ) {
+                retVal = true;
               }
 
-              return false;
+
+              return retVal;
             }}
             name="research"
             mapContainerclassName="contact-list"
