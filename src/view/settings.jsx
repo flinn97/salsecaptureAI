@@ -5,6 +5,7 @@
  */
  import { Card } from "flinntech";
  import { GetAllComponents } from "flinntech";
+import AISettingsCard from "./aiSettingsCard";
  import "./contacts.css";
 import GoogleAuthCard from "./googleAuthCard";
  export default class Settings extends GetAllComponents {
@@ -38,6 +39,8 @@ import GoogleAuthCard from "./googleAuthCard";
          return (
              <div className={this.props.pageClass || this.state.defaultClass}>
                      <Card theme="NoBorder" type="fit" content={<GoogleAuthCard />} />
+                     <Card theme="NoBorder" type="fit" content={<AISettingsCard />} />
+
              </div>
          );
      }

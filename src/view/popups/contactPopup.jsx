@@ -376,7 +376,51 @@ export default class ContactPopup extends BaseComponent {
               )}
             </div>
 
+
             <div style={{ paddingBottom: "20px",}}>
+
+            <div
+              // className="popupButton"
+              style={{
+                background: "transparent",
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignContent: "flex-end",
+              }}
+            >
+              {" "}
+              {this.propsState.currentContact?.getJson()?.autoAI?
+      ( <div
+        onClick={()=>{
+          this.propsState.currentContact.setCompState({autoAI:false}, {run:true}, true);
+          
+
+        }}
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Turn off AI
+        </div>):
+        (<div
+          onClick={()=>{
+            this.propsState.currentContact.setCompState({autoAI:true}, {run:true}, true);
+            
+
+          }}
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Turn on AI
+        </div>)}
+              {!this.propsState.currentContact.getJson().finished&&
+
               <div
                 // className="popupButton"
                 style={{

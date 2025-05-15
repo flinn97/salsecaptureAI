@@ -95,10 +95,10 @@ export default class Conversation extends BaseComponent {
    */
   getInnerContent() {
     const { currentConversation } = this.propsState;
-
+    let currentContact = this.componentList.getComponent("contact", currentConversation?.getJson().contact, "email");
     return (
       <div>
-        {window.innerWidth < 600 && (
+        {window.innerWidth < 1000 && (
           <div
             style={{
               position: "sticky",
@@ -115,8 +115,45 @@ export default class Conversation extends BaseComponent {
             >
               {`< Back`}
             </div>
+            <div className="message-header">
+            <span className="sender">{this.propsState.currentConversation?.getJson().contactName}</span>
+            <span className="date">See Details</span>
+          </div>
           </div>
         )}
+        <div style={{width:'100%', position:"relative"}}>
+          <div style={{position:"absolute", right:"0px", zIndex:1000}}>
+          {currentContact?.getJson()?.autoAI?
+      ( <div
+        onClick={()=>{
+          currentContact.setCompState({autoAI:false}, {run:true}, true);
+          
+
+        }}
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Turn off AI
+        </div>):
+        (<div
+          onClick={()=>{
+            currentContact.setCompState({autoAI:true}, {run:true}, true);
+            
+
+          }}
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Turn on AI
+        </div>)}
+          </div>
+        </div>
         <div className="layoutColumn conversation-container">
           {this.state.message ? (
             <>{this.state.message}</>
@@ -124,6 +161,7 @@ export default class Conversation extends BaseComponent {
             <>
               {this.state.start && (
                 <div style={{ width: "100%", marginTop:"-20px", }}>
+                  
                   {/* MapComponent displaying messages connected to the current conversation */}
                   <MapComponent
                     mapContainerClass="message-list"
