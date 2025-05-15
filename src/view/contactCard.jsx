@@ -202,6 +202,14 @@ export default class ContactsCard extends BaseComponent {
                 if (o.getJson().tags.includes(tag)) {
                   return true;
                 }
+                if(o.getJson().finishedSequenceTags.includes(tag)){
+                  return true;
+                }
+                if(tag==="replied"){
+                  if(o.getJson().replied){
+                    return true;
+                  }
+                }
               }
 
               return false;

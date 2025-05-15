@@ -65,7 +65,7 @@ class SequenceCustomItem extends BaseComponent {
                         <div>Reply</div>
                         <div>
                             {sequence?.replyRate != null
-                                ? `${(sequence.replyRate * 100).toFixed(1)}%`
+                                ? `${sequence.replyRate}`
                                 : 'N/A'}
                         </div>                </div>
                     <div className="col">
