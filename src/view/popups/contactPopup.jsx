@@ -376,70 +376,101 @@ export default class ContactPopup extends BaseComponent {
               )}
             </div>
 
-            {/* Corrected placement of button container */}
+
             <div
+              //#region Buttons
+
               style={{
                 paddingBottom: "20px",
                 width: "100%", // Ensure container takes full width for flex justification
                 display: "flex",
-                justifyContent: "flex-end", // Justify content to the right
-                alignItems: "center", // Align items vertically in the center
-                gap: "8px", // Add some gap between buttons
+
+                justifyContent: "flex-end",
+                alignContent: "flex-end",
+                gap: "8px",
               }}
             >
-              {" "}
-              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch?.includes("add")) ?
-                (<div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState({ autoAI: false }, { run: true }, true);
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn off AI
-                </div>) :
-                (<div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState({ autoAI: true }, { run: true }, true);
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn on AI
-                </div>)}
-              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add") && // Added condition to not show in add mode
+              <div style={{marginRight:"0px"}}>
+            </div>
+              {!this.propsState?.currentContact?.getJson().finished && !this.propsState?.popupSwitch?.includes("add")?// Added condition to not show in add mode
                 (
                   <div
                     onClick={() => {
-                      this.propsState.currentContact.setCompState({
-                        finished: true,
-                      });
-                      this.propsState.currentContact.update();
-                      let sequence = this.componentList.getComponent(
-                        "sequence",
-                        this.propsState.currentContact.getJson().sequenceId
+                      this.propsState.currentContact?.setCompState(
+                        { autoAI: false },
+                        { run: true },
+                        true
                       );
+
+
                       if(sequence) { // Check if sequence exists before updating
                          let finished = parseInt(sequence.getJson().finished) + 1;
                          sequence.setCompState({ finished: finished });
                          sequence.update();
                       }
+
                     }}
                     className="dark-button-1"
                     style={{
-                      position: "relative",
-                      width: "fit-content",
-                    }}
+                        position: "relative",
+                        width: "fit-content",
+                      }}
                   >
-                    Remove From Sequence
+                    Turn off AI
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      this.propsState.currentContact?.setCompState(
+                        { autoAI: true },
+                        { run: true },
+                        true
+                      );
+                    }}
+                    className="dark-button-1"
+                    style={{
+                        position: "relative",
+                        width: "fit-content",
+                      }}
+                  >
+                    Turn on AI
                   </div>
                 )}
+
+              
+              {!this.propsState.currentContact?.getJson().finished && (
+                <>
+                  {" "}
+                  {!this.propsState.currentContact?.getJson().finished && (
+                    <div
+                      onClick={() => {
+                        this.propsState.currentContact?.setCompState({
+                          finished: true,
+                        });
+                        this.propsState.currentContact?.update();
+                        let sequence = this.componentList.getComponent(
+                          "sequence",
+                          this.propsState.currentContact?.getJson().sequenceId
+                        );
+                        let finished =
+                          parseInt(sequence?.getJson().finished) + 1;
+                        sequence.setCompState({ finished: finished });
+                        sequence.update();
+                      }}
+                      className="dark-button-1"
+                      style={{
+                        position: "relative",
+                        width: "fit-content",
+                        height: "fit-content",
+                      }}
+                    >
+                      Remove From Sequence
+                    </div>
+                  )}
+                  
+                </>
+              )}
+
               {/*Container for the save button*/}
               {button}
             </div>

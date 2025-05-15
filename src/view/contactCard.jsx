@@ -257,7 +257,7 @@ export default class ContactsCard extends BaseComponent {
           <div id="floating-select-set" className="floating-select-set">
             <button  
             onClick = {()=>{this.dispatch({popupSwitch:"addTags"})}} 
-            className="floating-select-btn hover-basic" style={{background:"#3f8cdf"}}>
+            className="floating-select-btn">
               <span className="floating-select-btn-text">Tags</span>
             </button>
             <button
