@@ -42,16 +42,26 @@ class ContactsCustomItem extends BaseComponent {
                     ))}
                     {user.finishedSequenceTags?.length>0&&<>{user.finishedSequenceTags?.split(",").map((text, index) => (
                         // Add a key prop when mapping lists for performance and stability
+                        <>
+                        {text.length>0&&
                         <button key={index} className="contact-tag-btn" style={{backgroundColor:"red"}}>
                             {text}
                         </button>
+                        }
+                        </>
                     ))}</>}
-                    {user.sequenceId&& <button className="contact-tag-btn" style={{backgroundColor:user.finished?"red":"green"}}>
+                    {user.sequenceId&& <>{(user.finishedSequenceTags.includes(this.componentList.getComponent("sequence", user.sequenceId)?.getJson().name)&&user.finished) ?<></>: 
+                    <>
+                    {this.componentList.getComponent("sequence", user.sequenceId)?.getJson().name.length>0&&
+                    <button className="contact-tag-btn" style={{backgroundColor:user.finished?"red":"green"}}>
                             {this.componentList.getComponent("sequence", user.sequenceId)?.getJson().name}
-                        </button>}
+                        </button>
+                        }
+                        </>
+                        }
                         {user.replied&& <button className="contact-tag-btn" style={{backgroundColor:"green"}}>
                             Replied
-                        </button>}
+                        </button>}</>}
 
                 </div>
                 

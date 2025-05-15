@@ -32,6 +32,8 @@ import AssignedProspectsCustom from "./components/assignedProspectsCustom";
          let sequence;
          await this.getComponentsFromBackend();
          await this.componentList.getComponentsFromBackend("template");
+         await this.componentList.getComponentsFromBackend("step");
+
          await this.componentList.getComponentsFromBackend("contact")
          sequence = this.comp
  
