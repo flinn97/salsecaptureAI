@@ -334,17 +334,17 @@ body {
 .float-btn:hover {
   /*background-color: #2374ab;*/
   /*transform: translateY(-3px);*/
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.0);
 }
 
 .floating-select-btn {
   flex: 1;
+  border: none;
   margin: 0 8px;
   padding: 0.51rem .4rem;
-  border: 1px solid black;
   border-radius: 1.5rem;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;

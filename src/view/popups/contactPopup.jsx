@@ -391,34 +391,8 @@ export default class ContactPopup extends BaseComponent {
               }}
             >
               <div style={{marginRight:"0px"}}>
-              {" "}
-              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch?.includes("add")) ?
-                (<div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState({ autoAI: false }, { run: true }, true);
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn off AI
-                </div>) :
-                (<div
-                  onClick={() => {
-                    this.propsState.currentContact.setCompState({ autoAI: true }, { run: true }, true);
-                  }}
-                  className="dark-button-1"
-                  style={{
-                    position: "relative",
-                    width: "fit-content",
-                  }}
-                >
-                  Turn on AI
-                </div>)}
             </div>
-              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add")?// Added condition to not show in add mode
+              {!this.propsState?.currentContact?.getJson().finished && !this.propsState?.popupSwitch?.includes("add")?// Added condition to not show in add mode
                 (
                   <div
                     onClick={() => {
@@ -437,6 +411,10 @@ export default class ContactPopup extends BaseComponent {
 
                     }}
                     className="dark-button-1"
+                    style={{
+                        position: "relative",
+                        width: "fit-content",
+                      }}
                   >
                     Turn off AI
                   </div>
@@ -450,6 +428,10 @@ export default class ContactPopup extends BaseComponent {
                       );
                     }}
                     className="dark-button-1"
+                    style={{
+                        position: "relative",
+                        width: "fit-content",
+                      }}
                   >
                     Turn on AI
                   </div>
@@ -485,7 +467,7 @@ export default class ContactPopup extends BaseComponent {
                       Remove From Sequence
                     </div>
                   )}
-                  {button}
+                  
                 </>
               )}
 
