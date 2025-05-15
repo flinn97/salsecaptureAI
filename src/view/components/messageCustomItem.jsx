@@ -71,6 +71,7 @@ export default class CustomMessageItem extends BaseComponent {
                     .catch((error) => {
                       console.error("Error sending reply:", error);
                     });
+                    obj.setCompState({suggestion:false}, {run:true})
                 }}
               >
                 <i className="fas fa-check" />

@@ -101,7 +101,7 @@ export default class ContactPopup extends BaseComponent {
     }
     return (
       <>
-        <h2 style={{ position: "sticky", top: 0, padding: "2%" }}>
+        <h2 style={{ position: "sticky", top: 0, padding: "2%", width:"80%" }}>
           {text} Contact
         </h2>
         {obj && (
@@ -389,7 +389,7 @@ export default class ContactPopup extends BaseComponent {
               }}
             >
               {" "}
-              {this.propsState.currentContact?.getJson()?.autoAI?
+              {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch.includes("add"))?
       ( <div
         onClick={()=>{
           this.propsState.currentContact.setCompState({autoAI:false}, {run:true}, true);
@@ -418,7 +418,7 @@ export default class ContactPopup extends BaseComponent {
         >
           Turn on AI
         </div>)}
-              {!this.propsState.currentContact.getJson().finished&&
+              {!this.propsState?.currentContact?.getJson().finished&&
               <div
               onClick={()=>{
                 this.propsState.currentContact.setCompState({finished:true})
