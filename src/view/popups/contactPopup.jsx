@@ -391,13 +391,6 @@ export default class ContactPopup extends BaseComponent {
               }}
             >
               <div style={{marginRight:"0px"}}>
-                {this.propsState.currentContact?.getJson()?.autoAI ? (
-
-                justifyContent: "flex-end", // Justify content to the right
-                alignItems: "center", // Align items vertically in the center
-                gap: "8px", // Add some gap between buttons
-              }}
-            >
               {" "}
               {(this.propsState.currentContact?.getJson()?.autoAI && !this.propsState.popupSwitch?.includes("add")) ?
                 (<div
@@ -424,9 +417,9 @@ export default class ContactPopup extends BaseComponent {
                 >
                   Turn on AI
                 </div>)}
-              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add") && // Added condition to not show in add mode
+            </div>
+              {!this.propsState?.currentContact?.getJson().finished && !this.propsState.popupSwitch.includes("add")?// Added condition to not show in add mode
                 (
-
                   <div
                     onClick={() => {
                       this.propsState.currentContact?.setCompState(
@@ -462,7 +455,7 @@ export default class ContactPopup extends BaseComponent {
                   </div>
                 )}
 
-              </div>
+              
               {!this.propsState.currentContact?.getJson().finished && (
                 <>
                   {" "}
