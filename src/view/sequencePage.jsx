@@ -157,7 +157,9 @@ export default class SequencePage extends GetComponentsFromUrl {
                 </>
               )}
             </div>
-            <div className="title-right">
+            <div
+              className="title-right active-seq-container"
+            >
               <div className="title-icon">
                 <i className="fas fa-circle"></i>
               </div>
