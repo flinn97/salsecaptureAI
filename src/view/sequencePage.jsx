@@ -17,6 +17,7 @@ export default class SequencePage extends GetComponentsFromUrl {
     super(props);
     this.state = {
       ...this.state,
+      list:null,
       spState: "sequenceSteps",
     };
   }
@@ -44,6 +45,16 @@ export default class SequencePage extends GetComponentsFromUrl {
       //  await this.componentList.getComponentsFromBackend({ type: "step", ids: sequence.getJson()._id, filterKeys: "sequenceId" });
     }
 
+    let list = await this.componentList.getList(
+      "step",
+      this.propsState.currentSequence?.getJson()._id,
+      "sequenceId"
+    );
+
+    if (!this.state.list){      
+      this.setState({list});
+    }
+
     await this.dispatch({ currentSequence: sequence });
     this.componentList.sortSelectedList("step", "order");
 
@@ -62,6 +73,9 @@ export default class SequencePage extends GetComponentsFromUrl {
       "sequenceId"
     );
 
+    if (!this.state.list){
+      this.setState({list});
+    }
     // If no ID in the URL, prepare a new Step objectx
     const newStep = await this.operationsFactory.prepare({
       prepare: {
@@ -72,17 +86,18 @@ export default class SequencePage extends GetComponentsFromUrl {
         step: list.length,
       },
     });
+    
     this.dispatch({
       currentStep: newStep.length === 2 ? newStep[1] : newStep[0],
     }); // Dispatch the currentStep as the new step
   }
+  
   getStepJson() {
     let list = this.componentList.getList(
       "step",
       this.propsState.currentSequence?.getJson()._id,
       "sequenceId"
     );
-
     // If no ID in the URL, prepare a new Step objectx
     let newStep = {
       type: "step",
@@ -111,6 +126,9 @@ export default class SequencePage extends GetComponentsFromUrl {
       { label: "5 m", value: 5 / 60 },
       { value: 10 / 60, label: "10 m" },
     ];
+
+    let listLen = this.state.list?.length>0;
+    let hasList = listLen?this.state?.list[0].getJson().content:undefined;
 
     return (
       <div className="fit">
@@ -238,13 +256,16 @@ export default class SequencePage extends GetComponentsFromUrl {
                       height="50"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path
-                        d="M25,0 Q25,25 50,25 H50"
-                        fill="none"
-                        stroke="var(--app-green)"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                      />
+                      {hasList && this.state.list &&(
+                      <>
+                        <path
+                          d="M25,0 Q25,25 50,25 H50"
+                          fill="none"
+                          stroke="var(--app-green)"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                        />
+                      </>)}
                     </svg>
                     <div className="icon-last">
                       <i className="fa-solid fa-plus"></i>

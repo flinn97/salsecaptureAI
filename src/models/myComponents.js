@@ -75,7 +75,7 @@ class Step extends ComponentBase {
         ...this.json,
         type: 'step',
         delay: 0,
-        messageId: ""
+        messageId: "",
     };
 }
 
