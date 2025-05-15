@@ -211,7 +211,7 @@ export default class ProspectCard extends BaseComponent {
               }
               this.dispatch({ selectedContacts: [] });
             }}
-            className="floating-select-btn"
+            className="floating-select-btn hover-basic"
           >
             <span className="floating-select-btn-text">Remove</span>
           </button>
@@ -219,18 +219,18 @@ export default class ProspectCard extends BaseComponent {
             for(let prospect of this.propsState.selectedContacts){
               prospect.copy({type:"contact", ogPPId:prospect.getJson()._id})
             }
-          }} className="floating-select-btn floating-select-primary-btn">
+          }} className="floating-select-btn floating-select-primary-btn hover-basic">
            
                 <span className="floating-select-btn-text">
                   Add Prospect
                 </span>
             
           </button>
-          <button className="floating-select-btn floating-select-primary-btn">
+          <button 
+          style={{width:"110px"}}
+          className="floating-select-btn floating-select-primary-btn hover-basic">
             <PopupButton
-              formclassName="FCImgButton floating-select-btn-text"
-              fromStyle={{color:"white"}}
-
+              formclassName="FCImgButton"
               content={
                 <span onClick={()=>{
                   let contacts = this.propsState.selectedContacts;
@@ -239,7 +239,8 @@ export default class ProspectCard extends BaseComponent {
                         }
                         this.dispatch({sequenceDataType:"research"})    
                     
-                }} className="floating-select-btn-text" style={{color:"white"}}>
+                }} className="floating-select-btn-text" 
+                style={{color:"white",}}>
                   Add to Sequence
                 </span>
               }
