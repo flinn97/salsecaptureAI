@@ -63,7 +63,8 @@ export default class ContactPopup extends BaseComponent {
 
     let obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
 
-    let createDate = (obj&&obj?.getJson().date) ? this.formatDate(obj?.getJson().date) : "";
+    let createDate =
+      obj && obj?.getJson().date ? this.formatDate(obj?.getJson().date) : "";
 
     const effectivePopupComponent = isWideScreen
       ? this.propsState.currentContact
@@ -374,41 +375,45 @@ export default class ContactPopup extends BaseComponent {
                 </>
               )}
             </div>
-            
 
-            <div
-              // className="popupButton"
-              style={{
-                background: "transparent",
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignContent: "flex-end",
-              }}
-            >
-              {" "}
-              {!this.propsState.currentContact.getJson().finished&&
+            <div style={{ paddingBottom: "20px",}}>
               <div
-              onClick={()=>{
-                this.propsState.currentContact.setCompState({finished:true})
-                this.propsState.currentContact.update();
-                let sequence = this.componentList.getComponent("sequence", this.propsState.currentContact.getJson().sequenceId)
-                let finished = parseInt(sequence.getJson().finished) +1;
-                sequence.setCompState({finished:finished});
-                sequence.update();
-              }}
-
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Remove From Sequence
-        </div>}
-              {/*Container for the save button*/}
-              <div style={{ paddingBottom: "20px" }}>
+                // className="popupButton"
+                style={{
+                  background: "transparent",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignContent: "flex-end",
+                  gap:"8px"
+                }}
+              >
                 {" "}
+                {!this.propsState.currentContact?.getJson().finished && (
+                  <div
+                    onClick={() => {
+                      this.propsState.currentContact.setCompState({
+                        finished: true,
+                      });
+                      this.propsState.currentContact.update();
+                      let sequence = this.componentList.getComponent(
+                        "sequence",
+                        this.propsState.currentContact.getJson().sequenceId
+                      );
+                      let finished = parseInt(sequence.getJson().finished) + 1;
+                      sequence.setCompState({ finished: finished });
+                      sequence.update();
+                    }}
+                    className="dark-button-1"
+                    style={{
+                      position: "relative",
+                      width: "fit-content",
+                    }}
+                  >
+                    Remove From Sequence
+                  </div>
+                )}
+                {/*Container for the save button*/}{" "}
                 {/*Container for button spacing*/}
                 {button}
               </div>{" "}

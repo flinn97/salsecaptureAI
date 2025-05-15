@@ -28,14 +28,27 @@ import SequencePopupCustomItem from "../components/sequencePopupCustom";
 
    
          return(
-         <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
-           <h2>Tags</h2> {/*Heading for the popup*/}
-           <input onChange={(e)=>{
-            let {value} = e.target;
-            this.setState({tags:value})
-           }}></input>
+         <div style={{padding:"18px", paddingBottom:"100px", height:"100%"}} className={this.props.pageClass||this.state.defaultClass}>
+           <h2 style={{font: 'normal normal 900 18px/25px Satoshi'}}>
+           Add Tags to Selected</h2>
+
+           <div className="contact-contact-data" 
+           style={{marginTop:"8%", padding:"24px", border:"none", background:"#f0f0f0"}}>
+            <div className="row-container">
+              <div className="row-name" style={{maxWidth:"fit-content"}}>Tags:</div>
+              <div className="row-field">
+              <input class="underline-form" onChange={(e)=>{
+                let {value} = e.target;
+                this.setState({tags:value})
+              }}></input>
+              </div>
+            </div>
+          </div>
+           
  
-           <div onClick={async ()=>{
+           <div class="dark-button-1" 
+           style={{justifySelf:"flex-end", marginTop:"20px"}}
+           onClick={async ()=>{
             for(let obj of this.propsState.selectedContacts){
               debugger
               let tags = obj.getJson().tags||"";
@@ -45,7 +58,7 @@ import SequencePopupCustomItem from "../components/sequencePopupCustom";
               obj.update();
             }
             this.dispatch({popupSwitch:''})
-           }}>save</div>
+           }}>Save</div>
          </div>
          )
      }

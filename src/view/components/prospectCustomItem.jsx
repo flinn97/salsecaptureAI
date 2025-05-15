@@ -46,10 +46,16 @@ class ProspectCustomItem extends BaseComponent {
     const { obj } = this.props;
     // Assuming obj.getJson() is necessary and works
     let user = obj.getJson();
+    const cons = this.props.app.state.selectedContacts
+            ? [...this.props.app.state.selectedContacts]
+            : [];
+        let selected = cons.includes(obj);
 
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div className="contact-item">
+        <div 
+          className="contact-item hover-darken" 
+          style={{ background: selected ? "#2374ab10" : "white", position:"relative", paddingLeft:"5px"  }}>
           <CheckIt
             checkKey="selectedContacts"
             obj={obj}
