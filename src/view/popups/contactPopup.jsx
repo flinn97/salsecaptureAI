@@ -29,7 +29,7 @@ export default class ContactPopup extends BaseComponent {
   //or we can import date-fns library
   formatDate(timestamp) {
     const date = new Date(
-      timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+      timestamp?.seconds * 1000 + timestamp?.nanoseconds / 1000000
     );
     const months = [
       "January",
@@ -62,9 +62,8 @@ export default class ContactPopup extends BaseComponent {
     }
 
     let obj = isWideScreen ? this.propsState.currentContact : this.props.obj;
-    //TODO: switching contact needs to refresh all the parentFormComponents
 
-    let createDate = obj ? this.formatDate(obj?.getJson().date) : "";
+    let createDate = (obj&&obj?.getJson().date) ? this.formatDate(obj?.getJson().date) : "";
 
     const effectivePopupComponent = isWideScreen
       ? this.propsState.currentContact
@@ -73,7 +72,6 @@ export default class ContactPopup extends BaseComponent {
 
     // Determine the text for the heading based on whether an object is provided
     let text = obj ? "Edit" : "Add";
-    console.log(obj ? obj : "");
     // Set default button to RunButton
     let button = (
       <RunButton
@@ -362,7 +360,7 @@ export default class ContactPopup extends BaseComponent {
                 </div>
               </div>
 
-              {obj && (
+              {obj && obj?.getJson().date && (
                 <>
                   <div
                     className="row-container"

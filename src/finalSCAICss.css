@@ -55,6 +55,7 @@ body {
      ========================================================================== */
 .mobile-container {
   /* max-width: 600px; */
+  display: block;
 }
 
 .map-container {
@@ -866,6 +867,7 @@ body {
 .icon-list .icon-row>:nth-child(2)>:nth-child(3) {
   display: -webkit-box;
   overflow: hidden;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
