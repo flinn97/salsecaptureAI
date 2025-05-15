@@ -15,6 +15,20 @@ class AssignedProspectsCustom extends BaseComponent {
           };
     }
 
+    getText(obj){
+        let text = "Active";
+        if(obj.getJson().finished){
+            text = "Finished"
+            if(obj.getJson().bounced){
+                text= "bounced"
+            }
+            if(obj.getJson().replied){
+                text = "replied"
+            }
+        }
+        return text
+    }
+
    
 
     render() {
@@ -22,7 +36,7 @@ class AssignedProspectsCustom extends BaseComponent {
         return (
             <div>
                                                 <b>{this.props.obj.getJson().firstName}</b>
-                                                <div>{this.props.obj.getJson().finished?"Finished":"Active"}</div>
+                                                <div>{this.getText(this.props.obj)}</div>
 
             </div>
                         

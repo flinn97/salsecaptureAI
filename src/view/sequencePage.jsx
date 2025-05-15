@@ -31,6 +31,8 @@ import AssignedProspectsCustom from "./components/assignedProspectsCustom";
  
          let sequence;
          await this.getComponentsFromBackend();
+         await this.componentList.getComponentsFromBackend("template");
+         await this.componentList.getComponentsFromBackend("contact")
          sequence = this.comp
  
          if (!sequence) {
@@ -43,6 +45,7 @@ import AssignedProspectsCustom from "./components/assignedProspectsCustom";
  
          await this.dispatch({ currentSequence: sequence });
          this.componentList.sortSelectedList("step", "order");
+
         //  this.createStep(sequence);
  
      }
@@ -91,7 +94,7 @@ import AssignedProspectsCustom from "./components/assignedProspectsCustom";
                      <div className="title-bar">
                          <div className="title-left">
                              <div className="title-icon">
-                                 <i className="fas fa-angle-left"></i>
+                                 <i className="fas fa-angle-left" onClick={()=>{history.back();}}></i>
                              </div>
                              {this.propsState.currentSequence?.getJson().name==="" ||this.state.edit?(<div className="name-a-sequence">
                              <ParentFormComponent obj={this.propsState.currentSequence} name="name"/>

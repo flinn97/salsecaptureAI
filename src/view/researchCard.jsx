@@ -173,35 +173,7 @@ export default class ResearchCard extends BaseComponent {
             hasLink={true}
           />
         </div>
-        {this.propsState.selectedContacts?.length > 0 && (
-          <div id="floating-select-set" className="floating-select-set">
-            <button className="floating-select-btn">
-              <span className="floating-select-btn-text">Export</span>
-            </button>
-            <button
-              onClick={() => {
-                for (let contact of this.propsState.selectedContacts) {
-                  contact.del();
-                }
-                this.dispatch({ selectedContacts: [] });
-              }}
-              className="floating-select-btn"
-            >
-              <span className="floating-select-btn-text">Delete</span>
-            </button>
-            <button className="floating-select-btn floating-select-primary-btn">
-              <PopupButton
-                formclassName="FCImgButton"
-                content={
-                  <span className="floating-select-btn-text">
-                    Add to Sequence
-                  </span>
-                }
-                popupSwitch="addToSequence"
-              />
-            </button>
-          </div>
-        )}
+        
       </div>
     );
   }

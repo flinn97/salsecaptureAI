@@ -61,7 +61,7 @@ import AddTags from './view/popups/addTags.jsx';
         type:window.innerWidth<1000? "topBar":undefined,
         style:{backgroundColor:"#35b593", color:"white", fontFamily:"'Satoshi-Variable', sans-serif"},
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<1000&& "absolute",bottom:window.innerWidth<1000&& "0px", fontFamily:"'Satoshi-Variable', sans-serif" }, 
-        logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white"}, },
+        logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white", fontFamily:"'Satoshi-Variable', sans-serif"}, },
        routes: [
          { comp: Conversations, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },

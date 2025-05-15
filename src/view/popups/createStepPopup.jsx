@@ -5,13 +5,16 @@
  */
 import {
   DelButton,
+  MapComponent,
   ParentFormComponent,
   RunButton,
   UpdateButton,
   UploadButton,
 } from "flinntech";
-import { BaseComponent } from "flinntech";
 
+import { BaseComponent } from "flinntech";
+import SelectTemplate from "../components/templateCustomSelect";
+import Templates from "../Templates";
 export default class CreateStepPopup extends BaseComponent {
   /**
    * Constructor for the OemPopupContent component.
@@ -58,15 +61,60 @@ export default class CreateStepPopup extends BaseComponent {
         className={this.props.pageClass || this.state.defaultClass}
       >
         <div
-                    
-                    className="dark-button-1"
-                    style={{
-                      position: "relative",
-                      width: "fit-content",
+
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+        >
+          Draft With AI
+        </div>
+        <div
+
+          className="dark-button-1"
+          style={{
+            position: "relative",
+            width: "fit-content",
+          }}
+          onClick={()=>{this.setState({selectTemplate:true})}}
+        >
+          Select Template
+        </div>
+        {this.state.selectTemplate&&<MapComponent
+                    name="template"
+                    filterFunc={(obj)=>{
+                        if(obj.getJson().content===undefined){
+                            return false
+                        }
+                        if(obj.getJson().content===""){
+                            return false
+                        }
+                        let retVal = false;
+                        if (!this.propsState.searchText) {
+                          retVal = true;
+                        }
+                        let filterText = this.propsState.searchText;
+          
+                        if (
+                          obj
+                            .getJson()
+                            .content?.toLowerCase()
+                            .includes(filterText?.toLowerCase())
+                        ) {
+                          retVal = true;
+                        }
+          
+          
+                        return retVal;
                     }}
-                  >
-                    Draft With AI
-                  </div>
+                    cells={[
+                        {type:"custom",
+                        custom: SelectTemplate
+                        }
+                      
+                    ]}
+                />}
         <br />
         <div className="content-home-add">
           <div className="row">
@@ -94,8 +142,8 @@ export default class CreateStepPopup extends BaseComponent {
               name="nextSend"
               formClass="underline-form"
               wrapperStyle={{ width: "10%", marginRight: "8px" }}
-              //This needs to accept only numbers
-              //TODO: Jared or Taylor
+            //This needs to accept only numbers
+            //TODO: Jared or Taylor
             />
             {` days`}
           </div>

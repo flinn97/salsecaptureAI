@@ -36,6 +36,7 @@ class Contact extends ComponentBase {
         state:"",
         zip:"",
         source:"",
+        finishedSequenceTags:"",
         tags:"",
         conversationIds: [],
         

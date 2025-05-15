@@ -3,8 +3,9 @@ import { BaseComponent } from "flinntech";
 import "./Checkbox.css";
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from "./check";
+import ContactsCustomItem from "./contactsCustom";
 
-class ResearchCustomItem extends BaseComponent {
+class ResearchCustomItem extends ContactsCustomItem {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +20,7 @@ class ResearchCustomItem extends BaseComponent {
       let cList = app.state.componentList;
       let list = cList.getList(
         "potentialProspect",
-        obj?.getJson().name,
+        obj?.getJson()._id,
         "researchId"
       );
       let count = list.length;
@@ -82,12 +83,7 @@ class ResearchCustomItem extends BaseComponent {
           className="contact-tag-container active"
         >
           {/* Use optional chaining and check if tags exist before splitting */}
-          {research.tags?.split(",").map((text, index) => (
-            // Add a key prop when mapping lists for performance and stability
-            <button key={index} className="contact-tag-btn">
-              {text}
-            </button>
-          ))}
+          {this.getTagUI(research)}
         </div>
       </div>
     );

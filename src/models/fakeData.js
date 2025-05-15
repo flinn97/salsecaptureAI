@@ -107,10 +107,38 @@ let data = [
         type:"contact",
         _id: "contact1",
         name:"Taylor Davidson",
+        firstName:"Taylor",
+        lastName:"Davidson",
         email:"taylormdavidson@gmail.com",
-        owner:"alan@salescapture.com "
+        owner:"alan@salescapture.com ",
+        finishedSequenceTags:"sequence1,sequence2",
+        sequenceId:"z29s2051525",
+
 
     },
+    {
+        type:"contact",
+        _id: "contact123",
+        name:"Alan Davidson",
+        firstName:"Alan",
+        lastName:"Davidson",
+        email:"taylormdavidson@gmail.com",
+        owner:"alan@salescapture.com ",
+        replied:true,
+        finished:true,
+        finishedSequenceTags:"sequence1,sequence2",
+        sequenceId:"z29s2051525",
+        replied:true
+
+
+    },
+    {
+        type:"research",
+        _id: "research1",
+        name:"Vp of Sales",
+        email:"taylormdavidson@gmail.com",
+        owner:"alan@salescapture.com ",
+        },
     {
     type:"potentialProspect",
     _id: "prospect1",

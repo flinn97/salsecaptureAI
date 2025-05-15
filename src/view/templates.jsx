@@ -6,6 +6,7 @@ import { MapComponent } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import TemplateCustomItem from "./components/templateCustom";
+import SelectTemplate from "./components/templateCustomSelect";
 
 export default class Templates extends BaseComponent {
     /**

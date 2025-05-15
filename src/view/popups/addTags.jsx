@@ -29,7 +29,7 @@ import SequencePopupCustomItem from "../components/sequencePopupCustom";
    
          return(
          <div style={{padding:"10px", paddingBottom:"100px", height:"65%"}} className={this.props.pageClass||this.state.defaultClass}>
-           <h2>Add tags</h2> {/*Heading for the popup*/}
+           <h2>Tags</h2> {/*Heading for the popup*/}
            <input onChange={(e)=>{
             let {value} = e.target;
             this.setState({tags:value})
@@ -37,8 +37,10 @@ import SequencePopupCustomItem from "../components/sequencePopupCustom";
  
            <div onClick={async ()=>{
             for(let obj of this.propsState.selectedContacts){
-              let tags = obj.getJson().tags;
-              tags += (","+this.state.tags);
+              debugger
+              let tags = obj.getJson().tags||"";
+              let addTag = tags.length===0? this.state.tags: ","+this.state.tags
+              tags = addTag;
               await obj.setCompState({tags:tags});
               obj.update();
             }

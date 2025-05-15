@@ -248,7 +248,7 @@ export default class ContactsCard extends BaseComponent {
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
             <button  onClick = {()=>{this.dispatch({popupSwitch:"addTags"})}} className="floating-select-btn">
-              <span className="floating-select-btn-text">Add Tags</span>
+              <span className="floating-select-btn-text">Tags</span>
             </button>
             <button
               onClick={() => {
@@ -265,7 +265,7 @@ export default class ContactsCard extends BaseComponent {
               <PopupButton
                 formclassName="FCImgButton"
                 content={
-                  <span className="floating-select-btn-text">
+                  <span className="floating-select-btn-text" style={{color:"white"}}>
                     Add to Sequence
                   </span>
                 }

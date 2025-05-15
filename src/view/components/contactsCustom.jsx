@@ -28,6 +28,35 @@ class ContactsCustomItem extends BaseComponent {
         this.dispatch({ selectedContacts: contacts });
     };
 
+    getTagUI(user){
+        return <div
+                    // The 'active' class here might need dynamic logic if it depends on selection state
+                    className="contact-tag-container active"
+                >
+                    {/* Use optional chaining and check if tags exist before splitting */}
+                    {user.tags?.split(",").filter(text=>text!=="").map((text, index) => (
+                        // Add a key prop when mapping lists for performance and stability
+                        <button key={index} className="contact-tag-btn">
+                            {text}
+                        </button>
+                    ))}
+                    {user.finishedSequenceTags?.length>0&&<>{user.finishedSequenceTags?.split(",").map((text, index) => (
+                        // Add a key prop when mapping lists for performance and stability
+                        <button key={index} className="contact-tag-btn" style={{backgroundColor:"red"}}>
+                            {text}
+                        </button>
+                    ))}</>}
+                    {user.sequenceId&& <button className="contact-tag-btn" style={{backgroundColor:user.finished?"red":"green"}}>
+                            {this.componentList.getComponent("sequence", user.sequenceId)?.getJson().name}
+                        </button>}
+                        {user.replied&& <button className="contact-tag-btn" style={{backgroundColor:"green"}}>
+                            Replied
+                        </button>}
+
+                </div>
+                
+    }
+
     // Use arrow function for auto-binding 'this'
     handleUncheckContact = (obj) => {
         // Ensure we get the latest state within the handler
@@ -160,19 +189,9 @@ class ContactsCustomItem extends BaseComponent {
                             </div>
                         }
                     />
+                    
                 </div>
-                <div
-                    // The 'active' class here might need dynamic logic if it depends on selection state
-                    className="contact-tag-container active"
-                >
-                    {/* Use optional chaining and check if tags exist before splitting */}
-                    {user.tags?.split(",").map((text, index) => (
-                        // Add a key prop when mapping lists for performance and stability
-                        <button key={index} className="contact-tag-btn">
-                            {text}
-                        </button>
-                    ))}
-                </div>
+                {this.getTagUI(user)}
                 {/* {this.state.redirect&& <RedirectMessage/>} */}
             </div>
         );
