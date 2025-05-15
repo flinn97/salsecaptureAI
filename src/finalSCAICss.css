@@ -766,6 +766,17 @@ body {
   font-weight: 450;
 }
 
+
+.finished-sequence-tags{
+  background-color: var(--app-color-red);
+  color: white;
+}
+
+.unfinished-sequence-tags{
+  background-color: var(--app-green);
+  color: white;
+}
+
 .contact-contact-data {
   display: flex;
   flex-direction: column;
