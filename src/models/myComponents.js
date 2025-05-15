@@ -25,6 +25,7 @@ class Contact extends ComponentBase {
         ...this.json,
         type: 'contact',
         phone: "",
+        autoAI: true, 
         email: "",
         title:"",
         company:"",
@@ -127,5 +128,14 @@ class Research extends ComponentBase {
     }
 }
 
+class AISettings extends ComponentBase {
+    json={ 
+        ...this.json,
+        type:"aiSettings",
+        autoAI:"",
+        
+    }
+}
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research };
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, AISettings };
