@@ -27,6 +27,7 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
+import AdminPage from './view/adminPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -74,6 +75,8 @@ import AddEmail from './view/popups/addEmail.jsx';
          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
+
+         { comp: AdminPage, name: "Admin", path: "admin",}
          //  { comp: Settings, name: "settings" },
        ],
        popups: [

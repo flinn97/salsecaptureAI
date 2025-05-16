@@ -316,7 +316,23 @@ let data = [
         _id: "research1",
         name:"research1",
         owner:"alan@salescapture.com "
-        }
+        },
+    {
+        type:"client",
+        _id:"client1",
+        name:"firstClient"
+       
+    },
+    {
+        type:"client",
+        _id:"client2",
+        name:"jared"
+    },
+    {
+        type:"AIPrompt",
+        _id:"ai1",
+
+    }
 ]
 
 export {data}

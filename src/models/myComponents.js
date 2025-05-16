@@ -124,5 +124,21 @@ class Research extends ComponentBase {
     }
 }
 
+class Client extends ComponentBase{
+    json={
+        ...this.json,
+        type:"client",
+        name:"",
+        email: "",
+        researchId:"",
+        conversationIds: [],
+    }
+}
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research };
+class AIPrompt extends ComponentBase{
+    json={
+        ...this.json,
+        type:"AIPrompt"
+    }
+}
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client };
