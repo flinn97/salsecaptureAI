@@ -7,7 +7,6 @@ import { ParentFormComponent, RunButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 import CustomMessageItem from "./components/messageCustomItem";
 import arrow from "../assets/arrow_back.svg";
-import aiSrc from "../assets/quick_phrases.svg";
 
 export default class Conversation extends BaseComponent {
   /**
@@ -142,7 +141,7 @@ export default class Conversation extends BaseComponent {
               <span className="sender-details-button">See Details</span>
             </div>
 
-            <div style={{fontSize: ".8rem", cursor:"pointer", width: "55px",}} className="hover-basic">
+            <div style={{fontSize: ".8rem", cursor:"pointer", minWidth: "55px",}} className="hover-basic">
               {currentContact?.getJson()?.autoAI ? (
                 <div
                   style={{ display: "flex", flexDirection: "column", alignItems:"center" }}
@@ -154,15 +153,13 @@ export default class Conversation extends BaseComponent {
                     );
                   }}
                 >
-                  <span>AI On</span>
-                  <img
-                    src={aiSrc}
+                  {/* <span>AI On</span> */}
+                  <i class="fa-solid fa-comment-nodes" 
                     style={{
-                      height:"35px",
-                      filter:
-                        "brightness(0) saturate(100%) invert(51%) sepia(9%) saturate(3236%) hue-rotate(67deg) brightness(92%) contrast(76%)",
-                    }}
-                  />
+                      fontSize:"35px",
+                      color: "#36b593",
+                    }}></i>
+              
                 </div>
               ) : (
                 <div
@@ -175,8 +172,12 @@ export default class Conversation extends BaseComponent {
                     );
                   }}
                 >
-                  <span>AI Off</span>
-                  <img src={aiSrc} style={{height:"35px",}}/>
+                  {/* <span>AI Off</span> */}
+                  <i class="fa-solid fa-comment-nodes" 
+                    style={{
+                      fontSize:"35px",
+                      color: "#363636",
+                      }}></i>
                 </div>
               )}
             </div>
