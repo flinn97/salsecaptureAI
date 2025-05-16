@@ -229,7 +229,7 @@ export default class Conversation extends BaseComponent {
                         // const { originalMessageId, from, to, subject, text } = req.body;
                         let body = {
                           originalMessageId: obj.getJson().originalMessageId,
-                          from: obj.getJson().owner,
+                          from: this.propsState.currentUser.getJson()._id,
                           to: this.propsState.currentConversation.getJson()
                             .contact,
                           subject: obj.getJson().subject,
