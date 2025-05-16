@@ -43,7 +43,7 @@ export default class GoogleAuthCard extends BaseComponent {
         return (
             <div className="mobile-container">
                 {/* <GmailConnectButton /> */}
-                <GmailConnect/>
+               {this.propsState.currentUser.getJson().gmailAuthenticated?(<div>Gmail Authenticated: {this.propsState.currentUser.getJson()._id}</div>):(<GmailConnect/>)} 
             </div>
         );
     }
