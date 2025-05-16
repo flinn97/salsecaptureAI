@@ -30,6 +30,8 @@ export default class Conversation extends BaseComponent {
     await this.prepareMessages(); // Calls the function to prepare messages
   }
 
+
+
   /**
    * Prepares the messages for the current conversation.
    */
