@@ -183,7 +183,7 @@
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
-    border-radius: 1.5rem;
+    border-radius: .75rem;
     margin: 0 20px;
     display: flex;
     max-width: 590px;

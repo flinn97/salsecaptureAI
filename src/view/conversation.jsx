@@ -6,6 +6,7 @@ import { MapComponent } from "flinntech";
 import { ParentFormComponent, RunButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 import CustomMessageItem from "./components/messageCustomItem";
+import arrow from "../assets/arrow_back.svg";
 
 export default class Conversation extends BaseComponent {
   /**
@@ -69,23 +70,24 @@ export default class Conversation extends BaseComponent {
         originalMessageId: replyToId,
         subject: subject,
         ownerMessage: true,
-      }, clean: true // Prepare with messageType and conversationId
+      },
+      clean: true, // Prepare with messageType and conversationId
     });
     // Dispatch to set the current component in the global state
     this.dispatch({
       currentComponent: prepared[0], // Set the first prepared item as the current component
     });
     this.setState({
-        currentConversation:currentConversation
-    })
+      currentConversation: currentConversation,
+    });
   }
 
-  componentDidUpdate(props, state){
-    if(this.propsState.currentConversation!==this.state.currentConversation){
-        this.prepNewMessage()
+  componentDidUpdate(props, state) {
+    if (
+      this.propsState.currentConversation !== this.state.currentConversation
+    ) {
+      this.prepNewMessage();
     }
-
-
   }
 
   /**
@@ -95,73 +97,100 @@ export default class Conversation extends BaseComponent {
    */
   getInnerContent() {
     const { currentConversation } = this.propsState;
-    let currentContact = this.componentList.getComponent("contact", currentConversation?.getJson().contact, "email");
+    let currentContact = this.componentList.getComponent(
+      "contact",
+      currentConversation?.getJson().contact,
+      "email"
+    );
     return (
       <div>
-        {window.innerWidth < 1000 && (
+        {window.innerWidth > 1 && (
           <div
             style={{
               position: "sticky",
               top: 0,
               zIndex: 200,
-              marginBottom: "-20px",
+              marginBottom: "-2px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyItems: "space-between",
             }}
           >
+            {window.innerWidth < 600 &&
             <div
-              className="dark-button-1"
               onClick={() => {
                 this.dispatch({ showConversation: undefined });
               }}
             >
-              {`< Back`}
+              <img src={arrow} style={{ color: "black" }} />
             </div>
-            <div className="message-header">
-            <span className="sender">{this.propsState.currentConversation?.getJson().contactName}</span>
-            <span className="date">See Details</span>
-          </div>
+            }
+
+            <div
+              className="contact-avatar"
+              style={{ maxWidth: "45px", maxHeight: "45px" }}
+            >
+              <i className="fa-solid fa-user"></i>
+            </div>
+
+            <div className="message-header-title">
+              <span className="sender-title">
+                {this.propsState.currentConversation?.getJson().contactName}
+              </span>
+              <span className="sender-details-button">See Details</span>
+            </div>
+
+            <div style={{fontSize: ".8rem", cursor:"pointer", minWidth: "55px",}} className="hover-basic">
+              {currentContact?.getJson()?.autoAI ? (
+                <div
+                  style={{ display: "flex", flexDirection: "column", alignItems:"center" }}
+                  onClick={() => {
+                    currentContact.setCompState(
+                      { autoAI: false },
+                      { run: true },
+                      true
+                    );
+                  }}
+                >
+                  {/* <span>AI On</span> */}
+                  <i class="fa-solid fa-comment-nodes" 
+                    style={{
+                      fontSize:"35px",
+                      color: "#36b593",
+                    }}></i>
+              
+                </div>
+              ) : (
+                <div
+                  style={{ display: "flex", flexDirection: "column", alignItems:"center" }}
+                  onClick={() => {
+                    currentContact.setCompState(
+                      { autoAI: true },
+                      { run: true },
+                      true
+                    );
+                  }}
+                >
+                  {/* <span>AI Off</span> */}
+                  <i class="fa-solid fa-comment-nodes" 
+                    style={{
+                      fontSize:"35px",
+                      color: "#363636",
+                      }}></i>
+                </div>
+              )}
+            </div>
           </div>
         )}
-        <div style={{width:'100%', position:"relative"}}>
-          <div style={{position:"absolute", right:"0px", zIndex:1000}}>
-          {currentContact?.getJson()?.autoAI?
-      ( <div
-        onClick={()=>{
-          currentContact.setCompState({autoAI:false}, {run:true}, true);
-          
 
-        }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn off AI
-        </div>):
-        (<div
-          onClick={()=>{
-            currentContact.setCompState({autoAI:true}, {run:true}, true);
-            
-
-          }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn on AI
-        </div>)}
-          </div>
-        </div>
         <div className="layoutColumn conversation-container">
           {this.state.message ? (
             <>{this.state.message}</>
           ) : (
             <>
               {this.state.start && (
-                <div style={{ width: "100%", marginTop:"-20px", }}>
-                  
+                <div style={{ width: "100%", marginTop: "-20px" }}>
                   {/* MapComponent displaying messages connected to the current conversation */}
                   <MapComponent
                     mapContainerClass="message-list"
@@ -182,91 +211,98 @@ export default class Conversation extends BaseComponent {
                       search: this.propsState.currentConversation.getJson()._id,
                       attribute: "conversationId",
                     }}
-                    filterFunc={(obj)=>{
-                      if(obj.getJson().body===undefined){
-                          return false
+                    filterFunc={(obj) => {
+                      if (obj.getJson().body === undefined) {
+                        return false;
                       }
-                      if(obj.getJson().body===""){
-                          return false
+                      if (obj.getJson().body === "") {
+                        return false;
                       }
-                      return true
-                  }}
+                      return true;
+                    }}
                   />
 
                   <div
                     style={{
-                      display:"flex",
-                      flexDirection:"row",
+                      display: "flex",
+                      flexDirection: "row",
                       position: "sticky",
                       bottom: 0,
                       zIndex: 1,
                       width: "100%",
                       minHeight: "60px",
                       paddingBottom: "65px",
-                      paddingLeft:"12px",
+                      paddingLeft: "12px",
                       background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
                     }}
                   >
-                   <div style={{ position:"relative",
-                    width:"40px", zIndex:2,
-                    }}>
-                    <RunButton
-                      content={
-                          <button className="footer-btn"
-                          style={{marginBottom:"-15px", position:"absolute", left:0}}>
+                    <div
+                      style={{ position: "relative", width: "40px", zIndex: 2 }}
+                    >
+                      <RunButton
+                        content={
+                          <button
+                            className="footer-btn"
+                            style={{
+                              marginBottom: "-15px",
+                              position: "absolute",
+                              left: 0,
+                            }}
+                          >
                             <i className="fa-solid fa-circle-plus"></i>
                           </button>
-                      }
-                      callbackFunc={() => {
-                        
-                        let obj = this.propsState.currentComponent;
-                        if(obj.getJson().body===""){
-                            return
                         }
                         
-                        this.prepNewMessage();
-
-                        // const { originalMessageId, from, to, subject, text } = req.body;
-                        let body = {
-                          originalMessageId: obj.getJson().originalMessageId,
-                          from: this.propsState.currentUser.getJson()._id,
-                          to: this.propsState.currentConversation.getJson()
-                            .contact,
-                          subject: obj.getJson().subject,
-                          text: obj.getJson().body,
-                        };
-                        // Make the POST request
-                        fetch(
-                          "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
-                          {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(body),
-                          }
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error(
-                                `HTTP error! Status: ${response.status}`
-                              );
+                       
+                          callbackFunc={() => {
+                            let obj = this.propsState.currentComponent;
+                            if (obj.getJson().body === "") {
+                              return;
                             }
-                            return response.json();
-                          })
-                          .then((data) => {
-                            console.log(
-                              "Reply sent successfully in thread.",
-                              data
-                            );
-                          })
-                          .catch((error) => {
-                            console.error("Error sending reply:", error);
-                          });
-                      }} // Callback to re-run the prepareMessages function
-                    /></div>
-                     {/* Form for sending new messages */}
-                     <div style={{zIndex:3, width:"100%"}}>
+                          this.prepNewMessage();
+
+                          // const { originalMessageId, from, to, subject, text } = req.body;
+                          let body = {
+                            originalMessageId: obj.getJson().originalMessageId,
+                            from: obj.getJson().owner,
+                            to: this.propsState.currentConversation.getJson()
+                              .contact,
+                            subject: obj.getJson().subject,
+                            text: obj.getJson().body,
+                          };
+                          // Make the POST request
+                          fetch(
+                            "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify(body),
+                            }
+                          )
+                            .then((response) => {
+                              if (!response.ok) {
+                                throw new Error(
+                                  `HTTP error! Status: ${response.status}`
+                                );
+                              }
+                              return response.json();
+                            })
+                            .then((data) => {
+                              console.log(
+                                "Reply sent successfully in thread.",
+                                data
+                              );
+                            })
+                            .catch((error) => {
+                              console.error("Error sending reply:", error);
+                            });
+                        }} // Callback to re-run the prepareMessages function
+                      />
+                    </div>
+                    {/* Form for sending new messages */}
+                    <div style={{ zIndex: 3, width: "100%" }}>
                       <ParentFormComponent
                         wrapperClass="footer-input"
                         formClass="search-input"

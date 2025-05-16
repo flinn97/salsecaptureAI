@@ -65,9 +65,9 @@
         align-items: baseline;
 
         .sender {
-          font-weight: 600;
+          font-weight: 800;
           font-size: 1rem;
-          color: #333;
+          color: #262626;
         }
 
         .date {
@@ -89,7 +89,7 @@
         overflow: hidden;
       }
     }
-  }
+  } 
 
   /* Floating Action Button (FAB) for "new message" */
   .fab {
