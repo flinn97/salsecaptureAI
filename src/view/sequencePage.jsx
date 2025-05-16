@@ -129,6 +129,8 @@ export default class SequencePage extends GetComponentsFromUrl {
 
     let listLen = this.state.list?.length>0;
     let hasList = listLen?this.state?.list[0].getJson().content:undefined;
+    //Taylor please explain how the MapComponent rendering gets this wrong
+    // Click a Seq with content, and then back, then newSeq
 
     return (
       <div className="fit">
