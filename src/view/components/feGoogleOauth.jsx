@@ -1,5 +1,6 @@
 import { BaseComponent } from 'flinntech';
 import React, { Component } from 'react';
+import goog from '../../assets/logo_google_g.png';
 // Optional: Create a CSS file for styling and import it
 // import './GmailAuthButton.css';
 
@@ -81,12 +82,16 @@ class GmailAuthButton extends BaseComponent {
 
         return (
             <div className="gmail-auth-container">
-                <h1>Gmail API Authorization</h1>
+                <h1 style={{font: "normal normal 900 18px/24px Satoshi;"}}>Gmail API Authorization</h1>
                 <p>Click the button below to authorize your Google account for use with the Firebase Function.</p>
-                <p>This process will redirect you to Google for authorization and then back to your function, which will save your token to Firestore, linked by your email address.</p>
+                <p>- This process will redirect you to Google for authorization and then back to your function, which will save your token to Firestore, linked by your email address.</p>
 
-                <button className="auth-button" onClick={this.handleAuthClick}>
-                    Authorize with Google
+                <button 
+                className="auth-button dark-button-1" 
+                style={{fontSize:"15px", background:"#333333"}}
+                onClick={this.handleAuthClick}>
+                    <img src={goog} style={{width:"30px"}}/>
+                    <div>Authorize with Google</div>
                 </button>
 
                 {/* This div will show status messages from the component itself */}

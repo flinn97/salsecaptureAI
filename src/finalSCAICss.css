@@ -131,6 +131,30 @@ body {
   color: #378c75;
 }
 
+.gmail-auth-container{
+  flex-direction: column;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 314px;
+  color: #262626;
+  height: fit-content;
+}
+
+.auth-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  min-width: 210px;
+  border: 1px solid white;
+}
+
+.auth-button:hover{
+  border: 1px solid rgb(105, 105, 105);
+  filter: brightness(1.1);
+}
+
 .chat-avatar {
   width: 50px;
   height: 50px;
