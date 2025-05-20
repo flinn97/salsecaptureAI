@@ -50,7 +50,7 @@ export default class Conversations extends GetAllComponents {
         const body = {
             userId: user.getJson()._id,
             after: formatGmailDate(lastCheck),
-            before: formatGmailDate(now),
+            // before: formatGmailDate(now),
             maxResults: 50
         };
 
@@ -70,6 +70,40 @@ export default class Conversations extends GetAllComponents {
             })
             .then(async (json) => {
                 let messages = json.batchMessages;
+                // --- BEGIN: Filter for Today's and Yesterday's Emails ---
+                const today = new Date();
+                const yesterday = new Date(today);
+                yesterday.setDate(today.getDate() - 1);
+
+                // Normalize today and yesterday to the start of the day for accurate comparison
+                today.setHours(0, 0, 0, 0);
+                yesterday.setHours(0, 0, 0, 0);
+
+                messages = messages.filter(message => {
+                    if (!message || typeof message.date !== 'string') {
+                        console.warn("Skipping message with missing or invalid date property:", message);
+                        return false; // Skip messages with no date
+                    }
+                    try {
+                        const messageDate = new Date(message.date);
+                        if (isNaN(messageDate.getTime())) {
+                            console.warn("Invalid date string encountered during today/yesterday filter:", message.date, "for message:", message.id);
+                            return false; // Skip messages with invalid dates
+                        }
+
+                        // Normalize messageDate to the start of its day
+                        const messageDateNormalized = new Date(messageDate);
+                        messageDateNormalized.setHours(0, 0, 0, 0);
+
+                        // Check if the normalized message date is today or yesterday
+                        return messageDateNormalized.getTime() === today.getTime() || messageDateNormalized.getTime() === yesterday.getTime();
+                    } catch (e) {
+                        console.warn("Error parsing date string during today/yesterday filter:", message.date, "for message:", message.id, e);
+                        return false; // Skip messages if date parsing fails
+                    }
+                });
+                console.log("Filtered for today and yesterday:", messages);
+
                 /**
      * Sorts an array of email objects by thread recency, then by message date within threads.
      * Sort order is latest to earliest.
@@ -179,7 +213,7 @@ export default class Conversations extends GetAllComponents {
                     // 3. If no email is found with the above patterns
                     return null;
                 }
-                let check = messages.filter((m)=>{
+                let check = messages.filter((m) => {
                     return (m.from.includes('taylor'))
                 })
                 console.log(check)
@@ -190,7 +224,7 @@ export default class Conversations extends GetAllComponents {
                     const recipientEmail = extractEmailFromField(toField);
                     const senderEmail = extractEmailFromField(fromField);
 
-                
+
                     // Rule 1: I sent the email, and the recipient is in my contacts.
                     if (senderEmail === currentUserId) {
                         // If the email is also to myself, filter it out.
@@ -198,32 +232,32 @@ export default class Conversations extends GetAllComponents {
                         if (recipientEmail === currentUserId) {
                             return false;
                         }
-                
+
                         // If we can't extract the recipient's email, we can't check if they're a contact.
                         if (!recipientEmail) {
                             return false;
                         }
-                
+
                         const recipientContact = this.componentList.getComponent("contact", recipientEmail, "email");
                         // Keep if the recipient is a contact, otherwise filter out.
                         return recipientContact !== undefined;
                     }
-                
+
                     // Rule 2: Someone from my contacts sent something to me.
                     if (recipientEmail === currentUserId) {
                         // The case where fromField === currentUserId (email to myself) is already handled above.
                         // So, here, fromField is implicitly not currentUserId.
-                
+
                         // If we can't extract the sender's email, we can't check if they're a contact.
                         if (!senderEmail) {
                             return false;
                         }
-                
+
                         const senderContact = this.componentList.getComponent("contact", senderEmail, "email");
                         // Keep if the sender is a contact, otherwise filter out.
                         return senderContact !== undefined;
                     }
-                
+
                     // If the message is not from or to the current user, filter it out.
                     return false;
                 });
