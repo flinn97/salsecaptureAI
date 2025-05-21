@@ -95,11 +95,12 @@ export default class CustomMessageItem extends BaseComponent {
         ) : (
           <>
             {/* Timestamps */}
+            {this.props.obj.getJson().timeStamp &&
             <div className="date-divider">
               <span className="timestamp">
                 {this.props.obj.getJson().timeStamp}
               </span>
-            </div>
+            </div>}
             <div className={"message-item " + str}>
               {/* Outgoing message (right-aligned, green bubble) */}
               <div className={"message " + str}>{this.state.plainText}</div>
