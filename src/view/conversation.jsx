@@ -112,11 +112,14 @@ export default class Conversation extends BaseComponent {
               position: "sticky",
               top: 0,
               zIndex: 200,
-              marginBottom: "-2px",
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
               justifyItems: "space-between",
+              background:"white",
+              padding:"20px",
+              paddingBottom:"8px",
+              transform: "translateZ(0)", // Force GPU acceleration
             }}
           >
             {window.innerWidth < 600 &&
@@ -186,13 +189,13 @@ export default class Conversation extends BaseComponent {
           </div>
         )}
 
-        <div className="layoutColumn conversation-container">
+        <div className="layoutColumn conversation-container" style={{padding:"20px", marginBottom:"12px"}}>
           {this.state.message ? (
             <>{this.state.message}</>
           ) : (
             <>
               {this.state.start && (
-                <div style={{ width: "100%", marginTop: "-20px" }}>
+                <div style={{ width: "100%", marginTop: "-20px",}}>
                   {/* MapComponent displaying messages connected to the current conversation */}
                   <MapComponent
                     mapContainerClass="message-list"
@@ -232,8 +235,8 @@ export default class Conversation extends BaseComponent {
                       bottom: 0,
                       zIndex: 1,
                       width: "100%",
-                      minHeight: "60px",
-                      paddingBottom: "65px",
+                      minHeight: "70px",
+                      paddingBottom: "85px",
                       paddingLeft: "12px",
                       background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
                     }}
