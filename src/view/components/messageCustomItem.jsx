@@ -38,7 +38,7 @@ export default class CustomMessageItem extends BaseComponent {
                   // const { originalMessageId, from, to, subject, text } = req.body;
                   debugger;
                   let obj = this.props.obj;
-                  obj.setCompState({suggestion:false}, {run:true})
+                  obj.setCompState({suggestion:false, ownerMessage:true }, {run:true})
 
                   let body = {
                     originalMessageId:obj.getJson().originalMessageId ||"",

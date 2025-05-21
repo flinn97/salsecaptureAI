@@ -51,7 +51,7 @@ export default class AddToSequence extends BaseComponent {
             zIndex:20, background:"white",
           }}
         >
-          <h2>Add to Sequence</h2> {/*Heading for the popup*/}
+          <h2 >Add to Sequence</h2> {/*Heading for the popup*/}
           <div
             className="count-desc"
             style={{ position: "relative", margin: "10px" }}

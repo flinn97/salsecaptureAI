@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseComponent } from "flinntech";
+import { BaseComponent, urlService } from "flinntech";
 import "./Checkbox.css";
 import contactImg from "../../assets/contact.png";
 import CheckIt from "./check";
@@ -67,6 +67,7 @@ class AssignedProspectsCustom extends BaseComponent {
           <div className="contact-name">{`${user.firstName} ${user.lastName}`}</div>
           <div className="contact-desc">
             {user?.company || user?.title || user?.email || user?.mobile || ""}
+            <div>step: {parseInt(user.emailNumber)+1}</div>
           </div>
         </div>
 

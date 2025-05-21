@@ -39,6 +39,8 @@ export default class ConversationCard extends BaseComponent {
         this.dispatch({convoSnapped:true})
     }
     await this.componentList.sortSelectedListbyFirebaseDate('conversation');
+    await this.componentList.sortSelectedListbyFirebaseDate('email');
+
     this.componentList.getAPIService().subscribeToReadObserver(async (l, l2)=>{
         this.setState({start:false})
 
@@ -61,7 +63,9 @@ export default class ConversationCard extends BaseComponent {
             return obj
         })
         await this.componentList.clearSelectedList('conversation', list);
-        await this.componentList.sortSelectedListbyFirebaseDate('conversation', true)
+        await this.componentList.sortSelectedListbyFirebaseDate('conversation', true);
+        await this.componentList.sortSelectedListbyFirebaseDate('email');
+
 
         this.dispatch({ranConversationRead:true});
         this.setState({start:true})

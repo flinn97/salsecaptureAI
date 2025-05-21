@@ -22,7 +22,7 @@
    componentDidMount(){
     
     debugger
-    this.propsState.currentPopupComponent?.setCompState({conversationId: this.propsState.currentConversation?.getJson()._id, originalMessageId:false});
+    this.propsState.currentPopupComponent?.setCompState({conversationId: this.propsState.currentConversation?.getJson()._id, originalMessageId:false, ownerMessage:true});
     this.setState({email:this.propsState.currentPopupComponent})
     
  }
