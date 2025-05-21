@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 class BottomNavCustom extends NavMapContainer{
     getHtml(){
-        console.log("this.list", this.list)
-        console.log("this.mapList", this.mapList)
+        // console.log("this.list", this.list)
+        // console.log("this.mapList", this.mapList)
         
         // debugger
         return <div className="bottom-nav">

@@ -739,6 +739,29 @@ body {
   color: var(--app-dark-gray);
 }
 
+.sequence-custom{
+  cursor: pointer;
+  background: #c3ebe109 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  padding: 20px
+}
+
+.sequence-custom:hover{
+  background: #C3EBE1 0% 0% no-repeat padding-box;
+}
+
+.send-seq-icon{
+ color: var(--app-green-3);
+}
+
+#arrow-icon-appear {
+  display: none; /* Hidden by default */
+}
+
+.sequence-custom:hover #arrow-icon-appear {
+  display: inline; /* Visible when .sequence-custom is hovered */
+}
+
 .svg {
   width: 50px;
   height: 50px;
