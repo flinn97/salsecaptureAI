@@ -69,7 +69,7 @@ export default class Conversation extends BaseComponent {
       prepare: {
         type: messageType,
         conversationId: currentConversation.getJson()._id,
-        originalMessageId: replyToId,
+        originalMessageId: replyToId||"",
         subject: subject,
         ownerMessage: true,
       },
@@ -265,16 +265,17 @@ export default class Conversation extends BaseComponent {
 
                           // const { originalMessageId, from, to, subject, text } = req.body;
                           let body = {
-                            originalMessageId: obj.getJson().originalMessageId,
-                            from: obj.getJson().owner,
+                            originalMessageId:obj.getJson().originalMessageId,
+                            from: this.propsState.currentUser.getJson()._id,
                             to: this.propsState.currentConversation.getJson()
                               .contact,
                             subject: obj.getJson().subject,
                             text: obj.getJson().body,
                           };
+                          let url = this.propsState.currentUser.getJson().gmailAuthenticated? "https://gmailapiemailhandler-7c5i3vsqma-uc.a.run.app" : "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app"
                           // Make the POST request
                           fetch(
-                            "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
+                            url,
                             {
                               method: "POST",
                               headers: {

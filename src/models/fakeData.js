@@ -22,7 +22,7 @@ let data = [
     },
     {
         type:"email",
-        body: "Can you get me a price estimate that I can bring back to my team?",
+        body: "No I can't this week.",
         conversationId: '123',
         _id:"email2",
         owner: "alan@salescapture.ai",
@@ -57,7 +57,7 @@ let data = [
 
         body: "Hey Taylor Just let me know if it would be good to meet today or not.",
         conversationId: '1235',
-        suggestion:true,
+        // suggestion:true,
         _id:"email5",
         owner:"taylor@flinnapps.com",
         timeStamp: "Yesterday 10:14 AM",
@@ -66,7 +66,7 @@ let data = [
     },
     {
         type:"email",
-        body: "No I can't to this week.",
+        body: "No I can't this week.",
         conversationId: '1235',
         _id:"email6",
         owner: "alan@salescapture.ai",
@@ -94,44 +94,9 @@ let data = [
         recentMessage:"Hey, how's it going?",
         owner:"alan@salescapture.com"
     },
-    {
-        type:"conversation",
-        _id:"1235",
-        contact: "taylormdavidson@gmail.com",
-        contactName: "Taylor Davidson",
-        timeStamp: "Today 2:15 pm",
-        recentMessage:"Can you get me a price estimate that I can bring back to my team?",
-        owner:"alan@salescapture.com"
-    },
-    {
-        type:"contact",
-        _id: "contact1",
-        name:"Taylor Davidson",
-        firstName:"Taylor",
-        lastName:"Davidson",
-        email:"taylormdavidson@gmail.com",
-        owner:"alan@salescapture.com ",
-        finishedSequenceTags:"sequence1,sequence2",
-        sequenceId:"z29s2051525",
-
-
-    },
-    {
-        type:"contact",
-        _id: "contact123",
-        name:"Alan Davidson",
-        firstName:"Alan",
-        lastName:"Davidson",
-        email:"taylormdavidson@gmail.com",
-        owner:"alan@salescapture.com ",
-        replied:true,
-        finished:true,
-        finishedSequenceTags:"sequence1,sequence2",
-        sequenceId:"z29s2051525",
-        replied:true
-
-
-    },
+    
+  
+  
     {
         type:"research",
         _id: "research1",

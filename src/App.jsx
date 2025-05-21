@@ -5,6 +5,7 @@
  import * as MyComponents from './models/myComponents.js';
  import { AppBaseClass, BaseComponent, navInterface } from 'flinntech';
  import logo from "./assets/flinntechlogo.svg";
+
  import ContactPopup from './view/popups/contactPopup.jsx';
  import { User } from './models/myComponents.js';
  
@@ -51,7 +52,7 @@ import AddTags from './view/popups/addTags.jsx';
  
      }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
