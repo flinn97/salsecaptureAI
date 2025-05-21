@@ -172,11 +172,17 @@ export default class SequencePage extends GetComponentsFromUrl {
                       }}
                     >
                       <span className="name-a-sequence-edit-btn">Edit</span>
+                      
                     </span>
+                  
                   </div>
+                 
                 </>
               )}
+              
             </div>
+            limit contacts per day:
+                 <ParentFormComponent name="limit" obj={this.propsState.currentSequence} update={true}/>
             <div
               className="title-right active-seq-container"
             >
@@ -302,6 +308,7 @@ export default class SequencePage extends GetComponentsFromUrl {
                   },
                 ]}
               />
+              
             </div>
           )}
         </div>
@@ -334,6 +341,7 @@ export default class SequencePage extends GetComponentsFromUrl {
                          content="Save Sequence"
                      />
                  )} */}
+                 
       </div>
     );
   }
