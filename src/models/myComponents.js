@@ -67,6 +67,7 @@ class Sequence extends ComponentBase {
         steps: [],
         finished:0,
         replyRate: 0,
+        limit:"20"
     };
 }
 
