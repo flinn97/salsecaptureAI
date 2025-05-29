@@ -1,9 +1,10 @@
 import React from "react";
-import { BaseComponent } from "flinntech";
+import { BaseComponent, PopupButton } from "flinntech";
 import "./Checkbox.css";
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from "./check";
 import ContactsCustomItem from "./contactsCustom";
+import { Link } from "react-router-dom";
 
 class ResearchCustomItem extends ContactsCustomItem {
   constructor(props) {
@@ -37,8 +38,21 @@ class ResearchCustomItem extends ContactsCustomItem {
     let isActive = research.isActive;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", }}>
-        <div style={{padding:"20px" }}
+      <div style={{ display: "flex", flexDirection: "column", }}> 
+         <div style={{alignSelf:"flex-end"}}>
+              <PopupButton
+              obj={obj}
+                formClass="none"
+                wrapperClass="none"
+                content={
+                  <span className="floating-select-btn-text" style={{color:"black",  marginRight:"10px"}}>
+                    edit
+                  </span>
+                }
+                popupSwitch="updateResearch"
+              />
+            </div>
+        <Link to={`./${research?._id}`} style={{padding:"20px" }}
           className={`contact-item ${isActive ? "contact-item-active" : ""}`}
         >
           {/*<img*/}
@@ -77,7 +91,7 @@ class ResearchCustomItem extends ContactsCustomItem {
             <i className="fa-solid fa-circle" />
             <span>{isActive ? "Active" : "Paused"}</span>
           </div>
-        </div>
+        </Link>
         <div
           // The 'active' class here might need dynamic logic if it depends on selection state
           className="contact-tag-container active"

@@ -30,6 +30,8 @@ export default class Conversation extends BaseComponent {
     await this.prepareMessages(); // Calls the function to prepare messages
   }
 
+
+
   /**
    * Prepares the messages for the current conversation.
    */
@@ -67,7 +69,7 @@ export default class Conversation extends BaseComponent {
       prepare: {
         type: messageType,
         conversationId: currentConversation.getJson()._id,
-        originalMessageId: replyToId,
+        originalMessageId: replyToId||"",
         subject: subject,
         ownerMessage: true,
       },
@@ -110,11 +112,14 @@ export default class Conversation extends BaseComponent {
               position: "sticky",
               top: 0,
               zIndex: 200,
-              marginBottom: "-2px",
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
               justifyItems: "space-between",
+              background:"white",
+              padding:"20px",
+              paddingBottom:"8px",
+              transform: "translateZ(0)", // Force GPU acceleration
             }}
           >
             {window.innerWidth < 600 &&
@@ -184,13 +189,13 @@ export default class Conversation extends BaseComponent {
           </div>
         )}
 
-        <div className="layoutColumn conversation-container">
+        <div className="layoutColumn conversation-container" style={{padding:"20px", marginBottom:"12px"}}>
           {this.state.message ? (
             <>{this.state.message}</>
           ) : (
             <>
               {this.state.start && (
-                <div style={{ width: "100%", marginTop: "-20px" }}>
+                <div style={{ width: "100%", marginTop: "-20px",}}>
                   {/* MapComponent displaying messages connected to the current conversation */}
                   <MapComponent
                     mapContainerClass="message-list"
@@ -230,8 +235,8 @@ export default class Conversation extends BaseComponent {
                       bottom: 0,
                       zIndex: 1,
                       width: "100%",
-                      minHeight: "60px",
-                      paddingBottom: "65px",
+                      minHeight: "70px",
+                      paddingBottom: "85px",
                       paddingLeft: "12px",
                       background: `linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1%)`,
                     }}
@@ -263,16 +268,17 @@ export default class Conversation extends BaseComponent {
 
                           // const { originalMessageId, from, to, subject, text } = req.body;
                           let body = {
-                            originalMessageId: obj.getJson().originalMessageId,
-                            from: obj.getJson().owner,
+                            originalMessageId:obj.getJson().originalMessageId,
+                            from: this.propsState.currentUser.getJson()._id,
                             to: this.propsState.currentConversation.getJson()
                               .contact,
                             subject: obj.getJson().subject,
                             text: obj.getJson().body,
                           };
+                          let url = this.propsState.currentUser.getJson().gmailAuthenticated? "https://gmailapiemailhandler-7c5i3vsqma-uc.a.run.app" : "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app"
                           // Make the POST request
                           fetch(
-                            "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
+                            url,
                             {
                               method: "POST",
                               headers: {

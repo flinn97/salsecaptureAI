@@ -5,6 +5,7 @@
  import * as MyComponents from './models/myComponents.js';
  import { AppBaseClass, BaseComponent, navInterface } from 'flinntech';
  import logo from "./assets/flinntechlogo.svg";
+
  import ContactPopup from './view/popups/contactPopup.jsx';
  import { User } from './models/myComponents.js';
  
@@ -108,7 +109,13 @@ import AddTags from './view/popups/addTags.jsx';
      this.state.currentUser = user;
  
    }
+   componentDidMount(){
+    super.componentDidMount();
+    let div = document.getElementById("signUpFT");
+    if(div){
+      div.style.display="none"
+    }
+   }
  
  }
  
- class Home extends BaseComponent { }

@@ -129,6 +129,8 @@ export default class SequencePage extends GetComponentsFromUrl {
 
     let listLen = this.state.list?.length>0;
     let hasList = listLen?this.state?.list[0].getJson().content:undefined;
+    //Taylor please explain how the MapComponent rendering gets this wrong
+    // Click a Seq with content, and then back, then newSeq
 
     return (
       <div className="fit">
@@ -170,11 +172,17 @@ export default class SequencePage extends GetComponentsFromUrl {
                       }}
                     >
                       <span className="name-a-sequence-edit-btn">Edit</span>
+                      
                     </span>
+                  
                   </div>
+                 
                 </>
               )}
+              
             </div>
+            limit contacts per day:
+                 <ParentFormComponent name="limit" obj={this.propsState.currentSequence} update={true}/>
             <div
               className="title-right active-seq-container"
             >
@@ -300,6 +308,7 @@ export default class SequencePage extends GetComponentsFromUrl {
                   },
                 ]}
               />
+              
             </div>
           )}
         </div>
@@ -332,6 +341,7 @@ export default class SequencePage extends GetComponentsFromUrl {
                          content="Save Sequence"
                      />
                  )} */}
+                 
       </div>
     );
   }

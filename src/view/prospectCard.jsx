@@ -81,7 +81,7 @@ export default class ProspectCard extends BaseComponent {
               <div className="nav-icon">
                 <i className="fas fa-circle"></i>
               </div>
-              <div className="nav-title">Potential Prospects</div>
+              <div className="nav-title">Researched Potential Prospects</div>
             </div>
 
             <div className="nav-right">

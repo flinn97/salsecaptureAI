@@ -22,7 +22,7 @@
    componentDidMount(){
     
     debugger
-    this.propsState.currentPopupComponent?.setCompState({conversationId: this.propsState.currentConversation?.getJson()._id, originalMessageId:false});
+    this.propsState.currentPopupComponent?.setCompState({conversationId: this.propsState.currentConversation?.getJson()._id, originalMessageId:false, ownerMessage:true});
     this.setState({email:this.propsState.currentPopupComponent})
     
  }
@@ -55,13 +55,14 @@
            // const { originalMessageId, from, to, subject, text } = req.body;
            let body = {
             from: this.propsState.currentUser.getJson()._id,
-            to: this.propsState.currentConversation.getJson()
-              .contact,
+            to: this.propsState.currentConversation.getJson().contact,
             subject: obj.getJson().subject,
             text: obj.getJson().body,
           };
+          let url = this.propsState.currentUser.getJson().gmailAuthenticated? "https://gmailapiemailhandler-7c5i3vsqma-uc.a.run.app" : "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app"
+
            // Make the POST request
-           fetch("https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app", {
+           fetch(url, {
              method: "POST",
              headers: {
                "Content-Type": "application/json",
@@ -105,7 +106,8 @@
              <div style={{ width: "70%", marginLeft: "7px" }}>
                {" "}
                {/*Container for the name input*/}
-               {this.propsState.currentConversation?.getJson().conversationOwner}
+               {/* {this.propsState.currentConversation?.getJson().conversationOwner} */}
+               Me
              </div>
            </div>
            <div className="row">

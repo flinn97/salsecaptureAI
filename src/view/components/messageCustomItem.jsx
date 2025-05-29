@@ -38,19 +38,21 @@ export default class CustomMessageItem extends BaseComponent {
                   // const { originalMessageId, from, to, subject, text } = req.body;
                   debugger;
                   let obj = this.props.obj;
-                  obj.setCompState({suggestion:false}, {run:true})
+                  obj.setCompState({suggestion:false, ownerMessage:true }, {run:true})
 
                   let body = {
-                    originalMessageId: obj.getJson().originalMessageId,
+                    originalMessageId:obj.getJson().originalMessageId ||"",
                     from: this.propsState.currentUser.getJson()._id,
                     to: this.propsState.currentConversation.getJson().contact,
                     subject: obj.getJson().subject,
                     text: obj.getJson().body,
                   };
+                  let url = this.propsState.currentUser.getJson().gmailAuthenticated? "https://gmailapiemailhandler-7c5i3vsqma-uc.a.run.app" : "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app"
+
 
                   // Make the POST request
                   await fetch(
-                    "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app",
+                    url,
                     {
                       method: "POST",
                       headers: {
@@ -95,11 +97,12 @@ export default class CustomMessageItem extends BaseComponent {
         ) : (
           <>
             {/* Timestamps */}
+            {this.props.obj.getJson().timeStamp &&
             <div className="date-divider">
               <span className="timestamp">
                 {this.props.obj.getJson().timeStamp}
               </span>
-            </div>
+            </div>}
             <div className={"message-item " + str}>
               {/* Outgoing message (right-aligned, green bubble) */}
               <div className={"message " + str}>{this.state.plainText}</div>

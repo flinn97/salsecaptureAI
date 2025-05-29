@@ -3,9 +3,9 @@
  * displaying a list of conversation cards. It extends the GetAllComponents class from 'flinntech'.
  */
 import { Card } from "flinntech";
-import ConversationCard from "./ConversationCard"; // Custom component for individual conversation cards
 import { GetAllComponents } from "flinntech";
 import "./conversations.css";
+import ConversationCard from "./conversationCard";
 
 export default class Conversations extends GetAllComponents {
     /**
@@ -17,7 +17,7 @@ export default class Conversations extends GetAllComponents {
         this.state = {
             ...this.state,
             defaultClass: "fit",
-            owner:this.app.state.currentUser.getJson()._id
+            owner: this.app.state.currentUser.getJson()._id
         };
     }
 
@@ -27,13 +27,19 @@ export default class Conversations extends GetAllComponents {
      */
     async componentDidMount() {
         await this.dispatch({ currentTopic: undefined, currentSubTopic: undefined, currentComponent: undefined });
-        this.getComponentsFromBackend();
+        await this.getComponentsFromBackend();
+        // let emails = this.componentList.getList("email");
+        // for(let e of emails){
+        //     e.del();
+        // }
     }
-    componentWillUnmount(){
+
+  
+    componentWillUnmount() {
         this.operationsFactory.clear();
-        this.dispatch({currentComponent:undefined})
+        this.dispatch({ currentComponent: undefined })
     }
-    
+
 
     /**
      * Renders the Conversations component.
@@ -41,11 +47,11 @@ export default class Conversations extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass} style={{ padding: "20px" }}>
+            <div className={this.props.pageClass || this.state.defaultClass}>
                 {/* Container for the conversations card */}
                 <div className="fit">
-                    {this.state.getComponentsFromBackend&&
-                    <Card theme="defaultCard" content={<ConversationCard />} />
+                    {this.state.getComponentsFromBackend &&
+                        <Card theme="defaultCard" content={<ConversationCard />} />
                     }
                 </div>
             </div>

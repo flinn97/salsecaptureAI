@@ -139,7 +139,7 @@ export default class ResearchCard extends BaseComponent {
             cells={[
               {
                 type: "custom",
-                hasLink: true,
+                // hasLink: true,
                 custom: ResearchCustomItem,
               },
               // {
@@ -170,7 +170,7 @@ export default class ResearchCard extends BaseComponent {
               // { type: "attribute", name: "phone" },
               // { type: "attribute", name: "status" },
             ]}
-            hasLink={true}
+            // hasLink={true}
           />
         </div>
         

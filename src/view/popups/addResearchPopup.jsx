@@ -60,7 +60,7 @@ export default class ResearchPopup extends BaseComponent {
         >
           <div className="row-container" style={{flexDirection:"column"}}>
             <div className="row-name">Profile Name:</div>
-            <div className="row-field">
+            <div className="row-field" style={{width:"100%"}}>
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
@@ -75,7 +75,7 @@ export default class ResearchPopup extends BaseComponent {
           </div>
           <div className="row-container" style={{flexDirection:"column"}}>
             <div className="row-name">Search Frequency:</div>
-            <div className="row-field">
+            <div className="row-field" style={{width:"100%"}}>
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
@@ -93,7 +93,7 @@ export default class ResearchPopup extends BaseComponent {
 
           <div className="row-container" style={{flexDirection:"column"}}>
             <div className="row-name">AI Prompt:</div>
-            <div className="row-field">
+            <div className="row-field" style={{width:"100%"}}>
               {" "}
               {/*Container for the AI Prompt input*/}
               <ParentFormComponent

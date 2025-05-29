@@ -163,7 +163,6 @@ export default class ContactsCard extends BaseComponent {
                             /> */}
               
                 <SCAIPopupButtonTest
-                  formclassName="FCImgButton"
                   wrapperclassName="none"
                   content={
                     <div
@@ -273,7 +272,6 @@ export default class ContactsCard extends BaseComponent {
             </button>
             <button className="floating-select-btn floating-select-primary-btn">
               <PopupButton
-                formclassName="FCImgButton"
                 content={
                   <span className="floating-select-btn-text" style={{color:"white"}}>
                     Add to Sequence
