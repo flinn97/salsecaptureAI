@@ -52,7 +52,7 @@ import AddTags from './view/popups/addTags.jsx';
  
      }
      //REMOVE
-    //  this.componentList.addComponents([...data], true)
+     this.componentList.addComponents([...data], true)
  
  
      this.state = {
@@ -106,7 +106,13 @@ import AddTags from './view/popups/addTags.jsx';
      this.state.currentUser = user;
  
    }
+   componentDidMount(){
+    super.componentDidMount();
+    let div = document.getElementById("signUpFT");
+    if(div){
+      div.style.display="none"
+    }
+   }
  
  }
  
- class Home extends BaseComponent { }

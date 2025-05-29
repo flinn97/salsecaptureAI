@@ -94,6 +94,34 @@ let data = [
         recentMessage:"Hey, how's it going?",
         owner:"alan@salescapture.com"
     },
+    {
+        "type": "contact",
+        "_id": "contact1",
+        "firstName": "Mubarak",
+        "email": "mubarak@vividinfotech.com",
+        "owner": "alan@salescapture.com",
+        "lastName": "Basha",
+        "linkedIn": "https://www.linkedin.com/in/mubarak-basha-6a705516",
+        "company": "VIVID Infotech Software Solutions (P) Ltd",
+        "title": "Founder & CEO www.vividinfotech.com",
+        "connectedOn": "19 May 2021",
+        "mobile": "NA",
+        "tags": "linkedin"
+    },
+    {
+        "type": "contact",
+        "_id": "contact2",
+        "firstName": "Nate",
+        "email": "nmaguire@strativise.com",
+        "owner": "alan@salescapture.com",
+        "lastName": "Maguire",
+        "linkedIn": "https://www.linkedin.com/in/natemaguire",
+        "company": "Strativise, Inc.",
+        "title": "Founder & CEO",
+        "connectedOn": "22 Apr 2021",
+        "mobile": "949-390-4532",
+        "tags": "linkedin"
+    },
     
   
   
@@ -103,15 +131,10 @@ let data = [
         name:"Vp of Sales",
         email:"taylormdavidson@gmail.com",
         owner:"alan@salescapture.com ",
+        AIPrompt:"Search for all the Vp of Sales in Utah",
+        searchFrequency:"Daily"
         },
-    {
-    type:"potentialProspect",
-    _id: "prospect1",
-    firstName:"Taylor Davidson",
-    email:"taylormdavidson@gmail.com",
-    owner:"alan@salescapture.com ",
-    researchId:"research1",
-    },
+  
     {
         "type": "potentialProspect",
         "_id": "prospect1",
