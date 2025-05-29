@@ -8,6 +8,7 @@ import { BaseComponent } from "flinntech";
 import add from "../assets/add.png";
 import CheckIt from "./components/check";
 import ContactsCustomItem from "./components/contactsCustom";
+import GmailConnect from "./components/feGoogleOauth";
 import GmailConnectButton from "./components/googleOauth";
 import CsvUpload from "./csvUpload";
 
@@ -41,7 +42,8 @@ export default class GoogleAuthCard extends BaseComponent {
         
         return (
             <div className="mobile-container">
-                <GmailConnectButton />
+                {/* <GmailConnectButton /> */}
+               {this.propsState.currentUser.getJson().gmailAuthenticated?(<div>Gmail Authenticated: {this.propsState.currentUser.getJson()._id}</div>):(<GmailConnect/>)} 
             </div>
         );
     }

@@ -25,6 +25,7 @@ class Contact extends ComponentBase {
         ...this.json,
         type: 'contact',
         phone: "",
+        autoAI: true, 
         email: "",
         title:"",
         company:"",
@@ -36,6 +37,7 @@ class Contact extends ComponentBase {
         state:"",
         zip:"",
         source:"",
+        finishedSequenceTags:"",
         tags:"",
         conversationIds: [],
         
@@ -63,6 +65,8 @@ class Sequence extends ComponentBase {
         ...this.json,
         type: 'sequence',
         steps: [],
+        finished:0,
+        replyRate: 0,
     };
 }
 
@@ -71,7 +75,7 @@ class Step extends ComponentBase {
         ...this.json,
         type: 'step',
         delay: 0,
-        messageId: ""
+        messageId: "",
     };
 }
 
@@ -98,7 +102,7 @@ class Email extends BaseMessenger {
         type: 'email',
         subject: "",
         body: "",
-        timestamp: "",
+        timeStamp: "",
     };
 }
 
@@ -124,6 +128,7 @@ class Research extends ComponentBase {
     }
 }
 
+<<<<<<< HEAD
 class Client extends ComponentBase{
     json={
         ...this.json,
@@ -141,4 +146,17 @@ class AIPrompt extends ComponentBase{
         type:"AIPrompt"
     }
 }
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client };
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt };
+=======
+class AISettings extends ComponentBase {
+    json={ 
+        ...this.json,
+        type:"aiSettings",
+        autoAI:"",
+        
+    }
+}
+
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, AISettings };
+>>>>>>> 245776a38f3327b259571a8dbd4e68be017b4592

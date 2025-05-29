@@ -31,6 +31,9 @@ export default class Contacts extends GetAllComponents {
   async componentDidMount() {
     await this.getComponentsFromBackend();
   }
+  componentWillUnmount(){
+    this.dispatch({selectedContacts:[]})
+  }
 
   /**
    * Renders the Contacts component.

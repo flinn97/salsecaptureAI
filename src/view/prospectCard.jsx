@@ -203,32 +203,51 @@ export default class ProspectCard extends BaseComponent {
         />
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
-            <button className="floating-select-btn">
-              <span className="floating-select-btn-text">Export</span>
-            </button>
-            <button
-              onClick={() => {
-                for (let contact of this.propsState.selectedContacts) {
-                  contact.del();
-                }
-                this.dispatch({ selectedContacts: [] });
-              }}
-              className="floating-select-btn"
-            >
-              <span className="floating-select-btn-text">Delete</span>
-            </button>
-            <button className="floating-select-btn floating-select-primary-btn">
-              <PopupButton
-                formclassName="FCImgButton"
-                content={
-                  <span className="floating-select-btn-text">
-                    Add to Sequence
-                  </span>
-                }
-                popupSwitch="addToSequence"
-              />
-            </button>
-          </div>
+           
+          <button
+            onClick={() => {
+              for (let contact of this.propsState.selectedContacts) {
+                contact.del();
+              }
+              this.dispatch({ selectedContacts: [] });
+            }}
+            className="floating-select-btn hover-basic"
+          >
+            <span className="floating-select-btn-text">Remove</span>
+          </button>
+          <button onClick={()=>{
+            for(let prospect of this.propsState.selectedContacts){
+              prospect.copy({type:"contact", ogPPId:prospect.getJson()._id})
+            }
+          }} className="floating-select-btn floating-select-primary-btn hover-basic">
+           
+                <span className="floating-select-btn-text">
+                  Add Prospect
+                </span>
+            
+          </button>
+          <button 
+          style={{width:"110px"}}
+          className="floating-select-btn floating-select-primary-btn hover-basic">
+            <PopupButton
+              formclassName="FCImgButton"
+              content={
+                <span onClick={()=>{
+                  let contacts = this.propsState.selectedContacts;
+                        for(let pp of contacts){
+                            pp.copy({type:"contact", ogPPId:pp.getJson()._id});
+                        }
+                        this.dispatch({sequenceDataType:"research"})    
+                    
+                }} className="floating-select-btn-text" 
+                style={{color:"white",}}>
+                  Add to Sequence
+                </span>
+              }
+              popupSwitch="addToSequence"
+            />
+          </button>
+        </div>
         )}
       </div>
     );

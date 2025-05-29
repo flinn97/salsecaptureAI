@@ -202,6 +202,14 @@ export default class ContactsCard extends BaseComponent {
                 if (o.getJson().tags.includes(tag)) {
                   return true;
                 }
+                if(o.getJson().finishedSequenceTags.includes(tag)){
+                  return true;
+                }
+                if(tag==="replied"){
+                  if(o.getJson().replied){
+                    return true;
+                  }
+                }
               }
 
               return false;
@@ -247,8 +255,10 @@ export default class ContactsCard extends BaseComponent {
         </div>
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
-            <button className="floating-select-btn">
-              <span className="floating-select-btn-text">Export</span>
+            <button  
+            onClick = {()=>{this.dispatch({popupSwitch:"addTags"})}} 
+            className="floating-select-btn">
+              <span className="floating-select-btn-text">Tags</span>
             </button>
             <button
               onClick={() => {
@@ -265,7 +275,7 @@ export default class ContactsCard extends BaseComponent {
               <PopupButton
                 formclassName="FCImgButton"
                 content={
-                  <span className="floating-select-btn-text">
+                  <span className="floating-select-btn-text" style={{color:"white"}}>
                     Add to Sequence
                   </span>
                 }

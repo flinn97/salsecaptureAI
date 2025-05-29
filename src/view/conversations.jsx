@@ -29,6 +29,10 @@ export default class Conversations extends GetAllComponents {
         await this.dispatch({ currentTopic: undefined, currentSubTopic: undefined, currentComponent: undefined });
         this.getComponentsFromBackend();
     }
+    componentWillUnmount(){
+        this.operationsFactory.clear();
+        this.dispatch({currentComponent:undefined})
+    }
     
 
     /**

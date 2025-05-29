@@ -17,31 +17,50 @@ class SequencePopupCustomItem extends BaseComponent {
         let sequence = obj.getJson();
         return (
             <div className="sequence">
-            <div onClick={()=>{
-            let obj = this.props.obj
-            
-            let contacts = this.propsState.selectedContacts;
-            let step1 = this.componentList.getList("step", [obj.getJson()._id], ["sequenceId"]);
-            step1= step1.filter(obj=> obj.getJson().content!=="" && obj.getJson().content)[0]
-            if(contacts?.length>0){
-                
-              let delay = parseFloat(step1.getJson().nextSend)
-              let nextSend = new Date(Date.now() + delay * 60 * 60 * 1000);
-              nextSend = Timestamp.fromDate(nextSend)
-              for(let c of contacts){
-                c.setCompState({sequenceId:obj.getJson()._id, finished:false, emailNumber:0, nextSend: nextSend}, {run:true})
-              }
-              this.dispatch({popupSwitch:"", selectedContacts:[]})
-            }
-           }} className="title">
-                <div className="title-left">
-                    {sequence.name}
+                <div onClick={() => {
+                    let obj = this.props.obj
+
+                    let contacts = this.propsState.selectedContacts;
+                    if(this.propsState.sequenceDataType==="research"){
+                        let newContact = [];
+                        for(let prospect of contacts){
+                            newContact.push(this.componentList.getComponent("contact", prospect.getJson()._id, "ogPPId"))
+                        }
+                    }
+
+                    
+                    let step1 = this.componentList.getList("step", [obj.getJson()._id], ["sequenceId"]);
+                    step1 = step1.filter(obj => obj.getJson().content !== "" && obj.getJson().content)[0]
+                    if (contacts?.length > 0) {
+
+                        let delay = parseFloat(step1.getJson().nextSend)
+                        let nextSend = new Date(Date.now() + delay * 60 * 60 * 1000);
+                        nextSend = Timestamp.fromDate(nextSend)
+                        for (let c of contacts) {
+
+                            let oldSeq = this.componentList.getComponent("sequence", c.getJson().sequenceId);
+                            let tags = c.getJson().finishedSequenceTags || "";
+                            if (!oldSeq) {
+                                if (!c.getJson().finishedSequenceTags.includes(oldSeq.getJson().name)) {
+                                    let addTag = tags.length === 0 ? oldSeq.getJson().name : "," + oldSeq.getJson().name
+                                    tags = addTag;
+                                }
+
+                            }
+
+                            c.setCompState({ sequenceId: obj.getJson()._id, finishedSequenceTags: tags, finished: false, emailNumber: 0, nextSend: nextSend }, { run: true })
+                        }
+                        this.dispatch({ popupSwitch: "", selectedContacts: [] })
+                    }
+                }} className="title">
+                    <div className="title-left">
+                        {sequence.name}
+                    </div>
+
+
+
                 </div>
-    
-                
-    
-            </div>
-            {/* <div className="row row-space-around">
+                {/* <div className="row row-space-around">
                 <div className="col">
                     <div>Active</div>
                     <div>455</div>
@@ -63,7 +82,7 @@ class SequencePopupCustomItem extends BaseComponent {
                     <div>7%</div>
                 </div>
             </div> */}
-        </div>
+            </div>
         );
     }
 }

@@ -6,7 +6,7 @@ import { MapComponent } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import TemplateCustomItem from "./components/templateCustom";
-import clientCustom from "./components/clientCustom";
+import ClientCustom from "./components/clientCustom";
 
 export default class AdminCard extends BaseComponent {
     /**
@@ -35,7 +35,7 @@ export default class AdminCard extends BaseComponent {
                     name="client"
                     cells={[
                         {type:"custom",
-                        custom:clientCustom
+                        custom:ClientCustom
                         }
                       
                     ]}

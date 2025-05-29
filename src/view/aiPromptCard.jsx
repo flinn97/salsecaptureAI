@@ -6,9 +6,10 @@ import { MapComponent } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import TemplateCustomItem from "./components/templateCustom";
-import SelectTemplate from "./components/templateCustomSelect";
+import ClientCustom from "./components/clientCustom";
+import AICustomItem from "./components/aiCustom";
 
-export default class Templates extends BaseComponent {
+export default class AIPromptCard extends BaseComponent {
     /**
      * Constructs the Templates component.
      * @param {object} props - The component's properties.
@@ -28,39 +29,14 @@ export default class Templates extends BaseComponent {
     getInnerContent() {
         return (
             <>
-                <h4 style={{ marginBottom: "10px", font: "normal normal 900 16px/22px Satoshi" }}>Templates</h4>
+                <h4 style={{ marginBottom: "10px", font: "normal normal 900 16px/22px Satoshi" }}>Admin</h4>
                 
                 {/* MapComponent to display templates with links */}
                 <MapComponent
-                    name="template"
-                    filterFunc={(obj)=>{
-                        if(obj.getJson().content===undefined){
-                            return false
-                        }
-                        if(obj.getJson().content===""){
-                            return false
-                        }
-                        let retVal = false;
-                        if (!this.propsState.searchText) {
-                          retVal = true;
-                        }
-                        let filterText = this.propsState.searchText;
-          
-                        if (
-                          obj
-                            .getJson()
-                            .content?.toLowerCase()
-                            .includes(filterText?.toLowerCase())
-                        ) {
-                          retVal = true;
-                        }
-          
-          
-                        return retVal;
-                    }}
+                    name="AIPrompt"
                     cells={[
                         {type:"custom",
-                        custom:TemplateCustomItem
+                        custom:AICustomItem
                         }
                       
                     ]}

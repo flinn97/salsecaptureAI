@@ -44,7 +44,7 @@ export default class ContentCard extends BaseComponent {
               <i className="fas fa-search search-icon"></i>
               <input
                 onChange={(e) => {
-                  this.dispatch({ tags: e.target.value });
+                  this.dispatch({ searchText: e.target.value });
                 }}
                 className="search-input"
                 placeholder="Search"

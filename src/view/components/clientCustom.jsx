@@ -6,7 +6,7 @@ import CheckIt from './check';
 import { Link } from 'react-router-dom';
 import stripHTML from '../../service/heDecoderService';
 
-class clientCustom extends BaseComponent {
+class ClientCustom extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -91,4 +91,4 @@ class clientCustom extends BaseComponent {
     }
 }
 
-export default clientCustom;
+export default ClientCustom;

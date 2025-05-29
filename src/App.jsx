@@ -27,7 +27,11 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
+<<<<<<< HEAD
 import AdminPage from './view/adminPage.jsx';
+=======
+import AddTags from './view/popups/addTags.jsx';
+>>>>>>> 245776a38f3327b259571a8dbd4e68be017b4592
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -57,11 +61,11 @@ import AdminPage from './view/adminPage.jsx';
      this.state = {
        ...this.state,
        navBarProps:{
-        mapType: window.innerWidth<600? "bottomNavMap":undefined,
-        type:window.innerWidth<600? "topBar":undefined,
-        style:{backgroundColor:"#35b593", color:"white", },
-        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<600&& "absolute",bottom:window.innerWidth<600&& "0px", }, 
-        logoURL:window.innerWidth>600&&Logo, linkItemStyle:{color:"white"}, },
+        mapType: window.innerWidth<1000? "bottomNavMap":undefined,
+        type:window.innerWidth<1000? "topBar":undefined,
+        style:{backgroundColor:"#35b593", color:"white", fontFamily:"'Satoshi-Variable', sans-serif"},
+        cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<1000&& "absolute",bottom:window.innerWidth<1000&& "0px", fontFamily:"'Satoshi-Variable', sans-serif" }, 
+        logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white", fontFamily:"'Satoshi-Variable', sans-serif"}, },
        routes: [
          { comp: Conversations, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
@@ -81,6 +85,8 @@ import AdminPage from './view/adminPage.jsx';
        ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
+         { content: AddTags, popupSwitch: "addTags" },
+
        ],
      };
  
@@ -90,7 +96,7 @@ import AdminPage from './view/adminPage.jsx';
      navList.update(0, {class:"SCAILogo"})
      navList.update(1, {activeClass:"SCAILink"})
 
-     if(window.innerWidth<600){
+     if(window.innerWidth<1000){
       navList.remove(2)
       navList.remove(0);
     }
