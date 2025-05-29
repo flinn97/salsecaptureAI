@@ -3,8 +3,11 @@
  * @extends {BaseComponent}
  * This component renders a popup for adding or editing OEM information.  It uses other components from 'flinntech' for form elements and buttons.
  */
- import { ParentFormComponent, RunButton, UpdateButton, UploadButton } from "flinntech";
+ import { DelButton, MapComponent, ParentFormComponent, PopupButton, RunButton, UpdateButton, UploadButton } from "flinntech";
  import {BaseComponent} from "flinntech";
+import AppointmentCustomItem from "./components/appointmentCustomItem";
+import GoalLightCustom from "./components/goalLightCustom";
+import HwLightCustom from "./components/hwLightCustom";
  
  export default class ContactProfileDetailCard extends BaseComponent{
      /**
@@ -54,14 +57,15 @@
                          </div>
                          <div className="client-info">
                              <div className="client-name">{this.propsState.currentContact?.getJson().firstName} {this.propsState?.currentContact?.getJson().lastName}</div>
-                             <div className="client-desc">Edit Profile</div>
+                             <PopupButton obj ={this.propsState.currentContact} content={<div  className="client-desc">Edit Profile</div>} popupSwitch="updateContact" />
+                             
                          </div>
                      </div>
                      <div className="row row-left padding-0 client-contact-div">
                          <div className="client-contact col col-left padding-0">
                              <div className="client-contact-phone row">
                                  <div><i className="fa-solid fa-phone"></i></div>
-                                 <div>{this.propsState.currentContact?.getJson().mobile}</div>
+                                 <div>{this.propsState.currentContact?.getJson().phone}</div>
                              </div>
                              <div className="client-contact-email row">
                                  <div><i className="fa-solid fa-envelope"></i></div>
@@ -69,61 +73,37 @@
                              </div>
                          </div>
                      </div>
+                     <DelButton content="delete" obj={this.propsState.currentContact} callbackFunc={()=>{this.dispatch({currentContact:undefined})}}/>
                  </div>
              </div>
              <div className="row row-align-start">
                  <div className="col client-appointments">
                      <div className="appointment-title">Appointment History</div>
+                     <PopupButton content="New Appointment" popupSwitch="addCalendarEvent" obj={{type:"calendarEvent", contactId:this.propsState.currentContact.getJson()._id, name:this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName}}/>
                      <div className="row appointment-upcoming">
                          <svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                              <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="1"/>
                          </svg>
-                         <div className="appointment-upcoming-text">Upcoming Appointments</div>
+                         <div className="appointment-upcoming-text">Appointments</div>
                          <svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                              <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="1"/>
                          </svg>
                      </div>
-                     <div className="appointment">
-                         <div className="row row-space-between">
-                             <div className="appointment-left">
-                                 <div className="row row-left padding-0 appointment-time">8AM</div>
-                                 <div className="row row-left padding-0">View Notes</div>
-                             </div>
-                             <div className="appointment-right">
-
-                                 <div className="appointment-date">Apr 9, 2025</div>
-                             </div>
-                         </div>
-                     </div>
-                     <div className="appointment">
-                         <div className="row row-space-between">
-                             <div className="appointment-left">
-                                 <div className="row row-left padding-0 appointment-time">8AM</div>
-                                 <div className="row row-left padding-0">View Notes</div>
-                             </div>
-                             <div className="appointment-right">
-
-                                 <div className="appointment-date">Apr 9, 2025</div>
-                             </div>
-                         </div>
-                     </div>
-                     <div className="appointment">
-                         <div className="row row-space-between">
-                             <div className="appointment-left">
-                                 <div className="row row-left padding-0 appointment-time">8AM</div>
-                                 <div className="row row-left padding-0">View Notes</div>
-                             </div>
-                             <div className="appointment-right">
-
-                                 <div className="appointment-date">Apr 9, 2025</div>
-                             </div>
-                         </div>
-                     </div>
+                   
+                     <MapComponent name="calendarEvent" cells={[{type:"custom", custom: AppointmentCustomItem}]} filter={{search:this.propsState.currentContact.getJson()._id, attribute:"contactId"}}/>
+                    
+                   
 
                  </div>
                  <div className="col client-second-col">
-                     <div className="col col-left client-notes">
-                         <div className="client-note-title">Notes</div>
+                    <PopupButton content="addHomework" obj={{type:"homework", contactId:this.propsState.currentContact.getJson()._id}} popupSwitch="addHomework"/>
+                    <PopupButton content="addGoal" obj={{type:"goal", contactId:this.propsState.currentContact.getJson()._id}} popupSwitch="addGoal"/>
+                    <MapComponent name="homework" cells={[{type:"custom", custom: HwLightCustom }]} filter={{search:this.propsState.currentContact.getJson()._id, attribute:"contactId"}}/>
+                    <MapComponent name="goal" cells={[{type:"custom", custom: GoalLightCustom}]} filter={{search:this.propsState.currentContact.getJson()._id, attribute:"contactId"}}/>
+
+
+                     {/* <div className="col col-left client-notes">
+                         <div className="client-note-title">Homework and Go</div>
                          <div className="client-note-detail">These are short, famous texts in English from classic
                              sources like the Bible or Shakespeare. Some texts have word definitions and explanations to
                              help you. Some of these texts are written in an old style of English. Try to understand
@@ -132,7 +112,7 @@
                              English. The Bible, for example, is a translation. But they are all well known in English
                              today, and many of them express beautiful thoughts.
                          </div>
-                     </div>
+                     </div> */}
                      <div className="row client-modules">
                          <div className="col">Billing History</div>
                          <div className="col"></div>

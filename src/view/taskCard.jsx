@@ -52,6 +52,7 @@ export default class TaskCard extends BaseComponent {
 
 
 
+
     /**
      * Returns the inner content of the ContactsCard component.
      * @returns {JSX.Element} The inner content of the card.

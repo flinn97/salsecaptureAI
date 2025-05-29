@@ -3,6 +3,7 @@ import { BaseComponent } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from './check';
+import { Link } from 'react-router-dom';
 
 class TaskCustomItem extends BaseComponent {
     constructor(props) {
@@ -63,17 +64,7 @@ class TaskCustomItem extends BaseComponent {
                     
                     <div className="contact-info">
                         {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
-                        <div onClick={() => {
-                            // JARED if the size of the window is more than something like 600 px ask chat gpt. then change the logic to take the obj and dispatch it to the currentContact
-                             // Assuming obj here refers to the current contact object being rendered
-                             debugger
-                             if(window.innerWidth > 600){
-                                this.dispatch({currentContact:obj})
-                             }
-                             else{
-                            this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
-                            }
-                        }} className="contact-name">{`${task.name}`}</div>
+                        <Link to={`../session/${this.componentList.getComponent("session", task._id, "taskId")?.getJson()._id}`} className="contact-name">{`${task.name}`}</Link>
                         <div className="contact-desc">{task.dueDate}</div>
                     </div>
                     {/*<div className="contact-icon">*/}
@@ -87,7 +78,7 @@ class TaskCustomItem extends BaseComponent {
                     {/* Use optional chaining and check if tags exist before splitting */}
                     {task.tags?.split(",").map((text, index) =>
                          // Add a key prop when mapping lists for performance and stability
-                        <button key={index} className="contact-tag-btn">{text}</button>
+                         <Link to={`../session/${this.componentList.getComponent("session", task._id, "taskId")?.getJson()._id}`}  key={index} className="contact-tag-btn">{text}</Link>
                     )}
                 </div>
             </div>

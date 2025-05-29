@@ -27,6 +27,10 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import TaskPage from './view/TaskPage.jsx';
 import SchedulePage from './view/schedule.jsx';
+import AddCalendarPopup from './view/popups/addAppointmentPopup.jsx';
+import AddHw from './view/popups/addHw.jsx';
+import AddGoal from './view/popups/addGoal.jsx';
+import SessionPage from './view/sessionPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -36,7 +40,7 @@ import SchedulePage from './view/schedule.jsx';
  export default class App extends AppBaseClass {
    constructor(props) {
      super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
-     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup };
+     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
@@ -70,6 +74,7 @@ import SchedulePage from './view/schedule.jsx';
 
          { comp: Content, name: "Content", path: "content" },
          { comp: Settings, name: "Billing", path: "billing" },
+         { comp: SessionPage, name: "", path: "session", idComp:SessionPage},
 
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 

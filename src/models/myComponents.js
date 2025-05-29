@@ -113,7 +113,7 @@ class CalendarEvent extends ComponentBase{
     json={
         ...this.json,
         type:"calendarEvent",
-        name: 'Jodie Soultfair', dayIndex: 0, startTime: '10:00', duration: 90,
+        name: '', dayIndex: 0, startTime: '10:00', duration: 90, day:"Monday"
     }
 }
 class Task extends ComponentBase{
@@ -126,7 +126,32 @@ class Task extends ComponentBase{
         name: ""
     }
 }
+class Homework extends ComponentBase{
+    json={
+        ...this.json,
+        type:"homework",
+        dueDate:"",
+        completed:false,
+        completeDate:"",
+        content:"",
+        name: ""
+    }
+}
+class Goal extends Homework{
+    json={
+        ...this.json,
+        type:"goal",
+       
+    }
+}
+
+class Session extends CalendarEvent{
+    json={
+        ...this.json,
+        type:"session",
+    }
+}
 
 
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task };
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task, Homework, Goal,  Session};

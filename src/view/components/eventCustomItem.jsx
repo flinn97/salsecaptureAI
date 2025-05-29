@@ -3,6 +3,7 @@ import { BaseComponent } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from './check';
+import { Link } from 'react-router-dom';
 
 // Helper function to calculate event position and height
 // Assuming each hour slot is 60px height for simplicity
@@ -41,7 +42,7 @@ class EventCustomItem extends BaseComponent {
                 className="weekly-calendar__event"
                 style={eventStyles}
             >
-                <div className="weekly-calendar__event-name">{calendarItem.name}</div>
+                <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="weekly-calendar__event-name">{calendarItem.name}</Link>
                 {/* Add time/duration display if needed */}
             </div>
         );

@@ -74,24 +74,32 @@
                          <ParentFormComponent obj={obj} name="email" inPopup={inPopup}/> {/*Component for title input*/}
                      </div>
                  </div>
-
-
-
                  <div className="row">
-                     <div>Tags</div>
+                     <div>Phone</div>
                      <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
-                         <ParentFormComponent obj={obj} name="tags" inPopup={inPopup}/> {/*Component for title input*/}
+                         <ParentFormComponent obj={obj} name="phone" inPopup={inPopup}/> {/*Component for title input*/}
                      </div>
                  </div>
+
+
 
 
 
                  <div className="row">
-                     <div>Notes</div>
-                     <div style={{width:"90%", marginLeft:"10px"}}> {/*Container for the notes input*/}
-                         <ParentFormComponent obj={obj} type="quill" name="notes" inPopup={inPopup}/> {/*Component for notes input (using Quill editor)*/}
+                     <div>Address</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={obj} name="address" inPopup={inPopup}/> {/*Component for title input*/}
                      </div>
                  </div>
+                 <div className="row">
+                     <div>Birth</div>
+                     <div style={{width:"70%", marginLeft:"7px"}}> {/*Container for the title input*/}
+                         <ParentFormComponent obj={obj} name="birth" inPopup={inPopup}/> {/*Component for title input*/}
+                     </div>
+                 </div>
+                
+
+               
    
 
 
