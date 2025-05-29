@@ -27,11 +27,8 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
-<<<<<<< HEAD
 import AdminPage from './view/adminPage.jsx';
-=======
 import AddTags from './view/popups/addTags.jsx';
->>>>>>> 245776a38f3327b259571a8dbd4e68be017b4592
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  

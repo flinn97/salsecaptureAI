@@ -128,7 +128,6 @@ class Research extends ComponentBase {
     }
 }
 
-<<<<<<< HEAD
 class Client extends ComponentBase{
     json={
         ...this.json,
@@ -146,8 +145,6 @@ class AIPrompt extends ComponentBase{
         type:"AIPrompt"
     }
 }
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt };
-=======
 class AISettings extends ComponentBase {
     json={ 
         ...this.json,
@@ -156,7 +153,8 @@ class AISettings extends ComponentBase {
         
     }
 }
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt };
 
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, AISettings };
->>>>>>> 245776a38f3327b259571a8dbd4e68be017b4592
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings  };
