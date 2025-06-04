@@ -29,7 +29,8 @@ export default class SequencePage extends GetComponentsFromUrl {
   async componentDidMount() {
     let sequence;
     await this.getComponentsFromBackend();
-    await this.componentList.getComponentsFromBackend("template");
+    debugger
+    let templates = await this.componentList.getComponentsFromBackend("template");
     await this.componentList.getComponentsFromBackend("step");
 
     await this.componentList.getComponentsFromBackend("contact");

@@ -154,6 +154,11 @@ class AISettings extends ComponentBase {
         
     }
 }
+class Todo extends ComponentBase{
+    json={
+        ...this.json,
+        type:"toDo",
+    }
+}
 
-
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings  };
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo  };
