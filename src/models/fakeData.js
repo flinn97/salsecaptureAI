@@ -327,7 +327,6 @@ let data = [
         "connectedOn": "06 Jul 2018",
         "tags": "linkedin"
     },
-<<<<<<< HEAD
     {
         type:"research",
         _id: "research1",
@@ -350,9 +349,7 @@ let data = [
         _id:"ai1",
 
     }
-=======
     
->>>>>>> 245776a38f3327b259571a8dbd4e68be017b4592
 ]
 
 export {data}

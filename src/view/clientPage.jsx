@@ -8,7 +8,7 @@ import { FormComponentInterface, InputBaseClass } from "flinntech";
 import AdminCard from "./adminCard";
 import AIPromptCard from "./aiPromptCard";
 
-export default class AdminPage extends GetComponentsFromUrl {
+export default class ClientPage extends GetComponentsFromUrl {
     /**
      * Lifecycle method that runs after the component mounts.
      * It fetches template components from the backend.

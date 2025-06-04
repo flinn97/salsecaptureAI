@@ -22,9 +22,10 @@ class GmailAuthButton extends BaseComponent {
      */
     handleAuthClick = () => {
         this.setState({ statusMessage: 'Redirecting to Google...' });
-
-        const CLIENT_ID = '786362911238-iiljh2nv259i5kbb0f27qa8no5sb09is.apps.googleusercontent.com'; // Replace with your actual Client ID
-
+        //local
+        // const CLIENT_ID = '786362911238-iiljh2nv259i5kbb0f27qa8no5sb09is.apps.googleusercontent.com'; // Replace with your actual Client ID
+        //production
+        const CLIENT_ID =  '786362911238-f25hopvjskqlrl5c0o95qslgkbdi13tt.apps.googleusercontent.com'
         // Authorization scopes required by the API.
         // Added 'email', 'openid', 'profile' to get user info including email.
         const SCOPES = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid';

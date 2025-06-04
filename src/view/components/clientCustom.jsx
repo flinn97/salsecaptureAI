@@ -4,31 +4,16 @@ import './Checkbox.css';
 import contactImg from "../../assets/contact.png";
 import CheckIt from './check';
 import { Link } from 'react-router-dom';
-import stripHTML from '../../service/heDecoderService';
 
 class ClientCustom extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
             ...this.state,
-            plainText: "", // Store the stripped text
           };
     }
 
-    componentDidMount() {
-        const body = this.props.obj?.getJson().content;
-        const plainText = stripHTML(body);
-        this.setState({ plainText });
-      }
-
-    componentDidUpdate(prevProps) {
-        const currentBody = this.props.obj?.getJson().content;
-        const prevBody = this.props.obj?.getJson().content;
-        if (currentBody !== prevBody) {
-          const plainText = stripHTML(currentBody);
-          this.setState({ plainText });
-        }
-    }
+  
 
     render() {
         const { obj } = this.props;
@@ -52,7 +37,7 @@ class ClientCustom extends BaseComponent {
                 whiteSpace: "nowrap",
                 }}
                     >
-                    {this.state.plainText}
+                    {client.name}
                 </span>
                 </Link>
     

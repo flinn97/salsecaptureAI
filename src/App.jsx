@@ -30,6 +30,7 @@ import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
 import AdminPage from './view/adminPage.jsx';
 import AddTags from './view/popups/addTags.jsx';
+import ClientPage from './view/clientPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -77,6 +78,8 @@ import AddTags from './view/popups/addTags.jsx';
          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
+         { comp: ClientPage, name: "", path: "client", idComp:ClientPage  },
+
 
          { comp: AdminPage, name: "Admin", path: "admin",}
          //  { comp: Settings, name: "settings" },
