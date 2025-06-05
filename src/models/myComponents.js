@@ -158,6 +158,13 @@ class Todo extends ComponentBase{
     json={
         ...this.json,
         type:"todo",
+        attribute1:"Create Authenticated User",
+        attribute2:"Create User Data",
+        attribute3:"Create Limiter",
+        attribute4:"Set Up Google Auth",
+        attribute5:"Setting Obj",
+        attribute6:"Firebase AI Training",
+
     }
 }
 

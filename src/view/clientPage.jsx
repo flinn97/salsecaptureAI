@@ -36,7 +36,13 @@ export default class ClientPage extends GetComponentsFromUrl {
         let toDoList = this.componentList.getComponentsFromBackend({type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys:"owner", })
         return (
             <div className="fit">
-                {toDoList}
+                {toDoList.getJson().attribute1}
+                {toDoList.getJson().attribute2}
+                {toDoList.getJson().attribute3}
+                {toDoList.getJson().attribute4}
+                {toDoList.getJson().attribute5}
+                {toDoList.getJson().attribute6}
+
                 <Card theme="NoBorder" type="fit"content={<AIPromptCard />} />
 
             </div>
