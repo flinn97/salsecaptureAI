@@ -157,7 +157,7 @@ class AISettings extends ComponentBase {
 class Todo extends ComponentBase{
     json={
         ...this.json,
-        type:"toDo",
+        type:"todo",
     }
 }
 

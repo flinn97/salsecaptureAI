@@ -23,6 +23,9 @@ export default class ClientPage extends GetComponentsFromUrl {
             const newTemplate = await this.operationsFactory.prepare({prepare: {type: "template"}, clean:true });
             this.dispatch({ currentComponent: newTemplate[0] }); // Dispatch the new template as the current component
         }
+        if(!this.componentList.getComponentsFromBackend("todo")){
+            await this.operationsFactory.prepare({prepare: {type: "todo"}, clean:true})
+        }
     }
 
     /**
@@ -30,8 +33,10 @@ export default class ClientPage extends GetComponentsFromUrl {
      * @returns {JSX.Element} The rendered content of the component.
      */
     getInnerContent() {
+        let toDoList = this.componentList.getComponentsFromBackend({type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys:"owner", })
         return (
             <div className="fit">
+                {toDoList}
                 <Card theme="NoBorder" type="fit"content={<AIPromptCard />} />
 
             </div>
