@@ -25,14 +25,15 @@ class GmailAuthButton extends BaseComponent {
         //local
         // const CLIENT_ID = '786362911238-iiljh2nv259i5kbb0f27qa8no5sb09is.apps.googleusercontent.com'; // Replace with your actual Client ID
         //production
-        const CLIENT_ID =  '786362911238-f25hopvjskqlrl5c0o95qslgkbdi13tt.apps.googleusercontent.com'
+        const CLIENT_ID =  '786362911238-7q3lb2icdev4ives0ho4loi21n1r1t1g.apps.googleusercontent.com'
         // Authorization scopes required by the API.
         // Added 'email', 'openid', 'profile' to get user info including email.
         const SCOPES = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid';
 
         // TODO(developer): Replace with the FULL URL of your deployed Firebase Function's callback endpoint.
+
         // This MUST exactly match the Redirect URI configured in your Google Cloud Console OAuth 2.0 Client ID settings.
-        const REDIRECT_URI = 'https://gmailapi-7c5i3vsqma-uc.a.run.app/oauth2callback'; // Replace with your deployed function URL + /oauth2callback
+        const REDIRECT_URI = 'https://scaiuserauthentication-7c5i3vsqma-uc.a.run.app/oauth2callback'; // Replace with your deployed function URL + /oauth2callback
 
 
         const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');

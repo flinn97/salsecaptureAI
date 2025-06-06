@@ -43,14 +43,14 @@ import AddTags from './view/popups/addTags.jsx';
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
      //REMOVE
-     let user = {
-       type: "user",
-       owner: "alan@salescapture.com",
-       email: "alan@salescapture.com",
-       _id: "alan@salescapture.com",
+    //  let user = {
+    //    type: "user",
+    //    owner: "alan@salescapture.com",
+    //    email: "alan@salescapture.com",
+    //    _id: "alan@salescapture.com",
  
  
-     }
+    //  }
      //REMOVE
      this.componentList.addComponents([...data], true)
  
@@ -97,15 +97,15 @@ import AddTags from './view/popups/addTags.jsx';
     }
      
      //REMOVE
-     this.getUser(user);
+    //  this.getUser(user);
  
    }
-   async getUser(user) {
-     await this.componentList.addComponents([user], true);
-     user = this.componentList.getComponent("user");
-     this.state.currentUser = user;
+  //  async getUser(user) {
+  //    await this.componentList.addComponents([user], true);
+  //    user = this.componentList.getComponent("user");
+  //    this.state.currentUser = user;
  
-   }
+  //  }
    componentDidMount(){
     super.componentDidMount();
     let div = document.getElementById("signUpFT");
