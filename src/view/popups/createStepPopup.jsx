@@ -13,6 +13,7 @@ import {
 } from "flinntech";
 
 import { BaseComponent } from "flinntech";
+import aiService from "../../service/aiService";
 import SelectTemplate from "../components/templateCustomSelect";
 import Templates from "../Templates";
 export default class CreateStepPopup extends BaseComponent {
@@ -25,6 +26,29 @@ export default class CreateStepPopup extends BaseComponent {
     this.state = {
       ...this.state,
       defaultClass: "fit scroller", //Sets a default class for styling
+    };
+  }
+  extractSubjectAndBody(emailText) {
+    const subjectMatch = emailText.match(/^{{\s*([^}]+?)\s*}}/);
+    let subject = '';
+    let plainBody = '';
+  
+    if (subjectMatch) {
+      subject = subjectMatch[1].trim();
+      plainBody = emailText.slice(subjectMatch[0].length).trim();
+    } else {
+      plainBody = emailText.trim();
+    }
+  
+    // Normalize newlines and convert to HTML
+    const htmlBody = plainBody
+      .split('\n\n') // Paragraphs
+      .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+      .join('\n');
+  
+    return {
+      subject,
+      body: htmlBody // Use this for injecting into Quill
     };
   }
   /**
@@ -62,6 +86,28 @@ export default class CreateStepPopup extends BaseComponent {
       >
         <div style={{ display: "flex", gap: "8px" }}>
           <div
+          onClick={async ()=>{
+            debugger
+            let step = this.componentList.getList("step", this.propsState.currentSequence.getJson()._id, "sequenceId");
+            let l = step.length
+            if(step.length>0){
+              step = step[step.length-1]
+            }
+           
+
+            let email = l>0? await aiService.getFollowUp(this.propsState.currentUser, step.getJson().content): await aiService.getTemplate(this.propsState.currentUser);
+            let {subject, body} = this.extractSubjectAndBody(email);
+            
+
+            console.log(subject)
+            console.log(body);
+
+
+            this.propsState.currentPopupComponent.setCompState({content:body, subject:subject})
+            this.dispatch({})
+            
+
+          }}
             className="dark-button-1"
             style={{
               position: "relative",
