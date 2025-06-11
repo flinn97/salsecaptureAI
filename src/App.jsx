@@ -28,7 +28,11 @@ import ProspectPage from './view/potentialProspectPage.jsx';
 import BottomNavCustom from './view/components/bottomBarNavSCAI.jsx';
 import ResearchPopup from './view/popups/addResearchPopup.jsx';
 import AddEmail from './view/popups/addEmail.jsx';
+import AdminPage from './view/adminPage.jsx';
 import AddTags from './view/popups/addTags.jsx';
+import ClientPage from './view/clientPage.jsx';
+import AddUserPopup from './view/addUserPopup.jsx';
+import UserPage from './view/userPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -38,7 +42,7 @@ import AddTags from './view/popups/addTags.jsx';
  export default class App extends AppBaseClass {
    constructor(props) {
      super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
-     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup, email:AddEmail };
+     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup, email:AddEmail, user:AddUserPopup };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
@@ -76,7 +80,7 @@ import AddTags from './view/popups/addTags.jsx';
          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
-         //  { comp: Settings, name: "settings" },
+    
        ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },

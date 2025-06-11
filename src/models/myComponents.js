@@ -129,6 +129,23 @@ class Research extends ComponentBase {
     }
 }
 
+class Client extends ComponentBase{
+    json={
+        ...this.json,
+        type:"client",
+        name:"",
+        email: "",
+        researchId:"",
+        conversationIds: [],
+    }
+}
+
+class AIPrompt extends ComponentBase{
+    json={
+        ...this.json,
+        type:"AIPrompt"
+    }
+}
 class AISettings extends ComponentBase {
     json={ 
         ...this.json,
@@ -137,6 +154,36 @@ class AISettings extends ComponentBase {
         
     }
 }
-
-
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, AISettings };
+class Todo extends ComponentBase{
+    json={
+        ...this.json,
+        type:"todo",
+        attribute1:"Create Authenticated User",
+        attribute2:"Create User Data",
+        attribute3:"Create Limiter",
+        attribute4:"Set Up Google Auth",
+        attribute5:"Setting Obj",
+        attribute6:"Firebase AI Training",
+        complete1:false,
+        complete2:false,
+        complete3:false,
+        complete4:false,
+        complete5:false,
+        complete6:false,
+        clientId:""
+    }
+}
+class Limit extends ComponentBase{
+    json={
+        ...this.json,
+        type:"limit",
+        limit:500
+    }
+}
+class CsvUpload extends ComponentBase{
+    json={
+        ...this.json,
+        type:"csv",
+    }
+}
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload };
