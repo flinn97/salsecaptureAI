@@ -31,6 +31,9 @@ import AddCalendarPopup from './view/popups/addAppointmentPopup.jsx';
 import AddHw from './view/popups/addHw.jsx';
 import AddGoal from './view/popups/addGoal.jsx';
 import SessionPage from './view/sessionPage.jsx';
+import ClientRegister from './view/clientRegister.jsx';
+import { Route, Router, Routes } from 'react-router-dom';
+import ClientProfilePage from './view/clientProfilePage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -44,15 +47,7 @@ import SessionPage from './view/sessionPage.jsx';
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
-     //REMOVE
-     let user = {
-       type: "user",
-       owner: "alan@salescapture.com",
-       email: "alan@salescapture.com",
-       _id: "alan@salescapture.com",
- 
- 
-     }
+    
      //REMOVE
      this.componentList.addComponents([...data], true)
  
@@ -81,6 +76,9 @@ import SessionPage from './view/sessionPage.jsx';
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
          //  { comp: Settings, name: "settings" },
        ],
+       extraAuthRoutes: [
+        {comp: ClientRegister, path:"/clientregister", idComp:ClientRegister}
+       ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
        ],
@@ -97,17 +95,44 @@ import SessionPage from './view/sessionPage.jsx';
       navList.remove(0);
     }
      
-     //REMOVE
-     this.getUser(user);
+     
  
    }
-   async getUser(user) {
-     await this.componentList.addComponents([user], true);
-     user = this.componentList.getComponent("user");
-     this.state.currentUser = user;
- 
-   }
+   
+   async checkForUser() {
+    debugger
+    let user = await this.APIService.getCurrentUser();
+
+    if (user) {
+      let loggedIn = await this.APIService.checkIfLoggedIn();
+
+      if (loggedIn) {
+        await this.APIService.getuser(user.email);
+      }
+    }
+    
+    if(this.state.currentUser.getJson().role==="client"){
+      this.dispatch({
+        routes:[
+          {comp: ClientProfilePage, name:"Dash", path:"/" },
+          { comp: TaskPage, name: "Tasks", path: "/tasks" },
+          { comp: Conversations, name: "Messages", path: "conversation" },
+          { comp: SchedulePage, name: "Schedule", path: "schedule" },
+  
+  
+          { comp: Settings, name: "Billing", path: "billing" },
+        ],
+      })
+    }
+  }
+
+
+    
+
+   
+
+  
  
  }
- 
- class Home extends BaseComponent { }
+
+
