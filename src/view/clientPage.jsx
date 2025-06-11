@@ -2,7 +2,7 @@
  * TemplatePage component. This component renders the page for displaying the details 
  * of a specific template. It extends GetComponentsFromUrl from the flinntech library.
  */
-import { Card, GetComponentsFromUrl, RunButton } from "flinntech";
+import { Card, GetComponentsFromUrl, PopupButton, RunButton, urlService } from "flinntech";
 import { ParentFormComponent } from "flinntech";
 import { FormComponentInterface, InputBaseClass } from "flinntech";
 import AdminCard from "./adminCard";
@@ -15,17 +15,19 @@ export default class ClientPage extends GetComponentsFromUrl {
      */
     async componentDidMount() {
         
-        await this.getComponentsFromBackend();
-        const templateId = this.urlId; // Get the ID from the URL
 
-        // If there's no ID, prepare a new template item
-        if (!templateId || templateId==="template") {
-            const newTemplate = await this.operationsFactory.prepare({prepare: {type: "template"}, clean:true });
-            this.dispatch({ currentComponent: newTemplate[0] }); // Dispatch the new template as the current component
+        await this.getComponentsFromBackend();
+        let toDoList = await this.componentList.getComponentsFromBackend({ type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys: "owner", })
+         
+        let id = urlService.getIdFromURL()
+        let todo = toDoList.find((obj) => { return obj.getJson().clientId === id })
+        if (!todo) {
+            let currentTodo = await this.operationsFactory.prepare({ prepare: { type: "todo", clientId: id }, clean: true })
+            todo = currentTodo[0]
+
         }
-        if(!this.componentList.getComponentsFromBackend("todo")){
-            await this.operationsFactory.prepare({prepare: {type: "todo"}, clean:true})
-        }
+        this.dispatch({ currentTodo: todo })
+
     }
 
     /**
@@ -33,18 +35,34 @@ export default class ClientPage extends GetComponentsFromUrl {
      * @returns {JSX.Element} The rendered content of the component.
      */
     getInnerContent() {
-        let toDoList = this.componentList.getComponentsFromBackend({type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys:"owner", })
+
         return (
             <div className="fit">
-                {toDoList.getJson().attribute1}
-                {toDoList.getJson().attribute2}
-                {toDoList.getJson().attribute3}
-                {toDoList.getJson().attribute4}
-                {toDoList.getJson().attribute5}
-                {toDoList.getJson().attribute6}
+                {[1, 2, 3, 4, 5, 6].map(i => {
+                    const attr = `attribute${i}`;
+                    const completeKey = `complete${i}`;
+                    const json = this.propsState.currentTodo?.getJson();
 
-                <Card theme="NoBorder" type="fit"content={<AIPromptCard />} />
-
+                    return (
+                        <div key={i}>
+                            {json?.[attr]}
+                            <div
+                                onClick={() => {
+                                     
+                                    const complete = !json[completeKey];
+                                    this.propsState.currentTodo?.setCompState({ [completeKey]: complete },{run:true});
+                                }}
+                            >
+                                {json?.[completeKey] ? "Done" : "Mark Done"}
+                            </div>
+                        </div>
+                    );
+                })}
+                <RunButton obj={this.propsState.currentTodo} content="save"/>
+                <PopupButton popupSwitch={"addUser"} content="add user"/>
+                <div>
+                    <Card theme="NoBorder" type="fit" content={<AIPromptCard />} />
+                </div>
             </div>
         );
     }

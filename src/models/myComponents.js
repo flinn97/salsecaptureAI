@@ -164,8 +164,20 @@ class Todo extends ComponentBase{
         attribute4:"Set Up Google Auth",
         attribute5:"Setting Obj",
         attribute6:"Firebase AI Training",
-
+        complete1:false,
+        complete2:false,
+        complete3:false,
+        complete4:false,
+        complete5:false,
+        complete6:false,
+        clientId:""
     }
 }
-
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo  };
+class Limit extends ComponentBase{
+    json={
+        ...this.json,
+        type:"limit",
+        limit:500
+    }
+}
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit,  };
