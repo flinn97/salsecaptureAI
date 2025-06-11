@@ -24,15 +24,19 @@ export default class AddUserPopup extends BaseComponent {
     getInnerContent() {
         return (
             <>
-                <ParentFormComponent name="_id" label="id:" inPopup={true}/>
-                <ParentFormComponent name="email" label="email:" inPopup={true}/>
-                <ParentFormComponent name="collection" label="collection:" inPopup={true}/>
-                <ParentFormComponent name="owner" label="owner:" inPopup={true}/>
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="_id"  inPopup={true}/>
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="email"  inPopup={true}/>
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="collection"  inPopup={true}/>
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="owner" inPopup={true}/>
              
                 
-                <RunButton isPopup={true} content="save" callbackFunc={()=>{
-                    let user = this.propsState.popupComponent
-                    this.operationsFactory.prepare({prepare:[{type:"aiSettings", owner:user.getJson()._id},{type:"limit", owner:user.getJson()._id}]})
+                <RunButton  content="save" callbackFunc={async()=>{
+                    debugger
+                    let user = this.propsState.currentPopupComponent
+                    await user.setCompState({clientId:this.propsState.currentClient.getJson()._id}, {run:true})
+                    await this.operationsFactory.prepare({prepare:[{type:"aiSettings", owner:user.getJson()._id},{type:"limit", owner:user.getJson()._id}]})
+                    this.operationsFactory.run()
+                    this.dispatch({currentPopupComponent:undefined, popupSwitch:""})
                     }}/>
             </>
         );

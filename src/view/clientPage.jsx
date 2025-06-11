@@ -7,6 +7,7 @@ import { ParentFormComponent } from "flinntech";
 import { FormComponentInterface, InputBaseClass } from "flinntech";
 import AdminCard from "./adminCard";
 import AIPromptCard from "./aiPromptCard";
+import UserList from "./userList";
 
 export default class ClientPage extends GetComponentsFromUrl {
     /**
@@ -15,11 +16,14 @@ export default class ClientPage extends GetComponentsFromUrl {
      */
     async componentDidMount() {
         
+        let id = urlService.getIdFromURL()
 
         await this.getComponentsFromBackend();
+        debugger
+        let users = await this.componentList.getComponentsFromBackend({ type: "user", ids: id, filterKeys: "clientId", })
         let toDoList = await this.componentList.getComponentsFromBackend({ type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys: "owner", })
+        
          
-        let id = urlService.getIdFromURL()
         let todo = toDoList.find((obj) => { return obj.getJson().clientId === id })
         if (!todo) {
             let currentTodo = await this.operationsFactory.prepare({ prepare: { type: "todo", clientId: id }, clean: true })
@@ -59,9 +63,16 @@ export default class ClientPage extends GetComponentsFromUrl {
                     );
                 })}
                 <RunButton obj={this.propsState.currentTodo} content="save"/>
-                <PopupButton popupSwitch={"addUser"} content="add user"/>
+                <div onClick={async()=>{
+                    let user = await this.operationsFactory.prepare({prepare:{type:"user"}})
+                    user = user[0]
+                    this.dispatch({popupSwitch:"addUser", currentPopupComponent:user})
+                }}>add user</div>
+                 <div>
+                    <Card theme="NoBorder" type="fit" content={<UserList />} />
+                </div>
                 <div>
-                    <Card theme="NoBorder" type="fit" content={<AIPromptCard />} />
+                    {/* <Card theme="NoBorder" type="fit" content={<AIPromptCard />} /> */}
                 </div>
             </div>
         );

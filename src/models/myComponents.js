@@ -180,4 +180,10 @@ class Limit extends ComponentBase{
         limit:500
     }
 }
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit,  };
+class CsvUpload extends ComponentBase{
+    json={
+        ...this.json,
+        type:"csv",
+    }
+}
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload };

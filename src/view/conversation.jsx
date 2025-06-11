@@ -7,6 +7,17 @@ import { ParentFormComponent, RunButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 import CustomMessageItem from "./components/messageCustomItem";
 import arrow from "../assets/arrow_back.svg";
+import Conversations from "./conversations";
+import Contacts from "./contacts";
+import ResearchPage from "./researchPage";
+import Content from "./content";
+import Settings from "./settings";
+import SequencePage from "./sequencePage";
+import TemplatePage from "./templatePage";
+import ClientPage from "./clientPage";
+import AdminPage from "./adminPage";
+import UserConfigPage from "./userPage";
+import ProspectPage from "./potentialProspectPage";
 
 export default class Conversation extends BaseComponent {
   /**
@@ -28,6 +39,31 @@ export default class Conversation extends BaseComponent {
    */
   async componentDidMount() {
     await this.prepareMessages(); // Calls the function to prepare messages
+    debugger
+    if(this.propsState.currentUser.getJson()._id==="alan@salescapture.com"){
+      this.dispatch({
+        routes: [
+          { comp: Conversations, name: "Home", path: "/" },
+          { comp: Conversations, name: "Messages", path: "conversation" },
+  
+          { comp: Contacts, name: "Contacts", path: "contacts" },
+          { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
+ 
+          { comp: Content, name: "Content", path: "content" },
+          { comp: Settings, name: "Settings", path: "settings" },
+ 
+          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
+ 
+          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
+          { comp: ClientPage, name: "", path: "client", idComp:ClientPage  },
+ 
+ 
+          { comp: AdminPage, name: "Admin", path: "admin",},
+          { comp: UserConfigPage, name: "", path: "user",idComp:UserConfigPage }
+          //  { comp: Settings, name: "settings" },
+        ]
+      })
+    }
   }
 
 

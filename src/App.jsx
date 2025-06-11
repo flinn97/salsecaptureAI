@@ -32,6 +32,7 @@ import AdminPage from './view/adminPage.jsx';
 import AddTags from './view/popups/addTags.jsx';
 import ClientPage from './view/clientPage.jsx';
 import AddUserPopup from './view/addUserPopup.jsx';
+import UserPage from './view/userPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -79,11 +80,7 @@ import AddUserPopup from './view/addUserPopup.jsx';
          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
-         { comp: ClientPage, name: "", path: "client", idComp:ClientPage  },
-
-
-         { comp: AdminPage, name: "Admin", path: "admin",}
-         //  { comp: Settings, name: "settings" },
+    
        ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
