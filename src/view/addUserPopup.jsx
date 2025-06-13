@@ -31,7 +31,7 @@ export default class AddUserPopup extends BaseComponent {
              
                 
                 <RunButton  content="save" callbackFunc={async()=>{
-                    debugger
+                    
                     let user = this.propsState.currentPopupComponent
                     await user.setCompState({clientId:this.propsState.currentClient.getJson()._id}, {run:true})
                     await this.operationsFactory.prepare({prepare:[{type:"aiSettings", owner:user.getJson()._id},{type:"limit", owner:user.getJson()._id}]})

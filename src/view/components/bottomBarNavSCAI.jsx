@@ -7,7 +7,6 @@ class BottomNavCustom extends NavMapContainer{
         // console.log("this.list", this.list)
         // console.log("this.mapList", this.mapList)
         
-        // debugger
         return <div className="bottom-nav">
                 <Link to="/conversation" className="bottom-nav-item">
                     <i className="fa-solid fa-message"></i>

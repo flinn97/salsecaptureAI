@@ -19,10 +19,10 @@ export default class ClientPage extends GetComponentsFromUrl {
         let id = urlService.getIdFromURL()
 
         await this.getComponentsFromBackend();
-        debugger
+        
         let users = await this.componentList.getComponentsFromBackend({ type: "user", ids: id, filterKeys: "clientId", })
         let toDoList = await this.componentList.getComponentsFromBackend({ type: "todo", ids: this.propsState.currentUser.getJson()._id, filterKeys: "owner", })
-        
+
          
         let todo = toDoList.find((obj) => { return obj.getJson().clientId === id })
         if (!todo) {

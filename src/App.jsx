@@ -56,7 +56,7 @@ import UserPage from './view/userPage.jsx';
  
     //  }
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
@@ -80,8 +80,14 @@ import UserPage from './view/userPage.jsx';
          { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
+         { comp: ClientPage, name: "", path: "client", idComp:ClientPage  },
+   
+   
+            { comp: AdminPage, name: "Admin", path: "admin",},
+            { comp: UserPage, name: "", path: "user",idComp:UserPage }
     
        ],
+       refresh: true,
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
          { content: AddTags, popupSwitch: "addTags" },
@@ -115,6 +121,32 @@ import UserPage from './view/userPage.jsx';
     let div = document.getElementById("signUpFT");
     if(div){
       div.style.display="none"
+    }
+   }
+   componentDidUpdate(props, state){
+    if(this.state.gotUser && this.state.refresh){
+      
+      if(this.state.currentUser.getJson()._id!=="alan@salescapture.com"){
+        this.dispatch({
+          refresh:false,
+          routes: [
+            { comp: Conversations, name: "Home", path: "/" },
+            { comp: Conversations, name: "Messages", path: "conversation" },
+    
+            { comp: Contacts, name: "Contacts", path: "contacts" },
+            { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
+   
+            { comp: Content, name: "Content", path: "content" },
+            { comp: Settings, name: "Settings", path: "settings" },
+   
+            { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
+   
+            { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
+            
+            //  { comp: Settings, name: "settings" },
+          ]
+        })
+      }
     }
    }
  

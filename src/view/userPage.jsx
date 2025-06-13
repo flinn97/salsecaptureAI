@@ -17,8 +17,10 @@ export default class UserConfigPage extends GetComponentsFromUrl {
         
         await this.getComponentsFromBackend();        
         let id = urlService.getIdFromURL()
-
+        
         let research = await this.componentList.getComponentsFromBackend({ type: "research", ids: id, filterKeys: "owner", })
+        this.dispatch({})
+        console.log(research)
 
     }
 

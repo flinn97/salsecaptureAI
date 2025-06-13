@@ -183,7 +183,7 @@ class ContactsCustomItem extends BaseComponent {
               <div
                 style={{ width: "fit-content" }}
                 onClick={async () => {
-                  debugger;
+                  ;
                   await this.operationsFactory.clear();
                   let contact = obj;
                   let conversation = this.componentList.getComponent(
@@ -210,7 +210,7 @@ class ContactsCustomItem extends BaseComponent {
                       "contact"
                     );
                   }
-                  debugger;
+                  
                   let dm = { type: "email" };
                   dm = { prepare: { ...dm }, clean: true };
                   dm = await this.operationsFactory.prepare(dm);

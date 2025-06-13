@@ -87,7 +87,6 @@ export default class CreateStepPopup extends BaseComponent {
         <div style={{ display: "flex", gap: "8px" }}>
           <div
           onClick={async ()=>{
-            debugger
             let step = this.componentList.getList("step", this.propsState.currentSequence.getJson()._id, "sequenceId");
             let l = step.length
             if(step.length>0){

@@ -16,10 +16,16 @@ class AICustomItem extends BaseComponent {
           };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const body = this.props.obj?.getJson().content;
         const plainText = stripHTML(body);
         this.setState({ plainText });
+
+        let {obj} = this.props;
+        
+        let csvs = await this.componentList.getComponentsFromBackend({ type: "csv", ids: obj.getJson()._id, filterKeys: "researchId", })
+        this.setState({});
+
       }
 
     componentDidUpdate(prevProps) {
@@ -81,6 +87,7 @@ class AICustomItem extends BaseComponent {
                  
     
             </div>
+            <div>{research.AIPrompt} </div>
             <MapComponent name="csv" filter={{search:research._id, attribute:"researchId"}} cells={[
                 {type:"attribute", name:"_id"},
             ]}/>

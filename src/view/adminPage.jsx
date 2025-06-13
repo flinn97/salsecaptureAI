@@ -15,13 +15,9 @@ export default class AdminPage extends GetComponentsFromUrl {
     async componentDidMount() {
         
         await this.getComponentsFromBackend();
-        const templateId = this.urlId; // Get the ID from the URL
-
-        // If there's no ID, prepare a new template item
-        if (!templateId || templateId==="template") {
-            const newTemplate = await this.operationsFactory.prepare({prepare: {type: "template"}, clean:true });
-            this.dispatch({ currentComponent: newTemplate[0] }); // Dispatch the new template as the current component
-        }
+        
+       let c = await this.componentList.getComponentsFromBackend({type:"client", ids: "alan@salescapture.com", filterKeys: "owner",})
+       console.log(c)
     }
 
     /**

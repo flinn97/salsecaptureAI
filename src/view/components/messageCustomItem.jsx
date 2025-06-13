@@ -36,7 +36,6 @@ export default class CustomMessageItem extends BaseComponent {
               <div className="accept-suggested-message hover-darken"
                 onClick={async () => {
                   // const { originalMessageId, from, to, subject, text } = req.body;
-                  debugger;
                   let obj = this.props.obj;
                   obj.setCompState({suggestion:false, ownerMessage:true }, {run:true})
 

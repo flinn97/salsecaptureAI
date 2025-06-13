@@ -50,7 +50,6 @@ import SequencePopupCustomItem from "../components/sequencePopupCustom";
            style={{justifySelf:"flex-end", marginTop:"20px"}}
            onClick={async ()=>{
             for(let obj of this.propsState.selectedContacts){
-              debugger
               let tags = obj.getJson().tags||"";
               let addTag = tags.length===0? this.state.tags: ","+this.state.tags
               tags = addTag;
