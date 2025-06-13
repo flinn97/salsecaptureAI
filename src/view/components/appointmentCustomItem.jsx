@@ -27,22 +27,24 @@ class AppointmentCustomItem extends BaseComponent {
     const displayTime = this.formatTime24to12(calendarItem.startTime);
 
     return (
-      <div className="appointment">
+      <div className="appointment" style={{position:"relative"}}>
         <div className="row row-space-between">
-          <div className="appointment-left">
-            <DelButton content="x" obj={obj} />
-            <PopupButton content="edit" popupSwitch="updateCalendarEvent" obj={obj} />
-
-            {/* now shows, e.g., "1:00 PM" instead of "13:00" */}
-            <div className="row row-left padding-0 appointment-time">
-              {displayTime}
+          <div className="appointment-left" >
+            <div style={{position:"absolute", right:"7px", top:"0px"}}>
+            <DelButton formClass="none" content="x" obj={obj} />
             </div>
+            <PopupButton formClass="none" content={ <div><div className="appointment-right">
+            <div className="appointment-date">{calendarItem.day}</div>
+          </div>
+            <div className="row row-left padding-0 appointment-time" style={{fontSize:"12px"}}>
+              {displayTime}
+            </div></div>} popupSwitch="updateCalendarEvent" obj={obj} />
+
+           
 
             <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="row row-left padding-0">View Notes</Link>
           </div>
-          <div className="appointment-right">
-            <div className="appointment-date">{calendarItem.day}</div>
-          </div>
+          
         </div>
       </div>
     );

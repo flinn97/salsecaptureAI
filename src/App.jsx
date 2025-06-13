@@ -68,7 +68,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
          { comp: Contacts, name: "Clients", path: "clients" },
 
          { comp: Content, name: "Content", path: "content" },
-         { comp: Settings, name: "Billing", path: "billing" },
+        //  { comp: Settings, name: "Billing", path: "billing" },
          { comp: SessionPage, name: "", path: "session", idComp:SessionPage},
 
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
@@ -120,7 +120,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
           { comp: SchedulePage, name: "Schedule", path: "schedule" },
   
   
-          { comp: Settings, name: "Billing", path: "billing" },
+          // { comp: Settings, name: "Billing", path: "billing" },
         ],
       })
     }

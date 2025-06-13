@@ -60,7 +60,7 @@ export default class ContactsCard extends BaseComponent {
 
     return (
       <div className="map-container">
-        <div className="Clients-name"><div>Clients</div> <PopupButton content=" Add Client"  popupSwitch="addContact" /></div>
+        <div className="Clients-name"><div>Clients</div> <PopupButton formClass="dark-green-button"  content=" Add Client"  popupSwitch="addContact" /></div>
         <div className="search-container">
           <div className="search-bar">
             <i className="fas fa-search search-icon"></i>
