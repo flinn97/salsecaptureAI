@@ -33,6 +33,7 @@ import AddTags from './view/popups/addTags.jsx';
 import ClientPage from './view/clientPage.jsx';
 import AddUserPopup from './view/addUserPopup.jsx';
 import UserPage from './view/userPage.jsx';
+import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -91,6 +92,8 @@ import UserPage from './view/userPage.jsx';
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
          { content: AddTags, popupSwitch: "addTags" },
+         { content: DeleteSequenceDialog, popupSwitch: "delSequence" },
+
 
        ],
      };

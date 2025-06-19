@@ -185,5 +185,12 @@ class CsvUpload extends ComponentBase{
         ...this.json,
         type:"csv",
     }
+
 }
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload };
+class Open extends ComponentBase{
+    json ={
+        ...this.json,
+        type:"open"
+    }
+}
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open };

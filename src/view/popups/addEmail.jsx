@@ -5,6 +5,7 @@
  * It uses components from 'flinntech' for form elements and buttons.
  */
  import { ParentFormComponent, RunButton, UpdateButton } from "flinntech";
+import aiService from "../../service/aiService";
  import Conversation from "../conversation";
  
  export default class AddEmail extends Conversation {
@@ -28,7 +29,29 @@
  componentDidUpdate(){}
  
 
- 
+ extractSubjectAndBody(emailText) {
+  const subjectMatch = emailText.match(/^{{\s*([^}]+?)\s*}}/);
+  let subject = '';
+  let plainBody = '';
+
+  if (subjectMatch) {
+    subject = subjectMatch[1].trim();
+    plainBody = emailText.slice(subjectMatch[0].length).trim();
+  } else {
+    plainBody = emailText.trim();
+  }
+
+  // Normalize newlines and convert to HTML
+  const htmlBody = plainBody
+    .split('\n\n') // Paragraphs
+    .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+    .join('\n');
+
+  return {
+    subject,
+    body: htmlBody // Use this for injecting into Quill
+  };
+} 
    /**
     * Renders the ContactPopup component.
     * @returns {JSX.Element} The rendered component.
@@ -84,12 +107,32 @@
          }} // Callback to re-run the prepareMessages function
        />
      );
+
+     
  
      return (
        <div
          style={{ padding: "10px", paddingBottom: "100px", height: "100%" }}
          className={this.props.pageClass || this.state.defaultClass}
        >
+         <div
+          onClick={async ()=>{
+            let email = await aiService.getTemplate(this.propsState.currentUser);
+            let {subject, body} = this.extractSubjectAndBody(email);
+            
+            this.propsState.currentPopupComponent.setCompState({body:body, subject:subject})
+            this.dispatch({})
+            
+
+          }}
+            className="dark-button-1"
+            style={{
+              position: "relative",
+              width: "fit-content",
+            }}
+          >
+            Draft With AI
+          </div>
          <h2>Email</h2> {/*Heading for the popup*/}
          <div className="contact-Add-container">
            <div className="row">

@@ -8,8 +8,19 @@ import { Link } from 'react-router-dom';
 class SequenceCustomItem extends BaseComponent {
     constructor(props) {
         super(props);
+        this.state={...this.state, opens:"0"}
         // preserve any initial state from BaseComponent
     }
+
+    async componentDidMount(){
+        debugger
+        const { obj } = this.props;
+        let sequenceOpenRates = await this.componentList.getComponentsFromBackend({type:"open", ids: obj.getJson()._id, filterKeys: "sequenceId",});
+        this.setState({opens: sequenceOpenRates.length})
+
+
+    }
+
 
 
     render() {
@@ -59,7 +70,7 @@ class SequenceCustomItem extends BaseComponent {
                     </div>
                     <div className="col">
                         <div>Opened</div>
-                        <div>{sequence?.openedRate ? `${sequence?.openedRate}%` : `N/A`}</div>
+                        <div>{ this.state.opens || `N/A`}</div>
                     </div>
                     <div className="col">
                         <div>Reply</div>
@@ -73,10 +84,9 @@ class SequenceCustomItem extends BaseComponent {
                         <div>{sequence?.bounceRate ? `${sequence?.bounceRate}%` : `N/A`}</div>
                     </div>
                 </div>
-                {/* <div className="del-icon">
-                    <i className="fa-solid fa-trash"></i>
-                    <DelButton obj={obj} />
-                </div> */}
+                <div style={{position:"absolute", right:"0px"}} className="del-icon">
+                    <div onClick={()=>{this.dispatch({popupSwitch:"delSequence", delSequence:this.props.obj})}}>X</div>
+                </div>
             </div>
         );
     }

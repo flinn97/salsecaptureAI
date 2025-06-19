@@ -79,7 +79,7 @@ export default class ContactPopup extends BaseComponent {
         formClass="dark-button-1"
         content="Save"
         isPopup={inPopup}
-        callbackFunc={this.props.callbackFunc}
+       
       />
     );
     //If an object is provided, change button to UpdateButton

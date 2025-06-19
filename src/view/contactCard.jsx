@@ -27,12 +27,79 @@ export default class ContactsCard extends BaseComponent {
       ...this.state,
       defaultClass: "fit",
       title: "Contacts",
+      showFilter: false,
+      filterAll: true,
+      filterTags: true,
+      filterCompany: true,
+      filterName: true,
     };
   }
 
-  componentDidMount(){
+  async componentDidMount() {
     this.dispatch({ selectedContacts: [] })
+
+    this.APIService.subscribeToReadObserver(async ()=>{
+      
+      await this.componentList.sortSelectedListbyFirebaseDate('contact', true);
+      this.setState({start:true})
+
+    })
+    this.APIService.subscribeToDispatchObserver(async (changes) => {
+      debugger
+      // grab the live array of contact-components
+      const list = this.componentList.getList("contact");
+    
+      for (let change of changes) {
+        if (change.added) {
+          for (let contact of change.added) {
+            if (contact.type === "contact") {
+              // 1. find existing index in the list
+              const idx = list.findIndex(c =>
+                // adapt to your shape: maybe c.id === contact.id, or c.getJson()._id === contact._id
+                c.getJson()._id === contact._id
+              );
+              let addToFront = list[idx]
+
+    
+              // 2. if it exists, remove it
+              if (idx > -1) {
+                list.splice(idx, 1);
+              }
+    
+              // 3. then put it at the front
+              list.unshift(addToFront);
+            }
+          }
+        }
+      }
+      await this.componentList.setSelectedList("contact", list)
+      await this.componentList.sortSelectedListbyFirebaseDate('contact', true);
+
+    
+      // trigger your view to re-render
+      this.dispatch({});
+    });
   }
+  // flip the dropdown open/closed
+  toggleFilter = () => {
+    this.setState({ showFilter: !this.state.showFilter });
+  };
+
+  // “All” toggles everything
+  onAllChange = e => {
+    const all = e.target.checked;
+    this.setState({
+      filterAll: all,
+      filterTags: all,
+      filterCompany: all,
+      filterName: all,
+    });
+  };
+
+  // individual boxes turn off “All”
+  onFilterChange = key => e => {
+    this.setState({ [key]: e.target.checked, filterAll: false });
+  };
 
   filterFunc() {
     let filterText = this.propsState.tags?.split(",") || "";
@@ -60,10 +127,11 @@ export default class ContactsCard extends BaseComponent {
     let selCon = this.propsState.selectedContacts;
     let allCon = this.propsState.componentList.getList("contact");
     let showChecked = selCon?.length > 0;
-    let allTotal = allCon?.length?"/"+allCon?.length:"";
-    let allSelect = selCon?.length===allCon?.length;
+    let allTotal = allCon?.length ? "/" + allCon?.length : "";
+    let allSelect = selCon?.length === allCon?.length;
 
-    return (
+    return (<>
+      {this.state.start&&
       <div className="map-container">
         <div className="top-nav-float">
           <nav className="top-nav">
@@ -81,9 +149,40 @@ export default class ContactsCard extends BaseComponent {
                 </button>
               </div>
               <div className="nav-icon">
-                <button className="btn">
+                <button onClick={() => { this.setState({ showFilter: !this.state.showFilter }) }} className="btn">
                   <i className="fa-solid fa-filter"></i>
                 </button>
+                <div>
+                  {this.state.showFilter && (
+                    <div className="filter-dropdown" style={{
+                      position: 'absolute', top: '100%', right: 0,
+                      background: '#f5f5f5', border: '1px solid #ccc',
+                      borderRadius: 4, padding: 8, zIndex: 10
+                    }}>
+                      <div style={{ fontWeight: 'bold', marginBottom: 8 }}>Search:</div>
+                      <label><input
+                        type="checkbox"
+                        checked={this.state.filterAll}
+                        onChange={this.onAllChange}
+                      /> All:</label>
+                      <label><input
+                        type="checkbox"
+                        checked={this.state.filterTags}
+                        onChange={this.onFilterChange('filterTags')}
+                      /> Tags</label>
+                      <label><input
+                        type="checkbox"
+                        checked={this.state.filterCompany}
+                        onChange={this.onFilterChange('filterCompany')}
+                      /> Company</label>
+                      <label><input
+                        type="checkbox"
+                        checked={this.state.filterName}
+                        onChange={this.onFilterChange('filterName')}
+                      /> Name</label>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </nav>
@@ -113,7 +212,7 @@ export default class ContactsCard extends BaseComponent {
                   }}
                 >
                   <CheckIt
-                    label={allSelect?`Deselect All`:`Select All`}
+                    label={allSelect ? `Deselect All` : `Select All`}
                     check={this.filterFunc}
                     uncheck={() => {
                       this.dispatch({ selectedContacts: [] });
@@ -130,30 +229,30 @@ export default class ContactsCard extends BaseComponent {
             </div>
 
             {!showChecked && (
-            <div className="filter-nav-right">
-              <CsvUpload
-                callBack={async (data) => {
-                  data = data.data.map((obj, i) => {
-                    obj.owner = this.propsState.currentUser.getJson()._id;
-                    obj.type = "contact";
-                    return obj;
-                  });
-                  this.dispatch({
-                    uploadData: data,
-                    popupSwitch: "uploadData",
-                  });
-                  await this.operationsFactory.prepare({ prepare: data });
+              <div className="filter-nav-right">
+                <CsvUpload
+                  callBack={async (data) => {
+                    data = data.data.map((obj, i) => {
+                      obj.owner = this.propsState.currentUser.getJson()._id;
+                      obj.type = "contact";
+                      return obj;
+                    });
+                    this.dispatch({
+                      uploadData: data,
+                      popupSwitch: "uploadData",
+                    });
+                    await this.operationsFactory.prepare({ prepare: data });
 
-                  this.operationsFactory.run();
-                }}
-              />
-              {/* <div className="btn-gray">
+                    this.operationsFactory.run();
+                  }}
+                />
+                {/* <div className="btn-gray">
                                 Views
                             </div> */}
-              {/* <div id="toggleTags" className="btn-gray">
+                {/* <div id="toggleTags" className="btn-gray">
                                 Show Tags
                             </div> */}
-              {/* <PopupButton
+                {/* <PopupButton
                                 formclassName="FCImgButton"
                                 wrapperclassName="none"
                                 content={<div  className="btn-gray">
@@ -161,12 +260,12 @@ export default class ContactsCard extends BaseComponent {
                                 </div>}
                                 popupSwitch="addContact"
                             /> */}
-              
+
                 <SCAIPopupButtonTest
                   wrapperclassName="none"
                   content={
                     <div
-                    
+
                       className="dark-button-1"
                       style={{
                         position: "relative",
@@ -178,41 +277,93 @@ export default class ContactsCard extends BaseComponent {
                   }
                   popupSwitch="addContact"
                 />
-              
-            </div>)}
+
+              </div>)}
           </div>
         </div>
 
         {/* Header row for the contacts data table */}
 
-        <div style={{paddingBottom:'60px'}}>
+        <div style={{ paddingBottom: '60px' }}>
           {" "}
           {/*scrollable section */}
           <MapComponent
             filterFunc={(o) => {
+              // If there's no text in the search bar, we show all contacts.
               if (!this.propsState.tags) {
-                return true;
+                  return true;
               }
-              let filterText = this.propsState.tags.split(",");
-              for (let tag of filterText) {
-                if (tag === "") {
-                  continue;
-                }
-                if (o.getJson().tags.includes(tag)) {
-                  return true;
-                }
-                if(o.getJson().finishedSequenceTags.includes(tag)){
-                  return true;
-                }
-                if(tag==="replied"){
-                  if(o.getJson().replied){
-                    return true;
+          
+              // If the user has unchecked all filter categories (Name, Company, Tags),
+              // then no contact can match the search criteria.
+              const noFiltersActive = !this.state.filterName && !this.state.filterCompany && !this.state.filterTags;
+              if (noFiltersActive) {
+                  return false;
+              }
+          
+              // Prepare the search terms from the input field.
+              // This splits a comma-separated string into an array of individual terms,
+              // converts them to lowercase, trims whitespace, and removes any empty entries.
+              const searchTerms = this.propsState.tags.toLowerCase().split(",").map(term => term.trim()).filter(term => term);
+              const contactJson = o.getJson();
+          
+              // We now check if any of the search terms match the contact in any of the active filter categories.
+              for (const term of searchTerms) {
+                  // Search by Name (if enabled)
+                  if (this.state.filterName) {
+                      // Safely get lowercase first and last names, defaulting to an empty string if null/undefined.
+                      const firstName = (contactJson.firstName || '').toLowerCase();
+                      const lastName = (contactJson.lastName || '').toLowerCase();
+                      const fullName = `${firstName} ${lastName}`;
+          
+                      // Check if the search term is a substring of the full name.
+                      if (fullName.includes(term)) {
+                          return true;
+                      }
                   }
-                }
+          
+                  // Search by Company (if enabled)
+                  // Performs a case-insensitive substring search on the contact's company.
+                  if (this.state.filterCompany && contactJson.company && contactJson.company.toLowerCase().includes(term)) {
+                      return true;
+                  }
+          
+                  // Search by Tags (if enabled)
+                  if (this.state.filterTags) {
+                    debugger
+                      // Handle standard tags, now treated as a comma-separated string.
+                      if (contactJson.tags && typeof contactJson.tags === 'string') {
+                          const tagList = contactJson.tags.split(',').map(t => t.trim().toLowerCase());
+                          for(let check of tagList){
+                            if (check.includes(term)) {
+                              return true;
+                          }
+                          }
+                         
+                      }
+          
+                      // Handle finished sequence tags, also a comma-separated string.
+                      if (contactJson.finishedSequenceTags && typeof contactJson.finishedSequenceTags === 'string') {
+                          const finishedTagList = contactJson.finishedSequenceTags.split(',').map(t => t.trim().toLowerCase());
+                          for(let check of finishedTagList){
+                            if (check.includes(term)) {
+                              return true;
+                          }
+                          }
+                         
+                      }
+                      
+                      // Special case to check for replied status.
+                      if (term === "replied" && contactJson.replied) {
+                          return true;
+                      }
+                  }
               }
-
+          
+              // If, after checking all terms against all active filters, no match was found,
+              // the contact should be filtered out.
               return false;
-            }}
+          }}
             name="contact"
             mapContainerclassName="contact-list"
             mapSectionclassName="contact"
@@ -254,9 +405,9 @@ export default class ContactsCard extends BaseComponent {
         </div>
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
-            <button  
-            onClick = {()=>{this.dispatch({popupSwitch:"addTags"})}} 
-            className="floating-select-btn">
+            <button
+              onClick={() => { this.dispatch({ popupSwitch: "addTags" }) }}
+              className="floating-select-btn">
               <span className="floating-select-btn-text">Tags</span>
             </button>
             <button
@@ -273,7 +424,7 @@ export default class ContactsCard extends BaseComponent {
             <button className="floating-select-btn floating-select-primary-btn">
               <PopupButton
                 content={
-                  <span className="floating-select-btn-text" style={{color:"white"}}>
+                  <span className="floating-select-btn-text" style={{ color: "white" }}>
                     Add to Sequence
                   </span>
                 }
@@ -282,7 +433,8 @@ export default class ContactsCard extends BaseComponent {
             </button>
           </div>
         )}
-      </div>
+      </div>}
+      </>
     );
   }
 
