@@ -42,7 +42,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
   */
  export default class App extends AppBaseClass {
    constructor(props) {
-     super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
+     super(props, { db: db, endpoint: "viridian", auth: auth, storage: storage });
      this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
@@ -111,7 +111,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
       }
     }
     
-    if(this.state.currentUser.getJson().role==="client"){
+    if(this.state.currentUser?.getJson().role==="client"){
       this.dispatch({
         routes:[
           {comp: ClientProfilePage, name:"Dash", path:"/" },

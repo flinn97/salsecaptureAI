@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "salescaptureai"
-  }
+    "default": "viridian-3afda",
+    "viridian": "viridian-3afda"
+  },
+  "targets": {},
+  "etags": {}
 }

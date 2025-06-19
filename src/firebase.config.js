@@ -5,13 +5,12 @@ import {getAuth} from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1ejMnWWe98bFa29RwIiBBB7UndNdJ1cA",
-  authDomain: "salescaptureai.firebaseapp.com",
-  projectId: "salescaptureai",
-  storageBucket: "salescaptureai.firebasestorage.app",
-  messagingSenderId: "392166418592",
-  appId: "1:392166418592:web:7807d9aafec37b8c0581c5",
-  measurementId: "G-BTPP6403LT"
+  apiKey: "AIzaSyAoReJ73uMcZ6FahopnVZmfeMKld4jiIgY",
+  authDomain: "viridian-3afda.firebaseapp.com",
+  projectId: "viridian-3afda",
+  storageBucket: "viridian-3afda.firebasestorage.app",
+  messagingSenderId: "156480615416",
+  appId: "1:156480615416:web:acda86fcfa52a332e51c0d"
 };
 
 // Initialize Firebase
