@@ -30,25 +30,28 @@ export default class ClientInfoCard extends BaseComponent {
     return (
       <div className="bio-container">
         <h1 className="bio-title">Biographical Info</h1>
+
         <ParentFormComponent obj={obj} name="firstName"  /> 
         <ParentFormComponent obj={obj} name="lastName" /> 
 
       
 
         <div className="bio-input-icon">
-          <span className="icon">📞</span>
-          <ParentFormComponent obj={obj} name="phone" /> 
+          <div className="row">
+            <ParentFormComponent obj={obj} name="phone" />
+          </div>
+
         </div>
 
         <div className="bio-input-icon">
-          <span className="icon">✉️</span>
+          <div className="row">
           <ParentFormComponent obj={obj} name="email"/> 
-
+          </div>
          
         </div>
 
         <div className="dob-container">
-          <span className="icon">🎂</span>
+          <span className="icon"><i className="fa-solid fa-cake-candles"></i></span>
           <select
             className="dob-select"
             value={this.state.day}

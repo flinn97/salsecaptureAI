@@ -45,7 +45,9 @@ export default class ClientRegisterCard extends BaseComponent {
         return (
             <div className="mobile-container">
     <div className="task-name"><div>Register</div></div>
-    <input 
+                <div className="register-input col">
+    <input
+        className="vir-input-one-line"
         type={"text"} 
         value={this.state.email}  
         onChange={(e) => {
@@ -55,7 +57,8 @@ export default class ClientRegisterCard extends BaseComponent {
         placeholder="Enter Email"
     />
 
-    <input 
+    <input
+        className="vir-input-one-line"
         type={this.state.showPasswords ? "text" : "password"} 
         value={this.state.password}  
         onChange={(e) => {
@@ -65,7 +68,8 @@ export default class ClientRegisterCard extends BaseComponent {
         placeholder="Enter password"
     />
 
-    <input 
+    <input
+        className="vir-input-one-line"
         type={this.state.showPasswords ? "text" : "password"} 
         value={this.state.password2} 
         onChange={(e) => {
@@ -75,17 +79,21 @@ export default class ClientRegisterCard extends BaseComponent {
         placeholder="Confirm password"
     />
 
-    <div>
-        <label>
-            <input 
-                type="checkbox" 
-                checked={this.state.showPasswords} 
-                onChange={(e) => {
-                    this.setState({ showPasswords: e.target.checked });
-                }} 
-            />
-            Show Passwords
-        </label>
+
+
+    <div className="vir-forget-pass">
+            <label>
+                <input
+
+                    type="checkbox"
+                    checked={this.state.showPasswords}
+                    onChange={(e) => {
+                        this.setState({ showPasswords: e.target.checked });
+                    }}
+                />
+                Show Passwords
+            </label>
+
     </div>
 
     <div onClick={async () => {
@@ -108,7 +116,9 @@ export default class ClientRegisterCard extends BaseComponent {
             this.dispatch({prepUser:user, clientRegisterState:"startQuestions", currentContact:contact});
             
         }
-    }}>Submit</div>
+    }} className="btn-vir">Submit</div>
+
+                </div>
 
     {this.state.message && (
         <div className="error-message">{this.state.message}</div>

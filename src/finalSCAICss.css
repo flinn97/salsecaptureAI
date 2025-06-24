@@ -248,9 +248,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  &.profile-status-active{
-    color: var(--app-background-color);
-  }
+
 }
 
 .profile-status i {
@@ -407,22 +405,22 @@ body {
   justify-content: center;
 }
 
-.icon {
-  width: 50px;
-  height: 50px;
-  font-size: 2rem;
-  color: var(--app-light-gray);
-  background-color: var(--app-green);
-  border-radius: 0.5rem;
-  position: relative;
-}
+/*.icon {*/
+/*  width: 50px;*/
+/*  height: 50px;*/
+/*  font-size: 2rem;*/
+/*  color: var(--app-light-gray);*/
+/*  background-color: var(--app-green);*/
+/*  border-radius: 0.5rem;*/
+/*  position: relative;*/
+/*}*/
 
-.icon i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+/*.icon i {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  transform: translate(-50%, -50%);*/
+/*}*/
 
 .icon-container {
   display: flex;
@@ -709,7 +707,6 @@ body {
 }
 
 .card-header{
-  color: var(--unnamed-color-262626);
   text-align: left;
   font: normal normal 900 16px/22px Satoshi;
   letter-spacing: 0px;
@@ -1395,3 +1392,359 @@ body {
 
 }
 
+.register-input input{
+  background-color: #e9f4f1;
+  border: none;
+  font: inherit;
+  color: #000;
+  box-shadow: none;
+  outline: none;
+ }
+
+.vir-input-one-line{
+  justify-content: left;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width:300px;
+}
+
+
+.btn-vir {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--app-darker-gray);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width:300px;
+}
+
+.vir-forget-pass{
+  display:flex;
+  justify-content: left;
+  padding: 0 0.25rem;
+  margin-bottom: 1rem;
+  width:300px;
+}
+
+.vir-forget-pass input[type="checkbox"]{
+margin-right:0.75rem;
+}
+
+
+.fit.task-container-div {
+  width: 100%;
+}
+
+
+.welcome-subtitle{
+  font-weight:900;
+  margin-bottom:3rem;
+}
+
+.welcome-container button{
+  font-weight: 900;
+}
+
+
+.bio-container>:nth-child(2)>input,
+.bio-container>:nth-child(3)>input,
+.bio-container>:nth-child(4) input,
+.bio-container>:nth-child(5) input{
+  border: none;
+  font: inherit;
+  color: #000;
+  box-shadow: none;
+  outline: none;
+
+  justify-content: left;
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+
+}
+.bio-container>:nth-child(2)>input,
+.bio-container>:nth-child(3)>input{
+  width:100%;
+}
+
+.bio-container>:nth-child(4),
+.bio-container>:nth-child(5){
+  width:50%;
+}
+.bio-container>:nth-child(4)>input,
+.bio-container>:nth-child(5)>input{
+  width:50%;
+}
+
+
+.bio-input-icon .icon{
+  position: static;
+  width:auto;
+  height:auto;
+  background-color:transparent;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+
+.bio-input-icon:nth-child(4)>.row>:nth-child(1)::before{
+  content: url("./assets/phone-flip-solid.svg");
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+/*div.bio-input-icon:nth-child(6){*/
+/*  background-color:black;*/
+/*}*/
+
+.bio-input-icon:nth-child(5)>.row>:nth-child(1)::before{
+  content: url("./assets/envelope-solid.svg");
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+.bio-input-icon>.row>:nth-child(1)>input{
+  width:auto;
+  margin-bottom:0;
+}
+
+.bio-input-icon>.row>:nth-child(1){
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+
+
+.about-container input{
+  border: none;
+  font: inherit;
+  color: #000;
+  box-shadow: none;
+  outline: none;
+
+  justify-content: left;
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+
+.dashboard-card{
+  background-color: #e9f4f1;
+  border-radius: 1.5rem;
+  padding: 1rem 1rem;
+  margin: 1rem 1rem;
+}
+
+.fit.client-dash-div>:nth-child(1){
+ width:auto;
+}
+
+.dash-current-row-goal, .dash-current-row-goal>.dashboard-card{
+  width:100%;
+}
+
+.vir-dash-first-col-second-row{
+  height:250px;
+}
+
+.vir-dash-first-col-second-row>.col, .vir-dash-first-col-second-row .dashboard-card{
+  height:100%;
+}
+
+.dash-current-row-goal{
+  height:500px;
+}
+
+.dash-current-row-goal>.dashboard-card{
+  height:100%;
+}
+
+
+.client-dash-div{
+}
+
+@media (min-width: 850px) {
+  .fullScreen>.fit {
+    margin-left: 300px;
+    width: 80%;
+  }
+}
+
+.fullScreen>.fit.client-dash-div {
+  width: calc(100% - 300px);
+  display: flex;
+}
+
+
+/*fix overall layout for viridian*/
+
+.fit.task-container-div{
+  margin-left:0 !important;
+}
+
+body{
+  padding-bottom:0 !important;
+}
+
+@media (min-width: 850px) {
+  .fit.task-container-div {
+    width: 100%;
+  }
+}
+
+.fit.task-container-div .fit{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.fit.task-container-div>div{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.bio-container>div{
+  width:300px;
+}
+.bio-container>div:nth-child(2),
+.bio-container>div:nth-child(3){
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+
+
+.bio-container>:nth-child(4), .bio-container>:nth-child(5) {
+  width:300px;
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+
+.about-container .about-coach input[type="checkbox"]{
+  margin-bottom:0;
+}
+
+.card-content-vertical-align{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.dashboard-card{
+  display:flex;
+  flex-direction:column;
+
+}
+.dashboard-container .defaultWrapper{
+  display:flex;
+}
+.dashboard-container .defaultWrapper .defaultButton{
+  background-color: #c7e2d9;
+  color:#234a3e;
+  font-weight:800;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1.5rem;
+  width:auto;
+}
+
+.dashboard-container{
+  color:#234a3e;
+}
+
+.highlight-font{
+  font-weight:1000;
+}
+
+.billing-amount{
+  background-color: #c7e2d9;
+  color:#234a3e;
+  font-weight:1000;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  margin-bottom:1rem;
+  display:inline-block;
+}
+
+.card-header{
+  font-family: 'Satoshi-Variable', sans-serif;
+  position:absolute;
+  top:0;
+  left:0;
+  margin:0.5rem 1rem;
+}
+.dashboard-card{
+  position:relative;
+}
+
+.dashboard-card{
+  width:100%;
+}
+.dashboard-container>div{
+  width:100%;
+}
+.dashboard-container>div>div:nth-child(1){
+  width:65%;
+}
+.dashboard-container>div>div:nth-child(2){
+  width:35%;
+}
+
+.fit.client-dash-div>:nth-child(1) {
+  width: 100%;
+}
+.vir-dash-first-col-second-row{
+  width:100%;
+  padding: 1rem 1rem;
+  margin: 1rem 1rem;
+}
+.vir-dash-first-col-second-row>div:nth-child(1){
+  width:50%;
+  margin-right: 1rem;
+}
+.vir-dash-first-col-second-row>div:nth-child(2){
+  width:50%;
+  margin-left:1rem;
+}
+
+.dashboard-container>div>div:nth-child(2)>div:nth-child(1){
+  width:100%;
+}
+.dashboard-container>div>div:nth-child(2)>div:nth-child(2){
+  width:100%;
+}
+
+.vir-sec-col{
+justify-content: start;
+  height:100%;
+}
+.dashboard-container>div{
+  align-items:start;
+}
+
+.vir-sec-col>div:nth-child(2) .dashboard-card{
+  min-height:300px;
+}
+
+.card-content.coach-info>div:nth-child(1){
+  margin-top:1rem;
+}
+.vir-sec-col .dashboard-card:nth-child(1){
+  margin-top:0;
+}
