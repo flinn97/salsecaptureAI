@@ -119,6 +119,7 @@
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
+    height: 100vh;
   }
   
   .contact-checkbox {
@@ -280,4 +281,14 @@ input[type="file"] {
 
 .checkbox-container input:checked ~ .checkmark:after {
   display: none;
+}
+
+/* Hide scrollbar in all major browsers */
+.flinnTechVirtuoso {
+  overflow-y: hidden;             /* turn off the scrollbar */
+  -ms-overflow-style: none;       /* IE & Edge */
+  scrollbar-width: none;          /* Firefox */
+}
+.flinnTechVirtuoso::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Opera */
 }

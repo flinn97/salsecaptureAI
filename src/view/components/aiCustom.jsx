@@ -64,7 +64,7 @@ class AICustomItem extends BaseComponent {
                 </div>
                 <CsvUpload
                 callBack={async (data) => {
-                    debugger
+                    
                     let id = urlService.getIdFromURL()
                     let csv = await this.operationsFactory.prepare({prepare:{type:"csv", researchId:research._id}})
                     csv = csv[0]

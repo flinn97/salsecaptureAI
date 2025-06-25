@@ -13,7 +13,7 @@ class SequenceCustomItem extends BaseComponent {
     }
 
     async componentDidMount(){
-        debugger
+        
         const { obj } = this.props;
         let sequenceOpenRates = await this.componentList.getComponentsFromBackend({type:"open", ids: obj.getJson()._id, filterKeys: "sequenceId",});
         this.setState({opens: sequenceOpenRates.length})

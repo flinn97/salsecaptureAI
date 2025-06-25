@@ -39,6 +39,8 @@ export default class ContactsCard extends BaseComponent {
     this.dispatch({ selectedContacts: [] })
 
     this.APIService.subscribeToReadObserver(async ()=>{
+
+      
       
       await this.componentList.sortSelectedListbyFirebaseDate('contact', true);
       this.setState({start:true})
@@ -46,6 +48,7 @@ export default class ContactsCard extends BaseComponent {
     })
     this.APIService.subscribeToDispatchObserver(async (changes) => {
       debugger
+      
       // grab the live array of contact-components
       const list = this.componentList.getList("contact");
     
@@ -102,20 +105,84 @@ export default class ContactsCard extends BaseComponent {
   };
 
   filterFunc() {
-    let filterText = this.propsState.tags?.split(",") || "";
-    let contactList = this.componentList.getList("contact");
-    let newList = [];
-    if (filterText) {
-      for (let tag of filterText) {
-        let list = contactList.filter((obj) =>
-          obj.getJson().tags.includes(tag)
-        );
-        newList = [...newList, ...list];
-      }
-    } else {
-      newList = [...contactList];
+    const { tags } = this.propsState;
+    const contactList = this.componentList.getList("contact");
+  
+    // 1️⃣ If there's no text in the search bar, show all contacts.
+    if (!tags) {
+      this.dispatch({ selectedContacts: [...contactList] });
+      return;
     }
-
+  
+    // 2️⃣ If no filter categories are active, show none.
+    const noFiltersActive = !this.state.filterName &&
+                            !this.state.filterCompany &&
+                            !this.state.filterTags;
+    if (noFiltersActive) {
+      this.dispatch({ selectedContacts: [] });
+      return;
+    }
+  
+    // 3️⃣ Prepare search terms (lowercased, trimmed, non-empty).
+    const searchTerms = tags
+      .toLowerCase()
+      .split(",")
+      .map(term => term.trim())
+      .filter(term => term);
+  
+    // 4️⃣ Filter the list.
+    const newList = contactList.filter(o => {
+      const json = o.getJson();
+      return searchTerms.some(term => {
+        // Name filter
+        if (this.state.filterName) {
+          const first = (json.firstName || "").toLowerCase();
+          const last  = (json.lastName  || "").toLowerCase();
+          if (`${first} ${last}`.includes(term)) {
+            return true;
+          }
+        }
+  
+        // Company filter
+        if (this.state.filterCompany &&
+            json.company &&
+            json.company.toLowerCase().includes(term)) {
+          return true;
+        }
+  
+        // Tags filter
+        if (this.state.filterTags) {
+          // standard tags
+          if (typeof json.tags === "string") {
+            const tagList = json.tags
+              .toLowerCase()
+              .split(",")
+              .map(t => t.trim());
+            if (tagList.some(t => t.includes(term))) {
+              return true;
+            }
+          }
+          // finishedSequenceTags
+          if (typeof json.finishedSequenceTags === "string") {
+            const seqTags = json.finishedSequenceTags
+              .toLowerCase()
+              .split(",")
+              .map(t => t.trim());
+            if (seqTags.some(t => t.includes(term))) {
+              return true;
+            }
+          }
+          // special “replied” case
+          if (term === "replied" && json.replied) {
+            return true;
+          }
+        }
+  
+        return false;
+      });
+    });
+  
+    // 5️⃣ Dispatch the filtered result.
     this.dispatch({ selectedContacts: newList });
   }
 
@@ -330,7 +397,7 @@ export default class ContactsCard extends BaseComponent {
           
                   // Search by Tags (if enabled)
                   if (this.state.filterTags) {
-                    debugger
+                    
                       // Handle standard tags, now treated as a comma-separated string.
                       if (contactJson.tags && typeof contactJson.tags === 'string') {
                           const tagList = contactJson.tags.split(',').map(t => t.trim().toLowerCase());
@@ -365,8 +432,9 @@ export default class ContactsCard extends BaseComponent {
               return false;
           }}
             name="contact"
-            mapContainerclassName="contact-list"
-            mapSectionclassName="contact"
+            type="viewPortMap"
+            mapContainerClass="contact-list"
+            mapSectionClass="contact"
             cells={[
               {
                 type: "custom",
