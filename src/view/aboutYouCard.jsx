@@ -60,7 +60,7 @@ export default class AboutYouCard extends BaseComponent {
           relationships, family, etc.)
         </p>
 
-        <ParentFormComponent obj={obj} name="work" /> 
+        <ParentFormComponent type={"quill"} rows={4} obj={obj} name="work" />
 
 
         <div className="about-coach">
