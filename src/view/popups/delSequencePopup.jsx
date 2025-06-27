@@ -54,9 +54,13 @@ export default class DeleteSequenceDialog extends BaseComponent {
             Cancel
           </div>
 
-          <DelButton obj={this.propsState.delSequence} content={"Delete"} inPopup={true} isPopup={true} callbackFunc={()=>{this.dispatch({popupSwitch:"", delSequence:undefined})}}
-            className="dark-button-1"
-           
+          <DelButton 
+            obj={this.propsState.delSequence} 
+            content={"Delete"} 
+            inPopup={true} 
+            isPopup={true} 
+            callbackFunc={()=>{this.dispatch({popupSwitch:"", delSequence:undefined})}}
+            className="dark-button-1 del-button-red"
           />
             
           

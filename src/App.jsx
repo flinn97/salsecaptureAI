@@ -34,6 +34,7 @@ import ClientPage from './view/clientPage.jsx';
 import AddUserPopup from './view/addUserPopup.jsx';
 import UserPage from './view/userPage.jsx';
 import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
+import WelcomePage from './view/welcomePage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -69,7 +70,7 @@ import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<1000&& "absolute",bottom:window.innerWidth<1000&& "0px", fontFamily:"'Satoshi-Variable', sans-serif" }, 
         logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white", fontFamily:"'Satoshi-Variable', sans-serif"}, },
        routes: [
-         { comp: Conversations, name: "Home", path: "/" },
+         { comp: WelcomePage, name: "Home", path: "/" },
          { comp: Conversations, name: "Messages", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
@@ -93,8 +94,6 @@ import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
          { content: AddToSequence, popupSwitch: "addToSequence" },
          { content: AddTags, popupSwitch: "addTags" },
          { content: DeleteSequenceDialog, popupSwitch: "delSequence" },
-
-
        ],
      };
  
@@ -133,7 +132,7 @@ import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
         this.dispatch({
           refresh:false,
           routes: [
-            { comp: Conversations, name: "Home", path: "/" },
+            { comp: WelcomePage, name: "Home", path: "/" },
             { comp: Conversations, name: "Messages", path: "conversation" },
     
             { comp: Contacts, name: "Contacts", path: "contacts" },
