@@ -88,7 +88,7 @@ body {
 
 .row-left {
   justify-content: left;
-  padding: 0.5rem 1rem;
+  padding:0.5rem 1rem;
 }
 
 /* CSS rules for selectors with identical definitions across all occurrences */
@@ -1199,10 +1199,7 @@ body {
 
 /*general*/
 
-.row-left{
-  justify-content: left;
-  padding: 0.5rem 1rem;
-}
+
 .col-left{
   align-items: start;
   padding: 0.5rem 1rem;
@@ -1579,13 +1576,13 @@ margin-right:0.75rem;
 
 @media (min-width: 850px) {
   .fullScreen>.fit {
-    margin-left: 300px;
+    margin-left: 15vw;
     width: 80%;
   }
 }
 
 .fullScreen>.fit.client-dash-div {
-  width: calc(100% - 300px);
+  width: calc(100% - 15vw);
   display: flex;
 }
 
@@ -1747,4 +1744,27 @@ justify-content: start;
 }
 .vir-sec-col .dashboard-card:nth-child(1){
   margin-top:0;
+}
+
+.dash-add-top-rem{
+  padding-top:0.5rem;
+}
+
+.dob-container select option{
+  color:black;
+}
+
+
+.about-container div.quill{
+  background-color: #e9f4f1;
+  border-radius: 0.5rem;
+}
+
+.vir-task-container{
+  width:600px;
+  margin-top:3rem;
+
+}
+.mobile-container:has(.vir-task-container){
+  height:100vh;
 }

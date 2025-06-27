@@ -31,7 +31,7 @@
          className={this.props.pageClass || this.state.defaultClass}
          style={{ padding: "20px", height: "100%", overflowY: "auto" }}
        >
-         <div className="row row-left">
+         <div className="row row-left dash-add-top-rem">
            {/*first col*/}
          <div className="col vir-dash-first-col-first-row">
            {/*current goal row*/}
