@@ -1,0 +1,22 @@
+.layoutColumn-welcome {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
+    margin-top: 12%;
+    line-height: 1.6em;
+}
+
+.inLine-Link {
+    display: inline;
+    margin: 4px 0px;
+    font-weight: 500;
+    text-decoration: underline;
+    color: grey;
+}
+
+.move-img-btm{
+    margin-top: 30%;
+    width: 94%;
+}

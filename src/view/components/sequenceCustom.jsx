@@ -52,7 +52,7 @@ class SequenceCustomItem extends BaseComponent {
                     </Link>
 
                     <Link to={"/sequence/" + sequence._id}
-                        style={{ marginRight: "0px" }}
+                        style={{ marginRight: "10px" }}
                         onClick={() => { this.dispatch({ popupSwitch: "", currentPopupComponent: undefined }) }}
                         className="title-right">
                         View Details
@@ -84,8 +84,10 @@ class SequenceCustomItem extends BaseComponent {
                         <div>{sequence?.bounceRate ? `${sequence?.bounceRate}%` : `N/A`}</div>
                     </div>
                 </div>
-                <div style={{position:"absolute", right:"0px"}} className="del-icon">
-                    <div onClick={()=>{this.dispatch({popupSwitch:"delSequence", delSequence:this.props.obj})}}>X</div>
+                <div style={{position:"absolute", right:"4px", cursor:"pointer"}} className="del-icon">
+                    <div onClick={()=>{this.dispatch({popupSwitch:"delSequence", delSequence:this.props.obj})}}>
+                    <i className="fa-solid fa-xmark"></i>
+                    </div>
                 </div>
             </div>
         );
