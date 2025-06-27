@@ -10,7 +10,7 @@ class BottomNavCustom extends NavMapContainer{
         return <div className="bottom-nav">
                 <Link to="/conversation" className="bottom-nav-item">
                     <i className="fa-solid fa-message"></i>
-                    <span>Messages</span>
+                    <span>Messages Beta</span>
                 </Link>
                 <Link to="/contacts" className="bottom-nav-item">
                     <i className="fa-solid fa-address-book"></i>

@@ -70,7 +70,7 @@ import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
         logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white", fontFamily:"'Satoshi-Variable', sans-serif"}, },
        routes: [
          { comp: Conversations, name: "Home", path: "/" },
-         { comp: Conversations, name: "Messages", path: "conversation" },
+         { comp: Conversations, name: "Messages Beta", path: "conversation" },
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
          { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
