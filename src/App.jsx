@@ -70,8 +70,10 @@ import WelcomePage from './view/welcomePage.jsx';
         cardStyle:{backgroundColor:"#35b593", position:window.innerWidth<1000&& "absolute",bottom:window.innerWidth<1000&& "0px", fontFamily:"'Satoshi-Variable', sans-serif" }, 
         logoURL:window.innerWidth>1000&&Logo, linkItemStyle:{color:"white", fontFamily:"'Satoshi-Variable', sans-serif"}, },
        routes: [
+
          { comp: WelcomePage, name: "Home", path: "/" },
-         { comp: Conversations, name: "Messages", path: "conversation" },
+         { comp: Conversations, name: "Messages Beta", path: "conversation" },
+
  
          { comp: Contacts, name: "Contacts", path: "contacts" },
          { comp: ResearchPage, name: "Research", path: "research", idComp:ProspectPage },
