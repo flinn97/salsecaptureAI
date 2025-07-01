@@ -209,7 +209,7 @@ export default class ContactsCard extends BaseComponent {
               <div className="nav-title">Contacts</div>
             </div>
 
-            <div className="nav-right">
+            {/* <div className="nav-right">
               <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
@@ -251,7 +251,7 @@ export default class ContactsCard extends BaseComponent {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
           </nav>
 
           <div className="search-container">

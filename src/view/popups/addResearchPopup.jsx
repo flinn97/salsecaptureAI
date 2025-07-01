@@ -50,7 +50,7 @@ export default class ResearchPopup extends BaseComponent {
 
     return (
       <div
-        style={{ padding: "1px", paddingBottom: "100px", height: "100%" }}
+        style={{ padding: "10px", paddingBottom: "100px", height: "100%" }}
         className={this.props.pageClass || this.state.defaultClass}
       >
         <h2>{text} Research Prompt</h2> {/*Heading for the popup*/}

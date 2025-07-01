@@ -110,7 +110,7 @@ export default class ConversationList extends BaseComponent {
         style={{ marginLeft: "-10px", minWidth:"fit-content" }}
       >
         {/* Header */}
-        <div className="header">Messages</div>
+        <div className="header">Messages Beta</div>
 
         {/* Optional Search Bar */}
         <div className="search-container">
