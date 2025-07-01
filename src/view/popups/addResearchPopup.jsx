@@ -56,11 +56,15 @@ export default class ResearchPopup extends BaseComponent {
         <h2>{text} Research Prompt</h2> {/*Heading for the popup*/}
         <div
           className="contact-contact-data"
-          style={{ padding: "10px", background: "rgb(245, 244, 244)", borderRadius:"12px" }}
+          style={{
+            padding: "10px",
+            background: "rgb(245, 244, 244)",
+            borderRadius: "12px",
+          }}
         >
-          <div className="row-container" style={{flexDirection:"column"}}>
+          <div className="row-container" style={{ flexDirection: "column" }}>
             <div className="row-name">Profile Name:</div>
-            <div className="row-field" style={{width:"100%"}}>
+            <div className="row-field" style={{ width: "100%" }}>
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
@@ -73,14 +77,14 @@ export default class ResearchPopup extends BaseComponent {
               {/*Component for name input*/}
             </div>
           </div>
-          <div className="row-container" style={{flexDirection:"column"}}>
+          <div className="row-container" style={{ flexDirection: "column" }}>
             <div className="row-name">Search Frequency:</div>
-            <div className="row-field" style={{width:"100%"}}>
+            <div className="row-field" style={{ width: "100%" }}>
               {" "}
               {/*Container for the name input*/}
               <ParentFormComponent
                 obj={obj}
-                placeholder="Daily"
+                placeholder="How often do you want new research results?"
                 // formClass="underline-form"
                 name="searchFrequency"
                 inputType="select"
@@ -91,14 +95,14 @@ export default class ResearchPopup extends BaseComponent {
             </div>
           </div>
 
-          <div className="row-container" style={{flexDirection:"column"}}>
-            <div className="row-name">AI Prompt:</div>
-            <div className="row-field" style={{width:"100%"}}>
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Description:</div>
+            <div className="row-field" style={{ width: "100%" }}>
               {" "}
               {/*Container for the AI Prompt input*/}
               <ParentFormComponent
                 obj={obj}
-                placeholder={`ie: "Research VP of Sales at Tech Companies in Utah"`}
+                placeholder={`Describe your target prospect. “I.e. Research VP of Sales at Tech Companies with less than 100M in sales”`}
                 // formClass="underline-form"
                 name="AIPrompt"
                 // type="quill"
@@ -108,16 +112,131 @@ export default class ResearchPopup extends BaseComponent {
             </div>
           </div>
 
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Keywords:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                placeholder={`Which keywords are in the title of the prospects you are seeking?`}
+                // formClass="underline-form"
+                name="keywords"
+                // type="quill"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Company Size by Revenue:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                name="companySizebyRevenue"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Company Size by # of Employees:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                name="companySizebyEmployees"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Geographic Location:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                name="location"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Decision Making Level:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                placeholder={`Any, Non-Manager, Manager, Director, VP, C-Level`}
+                name="contactLevel"
+                inPopup={true}
+                inputType="select"
+                selectOptions={[
+                  "Any",
+                  "Non-Manager",
+                  "Director",
+                  "VP",
+                  "C-Level",
+                ]}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Department:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                placeholder={"i.e. IT, HR, Sales, Marketing etc."}
+                name="department"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Disqualifiers:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                placeholder={
+                  "Describe any characteristics, titles, or companies, that you specifically do not want included in the data results. "
+                }
+                name="disqualifiers"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
+
           <div
             style={{
               background: "white",
-              width: "80%",
+              height: "fit-content",
               display: "flex",
               justifyContent: "flex-end",
               alignSelf: "flex-end",
               position: "absolute",
               bottom: 20,
               right: 20,
+              borderRadius:"12px"
             }}
           >
             {" "}
