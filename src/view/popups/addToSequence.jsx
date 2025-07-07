@@ -26,6 +26,15 @@ export default class AddToSequence extends BaseComponent {
       defaultClass: "fit scroller", //Sets a default class for styling
     };
   }
+
+  async componentDidMount(){
+    let accessToken= this.propsState.currentUser.getJson().outreachAccessToken;
+    let sequences = await fetch("https://getsequences-7c5i3vsqma-uc.a.run.app", {
+  headers: { Authorization: `Bearer ${accessToken}` }
+})
+  .then(r => r.json())
+  .then(data => console.log(data));
+  }
   /**
    * Renders the OemPopupContent component.
    * @returns {JSX.Element} The rendered component.
