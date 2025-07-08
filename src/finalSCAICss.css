@@ -182,6 +182,7 @@ body {
 
 .contact {
   padding: 12px 15px;
+  max-height: 73px;
 }
 
 .contact-item {
