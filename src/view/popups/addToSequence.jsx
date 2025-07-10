@@ -29,6 +29,11 @@ export default class AddToSequence extends BaseComponent {
 
   async componentDidMount(){
     let accessToken= this.propsState.currentUser.getJson().outreachAccessToken;
+    let usersAndMailboxes = await fetch("https://getusersandmailboxes-7c5i3vsqma-uc.a.run.app", {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    })
+      .then(r => r.json())
+      .then(data => console.log(data));
     let sequences = await fetch("https://getsequences-7c5i3vsqma-uc.a.run.app", {
   headers: { Authorization: `Bearer ${accessToken}` }
 })

@@ -124,7 +124,7 @@ class ContactsCustomItem extends BaseComponent {
     let selected = cons.includes(obj);
 
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column",}}>
         <div
           className="contact-item hover-darken"
           style={{

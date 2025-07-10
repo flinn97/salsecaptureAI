@@ -435,10 +435,13 @@ export default class ContactsCard extends BaseComponent {
             type="viewPortMap"
             mapContainerClass="contact-list"
             mapSectionClass="contact"
+            wrapperClass="none"
+
             cells={[
               {
                 type: "custom",
                 custom: ContactsCustomItem,
+                wrapperClass:"none"
               },
               // {
               //     type: "custom",
