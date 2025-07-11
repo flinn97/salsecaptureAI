@@ -193,4 +193,18 @@ class Open extends ComponentBase{
         type:"open"
     }
 }
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open };
+
+class OutreachUser extends ComponentBase{
+    json={
+        ...this.json,
+        type:"outreachUser",
+        mailboxId: "",
+        mailboxEmail: ""
+
+    }
+}
+
+
+
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open, OutreachUser };

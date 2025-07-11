@@ -6,95 +6,127 @@ import CheckIt from './check';
 import { Link } from 'react-router-dom';
 import stripHTML from '../../service/heDecoderService';
 import CsvUpload from '../csvUpload';
+import Papa from 'papaparse';
+
 
 class AICustomItem extends BaseComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ...this.state,
-            plainText: "", // Store the stripped text
-          };
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+    };
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+
+  }
+  componentDidUpdate(prevProps) {
+    // update if MapComponent gave us a new obj
+    const newId = this.props.obj.getJson()._id;
+    if (newId !== this.researchId) {
+      this.researchId = newId;
     }
+  }
+  handleFileUpload(e) {
+    debugger
+    const file = e.target.files[0];
+    if (!file) return;
 
-    async componentDidMount() {
-        const body = this.props.obj?.getJson().content;
-        const plainText = stripHTML(body);
-        this.setState({ plainText });
+    Papa.parse(file, {
+      header: true,       // Treat the first row as header
+      skipEmptyLines: true,
+      complete: (results) => {
+        console.log('Parsed CSV data:', results.data);
+        this.handleCsvUpload(results.data)
+      },
+      error: (error) => {
+        console.error('Error while parsing:', error);
+      },
+    });
+  }
 
-        let {obj} = this.props;
-        
-        let csvs = await this.componentList.getComponentsFromBackend({ type: "csv", ids: obj.getJson()._id, filterKeys: "researchId", })
-        this.setState({});
+  async componentDidMount() {
+    const body = this.props.obj?.getJson().content;
+    const plainText = stripHTML(body);
+    this.setState({ plainText });
 
-      }
+    let { obj } = this.props;
 
-    componentDidUpdate(prevProps) {
-        const currentBody = this.props.obj?.getJson().content;
-        const prevBody = this.props.obj?.getJson().content;
-        if (currentBody !== prevBody) {
-          const plainText = stripHTML(currentBody);
-          this.setState({ plainText });
-        }
-    }
+    let csvs = await this.componentList.getComponentsFromBackend({ type: "csv", ids: obj.getJson()._id, filterKeys: "researchId", })
+    this.setState({});
 
-    render() {
-        const { obj } = this.props;
-        let research = obj.getJson();
-        return (
-            <div>
-            <div className="sequence">
-            <div className="title"  style={{
-                justifyContent:"space-between",
-                padding:"2px"}}> 
-                <div 
-                style={{ color: "#262626", maxWidth: "50%", minWidth:"50%", }}
-                  className="title-left">
-                    <span
+  }
+  handleCsvUpload = async (data) => {
+    debugger
+    // always reads the latest this.researchId
+    const csvs = await this.operationsFactory.prepare({
+      prepare: { type: "csv", researchId: this.researchId }
+    });
+    const csv = csvs[0];
+    const ownerId = urlService.getIdFromURL();
+
+    const payload = data.map(row => ({
+      ...row,
+      owner: ownerId,
+      type: "potentialProspect",
+      researchId: this.researchId,
+      csvId: csv.getJson()._id
+    }));
+
+    await this.operationsFactory.prepare({ prepare: payload });
+    this.operationsFactory.run();
+  };
+
+
+
+  render() {
+    const { obj } = this.props;
+    let research = obj.getJson();
+    return (
+      <div>
+        <div className="sequence">
+          <div className="title" style={{
+            justifyContent: "space-between",
+            padding: "2px"
+          }}>
+            <div
+              style={{ color: "#262626", maxWidth: "50%", minWidth: "50%", }}
+              className="title-left">
+              <span
                 style={{
-                width:"100%",
-                display: "inline-block",
-                overflow: "hidden",
-                lineBreak:"anywhere",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                  width: "100%",
+                  display: "inline-block",
+                  overflow: "hidden",
+                  lineBreak: "anywhere",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
                 }}
-                    >
-                    {research.name}
-                </span>
-                </div>
-                <CsvUpload
-                callBack={async (data) => {
-                    
-                    let id = urlService.getIdFromURL()
-                    let csv = await this.operationsFactory.prepare({prepare:{type:"csv", researchId:research._id}})
-                    csv = csv[0]
-
-                  data = data.data.map((obj, i) => {
-                    obj.owner = id;
-                    obj.type = "potentialProspect";
-                    obj.researchId = research._id
-                    obj.csvId = csv.getJson()._id
-                    return obj;
-                  });
-                  
-                  
-                  await this.operationsFactory.prepare({ prepare: data });
-
-                  this.operationsFactory.run();
-                }}
-              />
-    </div>
-                 
-    
+              >
+                {research.name}
+              </span>
             </div>
-            <div>{research.AIPrompt} </div>
-            <MapComponent name="csv" filter={{search:research._id, attribute:"researchId"}} cells={[
-                {type:"attribute", name:"_id"},
-            ]}/>
-           
+          
+            <div className="dark-button-1" style={{ position: 'relative', width: "fit-content" }}>
+
+              <label htmlFor={`file-upload${this.props.obj.getJson()._id}`} className="">
+                Upload
+              </label>
+              <input id={`file-upload${this.props.obj.getJson()._id}`} type="file" accept=".csv" onChange={
+              
+                this.handleFileUpload
+                } />
+
+            </div>
+          </div>
+
+
         </div>
-        );
-    }
+        <div>{research.AIPrompt} </div>
+        <MapComponent name="csv" filter={{ search: research._id, attribute: "researchId" }} cells={[
+          { type: "attribute", name: "_id" },
+        ]} />
+
+      </div>
+    );
+  }
 }
 
 export default AICustomItem;

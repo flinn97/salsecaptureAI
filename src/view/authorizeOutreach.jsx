@@ -78,7 +78,7 @@ export default class AuthorizeOutreachCard extends BaseComponent {
                    `?client_id=${"FVmbvVzJuXA7v1QqONeErtezeL-Rth2L6.UWzJW8IeZL"}` +
                    `&redirect_uri=${encodeURIComponent("https://app.salescapture.ai/settings")}` +
                    "&response_type=code" +
-                   "&scope=sequences.read%20prospects.write%20sequenceStates.write" +
+                   "&scope=sequences.read%20sequenceStates.write%20users.all%20mailboxes.all%20prospects.all" +
                    "&state=xyz123"
                }}>
             Connect Outreach
