@@ -5,6 +5,7 @@ import ClientRegisterCard from "./registerClientCard";
 import StartQuestionsCard from "./startQuestionsCard";
 import ClientInfoCard from "./clientInfoCard";
 import AboutYouCard from "./aboutYouCard";
+
 // import StartQuestionsCard from "./StartQuestionsCard"; // uncomment & adjust path if you have this
 
 export default class ClientRegister extends BaseComponent {
@@ -22,7 +23,11 @@ export default class ClientRegister extends BaseComponent {
       default: ClientRegisterCard,
       startQuestions: StartQuestionsCard,
       clientInfo: ClientInfoCard,
-      aboutYou: AboutYouCard
+      aboutYou: AboutYouCard,
+     
+
+
+
 
     };
 

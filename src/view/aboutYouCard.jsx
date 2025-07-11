@@ -12,78 +12,60 @@ export default class AboutYouCard extends BaseComponent {
       ...this.state,
       aboutText: "",
       hadCoach: null, // "yes" or "no"
+      priority:0
     };
   }
 
-  handleTextChange = (e) => {
-    this.setState({ aboutText: e.target.value });
-  };
 
-  handleCoachChange = (answer) => () => {
-    this.setState({ hadCoach: answer });
-    let obj = this.propsState.currentContact;
-    obj.setCompState({coachAnswer:answer})
-
-  };
 
   handleBack = () => {
-    // TODO: wire this up to navigate to the previous card
-    console.log("Go back");
+    if(this.state.priority!==0){
+      this.setState({priority:this.state.priority-1})
+
+    }
+    else{
+      this.dispatch({clientRegisterState:'clientInfo'})
+    }
   };
 
   handleContinue = async () => {
-    await this.operationsFactory.run();
-    await this.propsState.currentContact.update();
+    if(this.state.priority+1 === this.componentList.getList("question").length){
+      await this.operationsFactory.run();
+      await this.propsState.currentContact.update();
+  
+      this.dispatch({currentUser:this.propsState.currentContact,
+        routes:[
+          {comp: ClientProfilePage, name:"Dash", path:"/" },
+          { comp: TaskPage, name: "Tasks", path: "/tasks" },
+          { comp: Conversations, name: "Messages", path: "conversation" },
+          { comp: SchedulePage, name: "Schedule", path: "schedule" },
+  
+  
+          { comp: Settings, name: "Billing", path: "billing" },
+        ],
+      })
+    }
+    else{
+      this.setState({priority:this.state.priority+1})
 
-    this.dispatch({currentUser:this.propsState.currentContact,
-      routes:[
-        {comp: ClientProfilePage, name:"Dash", path:"/" },
-        { comp: TaskPage, name: "Tasks", path: "/tasks" },
-        { comp: Conversations, name: "Messages", path: "conversation" },
-        { comp: SchedulePage, name: "Schedule", path: "schedule" },
+    }
 
-
-        { comp: Settings, name: "Billing", path: "billing" },
-      ],
-    })
     
   };
 
   getInnerContent() {
     let obj = this.propsState.currentContact
+    let question = this.componentList.getComponent("question", this.state.priority, "priority");
     return (
       <div className="about-container">
-        <h1 className="about-title">About You</h1>
+        <h1 className="about-title">{question.getJson().subject}</h1>
 
         <p className="about-question">
-          What's your current occupation and life situation? (e.g. work,
-          relationships, family, etc.)
+          {question.getJson().question}
         </p>
 
-        <ParentFormComponent type={"quill"} rows={4} obj={obj} name="work" />
+        <ParentFormComponent type={"quill"} rows={4} obj={obj} name={question.getJson()._id}/>
 
-
-        <div className="about-coach">
-          <span className="about-question">
-            Have you worked with a coach or therapist before?
-          </span>
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={this.state.hadCoach === "yes"}
-              onChange={this.handleCoachChange("yes")}
-            />
-            Yes
-          </label>
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={this.state.hadCoach === "no"}
-              onChange={this.handleCoachChange("no")}
-            />
-            No
-          </label>
-        </div>
 
         <div className="about-nav">
           <button

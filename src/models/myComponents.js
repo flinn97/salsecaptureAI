@@ -151,7 +151,12 @@ class Session extends CalendarEvent{
         type:"session",
     }
 }
+class Question extends ComponentBase{
+    json={
+        ...this.json,
+        type:"question",
+    }
+}
 
 
-
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task, Homework, Goal,  Session};
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task, Homework, Goal,  Session, Question};

@@ -55,9 +55,9 @@ export default class ClientInfoCard extends BaseComponent {
           <select
             className="dob-select"
             value={this.state.day}
-            onChange={()=>{
+            onChange={(e)=>{
             
-              this.handleChange("day")
+              this.setState({day:e.target.value})
             }}
           >
             <option value="">Day</option>

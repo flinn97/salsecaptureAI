@@ -100,7 +100,7 @@ export default class ClientRegisterCard extends BaseComponent {
         if (this.state.password !== this.state.password2) {
             this.setState({ message: "Please make sure both passwords are the same" });
         } else {
-            debugger
+            
             this.setState({ message: "" }); // clear message if needed
             // You handle submit
             let password = this.state.password;
@@ -109,11 +109,13 @@ export default class ClientRegisterCard extends BaseComponent {
 
             let contactId = urlService.getIdFromURL();
             let contact = await this.componentList.getComponentFromBackend({type:"contact", ids:contactId, filterKeys:"_id"});
+            let questions = await this.componentList.getComponentsFromBackend({type:"question", ids:contact.getJson().owner, filterKeys:"owner"});
             let newUser = await this.operationsFactory.prepare({prepare:{type:'user', role:"client", firstTime:true, coachId: contact.getJson().owner, email:contact.getJson().email, owner:contact.getJson().email, _id:contact.getJson().email, collection:contact.getJson().email}});
             
             let user = newUser[0];
+
             
-            this.dispatch({prepUser:user, clientRegisterState:"startQuestions", currentContact:contact});
+            this.dispatch({prepUser:user, clientRegisterState:"startQuestions", currentContact:contact, questions:questions});
             
         }
     }} className="btn-vir">Submit</div>
