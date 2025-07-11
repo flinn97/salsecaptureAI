@@ -61,6 +61,7 @@ export default class TaskCard extends BaseComponent {
         
         return (
             <div className="mobile-container">
+                <div className="vir-task-container">
                 <div className="task-name"><div>Tasks</div></div>
                 {/*<div className="top-nav-float">*/}
                 {/*    <nav className="top-nav">*/}
@@ -227,6 +228,7 @@ export default class TaskCard extends BaseComponent {
                         </button>
                     </div>
                 }
+                </div>
             </div>
         );
     }

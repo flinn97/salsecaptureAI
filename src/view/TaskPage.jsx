@@ -38,7 +38,7 @@ export default class TaskPage extends GetAllComponents {
      */
     render() {
         return (
-            <div style={{marginLeft:"250px"}} className={this.props.pageClass || this.state.defaultClass}>
+            <div style={{marginLeft:"15vh"}} className={this.props.pageClass || this.state.defaultClass}>
                     <Card theme="NoBorder" type="fit" content={<TaskCard />} />
                    
             </div>
