@@ -72,7 +72,7 @@ export default class ContactProfileDetailCard extends BaseComponent {
                                     <div>{this.propsState.currentContact?.getJson().email}</div>
                                 </div>
                             </div>
-                            <div style={{ position: "absolute", right: "0px", bottom: "0px" }}>
+                            <div className="contact-profile-delete-btn" style={{ position: "absolute", right: "0px", bottom: "0px" }}>
                                 <DelButton content="delete" obj={this.propsState.currentContact} callbackFunc={() => { this.dispatch({ currentContact: undefined }) }} />
                             </div>
 
