@@ -22,9 +22,10 @@
    render() {
      const user = this.propsState.currentUser?.getJson();
      const currentGoal = this.propsState.currentGoal;
-     const nextAppointment = this.propsState.nextAppointment;
+     
+     const nextAppointment =  this.componentList.getComponent('calendarEvent', this.propsState.currentContact?.getJson()._id, "contactId");
      const billing = this.propsState.billingStatus;
-     const coach = this.propsState.coachProfile;
+     const coach = this.propsState.coach;
  
      return (
        <div
@@ -38,11 +39,11 @@
            <div className="row dash-current-row-goal">
              {/* current goal */}
              <div className="dashboard-card">
-               <div className="card-header">Your Current Goal</div>
+               <div className="card-header">Your Current Goals</div>
                <div className="card-content-vertical-align">
                  <div className="card-content">
                    <h2 className="goal-title highlight-font">
-                     {currentGoal?.getJson().title || "No active goal"}
+                     <MapComponent name="goal" cells={[{type:"attribute", name:"name"}]} />
                    </h2>
                    <PopupButton
                        content="Mark Complete"
@@ -64,9 +65,8 @@
                    {nextAppointment ? (
                        <>
                          <h3>
-                           {nextAppointment.getJson().dayOfWeek} | {nextAppointment.getJson().time}
+                           {nextAppointment?.getJson().day} | {nextAppointment?.getJson().startTime}
                          </h3>
-                         <div>{nextAppointment.getJson().date}</div>
                        </>
                    ) : (
                        <div className="highlight-font">No upcoming appointments</div>
@@ -105,13 +105,13 @@
                      />
                  )}
                  <div className="coach-name">
-                   {coach?.firstName} {coach?.lastName}
+                   {coach?.getJson().firstName} {coach?.getJson().lastName}
                  </div>
                  <div className="coach-contact row row-left">
-                   <i className="fa-solid fa-phone" /> {coach?.phone}
+                   <i className="fa-solid fa-phone" /> {coach?.getJson().phone}
                  </div>
                  <div className="coach-contact row row-left">
-                   <i className="fa-solid fa-envelope" /> {coach?.email}
+                   <i className="fa-solid fa-envelope" /> {coach?.getJson().email}
                  </div>
                  <PopupButton
                      content="Send Message"
@@ -128,7 +128,6 @@
                  <MapComponent
                      name="homework"
                      cells={[{ type: "custom", custom: HwLightCustom }]}
-                     filter={{ search: user._id, attribute: "contactId" }}
                  />
                </div>
              </div>

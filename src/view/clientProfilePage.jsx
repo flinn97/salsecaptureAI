@@ -31,7 +31,28 @@ export default class ClientProfilePage extends GetAllComponents {
      * Fetches components data from the backend.
      */
     async componentDidMount() {
-        await this.getComponentsFromBackend();
+        
+        try{
+            await this.getComponentsFromBackend();
+            let contact = await this.componentList.getComponentFromBackend({type:"contact", ids:this.propsState.currentUser.getJson()._id, filterKeys:"email"});
+            //goals hw tasks calendar events conversations
+            let goals = await this.componentList.getComponentsFromBackend({type:"goal", ids:contact.getJson()._id, filterKeys:"contactId"});
+            let hw = await this.componentList.getComponentsFromBackend({type:"homework", ids:contact.getJson()._id, filterKeys:"contactId"});
+            let events = await this.componentList.getComponentsFromBackend({type:"calendarEvent", ids:contact.getJson()._id, filterKeys:"contactId"});
+            let conversations = await this.componentList.getComponentsFromBackend({type:"conversation", ids:contact.getJson()._id, filterKeys:"contactId"});
+            let coach = await this.componentList.getComponentFromBackend({type:"user", ids:contact.getJson().owner, filterKeys:"_id"});
+            this.dispatch({currentContact:contact, coach:coach})
+        }
+        catch(e){
+            
+            
+            alarm(e.toString())
+        }
+        
+
+
+
+
     }
 
     /**
@@ -41,6 +62,7 @@ export default class ClientProfilePage extends GetAllComponents {
     render() {
         return (
             <div className={this.props.pageClass || this.state.defaultClass}>
+                
                     {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
                     This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
                     */}

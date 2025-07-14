@@ -100,7 +100,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
    }
    
    async checkForUser() {
-    debugger
+    
     let user = await this.APIService.getCurrentUser();
 
     if (user) {
@@ -126,7 +126,22 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
     }
   }
 
+componentDidUpdate(props,state){
+  if(state.currentUser===undefined && this.state.currentUser){ 
+    if(this.state.currentUser?.getJson().role==="client"){
+    this.dispatch({
+      routes:[
+        {comp: ClientProfilePage, name:"Dash", path:"/" },
+        { comp: Conversations, name: "Messages", path: "conversation" },
+        { comp: SchedulePage, name: "Schedule", path: "schedule" },
 
+
+        // { comp: Settings, name: "Billing", path: "billing" },
+      ],
+    })
+  }
+  }
+}
     
 
    
