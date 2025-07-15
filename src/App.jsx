@@ -49,7 +49,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
     
     
      //REMOVE
-     this.componentList.addComponents([...data], true)
+    //  this.componentList.addComponents([...data], true)
  
  
      this.state = {
@@ -74,7 +74,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
-         //  { comp: Settings, name: "settings" },
+          { comp: Settings, name: "settings" },
        ],
        extraAuthRoutes: [
         {comp: ClientRegister, path:"/clientregister", idComp:ClientRegister}

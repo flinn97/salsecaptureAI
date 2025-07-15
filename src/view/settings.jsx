@@ -5,6 +5,7 @@
  */
  import { Card } from "flinntech";
  import { GetAllComponents } from "flinntech";
+
  import "./contacts.css";
 import GoogleAuthCard from "./googleAuthCard";
  export default class Settings extends GetAllComponents {
@@ -32,12 +33,19 @@ import GoogleAuthCard from "./googleAuthCard";
  
      /**
       * Renders the Contacts component.
+      * outreach oaugthFVmbvVzJuXA7v1QqONeErtezeL-Rth2L6.UWzJW8IeZL
+      * outreach secret 
+      * 
       * @returns {JSX.Element} The rendered component.
       */
      render() {
          return (
-             <div className={this.props.pageClass || this.state.defaultClass}>
+             <div className={this.props.pageClass || this.state.defaultClass}
+             style={{display:"flex"}}>
                      <Card theme="NoBorder" type="fit" content={<GoogleAuthCard />} />
+
+
+
              </div>
          );
      }
