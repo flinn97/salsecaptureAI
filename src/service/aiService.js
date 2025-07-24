@@ -2,89 +2,82 @@ class AIService {
  
 
     /**
-     * A private helper method to handle API requests to Firebase Functions.
-     * @param {string} url - The function URL to call.
-     * @param {object} body - The JSON body for the POST request.
-     * @returns {Promise<object>} - The data from the AI's response.
+     * A private helper method to handle API requests.
      */
-    async _makeApiCall(body) {
+     async _makeApiCall(body) {
         try {
             const response = await fetch("https://getemailfromai-7c5i3vsqma-uc.a.run.app", {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Authorization': `Bearer ${userToken}` // Add Authorization header if your function is not public.
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             });
-
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error("API Error:", errorData.error);
                 throw new Error(errorData.error || `Request failed with status ${response.status}`);
             }
-
             const result = await response.json();
-        if (result.success) {
-                return result.data; // Return the 'data' object from your function's response
+            if (result.success) {
+                return result.data;
             } else {
                 throw new Error(result.error || "The API call was not successful.");
             }
-
         } catch (error) {
             console.error("Failed to fetch from AI service:", error);
-            throw error; // Re-throw the error to be handled by the caller
+            throw error;
         }
     }
 
     /**
-     * Generates a new email template.
-     * @param {object} user - The user object, must contain a 'companyID'.
-     * @param {object} [options] - Optional AI parameters.
-     * @param {string} [options.valuePropDoc] - A document or string describing the value proposition.
-     * @returns {Promise<object>} - The AI-generated email content.
+     * REFACTORED: Generates any type of message using the AI service.
+     * @param {object} user - The current user object.
+     * @param {string} messageType - The type of message (e.g., "template", "proposal", "event").
+     * @param {object} [options={}] - Optional parameters.
+     * @param {string} [options.persona] - The persona to adopt.
+     * @param {string} [options.details] - Additional one-off instructions.
+     * @param {object} [options.conversationHistory] - History for replies or follow-ups.
+     * @returns {Promise<string>} - The AI-generated message content.
      */
-    async getTemplate(user, options = {}) {
-
-
+     async generateMessage(user, messageType, options = {}) {
         const payload = {
+            companyID: user.getJson().companyId,
+            emailType: messageType,
             currentAIOptions: {
                 model: "gpt-4o-mini",
                 temperature: 0.9,
-                ...options
             },
-            companyID: user.getJson().companyId,
-            emailType: "template",
-           
-        };
-
-        return await this._makeApiCall(payload);
-    }
-
-    /**
-     * Generates a follow-up email for a sequence.
-     * @param {object} user - The user object, must contain a 'companyID'.
-     * @param {string} lastEmail - The content of the last email sent in the sequence.
-     * @param {object} [options] - Optional AI parameters.
-     * @returns {Promise<object>} - The AI-generated follow-up email.
-     */
-    async getFollowUp(user, lastEmail, options = {}) {
-      
-        const payload = {
-            currentAIOptions: {
-                model: "gpt-4o-mini",
-                temperature: 0.8,
-                ...options
-            },
-            companyID: user.getJson().companyId,
-            emailType: "sequence",
-            conversationHistory: {
-                lastSentEmail: lastEmail
+            // The new context object carries all dynamic data
+            context: {
+                persona: options.persona || "",
+                details: options.details || "",
+                conversationHistory: options.conversationHistory || {},
             }
         };
-
-        return await this._makeApiCall( payload);
+        return await this._makeApiCall(payload);
     }
+    
+    extractSubjectAndBody(emailText) {
+        const subjectMatch = emailText.match(/^{{\s*([^}]+?)\s*}}/);
+        let subject = '';
+        let plainBody = '';
+      
+        if (subjectMatch) {
+          subject = subjectMatch[1].trim();
+          plainBody = emailText.slice(subjectMatch[0].length).trim();
+        } else {
+          plainBody = emailText.trim();
+        }
+      
+        // Normalize newlines and convert to HTML
+        const htmlBody = plainBody
+          .split('\n\n') // Paragraphs
+          .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+          .join('\n');
+      
+        return {
+          subject,
+          body: htmlBody // Use this for injecting into Quill
+        };
+      } 
     
     // /**
     //  * Generates a reply to a prospect's email.
