@@ -115,24 +115,36 @@ import aiService from "../../service/aiService";
          style={{ padding: "10px", paddingBottom: "100px", height: "100%" }}
          className={this.props.pageClass || this.state.defaultClass}
        >
-         <div
-          onClick={async ()=>{
-            let email = await aiService.getTemplate(this.propsState.currentUser);
-            let {subject, body} = this.extractSubjectAndBody(email);
-            
-            this.propsState.currentPopupComponent.setCompState({body:body, subject:subject})
-            this.dispatch({})
-            
+        <div
+    onClick={async () => {
+        try {
+            const user = this.propsState.currentUser;
+            const messageType = 'template'; // Explicitly define the message type
+            const options = {};             // No extra options are needed for a basic template
 
-          }}
-            className="dark-button-1"
-            style={{
-              position: "relative",
-              width: "fit-content",
-            }}
-          >
-            Draft With AI
-          </div>
+            // Call the new unified AI service function
+            const email = await aiService.generateMessage(user, messageType, options);
+
+            // Use the consistent helper function from the AI service to parse the response
+            const { subject, body } = aiService.extractSubjectAndBody(email);
+
+            // Update the popup component's state
+            this.propsState.currentPopupComponent.setCompState({ body: body, subject: subject });
+            this.dispatch({});
+
+        } catch (error) {
+            console.error("Failed to draft with AI:", error);
+            alert("An error occurred while generating the draft. Please check the console.");
+        }
+    }}
+    className="dark-button-1"
+    style={{
+        position: "relative",
+        width: "fit-content",
+    }}
+>
+    Draft With AI
+</div>
          <h2>Email</h2> {/*Heading for the popup*/}
          <div className="contact-Add-container">
            <div className="row">

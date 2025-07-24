@@ -85,36 +85,53 @@ export default class CreateStepPopup extends BaseComponent {
         className={this.props.pageClass || this.state.defaultClass}
       >
         <div style={{ display: "flex", gap: "8px" }}>
-          <div
-          onClick={async ()=>{
-            let step = this.componentList.getList("step", this.propsState.currentSequence.getJson()._id, "sequenceId");
-            let l = step.length
-            if(step.length>0){
-              step = step[step.length-1]
+        <div
+    onClick={async () => {
+        try {
+            const user = this.propsState.currentUser;
+            const sequenceId = this.propsState.currentSequence.getJson()._id;
+            const steps = this.componentList.getList("step", sequenceId, "sequenceId");
+
+            let messageType = 'template'; // Default to a new template
+            const options = {}; // AI options container
+
+            // If steps already exist, it's a follow-up.
+            if (steps.length > 0) {
+                const lastStep = steps[steps.length - 1];
+                messageType = 'sequence';
+                // The AI needs the content of the last email to write a good follow-up.
+                options.conversationHistory = {
+                    lastSentEmail: lastStep.getJson().content
+                };
             }
-           
 
-            let email = l>0? await aiService.getFollowUp(this.propsState.currentUser, step.getJson().content): await aiService.getTemplate(this.propsState.currentUser);
-            let {subject, body} = this.extractSubjectAndBody(email);
+            // Single, unified call to the new AI service function
+            const email = await aiService.generateMessage(user, messageType, options);
             
+            // Use the consistent helper function from the AI service to parse the response
+            const { subject, body } = aiService.extractSubjectAndBody(email);
 
-            console.log(subject)
-            console.log(body);
+            console.log("Generated Subject:", subject);
+            console.log("Generated Body:", body);
 
+            // Update the popup component's state.
+            // Note: We are using 'content' as the key, matching your component's needs.
+            this.propsState.currentPopupComponent.setCompState({ content: body, subject: subject });
+            this.dispatch({});
 
-            this.propsState.currentPopupComponent.setCompState({content:body, subject:subject})
-            this.dispatch({})
-            
-
-          }}
-            className="dark-button-1"
-            style={{
-              position: "relative",
-              width: "fit-content",
-            }}
-          >
-            Draft With AI
-          </div>
+        } catch (error) {
+            console.error("Failed to draft with AI:", error);
+            alert("An error occurred while generating the draft. Please check the console.");
+        }
+    }}
+    className="dark-button-1"
+    style={{
+        position: "relative",
+        width: "fit-content",
+    }}
+>
+    Draft With AI
+</div>
           <div
             className="dark-button-1"
             style={{
