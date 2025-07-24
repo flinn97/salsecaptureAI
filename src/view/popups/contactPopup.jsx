@@ -28,6 +28,7 @@ export default class ContactPopup extends BaseComponent {
 
   //or we can import date-fns library
   formatDate(timestamp) {
+    console.log(this)
     const date = new Date(
       timestamp?.seconds * 1000 + timestamp?.nanoseconds / 1000000
     );
@@ -103,6 +104,14 @@ export default class ContactPopup extends BaseComponent {
         <h2 style={{ position: "sticky", top: 0, padding: "2%", width:"80%" }}>
           {text} Contact
         </h2>
+        {isWideScreen &&
+          <div 
+            className="close-contact-button" 
+            onClick={() => {
+              this.dispatch({ currentContact: null });
+            }}
+          >X</div>
+        }
         {obj && (
           <h3
             style={{

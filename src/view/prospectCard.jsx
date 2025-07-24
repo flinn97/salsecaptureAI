@@ -86,7 +86,7 @@ export default class ProspectCard extends BaseComponent {
               <div className="nav-title">Researched Potential Prospects</div>
             </div>
 
-            <div className="nav-right">
+            {/* <div className="nav-right">
               <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
@@ -130,7 +130,7 @@ export default class ProspectCard extends BaseComponent {
                   <i className="fa-solid fa-filter"></i>
                 </button>
               </div>
-            </div>
+            </div> */}
           </nav>
 
           <div className="search-container">

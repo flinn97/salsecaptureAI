@@ -131,7 +131,7 @@ body {
   color: #378c75;
 }
 
-.gmail-auth-container{
+.gmail-auth-container {
   flex-direction: column;
   display: flex;
   gap: 12px;
@@ -141,7 +141,7 @@ body {
   height: fit-content;
 }
 
-.auth-button{
+.auth-button {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -150,7 +150,7 @@ body {
   border: 1px solid white;
 }
 
-.auth-button:hover{
+.auth-button:hover {
   border: 1px solid rgb(105, 105, 105);
   filter: brightness(1.1);
 }
@@ -739,27 +739,29 @@ body {
   color: var(--app-dark-gray);
 }
 
-.sequence-custom{
+.sequence-custom {
   cursor: pointer;
   background: #c3ebe109 0% 0% no-repeat padding-box;
   border-radius: 10px;
   padding: 20px
 }
 
-.sequence-custom:hover{
+.sequence-custom:hover {
   background: #C3EBE1 0% 0% no-repeat padding-box;
 }
 
-.send-seq-icon{
- color: var(--app-green-3);
+.send-seq-icon {
+  color: var(--app-green-3);
 }
 
 #arrow-icon-appear {
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
 }
 
 .sequence-custom:hover #arrow-icon-appear {
-  display: inline; /* Visible when .sequence-custom is hovered */
+  display: inline;
+  /* Visible when .sequence-custom is hovered */
 }
 
 .svg {
@@ -1006,7 +1008,7 @@ body {
   margin-bottom: 0;
 }
 
-.input-tall{
+.input-tall {
   height: 180px;
   flex: 1;
   border: none;
@@ -1299,10 +1301,8 @@ body {
   .sequence-margin {
     margin-left: 300px;
   }
-
-
 }
 
-.closePopup{
+.closePopup {
   z-index: 100000000;
 }

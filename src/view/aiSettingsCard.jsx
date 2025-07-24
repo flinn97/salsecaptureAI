@@ -26,7 +26,7 @@ export default class AISettingsCard extends BaseComponent {
   getInnerContent() {
     let aiSettings = this.componentList.getComponent("aiSettings");
     return (
-      <div className="map-container" style={{ paddingBottom: "62px" }}>
+      <div className="map-container" style={{ paddingBottom: "22px" }}>
        <h1>AI Settings</h1>
        {aiSettings?.getJson()?.autoAI?
       ( <div

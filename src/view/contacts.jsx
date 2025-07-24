@@ -54,7 +54,7 @@ export default class Contacts extends GetAllComponents {
                     */}
         <div
           style={{
-            width: window.innerWidth > 600 ? "50%" : "100%",
+            width: window.innerWidth > 600 ? "50%" : "0%",
             position: "relative",
           }}
         >

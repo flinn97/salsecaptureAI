@@ -10,6 +10,7 @@ import CheckIt from "./components/check";
 import ContactsCustomItem from "./components/contactsCustom";
 import SCAIPopupButtonTest from "./components/debug/CustomPopupButton";
 import CsvUpload from "./csvUpload";
+import React from "react";
 
 /**
  * ContactsCard class extends BaseComponent to create a contact management card.
@@ -33,6 +34,9 @@ export default class ContactsCard extends BaseComponent {
       filterCompany: true,
       filterName: true,
     };
+
+    this.dropdownRef = React.createRef(); //for hiding filter
+    this.buttonRef = React.createRef();
   }
 
   async componentDidMount() {
@@ -82,7 +86,26 @@ export default class ContactsCard extends BaseComponent {
       // trigger your view to re-render
       this.dispatch({});
     });
+
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
+
+  componentWillUnmount() {
+    // Clean up
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside = (event) => {
+    if (
+      this.dropdownRef.current &&
+      !this.dropdownRef.current.contains(event.target) &&
+      !this.buttonRef.current.contains(event.target) &&
+      this.state.showFilter
+    ) {
+      this.setState({ showFilter: false });
+    }
+  };
+
   // flip the dropdown open/closed
   toggleFilter = () => {
     this.setState({ showFilter: !this.state.showFilter });
@@ -209,40 +232,36 @@ export default class ContactsCard extends BaseComponent {
               <div className="nav-title">Contacts</div>
             </div>
 
-            {/* <div className="nav-right">
-              <div className="nav-icon">
+            <div className="nav-right">
+              {/* <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
                 </button>
-              </div>
+              </div> */}
               <div className="nav-icon">
-                <button onClick={() => { this.setState({ showFilter: !this.state.showFilter }) }} className="btn">
+                <button ref={this.buttonRef} onClick={() => { this.setState({ showFilter: !this.state.showFilter }) }} className="btn">
                   <i className="fa-solid fa-filter"></i>
                 </button>
                 <div>
                   {this.state.showFilter && (
-                    <div className="filter-dropdown" style={{
-                      position: 'absolute', top: '100%', right: 0,
-                      background: '#f5f5f5', border: '1px solid #ccc',
-                      borderRadius: 4, padding: 8, zIndex: 10
-                    }}>
+                    <div className="filter-dropdown" ref={this.dropdownRef}>
                       <div style={{ fontWeight: 'bold', marginBottom: 8 }}>Search:</div>
-                      <label><input
+                      <label className="filter-row"><input style={{marginRight:"8px"}}
                         type="checkbox"
                         checked={this.state.filterAll}
                         onChange={this.onAllChange}
                       /> All:</label>
-                      <label><input
+                      <label className="filter-row"><input className="filter-check"
                         type="checkbox"
                         checked={this.state.filterTags}
                         onChange={this.onFilterChange('filterTags')}
                       /> Tags</label>
-                      <label><input
+                      <label className="filter-row"><input className="filter-check"
                         type="checkbox"
                         checked={this.state.filterCompany}
                         onChange={this.onFilterChange('filterCompany')}
                       /> Company</label>
-                      <label><input
+                      <label className="filter-row"><input className="filter-check"
                         type="checkbox"
                         checked={this.state.filterName}
                         onChange={this.onFilterChange('filterName')}
@@ -251,7 +270,7 @@ export default class ContactsCard extends BaseComponent {
                   )}
                 </div>
               </div>
-            </div> */}
+            </div>
           </nav>
 
           <div className="search-container">
