@@ -126,6 +126,7 @@ class Research extends ComponentBase {
         searchFrequency:"",
         AIPrompt:"",
         
+        
     }
 }
 

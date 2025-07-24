@@ -22,6 +22,13 @@ export default class AIPromptCard extends BaseComponent {
         };
     }
 
+      
+    async componentDidMount(){
+        
+        let user = await this.componentList.getComponentFromBackend({type:"user"});
+
+    }
+
     /**
      * Returns the inner content of the Templates component.
      * @returns {JSX.Element} The rendered content of the component.

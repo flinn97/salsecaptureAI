@@ -16,22 +16,30 @@ export default class AuthorizeOutreachCard extends BaseComponent {
     const code = params.get("code");
     if (code && !this.state.hasExchanged) {
       this.setState({ hasExchanged: true });
-      this.exchangeCodeForTokens(code);
+      setTimeout(()=>{this.exchangeCodeForTokens(code);}, 100)
     }
   }
 
   expectedState = "xyz123"; // same as you sent in the authorize URL
 
   async exchangeCodeForTokens(code) {
-    console.log(code)
+    
     this.setState({ loading: true, error: null });
+    
+
+    let body ={
+      code:code,
+      user:this.propsState.currentUser.getJson()
+    }
+    console.log(body)
+    let json = await JSON.stringify(body)
     try {
       // 3. Call your own backend endpoint to swap the code for tokens
       //    (You shouldn't embed client_secret in the browser!)
       const resp = await fetch("https://exchangecode-7c5i3vsqma-uc.a.run.app", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
+        body:json,
       });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 

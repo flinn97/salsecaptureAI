@@ -4,7 +4,7 @@
  * This component renders a popup for adding or editing Contact information with simplified fields.
  * It uses components from 'flinntech' for form elements and buttons.
  */
-import { ParentFormComponent, RunButton, UpdateButton } from "flinntech";
+import { DelButton, ParentFormComponent, RunButton, UpdateButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 
 export default class ResearchPopup extends BaseComponent {
@@ -19,33 +19,110 @@ export default class ResearchPopup extends BaseComponent {
       defaultClass: "fit scroller", //Sets a default class for styling
     };
   }
+  async componentDidMount() {
+  
+
+    if (this.propsState.currentUser.getJson().outreachio && this.componentList.getList("outreachUser")?.length===0) {
+      let accessToken = this.propsState.currentUser.getJson().outreachAccessToken;
+      let usersAndMailboxes = await fetch("https://getusersandmailboxes-7c5i3vsqma-uc.a.run.app", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+        .then(r => r.json())
+        .then(async (data) => {
+          
+          console.log(data)
+          let userData = data.users;
+          let mailboxeData = data.mailboxes;
+          let rawData = userData.map(obj => {
+            let mailbox = mailboxeData.find((m)=>{return m.attributes.email===obj.attributes.email})
+            let newO = {
+              _id:obj.id.toString(),
+              type: "outreachUser",
+              mailboxId: mailbox.id,
+              type:"outreachUser",
+              mailboxEmail: mailbox.attributes.email,
+            }
+            return newO;
+          });
+          let factory = this.propsState.componentListInterface.getFactory();
+          let list = this.componentList.getList("outreachUser");
+          
+          let newList = [...list]
+          for(let obj of rawData){
+            let item = await factory.getComponent(obj);
+            newList = [...newList, item]
+          }
+          let outreachUserList = newList
+          this.componentList.setSelectedList("outreachUser", outreachUserList)
+          this.dispatch({ outreachUsers: outreachUserList })
+
+        });
+      let sequences = await fetch("https://getsequences-7c5i3vsqma-uc.a.run.app", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+        .then(r => r.json())
+        .then(async (data) => {
+          console.log(data)
+          let rawData = data.data.map(obj => {
+            let newO = {
+              type: "sequence",
+              _id: obj.id.toString(),
+              outreach: true,
+              outreach: "true",
+              name: obj.attributes.name,
+              outreachSequenceId: obj.attributes.id
+
+            }
+            return newO;
+          });
+          debugger
+          let factory = this.propsState.componentListInterface.getFactory();
+          let list = this.componentList.getList("sequence").filter(obj=>obj.getJson().outreach===undefined)
+          
+          let newList = [...list]
+          for(let obj of rawData){
+            let item = await factory.getComponent(obj);
+            newList = [...newList, item]
+          }
+          let seqList = newList
+          this.componentList.setSelectedList("sequence", seqList)
+
+
+          this.dispatch({ outreachSequences: seqList })
+        }
+
+        );
+    }
+  }
+
+
   /**
    * Renders the ContactPopup component.
    * @returns {JSX.Element} The rendered component.
    */
   render() {
     // The object containing the data for the form, either for adding or editing
-    const obj = this.props.obj;
+    const obj = this.propsState.currentPopupComponent;
 
     // Determine the text for the heading based on whether an object is provided
-    let text = obj ? "Edit" : "Add";
+    let text = this.propsState.currentPopupComponent.getJson().date ? "Edit" : "Add";
 
     // Set default button to RunButton for adding, UpdateButton for editing
-    let button = obj ? (
+    let button = this.propsState.currentPopupComponent.getJson().date ? (
       <UpdateButton
         formClass="dark-button-1"
-        obj={obj}
+        obj={this.propsState.currentPopupComponent}
         content="Save"
         isPopup={true}
         callbackFunc={this.props.callbackFunc}
       />
     ) : (
       <RunButton
-        formClass="dark-button-1"
-        content="Save"
-        isPopup={true}
-        callbackFunc={this.props.callbackFunc}
-      />
+      formClass="dark-button-1"
+      content="Save"
+      isPopup={true}
+      callbackFunc={this.props.callbackFunc}
+    />
     );
 
     return (
@@ -87,7 +164,7 @@ export default class ResearchPopup extends BaseComponent {
                 placeholder="How often do you want new research results?"
                 // formClass="underline-form"
                 name="searchFrequency"
-                inputType="select"
+                type="select"
                 inPopup={true}
                 selectOptions={["Daily", "Weekly", "Monthly"]}
               />{" "}
@@ -111,6 +188,34 @@ export default class ResearchPopup extends BaseComponent {
               {/*Component for AI Prompt input (using Quill editor)*/}
             </div>
           </div>
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Source:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent obj={obj}
+              placeholder="What Sources?" 
+              name="displayDataSrc" 
+              type ="select"
+              inPopup={true}
+              selectOptions={['existing', 'newData', 'both']}
+              handleChange={(e)=>{
+                
+            let src =e.target.value
+
+            if(src==="both"){
+              src= ['existing', 'newData'];
+            }
+            else{
+              src = [src]
+            }
+            this.propsState.currentPopupComponent.setCompState({getDataFrom:src, displayDataSrc:e.target.value})
+          }}  
+          //  textOptions ={["Existing ie, current crm, ourtreach.io salesforce etc", "New ie, zoom info, success ai, apollo", "Both"]} 
+          />
+            </div>
+          </div>
+         
 
           <div className="row-container" style={{ flexDirection: "column" }}>
             <div className="row-name">Keywords:</div>
@@ -181,7 +286,7 @@ export default class ResearchPopup extends BaseComponent {
                 placeholder={`Any, Non-Manager, Manager, Director, VP, C-Level`}
                 name="contactLevel"
                 inPopup={true}
-                inputType="select"
+                type="select"
                 selectOptions={[
                   "Any",
                   "Non-Manager",
@@ -225,10 +330,59 @@ export default class ResearchPopup extends BaseComponent {
               {/*Component for AI Prompt input (using Quill editor)*/}
             </div>
           </div>
+          {this.propsState.currentUser.getJson().outreachio &&<>
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Select Sequence:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+
+          <ParentFormComponent  
+                      name='sequenceDisplay'
+
+          handleChange={(e)=>{
+            let val = e.target.value;
+            let seq = this.componentList.getComponent("sequence", val, 'name')
+            obj.setCompState({outreachSequenceId: seq.getJson()._id, sequenceDisplay:e.target.value})
+          }}
+          obj={obj}
+          type ={"select"}
+          selectOptions={this.componentList.getList("sequence").map(s=>s.getJson().name)}
+          />
+           </div>
+          </div>
+          
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Select User:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+          <ParentFormComponent obj={obj} type ={"select"} 
+          name="outreachUserDisplay"
+          handleChange={(e)=>{
+            let val = e.target.value;
+            let user = this.componentList.getComponent("outreachUser", val, 'mailboxEmail')
+            obj.setCompState({outreachUserId: user.getJson()._id, outreachUserDisplay:e.target.value})
+          }}
+          selectOptions={this.componentList.getList("outreachUser").map(s=>s.getJson().mailboxEmail)}/>
+ </div>
+          </div>
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Automatic:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+          <ParentFormComponent obj={obj} type ={"select"} 
+           handleChange={(e)=>{
+            debugger
+            let val = e.target.value;
+            let bool = val==="Yes"?true:false;
+            obj.setCompState({autoSequence:bool, autoSequenceDisplay:e.target.value})
+          }}
+
+          name="autoSequenceDisplay"
+          // textOptions ={["Yes", "No"]} 
+          selectOptions={["Yes", "No"]}/>
+ </div>
+          </div>
+          </>}
 
           <div
             style={{
-              background: "white",
               height: "fit-content",
               display: "flex",
               justifyContent: "flex-end",
@@ -239,6 +393,17 @@ export default class ResearchPopup extends BaseComponent {
               borderRadius:"12px"
             }}
           >
+           { this.propsState.currentPopupComponent.getJson().date &&
+             <DelButton
+                obj={this.propsState.currentPopupComponent}
+                isPopup={true}
+                inPopup={true}
+                callbackFunc={()=>{this.dispatch({currentPopupComponent:undefined, popupSwitch:""})}}
+
+                formClass="dark-button-1"
+                content={"Delete"}
+                
+              />}
             {" "}
             {/*Container for the save button*/}
             <div>

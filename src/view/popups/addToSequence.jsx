@@ -122,7 +122,11 @@ export default class AddToSequence extends BaseComponent {
             debugger
             let sequence = this.componentList.getComponent("sequence", sequenceId);
             this.dispatch({selectedSequence:sequence});
-          }} type ={"select"} textOptions ={this.componentList.getList("sequence").map(s=>s.getJson().name)} selectOptions={this.componentList.getList("sequence")}/>
+          }} 
+          type ={"select"} 
+          textOptions ={this.componentList.getList("sequence").map(s=>s.getJson().name)} 
+          selectOptions={this.componentList.getList("sequence")}
+          />
           Select User
           <ParentFormComponent  handleChange={(e)=>{
             debugger
@@ -153,6 +157,7 @@ export default class AddToSequence extends BaseComponent {
                 lastName:  contact.getJson().lastName,
                 emails:    [ contact.getJson().email ],
                 userId:    userJson._id,
+                company:   contact.getJson().company,
                 mailboxId: userJson.mailboxId
                 // add any other required fields here
               }));
@@ -180,8 +185,9 @@ export default class AddToSequence extends BaseComponent {
                 const result = await response.json();
                 if (!response.ok) throw result;
                 console.log("✅ Contacts created & enrolled:", result);
+                this.dispatch({popupSwitch:""})
               } catch (err) {
-                alert("❌ Error adding to sequence: " + (err?.message || JSON.stringify(err)));
+                // alert("❌ Error adding to sequence: " + (err?.message || JSON.stringify(err)));
                 console.error("❌ Error adding to sequence:", err);
               }
             }} className="floating-select-btn-text" style={{ color: "black" }}>

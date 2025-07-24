@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseComponent, MapComponent, urlService } from 'flinntech';
+import { BaseComponent, MapComponent, UrlService, urlService } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png";
 import CheckIt from './check';
@@ -18,6 +18,7 @@ class AICustomItem extends BaseComponent {
     this.handleFileUpload = this.handleFileUpload.bind(this);
 
   }
+
   componentDidUpdate(prevProps) {
     // update if MapComponent gave us a new obj
     const newId = this.props.obj.getJson()._id;
@@ -53,7 +54,12 @@ class AICustomItem extends BaseComponent {
     let csvs = await this.componentList.getComponentsFromBackend({ type: "csv", ids: obj.getJson()._id, filterKeys: "researchId", })
     this.setState({});
 
+
+    
+    
+
   }
+
   handleCsvUpload = async (data) => {
     debugger
     // always reads the latest this.researchId
@@ -71,8 +77,57 @@ class AICustomItem extends BaseComponent {
       csvId: csv.getJson()._id
     }));
 
-    await this.operationsFactory.prepare({ prepare: payload });
+    let cp = await this.operationsFactory.prepare({ prepare: payload });
     this.operationsFactory.run();
+
+    let research = this.componentList.getComponent("research", this.researchId, "_id");
+
+
+    //If AUTO Research
+    if(research?.getJson().autoSequence){
+
+    
+    debugger
+    let user = this.componentList.getComponent("user", urlService.getIdFromURL(false), "_id");
+    if(!user){
+      await this.componentList.getComponentFromBackend({type: "user" });
+      user = this.componentList.getComponent("user", urlService.getIdFromURL(false), "_id");
+
+    }
+    
+    for(let p of cp){
+      p.copy({type:"contact", ogPPId:p.getJson()._id, outreach:true, });
+  }
+            
+
+            
+              const body = {
+                contacts:   payload,
+                user: user.getJson(),
+                research: research.getJson()
+              };
+            
+              try {
+
+                const response = await fetch(
+                  "https://autosequence-7c5i3vsqma-uc.a.run.app",
+                  {
+                    method:  "POST",
+                    headers: {
+                      "Content-Type":  "application/json",
+                    },
+                    body: JSON.stringify(body)
+                  }
+                );
+            
+                const result = await response.json();
+                if (!response.ok) throw result;
+                console.log("✅ Contacts created & enrolled:", result);
+              } catch (err) {
+                // alert("❌ Error adding to sequence: " + (err?.message || JSON.stringify(err)));
+                console.error("❌ Error adding to sequence:", err);
+              }
+            } 
   };
 
 

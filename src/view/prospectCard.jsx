@@ -63,6 +63,8 @@ export default class ProspectCard extends BaseComponent {
    */
   getInnerContent() {
     let id = urlService.getIdFromURL();
+    let research = this.componentList.getComponent('research', id);
+
     let selCon = this.propsState.selectedContacts;
     let allCon = this.propsState.componentList.getList(
       "potentialProspect",
@@ -88,6 +90,39 @@ export default class ProspectCard extends BaseComponent {
               <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
+                </button>
+              </div>
+              <div className="nav-icon">
+                <button onClick={async ()=>{
+                  
+                  let body = research.getJson();
+
+                  let url = "https://getcontacts-7c5i3vsqma-uc.a.run.app";
+                  let json = await JSON.stringify(body)
+        
+                   // Make the POST request
+                   await fetch(url, {
+                     method: "POST",
+                     headers: {
+                       "Content-Type": "application/json",
+                     },
+                     body:json ,
+                   })
+                     .then((response) => {
+                       if (!response.ok) {
+                         throw new Error(`HTTP error! Status: ${response.status}`);
+                       }
+                       return response.json();
+                     })
+                     .then((data) => {
+                       console.log("Reply sent successfully in thread.", data);
+                     })
+                     .catch((error) => {
+                       console.error("Error sending reply:", error);
+                     });
+
+                }} className="btn">
+                 Get Research<i className="fa-solid fa-angle-down"></i>
                 </button>
               </div>
               <div className="nav-icon">
