@@ -273,9 +273,6 @@ input[type="file"] {
     margin-left: 0;
     width:100%
   }
-
-
-
 }
 
 
@@ -291,4 +288,35 @@ input[type="file"] {
 }
 .flinnTechVirtuoso::-webkit-scrollbar {
   display: none;                  /* Chrome, Safari, Opera */
+}
+
+.filter-dropdown {
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+  position: absolute;
+  top: 38px;
+  right: 10px;
+  background:#f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 10;
+  filter: drop-shadow(-1px 1px 3px rgba(0, 0, 0, 0.301))
+}
+
+.filter-row{
+  padding-left: 2px;
+}
+
+.filter-check{
+  margin-right: 12px;
+}
+
+.close-contact-button{
+  position: absolute;
+  right: 12px;
+  top: 2%;
+  user-select: none;
+  cursor: pointer;
 }
