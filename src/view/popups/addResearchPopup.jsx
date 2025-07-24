@@ -339,9 +339,11 @@ export default class ResearchPopup extends BaseComponent {
                       name='sequenceDisplay'
 
           handleChange={(e)=>{
+            debugger
             let val = e.target.value;
             let seq = this.componentList.getComponent("sequence", val, 'name')
             obj.setCompState({outreachSequenceId: seq.getJson()._id, sequenceDisplay:e.target.value})
+            this.dispatch({})
           }}
           obj={obj}
           type ={"select"}
@@ -356,9 +358,12 @@ export default class ResearchPopup extends BaseComponent {
           <ParentFormComponent obj={obj} type ={"select"} 
           name="outreachUserDisplay"
           handleChange={(e)=>{
+            debugger
             let val = e.target.value;
             let user = this.componentList.getComponent("outreachUser", val, 'mailboxEmail')
             obj.setCompState({outreachUserId: user.getJson()._id, outreachUserDisplay:e.target.value})
+            this.dispatch({})
+
           }}
           selectOptions={this.componentList.getList("outreachUser").map(s=>s.getJson().mailboxEmail)}/>
  </div>
@@ -368,7 +373,7 @@ export default class ResearchPopup extends BaseComponent {
             <div className="row-field" style={{ width: "100%" }}>
           <ParentFormComponent obj={obj} type ={"select"} 
            handleChange={(e)=>{
-            debugger
+            
             let val = e.target.value;
             let bool = val==="Yes"?true:false;
             obj.setCompState({autoSequence:bool, autoSequenceDisplay:e.target.value})
