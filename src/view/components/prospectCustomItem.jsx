@@ -76,11 +76,18 @@ class ProspectCustomItem extends BaseComponent {
             {/* Consider if this onClick logic is correct. It seems to open a popup for the *clicked* obj, not based on selection state. */}
             <div
               onClick={() => {
-                // Assuming obj here refers to the current contact object being rendered
-                this.dispatch({
-                  currentPopupComponent: obj,
-                  popupSwitch: "updateContact",
-                });
+                
+                  if (window.innerWidth > 600) {
+                    this.dispatch({ currentContact: obj });
+                  } else {
+                    this.dispatch({
+                      currentContact:obj,
+                      currentPopupComponent: obj,
+                      popupSwitch: "viewPotentialProspect",
+                    });
+                  }
+                
+              
               }}
               className="contact-name"
             >{`${user.firstName} ${user.lastName}`}</div>

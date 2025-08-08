@@ -7,6 +7,7 @@ import { Card } from "flinntech";
 import { GetAllComponents } from "flinntech";
 import ContactsCard from "./contactCard"; // Custom component for displaying contacts
 import "./contacts.css";
+import ContactPopup from "./popups/contactPopup";
 import ProspectCard from "./prospectCard";
 export default class ProspectPage extends GetAllComponents {
     /**
@@ -19,7 +20,8 @@ export default class ProspectPage extends GetAllComponents {
         this.state = {
             ...this.state,
             defaultClass: "fit",
-            owner:this.app.state.currentUser.getJson()._id
+            owner:this.app.state.currentUser.getJson()._id,
+            visible:true,
         };
     }
 
@@ -37,9 +39,29 @@ export default class ProspectPage extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass}>
-                    <Card theme="NoBorder" type="fit" content={<ProspectCard />} />
+            <div
+            className={this.props.pageClass || this.state.defaultClass}
+            style={{ display: "flex" }}
+          >
+            <div style={{ width: window.innerWidth > 600 ? "50%" : "100%" }}>
+            <Card theme="NoBorder" type="fit" content={<ProspectCard />} />
             </div>
+    
+            {/* JARED create a new card like this right here just below it that displays the contact info which component is found on contactPopup you can literally use that component for the content section.
+                        This is only conditional on clicking the name of a contact and that contact becoming the currentContact in global state this.propsState.currentContact
+                        */}
+            <div
+              style={{
+                width: window.innerWidth > 600 ? "50%" : "0%",
+                position: "relative",
+              }}
+            >
+              {this.propsState.currentContact && window.innerWidth > 600 && this.state.visible &&(
+                 <Card theme="NoBorder" type="fit" content={<ContactPopup />} />
+              )}
+            </div>
+          </div>
+         
         );
     }
 }

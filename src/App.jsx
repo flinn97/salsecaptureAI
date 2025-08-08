@@ -97,6 +97,8 @@ export default class App extends AppBaseClass {
         { content: AddToSequence, popupSwitch: "addToSequence" },
         { content: AddTags, popupSwitch: "addTags" },
         { content: DeleteSequenceDialog, popupSwitch: "delSequence" },
+        { content: ContactPopup, popupSwitch: "viewPotentialProspect" },
+
       ],
     };
 
