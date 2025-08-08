@@ -313,6 +313,20 @@ export default class ResearchPopup extends BaseComponent {
               {/*Component for AI Prompt input (using Quill editor)*/}
             </div>
           </div>
+          <div className="row-container" style={{ flexDirection: "column" }}>
+            <div className="row-name">Industry:</div>
+            <div className="row-field" style={{ width: "100%" }}>
+              {" "}
+              {/*Container for the AI Prompt input*/}
+              <ParentFormComponent
+                obj={obj}
+                placeholder={"i.e. Technology, software, SAAS"}
+                name="industry"
+                inPopup={true}
+              />{" "}
+              {/*Component for AI Prompt input (using Quill editor)*/}
+            </div>
+          </div>
 
           <div className="row-container" style={{ flexDirection: "column" }}>
             <div className="row-name">Disqualifiers:</div>
