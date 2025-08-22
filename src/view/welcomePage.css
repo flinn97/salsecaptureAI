@@ -8,15 +8,52 @@
     line-height: 1.6em;
 }
 
+.opener-page-card{
+  background-color: rgb(243, 243, 243);
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 12px;
+  align-items: center;
+  align-content: center;
+  gap: 1em;
+  padding: 1em;
+  justify-items: center;
+}
+
 .inLine-Link {
     display: inline;
     margin: 4px 0px;
     font-weight: 500;
-    text-decoration: underline;
-    color: grey;
+    background-color: var(--app-green-3);
+    color: white;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    align-self: center;
+    padding: 8px 18px;
+    border-radius: 12px;
+}
+
+.inLine-Link:hover{
+    color:rgb(252, 252, 252);
+    filter: brightness(1.2);
 }
 
 .move-img-btm{
     margin-top: 30%;
     width: 94%;
+}
+
+.main-message{
+    text-align: center;
+}
+
+.main-title{
+     text-align: center;
+     font-weight: 600;
+     font-size: 1.2em;
+     color:#2c2c2c;
 }
