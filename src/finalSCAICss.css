@@ -1034,6 +1034,21 @@ body {
   height: fit-content;
 }
 
+.blue-button-1{
+  background: #3b78d4;
+  border-radius: 12px;
+  width: fit-content;
+  color: #F4F5F8;
+  font: normal normal 900 14px/18px Satoshi;
+  padding: 6px 17px;
+  user-select: none;
+  cursor: pointer;
+  transition: width 1s ease-in;
+  letter-spacing: .5px;
+  height: 42px;
+  align-content: center;
+}
+
 .del-button-1 {
   color: rgb(255, 141, 141);
   background: #353535 0% 0% no-repeat padding-box;

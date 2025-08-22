@@ -43,10 +43,10 @@ import GoogleAuthCard from "./googleAuthCard";
          return (
              <div className={this.props.pageClass || this.state.defaultClass}
              style={{display:"flex", flexDirection:"column"}}>
-                     <Card theme="NoBorder" type="fit" content={<GoogleAuthCard />} />
+
                      <Card theme="NoBorder" type="fit" content={<AISettingsCard />} />
                      <Card theme="NoBorder" type="fit" content={<AuthorizeOutreachCard />} />
-
+                     <Card theme="NoBorder" type="fit" content={<GoogleAuthCard />} />
 
              </div>
          );

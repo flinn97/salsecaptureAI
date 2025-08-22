@@ -5,7 +5,6 @@
  */
 import { BaseComponent } from "flinntech";
 
-
 export default class AISettingsCard extends BaseComponent {
   /**
    * Constructs the ContentCard component.
@@ -26,37 +25,57 @@ export default class AISettingsCard extends BaseComponent {
   getInnerContent() {
     let aiSettings = this.componentList.getComponent("aiSettings");
     return (
-      <div className="map-container" style={{ paddingBottom: "22px" }}>
-       <h1>AI Settings</h1>
-       {aiSettings?.getJson()?.autoAI?
-      ( <div
-        onClick={()=>{
-          aiSettings.setCompState({autoAI:false}, {run:true}, true);
-          
-
+      <div
+        id="aiSettings"
+        className="map-container"
+        style={{
+          width: "fit-content",
+          minWidth: "400px",
+          height: "fit-content",
+          padding: "12px",
+          borderRadius: "8px",
+          border: "1px solid #d1d1d1",
         }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn off AI
-        </div>):
-        (<div
-          onClick={()=>{
-            aiSettings.setCompState({autoAI:true}, {run:true}, true);
-            
-
-          }}
-          className="dark-button-1"
-          style={{
-            position: "relative",
-            width: "fit-content",
-          }}
-        >
-          Turn on AI
-        </div>)}
+      >
+        <div style={{display:"flex", flexDirection:"row"}}>
+          <div
+            className="contact-avatar"
+            style={{ maxWidth: "45px", maxHeight: "45px", background:"#323232" }}
+          >
+            <i className="fa-solid fa-gears"></i>
+          </div>
+          <h1>AI Settings</h1>
+        </div>
+        <p style={{ color: "#333333", margin: "12px 0px 12px 0px" }}>
+          Enable AI functionality within the platform
+        </p>
+        {aiSettings?.getJson()?.autoAI ? (
+          <div
+            onClick={() => {
+              aiSettings.setCompState({ autoAI: false }, { run: true }, true);
+            }}
+            className="blue-button-1"
+            style={{
+              position: "relative",
+              width: "fit-content",
+            }}
+          >
+            Turn off AI
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              aiSettings.setCompState({ autoAI: true }, { run: true }, true);
+            }}
+            className="blue-button-1"
+            style={{
+              position: "relative",
+              width: "fit-content",
+            }}
+          >
+            Turn on AI
+          </div>
+        )}
       </div>
     );
   }

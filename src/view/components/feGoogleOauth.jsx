@@ -84,13 +84,13 @@ class GmailAuthButton extends BaseComponent {
 
         return (
             <div className="gmail-auth-container">
-                <h1 style={{font: "normal normal 900 18px/24px Satoshi;"}}>Gmail API Authorization</h1>
-                <p>Click the button below to authorize your Google account for use with the Firebase Function.</p>
-                <p>- This process will redirect you to Google for authorization and then back to your function, which will save your token to Firestore, linked by your email address.</p>
+                <h1 style={{fontSize:"22px"}}>Gmail API Authorization</h1>
+                <p style={{fontSize:"16px"}}>Click the button below to authorize your Google account for use with the Firebase Function.</p>
+                <p style={{fontSize:"14px"}}>- This process will redirect you to Google for authorization and then back to your function, which will save your token to Firestore, linked by your email address.</p>
 
                 <button 
                 className="auth-button dark-button-1" 
-                style={{fontSize:"15px", background:"#333333"}}
+                style={{fontSize:"14px", background:"#333333"}}
                 onClick={this.handleAuthClick}>
                     <img src={goog} style={{width:"30px"}}/>
                     <div>Authorize with Google</div>
