@@ -82,7 +82,7 @@ export default class App extends AppBaseClass {
 
         { comp: Content, name: "Content", path: "content" },
         { comp: Settings, name: "Settings", path: "settings" },
-        { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Generator"},
+        { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Engine"},
 
 
         { comp: SequencePage, name: "", path: "sequence", idComp: SequencePage },

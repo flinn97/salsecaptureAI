@@ -12,8 +12,6 @@
       * It fetches template components from the backend.
       */
      async componentDidMount() {
-      debugger
-         
          await this.getComponentsFromBackend();
          const templateId = this.urlId; // Get the ID from the URL
  
