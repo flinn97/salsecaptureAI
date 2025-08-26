@@ -31,43 +31,100 @@ export default class WelcomePage extends BaseComponent {
    * @returns {JSX.Element} The inner content of the card.
    */
   getInnerContent() {
+    let isWideScreen = window.innerWidth > 600;
     return (
-      <div className="layoutRow" style={{ width: "100%", height: "100%" }}>
+      <div
+        className="layoutRow"
+        style={{ width: "100%", height: "100%", padding: "12px" }}
+      >
         <div className="layoutColumn-welcome">
-          <img src={logo} style={{ width: "100%" }} />
+          <img src={logo} style={{ width: "50%", marginBottom: "40px" }} />
           <div>
-            Welcome to{" "}
-            <span style={{ fontWeight: "600" }}>SalesCapture AI</span>! Get
-            things started by creating a new research profile so we can help you
-            find your next best sales target.
-            <Link
-              to="/research"
-              className="inLine-Link"
-              style={{ marginLeft: "8px" }}
+            <span
+              style={{
+                fontWeight: "900",
+                fontSize: "2em",
+                color: "#323232",
+              }}
             >
-              <div>Go to Research</div>
-            </Link>
+              Welcome to SalesCapture AI
+            </span>
+            <div style={{ marginTop: "20px" }}>
+              Leverage the power of AI to supercharge your sales process
+            </div>
           </div>
-          <div>
-            Work your contacts in the{" "}
-            <Link to="/contacts" className="inLine-Link">
-              Contact Center
-            </Link>
-            , the CRM is great for sales prospecting.
-          </div>
-          <div>
-            <Link to="/content" className="inLine-Link">
-              Create content
-            </Link>{" "}
-            using our awesome AI sales content generator that is tailored to
-            your company’s value proposition. The Messaging center is currently
-            in Beta with new features being added. More to come there.
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: isWideScreen ? "row" : "column",
+              gap: "1em",
+              marginTop: "30px",
+            }}
+          >
+            <div className="opener-page-card">
+              <div
+                style={{
+                  maxWidth: "45px",
+                  maxHeight: "45px",
+                  fontSize: "3em",
+                  color: "var(--app-green-3)",
+                }}
+              >
+               <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <div className="main-title">Research Agent</div>
+              <div className="main-message">
+                Identify the next best salees targets
+              </div>
+              <Link to="/research" className="inLine-Link">
+                <div>Go to Research</div>
+              </Link>
+            </div>
+            <div className="opener-page-card">
+              <div
+                style={{
+                  maxWidth: "45px",
+                  maxHeight: "45px",
+                  fontSize: "3em",
+                  color: "var(--app-green-3)",
+                }}
+              >
+                <i class="fa-solid fa-file-contract"></i>
+              </div>
+              <div className="main-title">Content Engine</div>
+              <div className="main-message">
+                Quickly generate effective sales content
+              </div>
+              <Link to="/content" className="inLine-Link">
+                Create Content
+              </Link>{" "}
+            </div>
+            <div className="opener-page-card">
+              <div
+                style={{
+                  maxWidth: "45px",
+                  maxHeight: "45px",
+                  fontSize: "3em",
+                  color: "var(--app-green-3)",
+                }}
+              >
+                <i class="fa-solid fa-envelope-circle-check"></i>
+              </div>
+              <div className="main-title">Automated BDR</div>
+              <div className="main-message">
+                Engage prospects with outbound campaigns
+              </div>
+              <Link to="/contacts" className="inLine-Link">
+                Start Campaign
+              </Link>{" "}
+            </div>
           </div>
         </div>
 
-        <div className="layoutColumn-welcome" style={{ flex: 1 }}>
+        {/* <div className="layoutColumn-welcome" style={{ flex: 1 }}>
           <img src={imageCard} className="move-img-btm" />
-        </div>
+        </div> */}
       </div>
     );
   }

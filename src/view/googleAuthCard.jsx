@@ -11,7 +11,7 @@ import ContactsCustomItem from "./components/contactsCustom";
 import GmailConnect from "./components/feGoogleOauth";
 import GmailConnectButton from "./components/googleOauth";
 import CsvUpload from "./csvUpload";
-import goog from '../assets/logo_google_g.png';
+import goog from "../assets/logo_google_g.png";
 
 /**
  * ContactsCard class extends BaseComponent to create a contact management card.
@@ -38,19 +38,36 @@ export default class GoogleAuthCard extends BaseComponent {
    */
   getInnerContent() {
     return (
-      <div>
+      <div
+        id="googleSettings"
+        style={{
+          border: "1px solid #d1d1d1",
+          width: "fit-content",
+          height: "fit-content",
+          minWidth: "400px",
+          padding: "12px",
+          borderRadius: "8px",
+        }}
+      >
         {/* <GmailConnectButton /> */}
         {this.propsState.currentUser.getJson().gmailAuthenticated ? (
-          <div style={{ font: "normal normal 900 19px/25px Satoshi", paddingTop:"30px" }}>
+          <div
+            style={{
+              font: "normal normal 900 12px/18px Satoshi",
+            }}
+          >
             Gmail Authenticated:
             <div
               style={{
-                font: "normal normal 400 16px/21px Satoshi",
-                color: "#696969", alignItems:"center",
-                display:"flex", marginTop:"20px"
+                font: "normal normal 400 12px/16px Satoshi",
+                color: "#696969",
+                alignItems: "center",
+                display: "flex",
+                marginTop: "20px",
               }}
             >
-              <img src={goog} style={{width:"30px"}}/>{this.propsState.currentUser.getJson()._id}
+              <img src={goog} style={{ width: "30px" }} />
+              {this.propsState.currentUser.getJson()._id}
             </div>
           </div>
         ) : (
@@ -66,10 +83,7 @@ export default class GoogleAuthCard extends BaseComponent {
    */
   render() {
     return (
-      <div
-        className={this.props.pageClass || this.state.defaultClass}
-        style={{ marginLeft: "30px", width: "100%" }}
-      >
+      <div className={this.props.pageClass || this.state.defaultClass}>
         {this.getInnerContent()}
       </div>
     );
