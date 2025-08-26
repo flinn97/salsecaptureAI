@@ -35,6 +35,7 @@ import AddUserPopup from './view/addUserPopup.jsx';
 import UserPage from './view/userPage.jsx';
 import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
 import WelcomePage from './view/welcomePage.jsx';
+import ContentGenerationPage from './view/contentGenerationpage.jsx';
 //  import Settings from './view/settings';
 //  import AddContactPopup from './view/addContactPopup';
 
@@ -81,6 +82,8 @@ export default class App extends AppBaseClass {
 
         { comp: Content, name: "Content", path: "content" },
         { comp: Settings, name: "Settings", path: "settings" },
+        { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Generator"},
+
 
         { comp: SequencePage, name: "", path: "sequence", idComp: SequencePage },
 

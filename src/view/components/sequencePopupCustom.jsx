@@ -58,7 +58,7 @@ class SequencePopupCustomItem extends BaseComponent {
                   c.getJson().sequenceId
                 );
                 let tags = c.getJson().finishedSequenceTags || "";
-                if (!oldSeq) {
+                if (oldSeq) {
                   if (
                     !c
                       .getJson()
