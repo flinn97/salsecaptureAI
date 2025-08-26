@@ -34,6 +34,10 @@ import SessionPage from './view/sessionPage.jsx';
 import ClientRegister from './view/clientRegister.jsx';
 import { Route, Router, Routes } from 'react-router-dom';
 import ClientProfilePage from './view/clientProfilePage.jsx';
+import VideoContent from './view/videoContent.jsx';
+import UploadVideoPopup from './view/popups/uploadVideoPopup.jsx';
+import ViewVideo from './view/popups/viewVideo.jsx';
+import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -43,7 +47,7 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
  export default class App extends AppBaseClass {
    constructor(props) {
      super(props, { db: db, endpoint: "viridian", auth: auth, storage: storage });
-     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal };
+     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal, video:UploadVideoPopup };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
@@ -68,6 +72,8 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
          { comp: Contacts, name: "Clients", path: "clients" },
 
          { comp: Content, name: "Content", path: "content" },
+         { comp: VideoContent, name: "Video Content", path: "videocontent" },
+
         //  { comp: Settings, name: "Billing", path: "billing" },
          { comp: SessionPage, name: "", path: "session", idComp:SessionPage},
 
@@ -81,6 +87,10 @@ import ClientProfilePage from './view/clientProfilePage.jsx';
        ],
        popups: [
          { content: AddToSequence, popupSwitch: "addToSequence" },
+         { content: PotentialHomeworkPopup, popupSwitch: "showPotentialHomework" },
+
+         { content: ViewVideo, popupSwitch: "showVideo", popupType:"biggestCard"},
+
        ],
      };
  

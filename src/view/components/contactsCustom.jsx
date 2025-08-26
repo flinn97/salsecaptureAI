@@ -71,7 +71,7 @@ class ContactsCustomItem extends BaseComponent {
                             <div onClick={() => {
                                 // JARED if the size of the window is more than something like 600 px ask chat gpt. then change the logic to take the obj and dispatch it to the currentContact
                                 // Assuming obj here refers to the current contact object being rendered
-                                debugger
+                                
                                 if(window.innerWidth > 600){
                                     this.dispatch({currentContact:obj})
                                 }

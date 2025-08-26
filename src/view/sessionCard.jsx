@@ -20,7 +20,7 @@ export default class SessionCard extends BaseComponent {
    */
   constructor(props) {
     super(props);
-    this.projectName="Homework"
+    this.projectName = "Homework"
     this.state = {
       ...this.state,
       defaultClass: "fit scroller", //Sets a default class for styling
@@ -31,10 +31,79 @@ export default class SessionCard extends BaseComponent {
     const match = path.match(/^\/session\/([^/]+)/);
     return match ? match[1] : null;                 // "rt606052125" or null
   }
-  componentDidMount(){
+  componentDidMount() {
     let id = this.getSessionIdFromPath();
     let session = this.componentList.getComponent("session", id);
-    this.dispatch({currentSession:session})
+    this.dispatch({ currentSession: session })
+  }
+  async getHWFromAI() {
+    // Show a loading indicator to the user
+    this.setState({ isGenerating: true, generationError: null });
+
+    try {
+
+      // 1. GATHER DATA
+      // Get the current session and its associated goal
+      const currentSessionJson = this.propsState.currentSession.getJson();
+      const goal = this.componentList.getComponent("goal", currentSessionJson.contactId, "contactId");
+
+      // Validate that essential data exists
+      if (!goal) {
+        throw new Error("Could not find the client's goal. Please ensure it is set.");
+      }
+      if (!currentSessionJson.owner) {
+        throw new Error("Session owner ID is missing. Cannot proceed.");
+      }
+
+      const goalText = goal.getJson().name;
+      const sessionNotes = currentSessionJson.content;
+      // 'coachNotes' can be added to your component's state if needed
+      const coachNotes = this.state.coachNotes || "";
+      const ownerId = currentSessionJson.owner;
+
+      // 2. CONSTRUCT PAYLOAD for the backend
+      const payload = {
+        contactId: currentSessionJson.contactId,
+        goal: goalText,
+        sessionNotes: sessionNotes,
+        coachNotes: coachNotes,
+        owner: ownerId,
+        sessionId: currentSessionJson._id
+      };
+
+      // 3. CALL THE BACKEND ENDPOINT
+      // IMPORTANT: Replace 'your-firebase-project-id' with your actual Firebase project ID.
+      const endpointUrl = "https://getpotentialhomework-dleyjvnyfa-uc.a.run.app";
+
+      const response = await fetch(endpointUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      // 4. HANDLE THE RESPONSE
+      if (!response.ok) {
+        // Try to parse error from backend, otherwise use status text
+        const errorData = await response.json().catch(() => ({ error: response.statusText }));
+        throw new Error(errorData.error || `Request failed with status ${response.status}`);
+      }
+
+      console.log("✅ Homework generation successfully triggered on the backend.");
+      // You can add a success notification for the user here
+      this.dispatch({ popupSwitch: "showPotentialHomework" });
+
+    } catch (error) {
+      console.error("❌ Failed to generate homework:", error);
+      this.setState({ generationError: error.message });
+      // Display a user-friendly error message
+      alert(`Error: ${error.message}`);
+
+    } finally {
+      // Reset the loading state regardless of outcome
+      this.setState({ isGenerating: false });
+    }
   }
   /**
    * Renders the OemPopupContent component.
@@ -52,84 +121,52 @@ export default class SessionCard extends BaseComponent {
         callbackFunc={this.props.callbackFunc}
       />
     );
-   
+
     return (
       <div
         style={{ padding: "10px", paddingBottom: "100px" }}
         className={this.props.pageClass || this.state.defaultClass}
       >
         <br />
-        {this.propsState.currentSession&&<>
-        <div className="content-home-add">
-          <div>Session</div>
-          <div className="row">
-            <div>Name: </div>
+        {this.propsState.currentSession && <>
+          <div className="content-home-add">
+            <div>Session</div>
+            <div className="row">
+              <div>Name: </div>
 
-            <ParentFormComponent
-              obj={this.propsState.currentSession}
-              name="name"
-              wrapperClass="underline-form"
-            />
-          </div>
-          <div className="row">
-            {/* <div>content</div> */}
-            <ParentFormComponent
-              type="quill"
-              obj={this.propsState.currentSession}
-              name="content"
-              wrapperClass="contentWrapper"
-            />
-          </div>
- 
-          <div className="row">
-            {/* {this.propsState.popupSwitch.includes("update") && (
-              <DelButton
-                obj={this.propsState.currentPopupComponent}
-                formClass="del-button-1"
-                callbackFunc={() => {
-                  this.dispatch({
-                    popupSwitch: "",
-                    currentPopupComponent: undefined,
-                  });
-                }}
+              <ParentFormComponent
+                obj={this.propsState.currentSession}
+                name="name"
+                wrapperClass="underline-form"
               />
-            )} */}
-
-            <div
-              className="col hover-basic"
-              style={{ cursor: "pointer", width: "37px", height: "37px" }}
-            >
-              {/* <UploadButton
-                obj={this.propsState.currentPopupComponent}
-                content={
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "50%",
-                      justifyContent: "center",
-                      fontSize: "19px",
-                      width: "37px",
-                      height: "37px",
-                      background: "#378c75",
-                      color: "#ade0d3",
-                    }}
-                  >
-                    <div className="icon-last">
-                      <i className="fa-solid fa-plus"></i>
-                    </div>
-                  </div>
-                }
-              /> */}
             </div>
-            <div className="col">{button}</div>
+            <div className="row">
+              {/* <div>content</div> */}
+              <ParentFormComponent
+                type="quill"
+                obj={this.propsState.currentSession}
+                name="content"
+                wrapperClass="contentWrapper"
+              />
+            </div>
+
+
+            <div className="row">
+              {button}          </div>
+            <div className="row">
+              Generate Homework
+            </div>
+            <div className="row">
+              Notes for AI
+              <div className="underline-form"><input style={{ border: "none", width: "100%" }} onChange={(e) => { this.setState({ coachNotes: e.target.value }) }}></input></div>
+
+            </div>
+            <div className="row">
+              <div style={{ paddingRight: "50px", paddingBottom: "20px" }}>
+                <div onClick={() => { this.getHWFromAI() }}>Generate Homework</div></div>           </div>
+          
+
           </div>
-          <div></div>
-          {/*<div className="popupButton" style={{width:"100%", display:"flex", justifyContent:"flex-end", alignContent:"flex-end"}}> /!*Container for the save button*!/*/}
-          {/*  <div style={{paddingRight:"50px", paddingBottom:"20px"}}> /!*Container for button spacing*!/*/}
-          {/*{button}</div> /!*Button to save changes*!/*/}
-          {/*</div>*/}
-        </div>
         </>}
       </div>
     );

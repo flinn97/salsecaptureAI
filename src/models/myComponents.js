@@ -157,6 +157,19 @@ class Question extends ComponentBase{
         type:"question",
     }
 }
+class Video extends ComponentBase{
+    json={
+        ...this.json,
+        type:"video",
+        videoURL: ""
+    }
+}
 
+class PotentialHomework extends ComponentBase{
+    json={
+        ...this.json,
+        type:"potentialHomework",
+    }
+}
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task, Homework, Goal,  Session, Question};
+export { User, Contact, Video, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, CalendarEvent, Task, Homework, Goal,  Session, Question,PotentialHomework};

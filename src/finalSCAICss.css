@@ -1841,3 +1841,145 @@ justify-content: start;
   width: 100%;
   box-sizing: border-box;
 }
+
+
+/* Card */
+.video-card {
+  background: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  outline: none;
+}
+
+.video-card:focus-visible {
+  box-shadow: 0 0 0 3px #6ea8ff, var(--card-shadow-hover);
+}
+
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Thumb with 16:9 aspect and image cover */
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;               /* modern browsers */
+  background: #111;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gradient at bottom to improve title contrast when overlaid (optional) */
+.thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.0) 55%);
+  pointer-events: none;
+}
+
+/* Play icon overlay */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+.play-overlay i {
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.video-card:hover .play-overlay {
+  opacity: 1;
+}
+
+/* Duration pill */
+.duration-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+/* Delete icon (visible), your DelButton is hidden but still present */
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.delete-btn:hover {
+  background: rgba(0,0,0,0.75);
+}
+
+.hidden-del {
+  /* Keep your <DelButton /> mounted but not visible; it can still attach handlers */
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Meta area under the thumbnail */
+.meta {
+  padding: 10px 12px 12px;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* clamp to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.subtle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280; /* gray-500 */
+}
+
+/* Put this on the parent that wraps your <VideoCustomItem/> list */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* <- tweak 240px */
+  gap: 18px;                    /* space between cards */
+  align-items: start;           /* avoid stretching tall cards */
+  width: 100%;
+}
+
