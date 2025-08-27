@@ -105,7 +105,7 @@
   
          return (
              <div className="fit">
-                 <h1>Template Details</h1>
+                 <h1>Content Engine</h1>
                  <div
                      onClick={() => this.setState({ showAIDraft: !this.state.showAIDraft })}
                      className="dark-button-1"

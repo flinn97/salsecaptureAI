@@ -181,13 +181,15 @@ export default class App extends AppBaseClass {
           refresh: false,
           routes: [
             { comp: WelcomePage, name: "Home", path: "/" },
-            { comp: Conversations, name: "Messages", path: "conversation" },
+            { comp: Conversations, name: "Messages Beta", path: "conversation" },
 
             { comp: Contacts, name: "Contacts", path: "contacts" },
             { comp: ResearchPage, name: "Research", path: "research", idComp: ProspectPage },
 
             { comp: Content, name: "Content", path: "content" },
             { comp: Settings, name: "Settings", path: "settings" },
+
+            { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Engine"},
 
             { comp: SequencePage, name: "", path: "sequence", idComp: SequencePage },
 
