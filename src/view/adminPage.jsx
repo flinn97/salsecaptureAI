@@ -28,6 +28,7 @@ export default class AdminPage extends GetComponentsFromUrl {
         return (
             <div className="fit">
                 <Card theme="NoBorder" type="fit"content={<AdminCard />} />
+                
 
             </div>
         );

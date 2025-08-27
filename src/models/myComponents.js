@@ -17,6 +17,10 @@ class User extends ComponentBase {
     json = {
         ...this.json,
         type: 'user',
+        _id:"alan@salescapture.com",
+        owner:"alan@salescapture.com",
+        email:"alan@saelscapture.com",
+        gmailAutenticated:true,
     };
 }
 
@@ -151,7 +155,10 @@ class AISettings extends ComponentBase {
         ...this.json,
         type:"aiSettings",
         autoAI:"",
-        
+        _id:"FlinnappsAISettings",
+        collection:"taylor@flinnapps.com",
+        orderMatters:false,
+
     }
 }
 class Todo extends ComponentBase{
@@ -177,6 +184,8 @@ class Limit extends ComponentBase{
     json={
         ...this.json,
         type:"limit",
+        owner:"alan@salescapture.com",
+        _id:"salescaptureLimiter",
         limit:500
     }
 }

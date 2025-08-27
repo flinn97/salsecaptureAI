@@ -2,13 +2,13 @@
  * Templates component. This component renders a view for displaying template items. 
  * It uses the MapComponent from the flinntech library to display the templates.
  */
-import { MapComponent } from "flinntech";
+import { MapComponent, ParentFormComponent, RunButton } from "flinntech";
 import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import TemplateCustomItem from "./components/templateCustom";
 import ClientCustom from "./components/clientCustom";
 
-export default class AdminCard extends BaseComponent {
+export default class AddClient extends BaseComponent {
     /**
      * Constructs the Templates component.
      * @param {object} props - The component's properties.
@@ -30,23 +30,10 @@ export default class AdminCard extends BaseComponent {
             <>
                 <h4 style={{ marginBottom: "10px", font: "normal normal 900 16px/22px Satoshi" }}>Admin</h4>
                 
-                {/* MapComponent to display templates with links */}
-                <MapComponent
-                    name="client"
-                    cells={[
-                        {type:"custom",
-                        custom:ClientCustom
-                        }
-                      
-                    ]}
-                />
-                <div onClick={async()=>{
-                    let client = await this.operationsFactory.perpare({prepare:{type:"client"}})
-                    client = client[0]
-                    this.dispatch({popupSwitch:"addClient", currentPopupComponent:client})
-                }}>add client</div>
-                
-                
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="name" inPopup={true}/>
+                <ParentFormComponent obj={this.propsState.currentPopupComponent} name="company" inPopup={ture}/>
+
+                <RunButton content="save"/>
             </>
         );
     }
