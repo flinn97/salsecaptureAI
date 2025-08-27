@@ -60,6 +60,7 @@ export default class ResearchCard extends BaseComponent {
               </div>
               <div className="nav-title">Research</div>
             </div>
+       
 
             {/* <div className="nav-right">
               <div className="nav-icon">
