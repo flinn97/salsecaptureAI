@@ -349,6 +349,8 @@ body {
   cursor: pointer;
   z-index: 125;
   transition: all 0.3s ease;
+
+  display: none;
 }
 
 .float-btn i {
@@ -683,6 +685,7 @@ body {
   padding: 0 1rem;
   max-width: 600px;
   margin: 0 auto;
+  width: 80%;
 }
 
 .search-container .search-bar {

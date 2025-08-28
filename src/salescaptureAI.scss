@@ -63,6 +63,8 @@
         display: flex;
         justify-content: space-between;
         align-items: baseline;
+        padding-right: 30px;
+
 
         .sender {
           font-weight: 800;
@@ -73,7 +75,6 @@
         .date {
           font-size: 0.75rem;
           color: #999;
-          margin-left: 0.5rem;
           white-space: nowrap;
         }
       }
