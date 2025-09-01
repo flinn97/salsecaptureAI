@@ -11,6 +11,7 @@ import {
   UploadButton,
 } from "flinntech";
 import { BaseComponent } from "flinntech";
+import {TherapistBillingPage} from "../service/pages/therapistBillingPage";
 
 export default class SessionCard extends BaseComponent {
 
@@ -32,9 +33,12 @@ export default class SessionCard extends BaseComponent {
     return match ? match[1] : null;                 // "rt606052125" or null
   }
   componentDidMount() {
+    
     let id = this.getSessionIdFromPath();
     let session = this.componentList.getComponent("session", id);
-    this.dispatch({ currentSession: session })
+    let contact = this.componentList.getComponent("contact", session.getJson().contactId,  "_id")
+
+    this.dispatch({ currentSession: session, currentContact:contact });
   }
   async getHWFromAI() {
     // Show a loading indicator to the user
@@ -166,6 +170,15 @@ export default class SessionCard extends BaseComponent {
                 <div onClick={() => { this.getHWFromAI() }}>Generate Homework</div></div>           </div>
           
 
+
+<TherapistBillingPage 
+therapistId={this.propsState.currentUser.getJson()._id} 
+clientId={this.propsState.currentSession.getJson().contactId} 
+sessionId={this.propsState.currentSession.getJson()._id} 
+email={this.propsState.currentContact.getJson().email}
+name = {this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName}
+phone = {this.propsState.currentContact.getJson().phone}
+/>
           </div>
         </>}
       </div>

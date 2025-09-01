@@ -22,9 +22,13 @@ export default class PotentialHomeworkPopup extends BaseComponent {
 
     async componentDidMount(){
         
+        await this.getPHW();
+        this.setState({start:true})
+    }
+
+    async getPHW(){
         let currentSession = this.propsState.currentSession
         await this.componentList.getComponentsFromBackend({type:"potentialHomework", ids:currentSession.getJson()._id, fliterKeys:"sessionId"});
-        this.setState({start:true})
     }
     /**
      * Renders the OemPopupContent component.
@@ -35,6 +39,7 @@ export default class PotentialHomeworkPopup extends BaseComponent {
         return (
 
             <div style={{ padding: "10px", paddingBottom: "100px", height: "100%" }} className={this.props.pageClass || this.state.defaultClass}>
+                <div onClick={this.getPHW}>Generate Again</div>
                 <h2>Potentail Homework From AI</h2> {/*Heading for the popup*/}
               {this.state.start&&
               <div><MapComponent name="potentialHomework" filter={{search: this.propsState.currentSession.getJson()._id, attribute:"sessionId"}} cells={[{type:"custom", custom:PotentialHwPopupCustom}]}/></div>
