@@ -50,6 +50,7 @@ export default class Conversations extends GetAllComponents {
    * @returns {JSX.Element} The rendered component.
    */
   render() {
+    let isWideScreen = window.innerWidth > 600;
     return (
       <div className={this.props.pageClass || this.state.defaultClass}>
         {/* Container for the conversations card */}
@@ -59,7 +60,7 @@ export default class Conversations extends GetAllComponents {
                     }
                 </div> */}
 
-        <div style={{ paddingTop:"22px", display:"flex", flexDirection:"column"}}>
+        <div style={{ paddingTop:"22px", display:"flex", flexDirection:"column",  paddingLeft: isWideScreen?"0%":"8%"}}>
              <img src={logo} style={{ width: "50%", marginBottom: "40px" }} />
           <span
             style={{
@@ -71,7 +72,7 @@ export default class Conversations extends GetAllComponents {
           >
            Messaging Management Platform Coming Soon
           </span>
-          <div style={{ marginTop: "20px" }}>
+          <div style={{ marginTop: "20px", width: "80%", }}>
             We're polishing the Messaging experience. In the meantime, you can manage contacts and research from the left navigation.
           </div>
 
