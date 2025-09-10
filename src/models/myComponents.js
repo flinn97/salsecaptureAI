@@ -125,6 +125,10 @@ class Research extends ComponentBase {
         type:"research",
         searchFrequency:"",
         AIPrompt:"",
+        active:true,
+        skipCompanySearch: false,
+        hasPeopleCsv: false,
+        hasCompanyCsv: false,
         
         
     }
@@ -206,6 +210,22 @@ class OutreachUser extends ComponentBase{
 }
 
 
+class PeopleToResearch extends Contact{
+    json ={
+        ...this.json,
+        type:"peopleToResearch"
+    }
+}
 
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open, OutreachUser };
+class CompaniesToResearch extends Contact{
+    json ={
+        ...this.json,
+        type:"companiesToResearch"
+    }
+}
+
+
+
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open, OutreachUser,PeopleToResearch,CompaniesToResearch };

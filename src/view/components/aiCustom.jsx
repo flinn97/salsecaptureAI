@@ -68,12 +68,15 @@ class AICustomItem extends BaseComponent {
     });
     const csv = csvs[0];
     const ownerId = urlService.getIdFromURL();
+    let user = this.componentList.getComponent("user", ownerId, "_id");
+    
 
     const payload = data.map(row => ({
       ...row,
       owner: ownerId,
       type: "potentialProspect",
       researchId: this.researchId,
+      companyOwnerId: user.getJson().companyId,
       csvId: csv.getJson()._id
     }));
 

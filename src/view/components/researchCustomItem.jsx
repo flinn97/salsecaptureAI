@@ -35,7 +35,7 @@ class ResearchCustomItem extends ContactsCustomItem {
     const { obj, app } = this.props;
     // Assuming obj.getJson() is necessary and works
     let research = obj.getJson();
-    let isActive = research.isActive;
+    let isActive = research.active;
 
     return (
       <div style={{ display: "flex", flexDirection: "column", }}> 

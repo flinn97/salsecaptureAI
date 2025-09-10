@@ -321,6 +321,7 @@ export default class ContactsCard extends BaseComponent {
                     data = data.data.map((obj, i) => {
                       obj.owner = this.propsState.currentUser.getJson()._id;
                       obj.type = "contact";
+                      obj.companyOwnerId = this.propsState.currentUser.getJson().companyId;
                       return obj;
                     });
                     this.dispatch({

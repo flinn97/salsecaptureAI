@@ -6,6 +6,7 @@
  */
 import { DelButton, ParentFormComponent, RunButton, UpdateButton } from "flinntech";
 import { BaseComponent } from "flinntech";
+import CsvUpload from "../csvUpload";
 
 export default class ResearchPopup extends BaseComponent {
   /**
@@ -93,6 +94,9 @@ export default class ResearchPopup extends BaseComponent {
 
         );
     }
+    const obj = this.propsState.currentPopupComponent;
+    obj.setCompState({companyOwnerId: this.propsState.currentUser.getJson().companyId})
+
   }
 
 
@@ -432,6 +436,61 @@ export default class ResearchPopup extends BaseComponent {
             </div>
           </div>
         </div>
+            <div onClick={()=>{this.setState({showUpload:"people"})}}>people upload</div>
+            {this.state.showUpload ==="people"&&
+        <CsvUpload
+                  callBack={async (data) => {
+                    debugger
+                    let oldContacts = await this.componentList.getComponentsFromBackend({type:"peopleToResearch", ids:this.propsState.currentPopupComponent.getJson()._id, filterKeys:"researchId"})
+                    for(let c of oldContacts){
+                      await c.del();
+                    }
+                    data = data.data.map((obj, i) => {
+                      obj.owner = this.propsState.currentUser.getJson()._id;
+                      obj.type = "peopleToResearch";
+                      obj.companyOwnerId = this.propsState.currentUser.getJson().companyId;
+                      obj.researchId = this.propsState.currentPopupComponent.getJson()._id
+                      return obj;
+                    });
+                    this.dispatch({
+                      uploadPeopleResearchData: data,
+                    });
+                    await this.operationsFactory.prepare({ prepare: data });
+                    await this.propsState.currentPopupComponent.setCompState({hasPeopleCsv:true, hasCompanyCsv:false});
+                    await this.propsState.currentPopupComponent.update();
+                    this.operationsFactory.addToComponentList();
+
+                  }}
+                
+                />}
+                            <div onClick={()=>{this.setState({showUpload:"company"})}}>company upload</div>
+                            {this.state.showUpload ==="company"&&
+                 <CsvUpload
+                  callBack={async (data) => {
+                    debugger
+                    let oldCompanies = await this.componentList.getComponentsFromBackend({type:"companiesToResearch", ids:this.propsState.currentPopupComponent.getJson()._id, filterKeys:"researchId"})
+                    for(let c of oldCompanies){
+                      await c.del();
+                    }
+                    data = data.data.map((obj, i) => {
+                      obj.owner = this.propsState.currentUser.getJson()._id;
+                      obj.type = "companiesToResearch";
+                      obj.companyOwnerId = this.propsState.currentUser.getJson().companyId;
+                      obj.researchId = this.propsState.currentPopupComponent.getJson()._id
+
+                      return obj;
+                    });
+                    this.dispatch({
+                      uploadCompanyResearchData: data,
+                    });
+                    await this.operationsFactory.prepare({ prepare: data });
+                    await this.propsState.currentPopupComponent.setCompState({hasCompanyCsv:true, hasPeopleCsv:false});
+                    await this.propsState.currentPopupComponent.update();
+                    this.operationsFactory.addToComponentList();
+
+
+                  }}
+                />}
       </div>
     );
   }

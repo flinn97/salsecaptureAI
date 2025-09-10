@@ -106,6 +106,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
       "Referral",
       "Network",
       "Re-Engage",
+      "Detailed"
     ];
     const messageTypeValues = [
       "template",
@@ -117,6 +118,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
       "referral",
       "network",
       "reEngage",
+      "detailed"
     ];
     // **NEW LOGIC**: Define dynamic label and placeholder for the details input
     let detailsLabel = "Additional Instructions";
@@ -141,19 +143,6 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
           The SalesCapture AI content engine is configured to optimize content
           for your products and services.
         </h3>
-        <div className="input-container" style={{ marginTop: "38px" }}>
-          {" "}
-          Subject
-          <div className="input-bar row-container">
-            {this.propsState.currentComponent && (
-              <ParentFormComponent
-                name="subject"
-                obj={this.propsState.currentComponent}
-              />
-            )}
-          </div>
-        </div>
-
         <div
           onClick={() =>
             this.setState({ showAIDraft: !this.state.showAIDraft })
@@ -212,6 +201,20 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
             </div>
           </div>
         )}
+        <div className="input-container" style={{ marginTop: "38px" }}>
+          {" "}
+          Subject
+          <div className="input-bar row-container">
+            {this.propsState.currentComponent && (
+              <ParentFormComponent
+                name="subject"
+                obj={this.propsState.currentComponent}
+              />
+            )}
+          </div>
+        </div>
+
+        
 
         <div className="input-container">
           {" "}

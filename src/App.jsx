@@ -79,10 +79,12 @@ export default class App extends AppBaseClass {
 
         { comp: Contacts, name: "Contacts", path: "contacts" },
         { comp: ResearchPage, name: "Research", path: "research", idComp: ProspectPage },
-
-        { comp: Content, name: "Content", path: "content" },
-        { comp: Settings, name: "Settings", path: "settings" },
         { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Engine"},
+
+        { comp: Settings, name: "Settings", path: "settings" },
+
+
+        { comp: Content, name: "", path: "content" },
 
 
         { comp: SequencePage, name: "", path: "sequence", idComp: SequencePage },
@@ -185,11 +187,11 @@ export default class App extends AppBaseClass {
 
             { comp: Contacts, name: "Contacts", path: "contacts" },
             { comp: ResearchPage, name: "Research", path: "research", idComp: ProspectPage },
+            { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Engine"},
 
-            { comp: Content, name: "Content", path: "content" },
             { comp: Settings, name: "Settings", path: "settings" },
 
-            { comp: ContentGenerationPage,  path: "aigeneration", name:"Content Engine"},
+            { comp: Content, name: "", path: "content" },
 
             { comp: SequencePage, name: "", path: "sequence", idComp: SequencePage },
 

@@ -30,7 +30,7 @@ export default class ProspectCard extends BaseComponent {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.dispatch({ selectedContacts: [] })
   }
 
@@ -73,7 +73,7 @@ export default class ProspectCard extends BaseComponent {
     );
     let showChecked = selCon?.length > 0;
     let allTotal = allCon?.length ? "/" + allCon?.length : "";
-    let allSelect = selCon?.length===allCon?.length;
+    let allSelect = selCon?.length === allCon?.length;
 
     return (
       <div className="mobile-container">
@@ -86,6 +86,16 @@ export default class ProspectCard extends BaseComponent {
               <div className="nav-title">Researched Potential Prospects</div>
             </div>
 
+            <div onClick={()=>{
+              research.setCompState({active: !research.getJson().active})
+              research.update();
+              this.setState();
+              
+            }}>{research.getJson().active?"Pause":"activate"}</div>
+
+
+
+
             {/* <div className="nav-right">
               <div className="nav-icon">
                 <button className="btn">
@@ -93,37 +103,37 @@ export default class ProspectCard extends BaseComponent {
                 </button>
               </div>
               <div className="nav-icon">
-                <button onClick={async ()=>{
-                  
-                  let body = research.getJson();
+                <button
+                  onClick={async () => {
+                    try {
+                      const r = (research?.getJson?.() || research) || {};
+                      const payload = {
+                        companyId: r.companyId || r.companyOwnerId,       // backend resolves by companyId
+                        researchIds: [r._id || r.id].filter(Boolean),     // send the one you're running
+                      };
 
-                  let url = "https://getcontacts-7c5i3vsqma-uc.a.run.app";
-                  let json = await JSON.stringify(body)
-        
-                   // Make the POST request
-                   await fetch(url, {
-                     method: "POST",
-                     headers: {
-                       "Content-Type": "application/json",
-                     },
-                     body:json ,
-                   })
-                     .then((response) => {
-                       if (!response.ok) {
-                         throw new Error(`HTTP error! Status: ${response.status}`);
-                       }
-                       return response.json();
-                     })
-                     .then((data) => {
-                       console.log("Reply sent successfully in thread.", data);
-                     })
-                     .catch((error) => {
-                       console.error("Error sending reply:", error);
-                     });
+                      if (!payload.companyId) throw new Error("Missing companyId on research");
+                      if (payload.researchIds.length === 0) throw new Error("Missing research id");
 
-                }} className="btn">
-                 Get Research<i className="fa-solid fa-angle-down"></i>
+                      const url = "https://getcontacts-7c5i3vsqma-uc.a.run.app";
+                      const res = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                      });
+
+                      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+                      const data = await res.json();
+                      console.log("getContacts triggered:", data);
+                    } catch (error) {
+                      console.error("Error calling getContacts:", error);
+                    }
+                  }}
+                  className="btn"
+                >
+                  Get Research <i className="fa-solid fa-angle-down"></i>
                 </button>
+
               </div>
               <div className="nav-icon">
                 <button className="btn">
@@ -131,6 +141,11 @@ export default class ProspectCard extends BaseComponent {
                 </button>
               </div>
             </div> */}
+
+
+
+
+
           </nav>
 
           <div className="search-container">
@@ -158,7 +173,7 @@ export default class ProspectCard extends BaseComponent {
                   }}
                 >
                   <CheckIt
-                    label={allSelect?"Deselect All":`Select All`}
+                    label={allSelect ? "Deselect All" : `Select All`}
                     check={this.filterFunc}
                     uncheck={() => {
                       this.dispatch({ selectedContacts: [] });
@@ -170,7 +185,7 @@ export default class ProspectCard extends BaseComponent {
               <span className="count-desc">
                 {this.propsState.selectedContacts?.length
                   ? this.propsState.selectedContacts.length +
-                    `${allTotal} Selected`
+                  `${allTotal} Selected`
                   : ""}
               </span>
             </div>
@@ -238,51 +253,51 @@ export default class ProspectCard extends BaseComponent {
         />
         {this.propsState.selectedContacts?.length > 0 && (
           <div id="floating-select-set" className="floating-select-set">
-           
-          <button
-            onClick={() => {
-              for (let contact of this.propsState.selectedContacts) {
-                contact.del();
+
+            <button
+              onClick={() => {
+                for (let contact of this.propsState.selectedContacts) {
+                  contact.del();
+                }
+                this.dispatch({ selectedContacts: [] });
+              }}
+              className="floating-select-btn hover-basic"
+            >
+              <span className="floating-select-btn-text">Remove</span>
+            </button>
+            <button onClick={() => {
+              for (let prospect of this.propsState.selectedContacts) {
+                prospect.copy({ type: "contact", ogPPId: prospect.getJson()._id })
               }
-              this.dispatch({ selectedContacts: [] });
-            }}
-            className="floating-select-btn hover-basic"
-          >
-            <span className="floating-select-btn-text">Remove</span>
-          </button>
-          <button onClick={()=>{
-            for(let prospect of this.propsState.selectedContacts){
-              prospect.copy({type:"contact", ogPPId:prospect.getJson()._id})
-            }
-          }} className="floating-select-btn floating-select-primary-btn hover-basic">
-           
-                <span className="floating-select-btn-text">
-                  Add Prospect
-                </span>
-            
-          </button>
-          <button 
-          style={{width:"110px"}}
-          className="floating-select-btn floating-select-primary-btn hover-basic">
-            <PopupButton
-              formclassName="FCImgButton"
-              content={
-                <span onClick={()=>{
-                  let contacts = this.propsState.selectedContacts;
-                        for(let pp of contacts){
-                            pp.copy({type:"contact", ogPPId:pp.getJson()._id});
-                        }
-                        this.dispatch({sequenceDataType:"research"})    
-                    
-                }} className="floating-select-btn-text" 
-                style={{color:"white",}}>
-                  Add to Sequence
-                </span>
-              }
-              popupSwitch="addToSequence"
-            />
-          </button>
-        </div>
+            }} className="floating-select-btn floating-select-primary-btn hover-basic">
+
+              <span className="floating-select-btn-text">
+                Add Prospect
+              </span>
+
+            </button>
+            <button
+              style={{ width: "110px" }}
+              className="floating-select-btn floating-select-primary-btn hover-basic">
+              <PopupButton
+                formclassName="FCImgButton"
+                content={
+                  <span onClick={() => {
+                    let contacts = this.propsState.selectedContacts;
+                    for (let pp of contacts) {
+                      pp.copy({ type: "contact", ogPPId: pp.getJson()._id });
+                    }
+                    this.dispatch({ sequenceDataType: "research" })
+
+                  }} className="floating-select-btn-text"
+                    style={{ color: "white", }}>
+                    Add to Sequence
+                  </span>
+                }
+                popupSwitch="addToSequence"
+              />
+            </button>
+          </div>
         )}
       </div>
     );
