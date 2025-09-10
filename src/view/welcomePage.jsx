@@ -37,7 +37,7 @@ export default class WelcomePage extends BaseComponent {
         className="layoutRow"
         style={{ width: "100%", height: "100%", padding: "12px" }}
       >
-        <div className="layoutColumn-welcome">
+        <div className="layoutColumn-welcome" >
           <img src={logo} style={{ width: "50%", marginBottom: "40px" }} />
           <div>
             <span
@@ -60,6 +60,7 @@ export default class WelcomePage extends BaseComponent {
               flexDirection: isWideScreen ? "row" : "column",
               gap: "1em",
               marginTop: "30px",
+              paddingBottom:isWideScreen?"0px":"64px"
             }}
           >
             <div className="opener-page-card">

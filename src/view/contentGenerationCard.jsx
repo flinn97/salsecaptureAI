@@ -143,7 +143,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
           The SalesCapture AI content engine is configured to optimize content
           for your products and services.
         </h3>
-        <div
+          <div
           onClick={() =>
             this.setState({ showAIDraft: !this.state.showAIDraft })
           }
@@ -154,6 +154,20 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
         >
           {this.state.showAIDraft ? "Cancel" : "Draft With AI"}
         </div>
+        <div className="input-container" style={{ marginTop: "38px" }}>
+          {" "}
+          Subject
+          <div className="input-bar row-container">
+            {this.propsState.currentComponent && (
+              <ParentFormComponent
+                name="subject"
+                obj={this.propsState.currentComponent}
+              />
+            )}
+          </div>
+        </div>
+
+      
         {this.state.showAIDraft && (
           <div style={{ padding: "1em", marginLeft:"1em", border: "1px solid gray", borderRadius:"14px" }}>
             <h2>Generate Content</h2>
