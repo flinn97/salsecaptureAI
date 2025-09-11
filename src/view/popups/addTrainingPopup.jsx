@@ -122,7 +122,20 @@ export default class AddTrainingPopup extends BaseComponent {
                   obj={obj}
                   formClass="underline-form"
                   name="prompt"
-                  placeholder="Optional: override prompt for this training doc"
+                  placeholder="Add an innitial prompt needed for messaging"
+                  inPopup={true}
+                />
+              </div>
+            </div>
+             {/* display name */}
+             <div className={`row-container ${obj?.getJson().prompt ? "" : "unfilled-container"}`}>
+              <div className="row-name">Display Name (only if its a type for messaging)</div>
+              <div className="row-field">
+                <ParentFormComponent
+                  obj={obj}
+                  formClass="underline-form"
+                  name="displayName"
+                  placeholder="what is displayed on the dropdown"
                   inPopup={true}
                 />
               </div>

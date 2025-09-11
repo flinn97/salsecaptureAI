@@ -15,6 +15,8 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
    */
   async componentDidMount() {
     await this.getComponentsFromBackend();
+    let t = await this.componentList.getComponentsFromBackend("training", false);
+
     const templateId = this.urlId; // Get the ID from the URL
 
     // If there's no ID, prepare a new template item
@@ -95,31 +97,49 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
    * @returns {JSX.Element} The rendered content of the component.
    */
   getInnerContent() {
+    function getUniqueByType(list) {
+      const seen = new Set();
+      return list.filter(obj => {
+        const type = obj.getJson().emailType;
+        if (seen.has(type)) return false;
+        seen.add(type);
+        return true;
+      });
+    }
+    
+    // Usage
+    let tList = this.componentList.getList("training", "genTraining", "trainingType");
+    tList = getUniqueByType(tList);    
+
+    let messageTypes = tList.map((obj)=>obj.getJson().displayName);
+    let messageTypeValues = tList.map((obj)=>obj.getJson().emailType);
+
+
     // Define all possible message types for the dropdown
-    const messageTypes = [
-      "Template",
-      "Follow Up",
-      "Reply",
-      "Event",
-      "Proposal",
-      "Attached Document",
-      "Referral",
-      "Network",
-      "Re-Engage",
-      "Detailed"
-    ];
-    const messageTypeValues = [
-      "template",
-      "sequence",
-      "reply",
-      "event",
-      "proposal",
-      "document",
-      "referral",
-      "network",
-      "reEngage",
-      "detailed"
-    ];
+    // const messageTypes = [
+    //   "Template",
+    //   "Follow Up",
+    //   "Reply",
+    //   "Event",
+    //   "Proposal",
+    //   "Attached Document",
+    //   "Referral",
+    //   "Network",
+    //   "Re-Engage",
+    //   "Detailed"
+    // ];
+    // const messageTypeValues = [
+    //   "template",
+    //   "sequence",
+    //   "reply",
+    //   "event",
+    //   "proposal",
+    //   "document",
+    //   "referral",
+    //   "network",
+    //   "reEngage",
+    //   "detailed"
+    // ];
     // **NEW LOGIC**: Define dynamic label and placeholder for the details input
     let detailsLabel = "Additional Instructions";
     let detailsPlaceholder = "Any extra details or specifications...";
