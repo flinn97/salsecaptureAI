@@ -225,7 +225,14 @@ class CompaniesToResearch extends Contact{
     }
 }
 
+class Training extends ComponentBase{
+    json={
+        ...this.json,
+        type:'training'
+    }
+}
 
 
 
-export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open, OutreachUser,PeopleToResearch,CompaniesToResearch };
+
+export { User, Contact, Conversations, Template, Sequence, Step, TextMessage, Email, PotentialProspect, Research, Client, AIPrompt, AISettings, Todo , Limit, CsvUpload, Open, OutreachUser,PeopleToResearch,CompaniesToResearch, Training };

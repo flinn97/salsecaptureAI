@@ -36,6 +36,7 @@ import UserPage from './view/userPage.jsx';
 import DeleteSequenceDialog from './view/popups/delSequencePopup.jsx';
 import WelcomePage from './view/welcomePage.jsx';
 import ContentGenerationPage from './view/contentGenerationpage.jsx';
+import AddTrainingPopup from './view/popups/addTrainingPopup.jsx';
 //  import Settings from './view/settings';
 //  import AddContactPopup from './view/addContactPopup';
 
@@ -45,7 +46,7 @@ import ContentGenerationPage from './view/contentGenerationpage.jsx';
 export default class App extends AppBaseClass {
   constructor(props) {
     super(props, { db: db, endpoint: "salescaptureAI", auth: auth, storage: storage });
-    this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup, email: AddEmail, user: AddUserPopup };
+    this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, research: ResearchPopup, email: AddEmail, user: AddUserPopup, training:AddTrainingPopup };
     this.popupComponentsProps = {};
     navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
 

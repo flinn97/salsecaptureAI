@@ -7,6 +7,8 @@ import { BaseComponent } from "flinntech";
 import { Link } from "react-router-dom";
 import TemplateCustomItem from "./components/templateCustom";
 import ClientCustom from "./components/clientCustom";
+import TrainingCustom from "./components/trainingCustom";
+import SCAIPopupButtonTest from "./components/debug/CustomPopupButton";
 
 export default class AdminCard extends BaseComponent {
     /**
@@ -36,6 +38,33 @@ export default class AdminCard extends BaseComponent {
                     cells={[
                         {type:"custom",
                         custom:ClientCustom
+                        }
+                      
+                    ]}
+                />
+
+                ALL TRAINING DOCS
+                <SCAIPopupButtonTest
+                  wrapperclassName="none"
+                  content={
+                    <div
+
+                      className="dark-button-1"
+                      style={{
+                        position: "relative",
+                        width: "fit-content",
+                      }}
+                    >
+                      Add Training
+                    </div>
+                  }
+                  popupSwitch="addTraining"
+                />
+                <MapComponent
+                    name="training"
+                    cells={[
+                        {type:"custom",
+                        custom:TrainingCustom
                         }
                       
                     ]}

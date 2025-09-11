@@ -15,6 +15,7 @@
     "flinntech": "^1.0.6-o",
     "he": "^1.2.0",
     "papaparse": "^5.5.2",
+    "pdfjs-dist": "^5.4.149",
     "react": "^18.3.1",
     "react-datepicker": "^7.6.0",
     "react-dom": "^18.3.1",

@@ -17,6 +17,9 @@ export default class AdminPage extends GetComponentsFromUrl {
         await this.getComponentsFromBackend();
         
        let c = await this.componentList.getComponentsFromBackend({type:"client", ids: "alan@salescapture.com", filterKeys: "owner",})
+       
+       let t = await this.componentList.getComponentsFromBackend("training", false);
+
        console.log(c)
     }
 
