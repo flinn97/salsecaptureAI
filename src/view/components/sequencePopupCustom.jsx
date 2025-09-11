@@ -52,37 +52,74 @@ class SequencePopupCustomItem extends BaseComponent {
               let delay = parseFloat(step1.getJson().nextSend);
               let nextSend = new Date(Date.now() + delay * 60 * 60 * 1000);
               nextSend = Timestamp.fromDate(nextSend);
+
               for (let c of contacts) {
-                let oldSeq = this.componentList.getComponent(
-                  "sequence",
-                  c.getJson().sequenceId
-                );
-                let tags = c.getJson().finishedSequenceTags || "";
-                if (oldSeq) {
-                  if (
-                    !c
-                      .getJson()
-                      .finishedSequenceTags.includes(oldSeq.getJson().name)
-                  ) {
-                    let addTag =
-                      tags.length === 0
-                        ? oldSeq.getJson().name
-                        : "," + oldSeq.getJson().name;
-                    tags = addTag;
+                const newSeqId = obj.getJson()._id;
+                const oldSeqId = c.getJson().sequenceId;
+                const oldSeq   = oldSeqId ? this.componentList.getComponent("sequence", oldSeqId) : null;
+              
+                // Build tag list safely (array of strings)
+                const existingTags = String(c.getJson().finishedSequenceTags || "")
+                  .split(",")
+                  .map(s => s.trim())
+                  .filter(Boolean);
+              
+                // If (and only if) the contact actually finished the old sequence, record it
+                const contactFinishedOld = Boolean(c.getJson().finished === true);
+                if (oldSeq && contactFinishedOld) {
+                  const oldName = String(oldSeq.getJson().name || "");
+                  if (oldName && !existingTags.includes(oldName)) {
+                    existingTags.push(oldName);
                   }
                 }
-
+              
+             
+              
+                // Update the contact
                 c.setCompState(
                   {
-                    sequenceId: obj.getJson()._id,
-                    finishedSequenceTags: tags,
+                    sequenceId: newSeqId,
+                    finishedSequenceTags: existingTags.join(","), // append instead of overwrite
                     finished: false,
                     emailNumber: 0,
-                    nextSend: nextSend,
+                    nextSend
                   },
                   { run: true }
                 );
               }
+
+              //trying new code above
+              // for (let c of contacts) {
+              //   let oldSeq = this.componentList.getComponent(
+              //     "sequence",
+              //     c.getJson().sequenceId
+              //   );
+              //   let tags = c.getJson().finishedSequenceTags || "";
+              //   if (oldSeq) {
+              //     if (
+              //       !c
+              //         .getJson()
+              //         .finishedSequenceTags.includes(oldSeq.getJson().name)
+              //     ) {
+              //       let addTag =
+              //         tags.length === 0
+              //           ? oldSeq.getJson().name
+              //           : "," + oldSeq.getJson().name;
+              //       tags = addTag;
+              //     }
+              //   }
+
+              //   c.setCompState(
+              //     {
+              //       sequenceId: obj.getJson()._id,
+              //       finishedSequenceTags: tags,
+              //       finished: false,
+              //       emailNumber: 0,
+              //       nextSend: nextSend,
+              //     },
+              //     { run: true }
+              //   );
+              // }
               this.dispatch({ popupSwitch: "", selectedContacts: [] });
             }
           }}

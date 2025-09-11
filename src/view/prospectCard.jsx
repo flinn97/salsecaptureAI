@@ -91,7 +91,7 @@ export default class ProspectCard extends BaseComponent {
               research.update();
               this.setState();
               
-            }}>{research.getJson().active?"Pause":"activate"}</div>
+            }}>{research?.getJson().active?"Pause":"activate"}</div>
 
 
 

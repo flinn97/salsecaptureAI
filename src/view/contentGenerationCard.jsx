@@ -156,15 +156,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
         </div>
         <div className="input-container" style={{ marginTop: "38px" }}>
           {" "}
-          Subject
-          <div className="input-bar row-container">
-            {this.propsState.currentComponent && (
-              <ParentFormComponent
-                name="subject"
-                obj={this.propsState.currentComponent}
-              />
-            )}
-          </div>
+        
         </div>
 
       
