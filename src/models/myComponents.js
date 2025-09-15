@@ -115,6 +115,7 @@ class PotentialProspect extends ComponentBase {
         email: "",
         researchId:"",
         conversationIds: [],
+        source:"Success AI"
         
     };
 }

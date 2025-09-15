@@ -42,6 +42,25 @@ class ProspectCustomItem extends BaseComponent {
     this.dispatch({ selectedContacts: contacts });
   };
 
+  async componentDidMount(){
+    const { obj } = this.props;
+    if(Object.prototype.toString.call(obj.getJson().mobile) === "[object Object]" && obj.getJson().raw.phone_numbers?.[0]){
+      await obj.setCompState({mobile:obj.getJson().mobile.raw_number})
+    }
+    if(obj.getJson().raw?.city){
+      await obj.setCompState({city:obj.getJson().raw?.city})
+
+    }
+    if(obj.getJson().raw?.state){
+      await obj.setCompState({state:obj.getJson().raw?.state})
+
+    }
+    await obj.update();
+    this.dispatch();
+
+
+  }
+
   render() {
     const { obj } = this.props;
     // Assuming obj.getJson() is necessary and works

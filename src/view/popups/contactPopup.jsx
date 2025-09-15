@@ -51,6 +51,29 @@ export default class ContactPopup extends BaseComponent {
     const year = date.getFullYear();
     return `${month} ${day}, ${year}`;
   }
+
+  async componentDidMount(){
+    debugger
+    const obj  = this.propsState.currentContact;
+    if(obj.getJson().type==="potentialProspect"){
+      if(Object.prototype.toString.call(obj.getJson().moble) === "[object Object]" && obj.getJson().raw.phone_numbers?.[0]){
+        await obj.setCompState({mobile:obj.getJson().mobile.raw_number})
+      }
+      if(obj.getJson().raw?.city){
+        await obj.setCompState({moble:obj.getJson().raw?.city})
+  
+      }
+      if(obj.getJson().raw?.state){
+        await obj.setCompState({moble:obj.getJson().raw?.state})
+  
+      }
+      await obj.update();
+      this.dispatch();
+    }
+   
+
+
+  }
   /**
    * Renders the OemPopupContent component.
    * @returns {JSX.Element} The rendered component.
