@@ -130,7 +130,16 @@ class Research extends ComponentBase {
         skipCompanySearch: false,
         hasPeopleCsv: false,
         hasCompanyCsv: false,
-        
+        mode:"Auto",
+        newDataSrcs: ['zoominfo'],
+        vettingThreshold:"70",
+        searchFrequency:"daily",
+        actionToFindDisplay: "Sequence",
+        actionOnFind:{
+            enpoint: "https://sequencecontacts-7c5i3vsqma-uc.a.run.app",
+            technology: []
+        }
+
         
     }
 }

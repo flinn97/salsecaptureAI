@@ -38,7 +38,7 @@ export default class ResearchPage extends GetAllComponents {
      */
     render() {
         return (
-            <div className={this.props.pageClass || this.state.defaultClass}>
+            <div style={{height: window.innerWidth<800&&"90vh"}}  className={this.props.pageClass || this.state.defaultClass}>
                     <Card theme="NoBorder" type="fit" content={<ResearchCard />} />
             </div>
         );

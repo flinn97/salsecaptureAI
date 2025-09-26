@@ -44,19 +44,27 @@ class ProspectCustomItem extends BaseComponent {
 
   async componentDidMount(){
     const { obj } = this.props;
-    if(Object.prototype.toString.call(obj.getJson().mobile) === "[object Object]" && obj.getJson().raw.phone_numbers?.[0]){
+    let update = false;
+    if(Object.prototype.toString.call(obj.getJson().mobile) === "[object Object]" && obj.getJson().raw.phone_numbers?.[0]&&obj.getJson().mobile!==obj.getJson().raw?.raw_number){
       await obj.setCompState({mobile:obj.getJson().mobile.raw_number})
+      update = true;
     }
-    if(obj.getJson().raw?.city){
+    if(obj.getJson().raw?.city&&obj.getJson().city!==obj.getJson().raw?.city){
       await obj.setCompState({city:obj.getJson().raw?.city})
+      update = true;
 
     }
-    if(obj.getJson().raw?.state){
-      await obj.setCompState({state:obj.getJson().raw?.state})
+    if(obj.getJson().raw?.state &&obj.getJson().state!==obj.getJson().raw?.state){
+      await obj.setCompState({state:obj.getJson().raw?.state})      
+      update = true;
+
 
     }
-    await obj.update();
-    this.dispatch();
+    if(update){
+      await obj.update();
+      this.dispatch();
+    }
+   
 
 
   }
