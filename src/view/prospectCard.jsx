@@ -196,7 +196,7 @@ handleBusinessCardFile = async (evt) => {
 
 
 
-            <div className="nav-right">
+            {/* <div className="nav-right">
               <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
@@ -240,7 +240,7 @@ handleBusinessCardFile = async (evt) => {
                   <i className="fa-solid fa-filter"></i>
                 </button>
               </div>
-            </div> 
+            </div>  */}
 
 
 
