@@ -42,7 +42,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
     const user = this.propsState.currentUser;
 
     if (!messageType) {
-      alert("Please select a message type.");
+      console.log("Please select a message type.");
       return;
     }
 
@@ -86,7 +86,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
       this.dispatch({}); // Re-render the component
     } catch (error) {
       console.error("Failed to generate AI message:", error);
-      alert(
+      console.log(
         "There was an error generating the message. Please check the console."
       );
     }
@@ -188,6 +188,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
               <div style={{marginLeft:"8px"}}>
               <ParentFormComponent
                 formClass="input-bar row-container underline-form"
+                wrapperClass="fit"
                 type="select"
                 // textOptions={messageTypes}
                 selectOptions={messageTypes}
@@ -230,14 +231,15 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
         <div className="input-container" style={{ marginTop: "38px" }}>
           {" "}
           Subject
-          <div className="input-bar row-container">
-            {this.propsState.currentComponent && (
+          <div className="row-field input-bar">
+          {this.propsState.currentComponent && (
               <ParentFormComponent
                 name="subject"
                 obj={this.propsState.currentComponent}
               />
             )}
-          </div>
+                </div>
+        
         </div>
 
         
