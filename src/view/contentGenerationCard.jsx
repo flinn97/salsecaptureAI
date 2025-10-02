@@ -200,7 +200,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
             <h2>Generate Content</h2>
             <div style={{ display: "flex", flexDirection: "column",}}>
               Select Message Type:
-              <div style={{marginLeft:"8px"}}>
+              <div style={{marginLeft:"8px", marginTop:"5px"}}>
               <ParentFormComponent
                 formClass="input-bar row-container underline-form"
                 wrapperClass="fit"
@@ -214,7 +214,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
                 }}
               /></div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column", marginTop:"8px" }}>
               Persona/Tone
               <input
                 className="input-bar row-container"
