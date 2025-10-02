@@ -26,6 +26,11 @@ export default class ResearchCard extends BaseComponent {
       title: "Contacts",
     };
   }
+  
+  componentDidMount(){
+    this.dispatch({currentComponent:undefined})
+
+  }
 
   filterFunc() {
     let filterText = this.propsState.tags?.split(",") || "";

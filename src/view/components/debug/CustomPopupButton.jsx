@@ -5,11 +5,13 @@ export default class SCAIPopupButtonTest extends BaseButton{
      *Ok so this is just a temp fix. Somthing is up with the library.
      */
     async buttonClickFunc(){
+        
             
             let obj = this.obj;
             let type = obj.type;
             
             if(this.props.popupSwitch.includes("add")){
+
                 obj= obj[0]?obj[0]:{type:this.getFactoryTypeString(this.props.popupSwitch.slice(3))}
                 obj = {prepare:{...obj}, amount:this.props.amount, clean:this.props.clean};
                 obj = await this.operationsFactory.prepare(obj);
