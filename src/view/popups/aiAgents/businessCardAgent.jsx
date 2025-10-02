@@ -101,17 +101,58 @@
     * ===================
     */
  render() {
+    const footerStyle = {
+        display: "flex",
+        alignItems: "center",        // <-- vertically center children
+        gap: 8,
+        position: "absolute",
+        bottom: 20,
+        right: 20,
+        borderRadius: "12px",
+      };
+      
+      const btnWrap = {
+        display: "flex",
+        alignItems: "center",
+        height: 36,                  // <-- unify button box height
+      };
+      
+      const btnStyle = {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        lineHeight: 1,               // <-- kill baseline drift
+        height: "100%",
+        padding: "8px 14px",
+      };
     const obj = this.propsState.currentPopupComponent;
     const isEdit = !!this.propsState.currentPopupComponent.getJson().date;
 
     const actionButton = isEdit ? (
-      <UpdateButton
-        formClass="dark-button-1"
-        obj={this.propsState.currentPopupComponent}
-        content="Save"
-        isPopup={true}
-        callbackFunc={this.props.callbackFunc}
-      />
+        <div style={footerStyle}>
+        <div style={btnWrap}>
+        <DelButton
+            formClass="danger-button-1 dark-button-1"
+            style={btnStyle}
+            obj={this.propsState.currentPopupComponent}
+            content="Delete"
+            isPopup={true}
+            inPopup={true}
+            callbackFunc={() => this.dispatch({ currentPopupComponent: undefined, popupSwitch: "" })}
+          />
+        
+        </div>
+        <div style={btnWrap}>
+        <UpdateButton
+            formClass="dark-button-1"
+            style={btnStyle}
+            obj={this.propsState.currentPopupComponent}
+            content="Save"
+            isPopup={true}
+            callbackFunc={this.props.callbackFunc}
+          />
+        </div>
+      </div>
     ) : (
       <RunButton formClass="dark-button-1" content="Save" isPopup={true} callbackFunc={this.props.callbackFunc} />
     );
@@ -121,6 +162,7 @@
     return (
       <div style={{ padding: "10px", paddingBottom: "100px", height: "100%" }} className={this.props.pageClass || this.state.defaultClass}>
         
+        {this.getHeaderSection(obj)}
 
         {/* 2. Prompt (front & center) */}
         {this.getPromptSection(obj)}

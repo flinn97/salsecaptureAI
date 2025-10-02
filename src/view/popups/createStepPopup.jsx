@@ -121,7 +121,7 @@ export default class CreateStepPopup extends BaseComponent {
 
         } catch (error) {
             console.error("Failed to draft with AI:", error);
-            alert("An error occurred while generating the draft. Please check the console.");
+            console.log("An error occurred while generating the draft. Please check the console.");
         }
     }}
     className="dark-button-1"

@@ -97,7 +97,7 @@ export default class WelcomePage extends BaseComponent {
               <div className="main-message">
                 Quickly generate effective sales content
               </div>
-              <Link to="/content" className="inLine-Link">
+              <Link to="/aigeneration" className="inLine-Link">
                 Create Content
               </Link>{" "}
             </div>

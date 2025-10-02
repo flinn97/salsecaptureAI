@@ -36,7 +36,7 @@ export default class TemplatePage extends GetComponentsFromUrl {
         const user = this.propsState.currentUser;
 
         if (!messageType) {
-            alert("Please select a message type.");
+            console.log("Please select a message type.");
             return;
         }
 
@@ -80,7 +80,7 @@ export default class TemplatePage extends GetComponentsFromUrl {
             this.dispatch({}); // Re-render the component
         } catch (error) {
             console.error("Failed to generate AI message:", error);
-            alert("There was an error generating the message. Please check the console.");
+            console.log("There was an error generating the message. Please check the console.");
         }
     }
 

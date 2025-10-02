@@ -9,6 +9,13 @@ import "./contentEngine.css";
 import { Link } from "react-router-dom";
 
 export default class ContentGenerationCard extends GetComponentsFromUrl {
+  constructor(props){
+    super(props);
+    this.state = {
+      ...this.state,
+      messageType:"template"
+    }
+  }
   /**
    * Lifecycle method that runs after the component mounts.
    * It fetches template components from the backend.
@@ -42,7 +49,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
     const user = this.propsState.currentUser;
 
     if (!messageType) {
-      alert("Please select a message type.");
+      console.log("Please select a message type.");
       return;
     }
 
@@ -86,7 +93,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
       this.dispatch({}); // Re-render the component
     } catch (error) {
       console.error("Failed to generate AI message:", error);
-      alert(
+      console.log(
         "There was an error generating the message. Please check the console."
       );
     }
@@ -111,8 +118,16 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
     let tList = this.componentList.getList("training", "genTraining", "trainingType");
     tList = getUniqueByType(tList);    
 
-    let messageTypes = tList.map((obj)=>obj.getJson().displayName);
-    let messageTypeValues = tList.map((obj)=>obj.getJson().emailType);
+    let messageTypes = tList.map((obj)=>obj.getJson().displayName).sort((a, b) => {
+      if (a === "Prospecting" && b !== "Prospecting") return -1; // a first
+      if (b === "Prospecting" && a !== "Prospecting") return 1;  // b first
+      return a.localeCompare(b); // otherwise normal alpha
+    });;
+    let messageTypeValues = tList.map((obj)=>obj.getJson().emailType).sort((a, b) => {
+      if (a === "template" && b !== "template") return -1; // a first
+      if (b === "template" && a !== "template") return 1;  // b first
+      return a.localeCompare(b); // otherwise normal alpha
+    });;
 
 
     // Define all possible message types for the dropdown
@@ -188,6 +203,7 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
               <div style={{marginLeft:"8px", marginTop:"5px"}}>
               <ParentFormComponent
                 formClass="input-bar row-container underline-form"
+                wrapperClass="fit"
                 type="select"
                 // textOptions={messageTypes}
                 selectOptions={messageTypes}
@@ -230,14 +246,15 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
         <div className="input-container" style={{ marginTop: "38px" }}>
           {" "}
           Subject
-          <div className="input-bar row-container">
-            {this.propsState.currentComponent && (
+          <div className="row-field input-bar">
+          {this.propsState.currentComponent && (
               <ParentFormComponent
                 name="subject"
                 obj={this.propsState.currentComponent}
               />
             )}
-          </div>
+                </div>
+        
         </div>
 
         

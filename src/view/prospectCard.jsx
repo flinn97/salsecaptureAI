@@ -11,7 +11,7 @@ import ContactsCustomItem from "./components/contactsCustom";
 import CsvUpload from "./csvUpload";
 import ProspectCustomItem from "./components/prospectCustomItem";
 import AskIsaac from "./popups/aiAgents/askIsaac";
-const ANALYZE_BUSINESS_CARD_URL = "https://analyzebusinesscard-7c5i3vsqma-uc.a.run.app";
+import BusinessCardAnalyzer from "./popups/aiAgents/businessCardAnalyst";
 
 /**
  * ContactsCard class extends BaseComponent to create a contact management card.
@@ -52,52 +52,6 @@ fileToBase64NoHeader(file) {
   });
 }
 
-// --- handler: send file → Cloud Function ---
-handleBusinessCardFile = async (evt) => {
-  try {
-    const file = evt?.target?.files?.[0];
-    if (!file) return;
-
-    this.setState({ uploadingCard: true, analyzeMsg: null });
-
-    // researchId = current page id (you already compute this.id in ctor)
-    const researchId = this.id;
-
-    // convert to base64 string without header
-    const imageBase64 = await this.fileToBase64NoHeader(file);
-
-    // build request body (you can add config/apiKey/AIType if you want)
-    const body = { researchId, image: imageBase64 };
-
-    const res = await fetch(ANALYZE_BUSINESS_CARD_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data?.error || `HTTP ${res.status}`);
-    }
-
-    // Show counts returned by the function
-    const c = data?.counts || {};
-    this.setState({
-      analyzeMsg: `Analyzed. Created: ${c.created || 0}, Updated: ${c.upserted || 0}, Skipped: ${c.skipped || 0}`,
-    });
-
-    // optional: refresh your list so new potentialProspects show up
-    // If your framework has a refresh hook, call it here; otherwise force a render.
-    this.setState({});
-  } catch (err) {
-    this.setState({ analyzeMsg: `Analyze failed: ${err?.message || String(err)}` });
-    console.error("Business card analyze error:", err);
-  } finally {
-    this.setState({ uploadingCard: false });
-    // reset the input so the same file can be re-selected if needed
-    if (evt?.target) evt.target.value = "";
-  }
-};
  // simple debounce helper
  debounce(fn, ms) {
   let t;
@@ -156,10 +110,18 @@ handleBusinessCardFile = async (evt) => {
     let showChecked = selCon?.length > 0;
     let allTotal = allCon?.length ? "/" + allCon?.length : "";
     let allSelect = selCon?.length === allCon?.length;
+    let agentTypes = {
+      askIsaac: AskIsaac,
+      businessCard: BusinessCardAnalyzer
+      
+    }
+    console.log(research?.getJson().agentType);
+    let Comp = agentTypes[research?.getJson().agentType]
+    console.log(Comp);
 
     return (
       <div className="mobile-container">
-        {research?.getJson().agentType==="askIsaac"?(<><AskIsaac/></>):(<>
+        {Comp!==undefined?(<><Comp/></>):(<>
         <div className="top-nav-float">
           <nav className="top-nav">
             <div className="nav-left">
@@ -175,28 +137,11 @@ handleBusinessCardFile = async (evt) => {
               this.setState();
 
             }}>{research?.getJson().active ? "Pause" : "activate"}</div>
-            {research?.getJson().researchType === "businessCard" && (
-  <div className="bizcard-uploader" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-    <input
-      id="bizcard-input"
-      type="file"
-      accept="image/*"
-      capture="environment"     // mobile: open rear camera by default
-      onChange={this.handleBusinessCardFile}
-      style={{ display: "none" }}
-    />
-    <label htmlFor="bizcard-input" className="btn">
-      {this.state.uploadingCard ? "Analyzing..." : "Scan Business Card"}
-    </label>
-    {this.state.analyzeMsg && (
-      <span style={{ fontSize: 12, opacity: 0.8 }}>{this.state.analyzeMsg}</span>
-    )}
-  </div>
-)}
+  
 
+{/* 
 
-
-            {/* <div className="nav-right">
+            <div className="nav-right">
               <div className="nav-icon">
                 <button className="btn">
                   A to Z <i className="fa-solid fa-angle-down"></i>
