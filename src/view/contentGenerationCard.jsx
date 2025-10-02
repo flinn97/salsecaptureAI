@@ -116,18 +116,19 @@ export default class ContentGenerationCard extends GetComponentsFromUrl {
     
     // Usage
     let tList = this.componentList.getList("training", "genTraining", "trainingType");
-    tList = getUniqueByType(tList);    
+    tList = getUniqueByType(tList);   
+    let messages = tList.sort((a, b) => {
+      if (a.getJson().displayName === "Prospecting" && b.getJson().displayName !== "Prospecting") return -1; // a first
+      if (b.getJson().displayName === "Prospecting" && a.getJson().displayName !== "Prospecting") return 1;  // b first
+      return a.getJson().displayName.localeCompare(b.getJson().displayName); // otherwise normal alpha
+    });
 
-    let messageTypes = tList.map((obj)=>obj.getJson().displayName).sort((a, b) => {
-      if (a === "Prospecting" && b !== "Prospecting") return -1; // a first
-      if (b === "Prospecting" && a !== "Prospecting") return 1;  // b first
-      return a.localeCompare(b); // otherwise normal alpha
-    });;
-    let messageTypeValues = tList.map((obj)=>obj.getJson().emailType).sort((a, b) => {
-      if (a === "template" && b !== "template") return -1; // a first
-      if (b === "template" && a !== "template") return 1;  // b first
-      return a.localeCompare(b); // otherwise normal alpha
-    });;
+
+    let messageTypes = messages.map((obj)=>obj.getJson().displayName)
+    let messageTypeValues = messages.map((obj)=>obj.getJson().emailType)
+    console.log("messageTypes", messageTypes)
+
+    console.log("messageTypeValues", messageTypeValues)
 
 
     // Define all possible message types for the dropdown
