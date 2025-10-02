@@ -139,7 +139,7 @@ fileToBase64NoHeader(file) {
             }}>{research?.getJson().active ? "Pause" : "activate"}</div>
   
 
-
+{/* 
 
             <div className="nav-right">
               <div className="nav-icon">
@@ -185,7 +185,7 @@ fileToBase64NoHeader(file) {
                   <i className="fa-solid fa-filter"></i>
                 </button>
               </div>
-            </div> 
+            </div>  */}
 
 
 

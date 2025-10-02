@@ -42,32 +42,156 @@ class ProspectCustomItem extends BaseComponent {
     this.dispatch({ selectedContacts: contacts });
   };
 
-  async componentDidMount(){
+  async componentDidMount() {
     const { obj } = this.props;
+    const j = obj.getJson?.() || {};
     let update = false;
-    if(Object.prototype.toString.call(obj.getJson().mobile) === "[object Object]" && obj.getJson().raw.phone_numbers?.[0]&&obj.getJson().mobile!==obj.getJson().raw?.raw_number){
-      await obj.setCompState({mobile:obj.getJson().mobile.raw_number})
+  
+    // ---------- helpers ----------
+    const isBlank = (v) =>
+      v === undefined || v === null || (typeof v === "string" && v.trim() === "");
+  
+    const isPlaceholder = (v) => {
+      if (typeof v !== "string") return false;
+      const s = v.trim().toLowerCase();
+      return (
+        s === "n/a" ||
+        s === "na" ||
+        s === "-" ||
+        s === "unknown" ||
+        s === "none" ||
+        s === "null" ||
+        s === "undefined" ||
+        s === "(000) 000-0000" ||
+        s === "0000000000" ||
+        s === "+10000000000"
+      );
+    };
+  
+    const isEmptyArray = (a) => !Array.isArray(a) || a.length === 0;
+  
+    // only set when target field is empty/missing/placeholder
+    const setIfEmpty = async (field, value) => {
+      if (isBlank(j[field]) || isPlaceholder(j[field])) {
+        if (!isBlank(value) && !isPlaceholder(value) && j[field] !== value) {
+          await obj.setCompState({ [field]: value });
+          update = true;
+        }
+      }
+    };
+  
+    const setArrayIfEmpty = async (field, valueArr) => {
+      if (isEmptyArray(j[field]) && Array.isArray(valueArr) && valueArr.length) {
+        await obj.setCompState({ [field]: valueArr });
+        update = true;
+      }
+    };
+  
+    const pick = (...vals) => vals.find((v) => !isBlank(v) && !isPlaceholder(v));
+  
+    const normalizePhone = (v) => {
+      if (isBlank(v) || typeof v !== "string") return undefined;
+      const digits = v.replace(/[^\d]/g, "");
+      if (digits.length === 11 && digits.startsWith("1")) return `+1${digits.slice(1)}`;
+      if (digits.length === 10) return `+1${digits}`;
+      return undefined;
+    };
+  
+    // ---------- SuccessAI legacy mobile-object shape (only if mobile empty) ----------
+    if (isBlank(j.mobile) || typeof j.mobile !== "string") {
+      if (
+        Object.prototype.toString.call(j.mobile) === "[object Object]" &&
+        j.raw?.phone_numbers?.[0] &&
+        j.mobile !== j.raw?.raw_number
+      ) {
+        await obj.setCompState({ mobile: j.mobile.raw_number });
+        update = true;
+      }
+    }
+  
+    // ---------- ZoomInfo: mobile from raw.mobile or raw.raw.phone (only if mobile empty) ----------
+    if (isBlank(j.mobile) || isPlaceholder(j.mobile)) {
+      const zMobileRaw = pick(j.raw?.mobile, j.raw?.raw?.phone);
+      const normalized = normalizePhone(zMobileRaw);
+      if (normalized) {
+        await obj.setCompState({ mobile: normalized });
+        update = true;
+      }
+    }
+  
+    // Optional: DNC flag — only set if we don't already have it
+    if (j.dncMobile === undefined) {
+      const dncZoom =
+        typeof j.raw?.mobilePhoneDoNotCall === "boolean"
+          ? j.raw.mobilePhoneDoNotCall
+          : typeof j.raw?.raw?.mobilePhoneDoNotCall === "boolean"
+          ? j.raw.raw.mobilePhoneDoNotCall
+          : undefined;
+      if (dncZoom !== undefined) {
+        await obj.setCompState({ dncMobile: dncZoom });
+        update = true;
+      }
+    }
+  
+    // ---------- City / State (only fill if empty) ----------
+    const rawCity = pick(j.raw?.city, j.raw?.raw?.city, j.moble);
+    await setIfEmpty("city", rawCity);
+  
+    const rawState = pick(j.raw?.state, j.raw?.raw?.state, j.raw?.region, j.raw?.raw?.region);
+    await setIfEmpty("state", rawState);
+  
+    // Clean the 'moble' typo if we can (don’t overwrite anything)
+    if (!isBlank(j.moble) && typeof obj.clearField === "function") {
+      await obj.clearField("moble");
       update = true;
     }
-    if(obj.getJson().raw?.city&&obj.getJson().city!==obj.getJson().raw?.city){
-      await obj.setCompState({city:obj.getJson().raw?.city})
-      update = true;
-
+  
+    // ---------- Company domain (only if empty) ----------
+    const domain = pick(
+      j.companyDomain,
+      j.raw?.companyDomain,
+      j.raw?.primary_domain,
+      j.primary_domain,
+      j.raw?.company?.website
+    );
+    await setIfEmpty("companyDomain", domain);
+  
+    // ---------- LinkedIn (only if empty) ----------
+    if (isBlank(j.linkedin)) {
+      const directLi = j.raw?.linkedin;
+      let li = directLi;
+      if (!li && Array.isArray(j.raw?.raw?.externalUrls)) {
+        const hit = j.raw.raw.externalUrls.find((u) => /linkedin\.com\/in\//i.test(u?.url || ""));
+        if (hit?.url) li = hit.url;
+      }
+      await setIfEmpty("linkedin", li);
     }
-    if(obj.getJson().raw?.state &&obj.getJson().state!==obj.getJson().raw?.state){
-      await obj.setCompState({state:obj.getJson().raw?.state})      
-      update = true;
-
-
+  
+    // ---------- Name / Title / Company / Management Level (only if empty) ----------
+    await setIfEmpty("firstName", j.raw?.firstName);
+    await setIfEmpty("lastName", j.raw?.lastName);
+  
+    const titleCandidate = pick(j.raw?.title, j.raw?.raw?.jobTitle);
+    await setIfEmpty("title", titleCandidate);
+  
+    await setIfEmpty("company", j.raw?.company?.name);
+  
+    if (isEmptyArray(j.managementLevel) && Array.isArray(j.raw?.managementLevel)) {
+      await setArrayIfEmpty("managementLevel", j.raw.managementLevel);
     }
-    if(update){
+  
+    // ---------- Primary domain -> companyDomain sync (only if companyDomain still empty) ----------
+    if (isBlank(j.companyDomain) && !isBlank(j.primary_domain)) {
+      await setIfEmpty("companyDomain", j.primary_domain);
+    }
+  
+    // ---------- persist if anything changed ----------
+    if (update) {
       await obj.update();
-      this.dispatch();
+      this.dispatch?.();
     }
-   
-
-
   }
+  
 
   render() {
     const { obj } = this.props;
