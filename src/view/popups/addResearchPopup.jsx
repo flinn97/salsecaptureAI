@@ -11,6 +11,7 @@ import Robot3 from "../../assets/bots/robots/robot3.png"
 import Robot4 from "../../assets/bots/robots/robot4.png"
 import Robot5 from "../../assets/bots/robots/robot5.png"
 import AddAgentBaseClass from "./aiAgents/addAgentBaseClass.jsx"
+import './addResearchPopup.scss';
 
  import { DelButton, ParentFormComponent, RunButton, UpdateButton } from "flinntech";
  import { BaseComponent } from "flinntech";
@@ -146,7 +147,7 @@ import AskIsaacCreate from "./aiAgents/askIsaacCreate"
     const tiles = this.getTypeOptions();
 
     return (
-      <div style={{ padding: 10 }} className={this.props.pageClass || this.state.defaultClass}>
+      <div style={{ padding: 10, userSelect: 'none'}} className={this.props.pageClass || this.state.defaultClass}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h2 style={{ margin: 0 }}>Choose an AI agent type</h2>
         </div>
@@ -163,22 +164,12 @@ import AskIsaacCreate from "./aiAgents/askIsaacCreate"
             <button
               key={t.key}
               onClick={() => this.handleSelectType(t.key)}
-              className="agent-tile"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                padding: 16,
-                borderRadius: 12,
-                border: "1px solid #e5e7eb",
-                background: "white",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-                cursor: "pointer",
-              }}
+              className={`agent-tile`}
             >
               <img
                 src={t.img}
+                draggable="false"
+                className={`agent-${t.key}`}
                 alt=""
                 style={{ width: 84, height: 84, objectFit: "contain", marginBottom: 12 }}
               />

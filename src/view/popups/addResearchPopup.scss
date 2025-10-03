@@ -1,0 +1,47 @@
+.agent-tile{
+  transition: all .4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  cursor: pointer;
+  user-select: none;
+
+  img{
+    border-radius: 8%;
+    transition: all .4s ease;
+  }
+
+  &:hover, &:active{
+    transform: translateY(-4px);
+    border: 1px solid #e5e7eb00;
+    background: #fafafa;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+
+    img{
+      background: #d2e3ee;
+      border-radius: 50%;
+    }
+
+    .agent-askIsaac{
+      background: #ecddca;
+    }
+
+    .agent-newData{
+      background: #e6e6e6;
+    }
+
+    .agent-businessCard{
+      background: #d5e2d7;
+    }
+
+    .agent-existing{
+      background: #fae3e3;
+    }
+  }
+}
