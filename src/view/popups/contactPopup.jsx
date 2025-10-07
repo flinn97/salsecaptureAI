@@ -39,11 +39,11 @@ export default class ContactPopup extends BaseComponent {
         // Set default button to RunButton
         let button = <RunButton content="Save" isPopup={false} callbackFunc={async (ob) => {
             let obj = this.propsState.currentPopupComponent
-            debugger
+            
             // In whatever place you set up your email object:
             let subject = "Welcome to Viridian! Claim Your New Account";
-            let link = `http://localhost:5173/clientregister/${obj.getJson()._id}`;
-            debugger
+            let link = `https://viridian-3afda.web.app/clientregister/${obj.getJson()._id}`;
+            
             // And for the body:
             let text = `
 Hi ${obj.getJson().firstName},
@@ -62,7 +62,7 @@ Best regards,
 Viridian 
 `;
 
-debugger
+
             //  this.prepNewMessage();
 
             // const { originalMessageId, from, to, subject, text } = req.body;

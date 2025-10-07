@@ -58,8 +58,67 @@ export default class ContactProfileDetailCard extends BaseComponent {
                             <div className="client-info">
                                 <div className="client-name">{this.propsState.currentContact?.getJson().firstName} {this.propsState?.currentContact?.getJson().lastName}</div>
                                 <PopupButton obj={this.propsState.currentContact} content={<div className="client-desc">Edit Profile</div>} popupSwitch="updateContact" />
-
-                            </div>
+                                <div onClick={async ()=>{
+                                     let obj = this.propsState.currentContact
+                                     
+                                     // In whatever place you set up your email object:
+                                     let subject = "Welcome to Viridian! Claim Your New Account";
+                                     let link = `https://viridian-3afda.web.app/clientregister/${obj.getJson()._id}`;
+                                     
+                                     // And for the body:
+                                     let text = `
+                         Hi ${obj.getJson().firstName},
+                         
+                         Congratulations! You've been successfully added to Viridian.
+                         
+                         To get started, please click the link below to claim and activate your account:
+                         
+                         ${link}
+                         
+                         If you have any questions or need help, just reply to this email and we'll be happy to assist.
+                         
+                         Welcome aboard!
+                         
+                         Best regards,
+                         Viridian 
+                         `;
+                         
+                         
+                                     //  this.prepNewMessage();
+                         
+                                     // const { originalMessageId, from, to, subject, text } = req.body;
+                                     let body = {
+                                         from: this.propsState.currentUser.getJson()._id,
+                                         to: obj.getJson().email,
+                                         subject: subject,
+                                         text: text,
+                                     };
+                                     let url = "https://gmailapiemailhandler-dleyjvnyfa-uc.a.run.app"
+                         
+                                     // Make the POST request
+                                     await fetch(url, {
+                                         method: "POST",
+                                         headers: {
+                                             "Content-Type": "application/json",
+                                         },
+                                         body: JSON.stringify(body),
+                                     })
+                                         .then((response) => {
+                                             if (!response.ok) {
+                                                 throw new Error(`HTTP error! Status: ${response.status}`);
+                                             }
+                                             return response.json();
+                                         })
+                                         .then((data) => {
+                                             console.log("Reply sent successfully in thread.", data);
+                                         })
+                                         .catch((error) => {
+                                             console.error("Error sending reply:", error);
+                                         });
+                                }}>
+                                    Send Login
+                                </div>
+                                </div>
                         </div>
                         <div className="row row-left padding-0 client-contact-div" style={{ position: "relative" }}>
                             <div className="client-contact col col-left padding-0">
@@ -82,7 +141,7 @@ export default class ContactProfileDetailCard extends BaseComponent {
                 <div className="row row-align-start">
                     <div className="col client-appointments">
                         <div className="appointment-title">Appointment History</div>
-                        <PopupButton wrapperStyle={{width:"200px"}} formClass="dark-green-button" content={"+ Appointment"} popupSwitch="addCalendarEvent" obj={{ type: "calendarEvent", contactId: this.propsState.currentContact.getJson()._id, name: this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName }} />
+                        <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content={"+ Appointment"} popupSwitch="addCalendarEvent" obj={{ type: "calendarEvent", contactId: this.propsState.currentContact.getJson()._id, name: this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName }} />
                         <div className="row appointment-upcoming">
                             <svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="1" />
@@ -99,8 +158,8 @@ export default class ContactProfileDetailCard extends BaseComponent {
 
                     </div>
                     <div className="col client-second-col">
-                        <PopupButton wrapperStyle={{width:"200px"}} formClass="dark-green-button" content="addHomework" obj={{ type: "homework", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addHomework" />
-                        <PopupButton wrapperStyle={{width:"200px"}} formClass="dark-green-button" content="addGoal" obj={{ type: "goal", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addGoal" />
+                        <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content="addHomework" obj={{ type: "homework", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addHomework" />
+                        <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content="addGoal" obj={{ type: "goal", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addGoal" />
                         <MapComponent name="homework" cells={[{ type: "custom", custom: HwLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
                         <MapComponent name="goal" cells={[{ type: "custom", custom: GoalLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
 
