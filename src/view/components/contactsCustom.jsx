@@ -3,6 +3,7 @@ import { BaseComponent } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from './check';
+import SCAIPopupButtonTest from './debug/CustomPopupButton';
 
 class ContactsCustomItem extends BaseComponent {
     constructor(props) {
@@ -11,7 +12,7 @@ class ContactsCustomItem extends BaseComponent {
 
     // Use arrow function for auto-binding 'this'
     handleCheckContact = (obj) => {
-        
+
         // Ensure we get the latest state within the handler
         // Although BaseComponent's dispatch might handle this, accessing state inside the handler
         // defined as a class method is safer.
@@ -41,14 +42,14 @@ class ContactsCustomItem extends BaseComponent {
         const { obj } = this.props;
         // Assuming obj.getJson() is necessary and works
         let user = obj.getJson();
-        const cons = this.props.app.state.selectedContacts 
-            ? [...this.props.app.state.selectedContacts] 
+        const cons = this.props.app.state.selectedContacts
+            ? [...this.props.app.state.selectedContacts]
             : [];
         let selected = cons.includes(obj);
 
         return (
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <div className="contact-item" style={{background:selected?"#2374ab10":"#eaf4f1"}}>
+                <div className="contact-item" style={{ background: selected ? "#2374ab10" : "#eaf4f1" }}>
                     {/*<CheckIt*/}
                     {/*    checkKey="selectedContacts"*/}
                     {/*    obj={obj}*/}
@@ -72,15 +73,74 @@ class ContactsCustomItem extends BaseComponent {
                                 // JARED if the size of the window is more than something like 600 px ask chat gpt. then change the logic to take the obj and dispatch it to the currentContact
                                 // Assuming obj here refers to the current contact object being rendered
                                 
-                                if(window.innerWidth > 600){
-                                    this.dispatch({currentContact:obj})
+                                if (window.innerWidth > 600) {
+                                    this.dispatch({ currentContact: obj })
                                 }
-                                else{
+                                else {
                                     this.dispatch({ currentPopupComponent: obj, popupSwitch: "updateContact" });
                                 }
                             }} className="contact-name">{`${user.firstName} ${user.lastName}`}</div>
-                            <div className="contact-date">Yesterday</div>
-                        </div>
+
+                            {/* <div className="contact-date">Yesterday</div> */}
+                        </div> <SCAIPopupButtonTest
+                            formClass="hover-basic"
+                            wrapperClass="icon-row"
+                            newProp="asdf"
+                            content={
+                                <div
+                                    style={{ width: "fit-content" }}
+                                    onClick={async () => {
+                                        ;
+                                        await this.operationsFactory.clear();
+                                        let contact = obj;
+                                        let conversation = this.componentList.getComponent(
+                                            "conversation",
+                                            contact.getJson().email,
+                                            "contact"
+                                        );
+                                        if (!conversation) {
+                                            await this.componentList.addComponents({
+                                                type: "conversation",
+                                                contact: contact.getJson().email,
+                                                contactName: `${contact.getJson().firstName} ${contact.getJson().lastName
+                                                    }`,
+                                                conversationOwner:
+                                                    this.propsState.currentUser.getJson()._id,
+                                                ownerName: `${this.propsState.currentUser.getJson().firstName
+                                                    } ${this.propsState.currentUser.getJson().lastName}`,
+                                            });
+                                            conversation = this.componentList.getComponent(
+                                                "conversation",
+                                                contact.getJson().email,
+                                                "contact"
+                                            );
+                                        }
+
+                                        let dm = { type: "email" };
+                                        dm = { prepare: { ...dm }, clean: true };
+                                        dm = await this.operationsFactory.prepare(dm);
+
+                                        if (Array.isArray(dm) && dm.length === 1) {
+                                            dm = dm[0];
+                                        }
+                                        let dispatchObj = {
+                                            popupSwitch: "addEmail",
+                                            currentPopupComponent: dm,
+                                        };
+                                        await this.dispatch({
+                                            ...dispatchObj,
+                                            currentConversation: conversation,
+                                            currentContact: contact,
+                                        });
+                                    }}
+
+                                    className="contact-icon"
+                                >
+                                    <i
+                                        className="fa-solid fa-message"
+                                    />   </div>
+                            }
+                        />
                         <div className="contact-desc">{user.company}</div>
                         {/*<div className="contact-desc">Show Details</div>*/}
                     </div>

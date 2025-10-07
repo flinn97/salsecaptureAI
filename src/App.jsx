@@ -34,6 +34,8 @@ import SessionPage from './view/sessionPage.jsx';
 import ClientRegister from './view/clientRegister.jsx';
 import { Route, Router, Routes } from 'react-router-dom';
 import ClientProfilePage from './view/clientProfilePage.jsx';
+import AddEmail from './view/popups/addEmail.jsx';
+import EnterStripe from './view/components/stripeComponents/enterStripe.jsx';
 import VideoContent from './view/videoContent.jsx';
 import UploadVideoPopup from './view/popups/uploadVideoPopup.jsx';
 import ViewVideo from './view/popups/viewVideo.jsx';
@@ -47,7 +49,7 @@ import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
  export default class App extends AppBaseClass {
    constructor(props) {
      super(props, { db: db, endpoint: "viridian", auth: auth, storage: storage });
-     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal, video:UploadVideoPopup };
+     this.popupComponents = { contact: ContactPopup, step: CreateStepPopup, calendarEvent:AddCalendarPopup, homework:AddHw, goal:AddGoal,email:AddEmail,  video:UploadVideoPopup };
      this.popupComponentsProps = {};
      navInterface.getFactory().registerComponent("bottomNavMap", BottomNavCustom);
     
@@ -70,7 +72,10 @@ import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
          { comp: SchedulePage, name: "Schedule", path: "schedule" },
 
          { comp: Contacts, name: "Clients", path: "clients" },
+         { comp: Settings, name: "settings" },
+         { comp: EnterStripe, name: "Billing", path: "billing"},
 
+        //  { comp: Content, name: "Content", path: "content" },
          { comp: Content, name: "Content", path: "content" },
          { comp: VideoContent, name: "Video Content", path: "videocontent" },
 
@@ -80,7 +85,6 @@ import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 
          { comp: TemplatePage, name: "", path: "template", idComp:TemplatePage  },
-          { comp: Settings, name: "settings" },
        ],
        extraAuthRoutes: [
         {comp: ClientRegister, path:"/clientregister", idComp:ClientRegister}
@@ -128,7 +132,8 @@ import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
           { comp: TaskPage, name: "Tasks", path: "/tasks" },
           { comp: Conversations, name: "Messages", path: "conversation" },
           { comp: SchedulePage, name: "Schedule", path: "schedule" },
-  
+          { comp: EnterStripe, name: "Billing", path: "billing"},
+
   
           // { comp: Settings, name: "Billing", path: "billing" },
         ],
@@ -144,6 +149,7 @@ componentDidUpdate(props,state){
         {comp: ClientProfilePage, name:"Dash", path:"/" },
         { comp: Conversations, name: "Messages", path: "conversation" },
         { comp: SchedulePage, name: "Schedule", path: "schedule" },
+        { comp: EnterStripe, name: "Billing", path: "billing"},
 
 
         // { comp: Settings, name: "Billing", path: "billing" },

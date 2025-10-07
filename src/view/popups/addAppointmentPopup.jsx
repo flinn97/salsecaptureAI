@@ -52,7 +52,7 @@ export default class AddCalendarPopup extends BaseComponent {
         let text = obj ? "Edit" : "Add"
         // Set default button to RunButton
         let button = <RunButton content="Save" isPopup={inPopup} callbackFunc={async ()=>{
-            debugger
+            
             let task = await this.operationsFactory.prepare({prepare:{type:'task', contactId:this.propsState.currentContact.getJson()._id, eventId:obj.getJson()._id, name:obj.getJson().name}});
             task = task[0]
 
@@ -84,7 +84,7 @@ export default class AddCalendarPopup extends BaseComponent {
                             <select
                                 value={this.state.day || ''}
                                 onChange={(e) => {
-                                    debugger
+                                    
                                     console.log(
                                         'Day of week changed to', e.target.value
                                     )
