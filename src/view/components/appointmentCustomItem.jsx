@@ -33,16 +33,17 @@ class AppointmentCustomItem extends BaseComponent {
             <div style={{position:"absolute", right:"7px", top:"0px"}}>
             <DelButton formClass="none" content="x" obj={obj} />
             </div>
-            <PopupButton formClass="none" content={ <div><div className="appointment-right">
+            <div className="row">
+            <PopupButton formClass="none" content={ <div className="row"><div className="appointment-right">
             <div className="appointment-date">{calendarItem.day}</div>
           </div>
-            <div className="row row-left padding-0 appointment-time" style={{fontSize:"12px"}}>
+            <div className="padding-0 appointment-time">
               {displayTime}
             </div></div>} popupSwitch="updateCalendarEvent" obj={obj} />
 
-           
+              <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="row row-left padding-0 ml-1">View Notes</Link>
 
-            <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="row row-left padding-0">View Notes</Link>
+            </div>
           </div>
           
         </div>

@@ -91,6 +91,19 @@ body {
   padding:0.5rem 1rem;
 }
 
+
+
+.row-align-start{
+  align-items:start;
+}
+.row-justify-left{
+  justify-content: left;
+}
+
+.ml-1{
+  margin-left:1rem;
+}
+
 /* CSS rules for selectors with identical definitions across all occurrences */
 
 .btn-gray {
@@ -1214,14 +1227,12 @@ body {
   flex-wrap: nowrap;
 }
 
-.row-align-start{
-  align-items:start;
-}
+
 
 
 /*client-profile-dash page css*/
 .client-profile-dash{
-  height:160px;
+  /*height:160px;*/
   background-color:#e9f4f1;
   border-radius:1rem;
   padding:1rem;
@@ -1233,9 +1244,9 @@ body {
 }
 
 .client-appointments{
-  width:30%;
-  padding:2rem;
-  margin:1rem;
+  /*width:30%;*/
+  padding:1rem;
+  /*margin:1rem;*/
 }
 
 .client-second-col{
@@ -1318,14 +1329,15 @@ body {
 /*customer-profile*/
 .appointment{
   width:100%;
-  border: 1px solid var(--app-light-gray);
+  /*border: 1px solid var(--app-light-gray);*/
   padding: 1rem 1rem;
   margin: 0 1rem 1rem;
   border-radius: 1rem;
-  background-color: #e9f4f1;
+  background-color: #cfe6de;
 }
 .appointment-time {
   font-weight: 800;
+  margin-left:1rem;
 }
 
 
@@ -1802,9 +1814,7 @@ justify-content: start;
 }
 
 
-.client-profile-dash{
-  height:200px;
-}
+
 
 .contact-profile-delete-btn .delButton{
   background-color: #C70039;
@@ -1838,7 +1848,7 @@ justify-content: start;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  /*width: 100%;*/
   box-sizing: border-box;
 }
 
@@ -1983,3 +1993,30 @@ justify-content: start;
   width: 100%;
 }
 
+.client-homework .appointment-left>div:nth-child(2)>div{
+  background-color:transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: left;
+  display:block;
+}
+
+.profile-detail-left-col{
+  width:50%;
+}
+
+.appointment .delButton{
+  width:100%;
+  background-color:transparent;
+  color:black;
+}
+
+.client-goal .appointment-left>div:nth-child(2)>div{
+  background-color:transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: left;
+  display:block;
+}
