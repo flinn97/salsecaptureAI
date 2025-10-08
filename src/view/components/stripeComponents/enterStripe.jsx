@@ -59,7 +59,7 @@ export default class EnterStripe extends BaseComponent {
             gap: 32
         };
         return (
-            <div style={{ marginLeft: "250px" }}>
+            <div style={{ marginLeft: "300px" }}>
                 <StripeProvider>
                     {this.state.coachUid&&
                     <div style={containerStyle}>

@@ -76,7 +76,7 @@ import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
          { comp: EnterStripe, name: "Billing", path: "billing"},
 
         //  { comp: Content, name: "Content", path: "content" },
-         { comp: Content, name: "Content", path: "content" },
+        //  { comp: Content, name: "Content", path: "content" },
          { comp: VideoContent, name: "Video Content", path: "videocontent" },
 
         //  { comp: Settings, name: "Billing", path: "billing" },
