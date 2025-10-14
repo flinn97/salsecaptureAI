@@ -70,6 +70,9 @@ body {
   align-items: start;
 }
 
+
+
+
 .row {
   display: flex;
   justify-content: center;
@@ -102,6 +105,24 @@ body {
 
 .ml-1{
   margin-left:1rem;
+}
+
+
+.padding-0{
+  padding:0;
+}
+
+
+.relative{
+  position:relative;
+}
+
+.absolute{
+  position:absolute;
+}
+
+.no-wrap{
+  flex-wrap: nowrap;
 }
 
 /* CSS rules for selectors with identical definitions across all occurrences */
@@ -1213,19 +1234,9 @@ body {
 /*general*/
 
 
-.col-left{
-  align-items: start;
-  padding: 0.5rem 1rem;
-}
-
-.padding-0{
-  padding:0;
-}
 
 
-.no-wrap{
-  flex-wrap: nowrap;
-}
+
 
 
 
@@ -1250,7 +1261,7 @@ body {
 }
 
 .client-second-col{
-  width:70%;
+  /*width:70%;*/
   border-radius:1rem;
   padding:1rem;
   margin:1rem;
@@ -1328,12 +1339,12 @@ body {
 
 /*customer-profile*/
 .appointment{
-  width:100%;
+  /*width:100%;*/
   /*border: 1px solid var(--app-light-gray);*/
   padding: 1rem 1rem;
   margin: 0 1rem 1rem;
   border-radius: 1rem;
-  background-color: #cfe6de;
+  /*background-color: #cfe6de;*/
 }
 .appointment-time {
   font-weight: 800;
@@ -1359,9 +1370,7 @@ body {
   margin-bottom:1rem;
 }
 
-.appointment-upcoming{
-  width:100%;
-}
+
 
 .appointment-left{
   color:#1d4b3e;
@@ -1839,8 +1848,8 @@ justify-content: start;
   color: #FFFFFF;
   border: none;
   border-radius: 24px;
-  height: 48px;
-  padding: 0 24px;
+  height: 28px;
+  padding: 0 1rem;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -2019,4 +2028,25 @@ justify-content: start;
   white-space: nowrap;
   justify-content: left;
   display:block;
+}
+
+
+.profile-detail-right-col .current-goal{
+  background-color:#cfe6de;
+  padding: 1rem 1rem;
+  margin: 0 1rem 1rem;
+  border-radius: 1rem;
+}
+
+.profile-detail-right-col .homework-assignment{
+  background-color:#cfe6de;
+  padding: 1rem 1rem;
+  margin: 0 1rem 1rem;
+  border-radius: 1rem;
+}
+
+
+.client-profile-dash .dark-green-button{
+  padding:0 1rem;
+  height:28px;
 }

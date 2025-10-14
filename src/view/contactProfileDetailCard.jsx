@@ -8,6 +8,7 @@ import { BaseComponent } from "flinntech";
 import AppointmentCustomItem from "./components/appointmentCustomItem";
 import GoalLightCustom from "./components/goalLightCustom";
 import HwLightCustom from "./components/hwLightCustom";
+import DropdownMenu from "./popups/DropdownMenu";
 
 export default class ContactProfileDetailCard extends BaseComponent {
     /**
@@ -123,7 +124,11 @@ export default class ContactProfileDetailCard extends BaseComponent {
                                             Send Login
                                         </div>
                                     </div>
+                                    <DropdownMenu />
                                 </div>
+
+                                <MapComponent className={"DropdownMenu"} name="DropdownMenu" cells={[{ type: "custom", custom: DropdownMenu }]} />
+
                                 <div className="row row-left padding-0 client-contact-div" style={{ position: "relative" }}>
                                     <div className="client-contact col col-left padding-0">
                                         <div className="client-contact-phone row">
@@ -142,17 +147,19 @@ export default class ContactProfileDetailCard extends BaseComponent {
                                 </div>
                                 <hr/>
                             <div className="row row-align-start row-justify-left">
-                                <div className="col client-appointments">
-                                    <div className="appointment-title">Appointment History</div>
-                                    <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content={"+ Appointment"} popupSwitch="addCalendarEvent" obj={{ type: "calendarEvent", contactId: this.propsState.currentContact.getJson()._id, name: this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName }} />
-                                    <div className="row appointment-upcoming">
-                                        <svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="1" />
-                                        </svg>
-                                        <div className="appointment-upcoming-text">Appointments</div>
-                                        <svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="1" />
-                                        </svg>
+                                <div className="col col-left client-appointments" style={{width:'100%'}}>
+                                    <div className="row">
+                                        <div className="appointment-title">Appointment History</div>
+                                        <PopupButton
+                                            wrapperStyle={{ marginLeft:"1rem" }}
+
+                                            formClass="dark-green-button" content={"+"} popupSwitch="addCalendarEvent" obj={{ type: "calendarEvent", contactId: this.propsState.currentContact.getJson()._id, name: this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName }} />
+
+
+                                    </div>
+                                    <div className="row" style={{width:'100%'}}>
+                                    <hr style={{width:'100%'}}/>
+
                                     </div>
 
                                     <MapComponent name="calendarEvent" cells={[{ type: "custom", custom: AppointmentCustomItem }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
@@ -164,16 +171,40 @@ export default class ContactProfileDetailCard extends BaseComponent {
                         </div>
                             <div className="col-left profile-detail-right-col">
                                 <div className="col-left client-second-col">
-                                    <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content="addHomework" obj={{ type: "homework", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addHomework" />
 
-                                    <div className="client-homework">
-                                        {/*<MapComponent className={"client-homework"}...*/}
-                                        <MapComponent className={"client-homework"} name="homework" cells={[{ type: "custom", custom: HwLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
+                                    <div className="current-goal">
+                                        <div className="row">
+                                            <h3>Current Goal</h3>
+                                            <PopupButton wrapperStyle={{ marginLeft: "1rem" }} formClass="dark-green-button" content="+" obj={{ type: "goal", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addGoal" />
+
+                                        </div>
+
+                                        <div className="client-goal">
+                                            <MapComponent name="goal" cells={[{ type: "custom", custom: GoalLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
+                                        </div>
                                     </div>
-                                    <PopupButton wrapperStyle={{ width: "200px" }} formClass="dark-green-button" content="addGoal" obj={{ type: "goal", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addGoal" />
-                                    <div className="client-goal">
-                                    <MapComponent name="goal" cells={[{ type: "custom", custom: GoalLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
+
+                                    <div className="homework-assignment">
+                                        <div className="row">
+                                            <h3>Homework</h3>
+                                            <PopupButton wrapperStyle={{ marginLeft: "1rem" }} formClass="dark-green-button" content="+" obj={{ type: "homework", contactId: this.propsState.currentContact.getJson()._id }} popupSwitch="addHomework" />
+                                        </div>
+
+
+                                        <div className="client-homework">
+                                            {/*<MapComponent className={"client-homework"}...*/}
+
+                                            <MapComponent className={"client-homework"} name="homework" cells={[{ type: "custom", custom: HwLightCustom }]} filter={{ search: this.propsState.currentContact.getJson()._id, attribute: "contactId" }} />
+                                        </div>
                                     </div>
+
+
+
+
+
+
+
+
 
                                     {/* <div className="col col-left client-notes">
                          <div className="client-note-title">Homework and Go</div>
@@ -186,14 +217,14 @@ export default class ContactProfileDetailCard extends BaseComponent {
                              today, and many of them express beautiful thoughts.
                          </div>
                      </div> */}
-                                    <div className="row client-modules">
-                                        <div className="col">Billing History</div>
-                                        <div className="col"></div>
-                                        <div className="col"></div>
-                                    </div>
-                                    <div className="row client-form-responses">
-                                        <div className="client-form-responses-cell"></div>
-                                    </div>
+                                    {/*<div className="row client-modules">*/}
+                                    {/*    <div className="col">Billing History</div>*/}
+                                    {/*    <div className="col"></div>*/}
+                                    {/*    <div className="col"></div>*/}
+                                    {/*</div>*/}
+                                    {/*<div className="row client-form-responses">*/}
+                                    {/*    <div className="client-form-responses-cell"></div>*/}
+                                    {/*</div>*/}
                                 </div></div>
                         </div>
 

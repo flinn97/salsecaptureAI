@@ -31,7 +31,7 @@ class AppointmentCustomItem extends BaseComponent {
         <div className="row row-space-between">
           <div className="appointment-left" >
             <div style={{position:"absolute", right:"7px", top:"0px"}}>
-            <DelButton formClass="none" content="x" obj={obj} />
+            {/*<DelButton formClass="none" content="x" obj={obj} />*/}
             </div>
             <div className="row">
             <PopupButton formClass="none" content={ <div className="row"><div className="appointment-right">
@@ -41,7 +41,7 @@ class AppointmentCustomItem extends BaseComponent {
               {displayTime}
             </div></div>} popupSwitch="updateCalendarEvent" obj={obj} />
 
-              <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="row row-left padding-0 ml-1">View Notes</Link>
+              <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="row row-left padding-0 ml-1">View</Link>
 
             </div>
           </div>
