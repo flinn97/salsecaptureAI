@@ -35,13 +35,13 @@
      
      
    }
-  //  componentDidUpdate(props, state) {
-  //   if (
-  //     this.propsState.currentConversation !== this.state.currentConversation && this.propsState.currentUser?.getJson().role!=="client"
-  //   ) {
-  //     this.prepareMessages(true);
-  //   }
-  // }
+   async componentDidUpdate(props, state) {
+    if (
+      this.propsState.currentConversation !== this.state.currentConversation && this.propsState.currentUser?.getJson().role!=="client"
+    ) {
+      await this.prepareMessages(true);
+    }
+  }
  
  
    /**
@@ -74,7 +74,7 @@
         order: "date" // order by date
       })
  
-       this.setState({ start: true });
+       this.setState({ start: true, currentConversation:currentConversation });
      } else {
        this.setState({
          message: "no current conversations",
