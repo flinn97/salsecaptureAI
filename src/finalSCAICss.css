@@ -70,6 +70,9 @@ body {
   align-items: start;
 }
 
+
+
+
 .row {
   display: flex;
   justify-content: center;
@@ -89,6 +92,37 @@ body {
 .row-left {
   justify-content: left;
   padding:0.5rem 1rem;
+}
+
+
+
+.row-align-start{
+  align-items:start;
+}
+.row-justify-left{
+  justify-content: left;
+}
+
+.ml-1{
+  margin-left:1rem;
+}
+
+
+.padding-0{
+  padding:0;
+}
+
+
+.relative{
+  position:relative;
+}
+
+.absolute{
+  position:absolute;
+}
+
+.no-wrap{
+  flex-wrap: nowrap;
 }
 
 /* CSS rules for selectors with identical definitions across all occurrences */
@@ -1200,28 +1234,16 @@ body {
 /*general*/
 
 
-.col-left{
-  align-items: start;
-  padding: 0.5rem 1rem;
-}
-
-.padding-0{
-  padding:0;
-}
 
 
-.no-wrap{
-  flex-wrap: nowrap;
-}
 
-.row-align-start{
-  align-items:start;
-}
+
+
 
 
 /*client-profile-dash page css*/
 .client-profile-dash{
-  height:160px;
+  /*height:160px;*/
   background-color:#e9f4f1;
   border-radius:1rem;
   padding:1rem;
@@ -1233,13 +1255,13 @@ body {
 }
 
 .client-appointments{
-  width:30%;
-  padding:2rem;
-  margin:1rem;
+  /*width:30%;*/
+  padding:1rem;
+  /*margin:1rem;*/
 }
 
 .client-second-col{
-  width:70%;
+  /*width:70%;*/
   border-radius:1rem;
   padding:1rem;
   margin:1rem;
@@ -1317,15 +1339,16 @@ body {
 
 /*customer-profile*/
 .appointment{
-  width:100%;
-  border: 1px solid var(--app-light-gray);
+  /*width:100%;*/
+  /*border: 1px solid var(--app-light-gray);*/
   padding: 1rem 1rem;
   margin: 0 1rem 1rem;
   border-radius: 1rem;
-  background-color: #e9f4f1;
+  /*background-color: #cfe6de;*/
 }
 .appointment-time {
   font-weight: 800;
+  margin-left:1rem;
 }
 
 
@@ -1347,9 +1370,7 @@ body {
   margin-bottom:1rem;
 }
 
-.appointment-upcoming{
-  width:100%;
-}
+
 
 .appointment-left{
   color:#1d4b3e;
@@ -1802,9 +1823,7 @@ justify-content: start;
 }
 
 
-.client-profile-dash{
-  height:200px;
-}
+
 
 .contact-profile-delete-btn .delButton{
   background-color: #C70039;
@@ -1829,8 +1848,8 @@ justify-content: start;
   color: #FFFFFF;
   border: none;
   border-radius: 24px;
-  height: 48px;
-  padding: 0 24px;
+  height: 28px;
+  padding: 0 1rem;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -1838,7 +1857,7 @@ justify-content: start;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  /*width: 100%;*/
   box-sizing: border-box;
 }
 
@@ -1983,3 +2002,51 @@ justify-content: start;
   width: 100%;
 }
 
+.client-homework .appointment-left>div:nth-child(2)>div{
+  background-color:transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: left;
+  display:block;
+}
+
+.profile-detail-left-col{
+  width:50%;
+}
+
+.appointment .delButton{
+  width:100%;
+  background-color:transparent;
+  color:black;
+}
+
+.client-goal .appointment-left>div:nth-child(2)>div{
+  background-color:transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: left;
+  display:block;
+}
+
+
+.profile-detail-right-col .current-goal{
+  background-color:#cfe6de;
+  padding: 1rem 1rem;
+  margin: 0 1rem 1rem;
+  border-radius: 1rem;
+}
+
+.profile-detail-right-col .homework-assignment{
+  background-color:#cfe6de;
+  padding: 1rem 1rem;
+  margin: 0 1rem 1rem;
+  border-radius: 1rem;
+}
+
+
+.client-profile-dash .dark-green-button{
+  padding:0 1rem;
+  height:28px;
+}

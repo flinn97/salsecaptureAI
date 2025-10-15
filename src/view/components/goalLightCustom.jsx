@@ -15,10 +15,13 @@ class GoalLightCustom extends BaseComponent {
 
 
     return (
-      <div className="appointment">
+        <div className="appointment" style={{position:"relative"}}>
         <div className="row row-space-between">
           <div className="appointment-left">
+            <div style={{position:"absolute", right:"7px", top:"0px"}}>
+
             <DelButton content="x" obj={obj} />
+            </div>
             <PopupButton content={goal?.name} popupSwitch="updateGoal" obj={obj} />
 
           </div>
