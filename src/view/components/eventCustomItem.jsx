@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseComponent } from 'flinntech';
+import { BaseComponent, DelButton } from 'flinntech';
 import './Checkbox.css';
 import contactImg from "../../assets/contact.png"; // Keep if needed elsewhere, but avatar uses font-awesome now
 import CheckIt from './check';
@@ -42,6 +42,11 @@ class EventCustomItem extends BaseComponent {
                 className="weekly-calendar__event"
                 style={eventStyles}
             >
+                <div style={{position:"absolute", right:"5px", top:"5px"}}>
+                <DelButton formClass ="none" obj ={obj} content="x"/>
+
+                </div>
+
                 <Link to={`../session/${this.componentList.getComponent("session", calendarItem._id, "eventId")?.getJson()._id}`} className="weekly-calendar__event-name">{calendarItem.name}</Link>
                 {/* Add time/duration display if needed */}
             </div>

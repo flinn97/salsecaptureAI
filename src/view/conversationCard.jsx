@@ -90,7 +90,7 @@
          <div style={{minWidth:window.innerWidth > 600?"50%":""}}>
            {!this.propsState.showConversation && (
              <>
-               {this.state.start && (
+               {this.state.start &&this.propsState.currentUser?.getJson().role!=='client' && (
                  <Card theme="defaultCard" content={<ConversationList />} />
                )}
              </>

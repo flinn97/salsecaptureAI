@@ -41,6 +41,7 @@ import UploadVideoPopup from './view/popups/uploadVideoPopup.jsx';
 import ViewVideo from './view/popups/viewVideo.jsx';
 import PotentialHomeworkPopup from './view/popups/potentialHomeworkPopup.jsx';
 import BillingPage from './view/billingPage.jsx';
+import ClientIntakeCoachPage from './view/clientIntakeCoachPage.jsx';
  //  import Settings from './view/settings';
  //  import AddContactPopup from './view/addContactPopup';
  
@@ -83,6 +84,7 @@ import BillingPage from './view/billingPage.jsx';
         //  { comp: Settings, name: "Billing", path: "billing" },
          { comp: SessionPage, name: "", path: "session", idComp:SessionPage},
          { comp: BillingPage, name: "", path: "clientbilling", idComp:BillingPage},
+         { comp: ClientIntakeCoachPage, name: "", path: "clientintake", idComp:ClientIntakeCoachPage},
 
         //  { comp: SequencePage, name: "", path: "sequence", idComp:SequencePage },
 

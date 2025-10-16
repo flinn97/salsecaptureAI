@@ -19,6 +19,7 @@
      this.state = {
        ...this.state,
        defaultClass: "fit",
+       input: "",
        currentConversation: null, // Initializes the currentConversation state
      };
    }
@@ -28,72 +29,61 @@
     * Prepares the current conversation's messages.
     */
    async componentDidMount() {
-     await this.prepareMessages(); // Calls the function to prepare messages
+    
+    
+     await this.prepareMessages(true); // Calls the function to prepare messages
      
      
    }
- 
+   async componentDidUpdate(props, state) {
+    if (
+      this.propsState.currentConversation !== this.state.currentConversation && this.propsState.currentUser?.getJson().role!=="client"
+    ) {
+      await this.prepareMessages(true);
+    }
+  }
  
  
    /**
     * Prepares the messages for the current conversation.
     */
-   async prepareMessages() {
+   async prepareMessages(skipPrepNewMessage) {
+    debugger
      let currentConversation = this.propsState.currentConversation; // Get the current conversation from the global state
      if (!currentConversation) {
        currentConversation = this.componentList.getComponent("conversation");
+       if(!currentConversation){
+        currentConversation = await this.componentList.getComponentFromBackend({type:"conversation", contact:this.propsState.currentUser?.getJson().email })
+       }
        await this.dispatch({ currentConversation: currentConversation });
+
      }
      if (currentConversation) {
        //REMOVE THE COMMENT
        // await this.componentList.getComponentsFromBackend({ type: "email", ids: this.propsState.currentUser.getJson()._id, filterKeys: "owner" });
+      // if(!skipPrepNewMessage){
+      //   await this.prepNewMessage();
+
+      // }
+      await this.componentList.clearSelectedList("email", "type");
+      await this.componentList.getAPIService().firebaseGetter( {
+        where: [
+          { attribute: "type", val: "email" }, // where type == "email"
+          { attribute: "conversationId", val: currentConversation.getJson()._id }
+        ],
+        order: "date" // order by date
+      })
  
-       await this.prepNewMessage();
- 
-       this.setState({ start: true });
+       this.setState({ start: true, currentConversation:currentConversation });
      } else {
        this.setState({
          message: "no current conversations",
        });
      }
    }
-   async prepNewMessage() {
-     let currentConversation = this.propsState.currentConversation;
-     const messageType = currentConversation.getJson().messageType || "email"; // Get the message type from the current conversation
-     let replyTo = this.componentList.getList(
-       "email",
-       this.propsState.currentConversation.getJson()._id,
-       "conversationId"
-     );
-     replyTo = replyTo[replyTo.length - 1];
-     let replyToId = replyTo.getJson().originalMessageId;
-     let subject = replyTo.getJson().subject;
-     const prepared = await this.operationsFactory.prepare({
-       prepare: {
-         type: messageType,
-         conversationId: currentConversation.getJson()._id,
-         originalMessageId: replyToId||"",
-         subject: subject,
-         ownerMessage: true,
-       },
-       clean: true, // Prepare with messageType and conversationId
-     });
-     // Dispatch to set the current component in the global state
-     this.dispatch({
-       currentComponent: prepared[0], // Set the first prepared item as the current component
-     });
-     this.setState({
-       currentConversation: currentConversation,
-     });
-   }
+   
  
-   componentDidUpdate(props, state) {
-     if (
-       this.propsState.currentConversation !== this.state.currentConversation
-     ) {
-       this.prepNewMessage();
-     }
-   }
+ 
  
    /**
     * Returns the inner content of the Conversation component.
@@ -247,9 +237,28 @@
                      <div
                        style={{ position: "relative", width: "40px", zIndex: 2 }}
                      >
-                       <RunButton
-                         content={
-                           <button
+                     
+                           <button 
+                           onClick={async ()=>{
+                            debugger
+                           await this.operationsFactory.clear();
+                              let obj = {
+                                type:"email",
+                                body: this.state.input,
+                                conversationId: this.propsState.currentConversation.getJson()._id,
+                                ownerMessage: this.propsState.currentUser.getJson().role==="client"?false:true
+                              }
+                              
+                              await this.operationsFactory.prepare(
+                                {prepare:
+                                {...obj}, clean:true, run:true
+                              })
+                              this.setState({firstMessageSent:true, input:""});
+                              this.dispatch({})
+                            
+                     
+
+                           }}
                              className="footer-btn"
                              style={{
                                marginBottom: "-15px",
@@ -259,65 +268,19 @@
                            >
                              <i className="fa-solid fa-circle-plus"></i>
                            </button>
-                         }
+                         
                          
                         
-                           callbackFunc={() => {
-                             let obj = this.propsState.currentComponent;
-                             if (obj.getJson().body === "") {
-                               return;
-                             }
-                           this.prepNewMessage();
- 
-                           // const { originalMessageId, from, to, subject, text } = req.body;
-                           let body = {
-                             originalMessageId:obj.getJson().originalMessageId,
-                             from: this.propsState.currentUser.getJson()._id,
-                             to: this.propsState.currentConversation.getJson()
-                               .contact,
-                             subject: obj.getJson().subject,
-                             text: obj.getJson().body,
-                           };
-                           let url = this.propsState.currentUser.getJson().gmailAuthenticated? "https://gmailapiemailhandler-7c5i3vsqma-uc.a.run.app" : "https://sendgridemailhandler-7c5i3vsqma-uc.a.run.app"
-                           // Make the POST request
-                           fetch(
-                             url,
-                             {
-                               method: "POST",
-                               headers: {
-                                 "Content-Type": "application/json",
-                               },
-                               body: JSON.stringify(body),
-                             }
-                           )
-                             .then((response) => {
-                               if (!response.ok) {
-                                 throw new Error(
-                                   `HTTP error! Status: ${response.status}`
-                                 );
-                               }
-                               return response.json();
-                             })
-                             .then((data) => {
-                               console.log(
-                                 "Reply sent successfully in thread.",
-                                 data
-                               );
-                             })
-                             .catch((error) => {
-                               console.error("Error sending reply:", error);
-                             });
-                         }} // Callback to re-run the prepareMessages function
-                       />
+                         
                      </div>
                      {/* Form for sending new messages */}
                      <div style={{ zIndex: 3, width: "100%" }}>
-                       <ParentFormComponent
-                         wrapperClass="footer-input"
-                         formClass="search-input"
-                         name="body" // Name for the input field
-                         obj={this.propsState.currentComponent} // Connect to the current conversation
-                       />
+                      
+                      <div className="footer-input">
+                      <input value={this.state.input} className="search-input" onChange={(e)=>{
+                        this.setState({input:e.target.value})
+                      }}/>
+                      </div>
                      </div>
                    </div>
                  </div>
