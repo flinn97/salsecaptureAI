@@ -59,6 +59,7 @@ export default class ContactsCard extends BaseComponent {
     let allTotal = allCon?.length?"/"+allCon?.length:"";
 
     return (
+        <div className="client-div-contactcard">
       <div className="map-container">
         <div className="Clients-name"><div>Clients</div> <PopupButton formClass="dark-green-button"  content=" Add Client"  popupSwitch="addContact" /></div>
         <div className="search-container">
@@ -271,6 +272,7 @@ export default class ContactsCard extends BaseComponent {
           </div>
         )}
       </div>
+        </div>
     );
   }
 
