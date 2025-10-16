@@ -115,6 +115,10 @@ body {
   margin-left:2rem;
 }
 
+.mb-1{
+  margin-bottom:1rem;
+}
+
 .padding-0{
   padding:0;
 }
@@ -131,6 +135,9 @@ body {
 .no-wrap{
   flex-wrap: nowrap;
 }
+
+
+
 
 /* CSS rules for selectors with identical definitions across all occurrences */
 
@@ -2142,4 +2149,14 @@ justify-content: start;
 }
 .billing-card .payments-by-date:nth-child(2)>div{
   width:100%;
+}
+
+
+.svg-div{
+  height:1.1rem;
+  width:1.1rem;
+  margin-right:0.4rem;
+}
+.svg-div>svg{
+  fill:#1d4b3e;
 }
