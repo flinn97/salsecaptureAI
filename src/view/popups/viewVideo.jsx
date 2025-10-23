@@ -1,4 +1,4 @@
-import { BaseComponent } from "flinntech";
+import { BaseComponent, DelButton } from "flinntech";
 import React from "react";
 
 export default class ViewVideo extends BaseComponent {
@@ -209,6 +209,9 @@ export default class ViewVideo extends BaseComponent {
             </div>
           </>
         )}
+         <div style={{marginTop:"25px", }}>
+            <DelButton callbackFunc={()=>{this.dispatch({popupSwitch:""})}} inPopup={true} isPopup={true} formStyle={{borderRadius:"7%"}} obj={this.propsState.currentPopupComponent} content={ <div>Delete</div>}/>
+          </div>
       </div>
     );
   }

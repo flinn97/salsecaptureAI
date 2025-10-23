@@ -74,7 +74,7 @@ import ClientIntakeCoachPage from './view/clientIntakeCoachPage.jsx';
          { comp: SchedulePage, name: "Schedule", path: "schedule" },
 
          { comp: Contacts, name: "Clients", path: "clients" },
-         { comp: Settings, name: "settings" },
+        //  { comp: Settings, name: "settings" },
          { comp: EnterStripe, name: "Billing", path: "billing"},
 
         //  { comp: Content, name: "Content", path: "content" },

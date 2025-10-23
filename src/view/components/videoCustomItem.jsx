@@ -31,22 +31,10 @@ class VideoCustomItem extends BaseComponent {
         <div className="thumb">
           <img src={thumb} alt={title} loading="lazy" />
 
-          <button
-            type="button"
-            className="delete-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              // Let your existing DelButton handle the deletion
-            }}
-            aria-label={`Delete ${title}`}
-          >
-            <i className="fa-solid fa-xmark"></i>
-          </button>
+         
 
           {/* Keep your real delete action in the DOM for functionality */}
-          <div className="hidden-del">
-            <DelButton obj={obj} />
-          </div>
+         
 
           <div className="play-overlay">
             <i className="fa-solid fa-play"></i>
