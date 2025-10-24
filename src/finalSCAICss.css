@@ -2160,3 +2160,55 @@ justify-content: start;
 .svg-div>svg{
   fill:#1d4b3e;
 }
+
+
+.intake-dash{
+  width:600px;
+  padding:1.5rem;
+  background-color:#cfe6de;
+}
+
+.intake-card{
+  background-color: #e9f4f1;
+  width:100%;
+  padding:1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  color:#1d4b3e;
+}
+
+.intake-header-left{
+  font-size:24px;
+  color:#1d4b3e;
+  font-weight: bold;
+}
+.intake-header-right svg{
+  width:24px;
+  height:24px;
+  color:#1d4b3e;
+}
+.intake-personal-info col{
+  width:33%;
+}
+
+.intake-question{
+  padding:0.5rem 1rem;
+}
+
+.intake-question .answer{
+  justify-content: left;
+  background-color: #f5f5f5;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width:100%;
+}
+
+.intake-question .answer input{
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0.5rem 0;
+  background: transparent;
+  width:100%;
+}
