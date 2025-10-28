@@ -94,7 +94,12 @@ body {
   padding:0.5rem 1rem;
 }
 
-
+.along-start{
+  align-items:start;
+}
+.cross-start{
+  justify-content:start;
+}
 
 .row-align-start{
   align-items:start;
@@ -106,7 +111,13 @@ body {
 .ml-1{
   margin-left:1rem;
 }
+.ml-2{
+  margin-left:2rem;
+}
 
+.mb-1{
+  margin-bottom:1rem;
+}
 
 .padding-0{
   padding:0;
@@ -124,6 +135,9 @@ body {
 .no-wrap{
   flex-wrap: nowrap;
 }
+
+
+
 
 /* CSS rules for selectors with identical definitions across all occurrences */
 
@@ -1214,11 +1228,12 @@ body {
 }
 
 
-.fullScreen>.fit>div>.fit.client-div{
-  width:350px;
-  background-color:#eaf4f1;
-}
 
+.client-dash-div .fit.client-div .client-div-contactcard{
+    width:350px;
+  height:100%;
+    background-color:#eaf4f1;
+}
 .fullScreen>.fit.client-dash-div {
   width: 100%;
   display:flex;
@@ -2049,4 +2064,151 @@ justify-content: start;
 .client-profile-dash .dark-green-button{
   padding:0 1rem;
   height:28px;
+}
+
+
+.billing-card{
+  width:800px;
+  background-color:#cfe6de;
+  color:#1d4b3e;
+  padding:1rem;
+}
+
+.billing-summary{
+  background-color:#e9f4f1;
+  padding:1rem;
+  border-radius:1rem;
+}
+
+.billing-card .billing-summary-title,
+.billing-card .payment-title,
+.billing-card .action-title{
+  font-size:2rem;
+}
+.billing-card .billing-due-amount{
+  font-size:4rem;
+}
+.billing-card .charge-btn{
+  background-color: #406E5D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 24px;
+  height: 48px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.billing-card .charge-light-btn{
+  background-color: #cfe6de;
+  padding:0.25rem 1rem;
+  border-radius:0.5rem;
+}
+.billing-card .trans-btn{
+  /*background-color: #cfe6de;*/
+  padding:0.25rem 1rem;
+  border-radius:0.5rem;
+}
+
+.after-billing-summary{
+  padding-top:1rem;
+  align-items: stretch;
+}
+
+.after-billing-summary .payments-by-date,
+.after-billing-summary .actions{
+  width:50%;
+  background-color:#e9f4f1;
+  padding:1rem;
+  border-radius:1rem;
+}
+
+.after-billing-summary .payments-by-date{
+  margin-right:1rem;
+}
+
+.billing-card .billing-summary>div{
+  flex: 1 1 100%;
+}
+.billing-card .billing-due{
+  width:100%;
+}
+
+/*.billing-card .payments-by-date>div{*/
+/*  flex: 1 1 100%;*/
+/*}*/
+.billing-card .payments-by-date>div{
+  width:100%;
+}
+.billing-card .payments-by-date:nth-child(2)>div{
+  width:100%;
+}
+
+
+.svg-div{
+  height:1.1rem;
+  width:1.1rem;
+  margin-right:0.4rem;
+}
+.svg-div>svg{
+  fill:#1d4b3e;
+}
+
+
+.intake-dash{
+  width:600px;
+  padding:1.5rem;
+  background-color:#cfe6de;
+}
+
+.intake-card{
+  background-color: #e9f4f1;
+  width:100%;
+  padding:1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  color:#1d4b3e;
+}
+
+.intake-header-left{
+  font-size:24px;
+  color:#1d4b3e;
+  font-weight: bold;
+}
+.intake-header-right svg{
+  width:24px;
+  height:24px;
+  color:#1d4b3e;
+}
+.intake-personal-info col{
+  width:33%;
+}
+
+.intake-question{
+  padding:0.5rem 1rem;
+}
+
+.intake-question .answer{
+  justify-content: left;
+  background-color: #f5f5f5;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width:100%;
+}
+
+.intake-question .answer input{
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0.5rem 0;
+  background: transparent;
+  width:100%;
 }
