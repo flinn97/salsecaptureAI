@@ -62,16 +62,17 @@ export default class ContactProfileDetailCard extends BaseComponent {
                                     </div>
                                     <div className="client-info">
                                         <div className="client-name">{this.propsState.currentContact?.getJson().firstName} {this.propsState?.currentContact?.getJson().lastName}</div>
-                                        <PopupButton obj={this.propsState.currentContact} content={<div className="client-desc">Edit Profile</div>} popupSwitch="updateContact" />
-                                        <div onClick={async ()=>{
-                                            let obj = this.propsState.currentContact
+                                        <div className="row row-left">
+                                            <PopupButton obj={this.propsState.currentContact} content={<div className="client-desc">Edit Profile</div>} popupSwitch="updateContact" />
+                                            <div className="client-send-login ml-1" onClick={async ()=>{
+                                                let obj = this.propsState.currentContact
 
-                                            // In whatever place you set up your email object:
-                                            let subject = "Welcome to Viridian! Claim Your New Account";
-                                            let link = `https://viridian-3afda.web.app/clientregister/${obj.getJson()._id}`;
+                                                // In whatever place you set up your email object:
+                                                let subject = "Welcome to Viridian! Claim Your New Account";
+                                                let link = `https://viridian-3afda.web.app/clientregister/${obj.getJson()._id}`;
 
-                                            // And for the body:
-                                            let text = `
+                                                // And for the body:
+                                                let text = `
                          Hi ${obj.getJson().firstName},
                          
                          Congratulations! You've been successfully added to Viridian.
@@ -89,40 +90,42 @@ export default class ContactProfileDetailCard extends BaseComponent {
                          `;
 
 
-                                            //  this.prepNewMessage();
+                                                //  this.prepNewMessage();
 
-                                            // const { originalMessageId, from, to, subject, text } = req.body;
-                                            let body = {
-                                                from: this.propsState.currentUser.getJson()._id,
-                                                to: obj.getJson().email,
-                                                subject: subject,
-                                                text: text,
-                                            };
-                                            let url = "https://gmailapiemailhandler-dleyjvnyfa-uc.a.run.app"
+                                                // const { originalMessageId, from, to, subject, text } = req.body;
+                                                let body = {
+                                                    from: this.propsState.currentUser.getJson()._id,
+                                                    to: obj.getJson().email,
+                                                    subject: subject,
+                                                    text: text,
+                                                };
+                                                let url = "https://gmailapiemailhandler-dleyjvnyfa-uc.a.run.app"
 
-                                            // Make the POST request
-                                            await fetch(url, {
-                                                method: "POST",
-                                                headers: {
-                                                    "Content-Type": "application/json",
-                                                },
-                                                body: JSON.stringify(body),
-                                            })
-                                                .then((response) => {
-                                                    if (!response.ok) {
-                                                        throw new Error(`HTTP error! Status: ${response.status}`);
-                                                    }
-                                                    return response.json();
+                                                // Make the POST request
+                                                await fetch(url, {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json",
+                                                    },
+                                                    body: JSON.stringify(body),
                                                 })
-                                                .then((data) => {
-                                                    console.log("Reply sent successfully in thread.", data);
-                                                })
-                                                .catch((error) => {
-                                                    console.error("Error sending reply:", error);
-                                                });
-                                        }}>
-                                            Send Login
+                                                    .then((response) => {
+                                                        if (!response.ok) {
+                                                            throw new Error(`HTTP error! Status: ${response.status}`);
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then((data) => {
+                                                        console.log("Reply sent successfully in thread.", data);
+                                                    })
+                                                    .catch((error) => {
+                                                        console.error("Error sending reply:", error);
+                                                    });
+                                            }}>
+                                                Send Login
+                                            </div>
                                         </div>
+
                                     </div>
                                     <DropdownMenu />
                                 </div>
@@ -140,9 +143,9 @@ export default class ContactProfileDetailCard extends BaseComponent {
                                             <div>{this.propsState.currentContact?.getJson().email}</div>
                                         </div>
                                     </div>
-                                    <div className="contact-profile-delete-btn" style={{ position: "absolute", right: "0px", bottom: "0px" }}>
-                                        <DelButton content="delete" obj={this.propsState.currentContact} callbackFunc={() => { this.dispatch({ currentContact: undefined }) }} />
-                                    </div>
+                                    {/*<div className="contact-profile-delete-btn" style={{ position: "absolute", right: "0px", bottom: "0px" }}>*/}
+                                    {/*    <DelButton content="delete" obj={this.propsState.currentContact} callbackFunc={() => { this.dispatch({ currentContact: undefined }) }} />*/}
+                                    {/*</div>*/}
 
                                 </div>
                                 <hr/>

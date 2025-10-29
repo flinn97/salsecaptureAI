@@ -134,7 +134,7 @@ export default class SessionCard extends BaseComponent {
         <br />
         {this.propsState.currentSession && <>
           <div className="content-home-add">
-            <div>Session</div>
+            <div style={{backgroundColor:"transparent"}}><h1>Session</h1></div>
             <div className="row">
               <div>Name: </div>
 
@@ -158,27 +158,28 @@ export default class SessionCard extends BaseComponent {
             <div className="row">
               {button}          </div>
             <div className="row">
-              Generate Homework
+              <h1>Generate Homework</h1>
             </div>
-            <div className="row">
-              Notes for AI
-              <div className="underline-form"><input style={{ border: "none", width: "100%" }} onChange={(e) => { this.setState({ coachNotes: e.target.value }) }}></input></div>
-
+            <div className="row generate-homework-row">
+              <div className="col mr-1">Notes for AI:</div>
+              <div className="col" style={{flexGrow:1}}>
+              <div className="generate-homework-form underline-form"><input style={{ border: "none", width: "100%" }} onChange={(e) => { this.setState({ coachNotes: e.target.value }) }}></input></div>
+              </div>
             </div>
             <div className="row">
               <div style={{ paddingRight: "50px", paddingBottom: "20px" }}>
-                <div onClick={() => { this.getHWFromAI() }}>Generate Homework</div></div>           </div>
+                <div className="generate-homework-btn" onClick={() => { this.getHWFromAI() }}>Generate Homework</div></div>           </div>
           
 
 
-<TherapistBillingPage 
-therapistId={this.propsState.currentUser.getJson()._id} 
-clientId={this.propsState.currentSession.getJson().contactId} 
-sessionId={this.propsState.currentSession.getJson()._id} 
-email={this.propsState.currentContact.getJson().email}
-name = {this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName}
-phone = {this.propsState.currentContact.getJson().phone}
-/>
+{/*<TherapistBillingPage */}
+{/*therapistId={this.propsState.currentUser.getJson()._id} */}
+{/*clientId={this.propsState.currentSession.getJson().contactId} */}
+{/*sessionId={this.propsState.currentSession.getJson()._id} */}
+{/*email={this.propsState.currentContact.getJson().email}*/}
+{/*name = {this.propsState.currentContact.getJson().firstName + " " + this.propsState.currentContact.getJson().lastName}*/}
+{/*phone = {this.propsState.currentContact.getJson().phone}*/}
+{/*/>*/}
           </div>
         </>}
       </div>
