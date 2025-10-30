@@ -53,7 +53,7 @@ import VideoList from "./videoList";
                      </div>
  
                      <div className="filter">
-                         <div className="row row-space-between">
+                         <div className="row row-space-between upload-video-btn">
                          <PopupButton
                        content="Upload Video"
                        popupSwitch="addVideo"

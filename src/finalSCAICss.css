@@ -1321,6 +1321,10 @@ body {
   min-width: 0;
 }
 
+.client-info .defaultButton{
+  background-color:transparent;
+}
+
 .client-name {
   font-size: 20px;
   font-weight: 800;
@@ -2268,4 +2272,26 @@ justify-content: start;
   padding: 0.5rem 0;
   background: transparent;
   width:100%;
+}
+
+.popup-save-btn{
+  background-color:transparent !important;
+}
+.upload-video-btn .defaultButton{
+  background-color: #406E5D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 24px;
+  height: 28px;
+  padding: 0 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+   width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
