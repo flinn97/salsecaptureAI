@@ -149,7 +149,7 @@ export default class AddCalendarPopup extends BaseComponent {
 
 
 
-                    <div className="popupButton" style={{ width: "50%", display: "flex", justifyContent: "flex-end", alignContent: "flex-end" }}> {/*Container for the save button*/}
+                    <div className="popupButton popup-save-btn"> {/*Container for the save button*/}
                         <div style={{ paddingRight: "50px", paddingBottom: "20px" }}> {/*Container for button spacing*/}
                             {button}</div> {/*Button to save changes*/}
                     </div>

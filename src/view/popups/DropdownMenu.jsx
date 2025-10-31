@@ -48,10 +48,10 @@ export default class DropdownMenu extends BaseComponent {
           </div>
 
           {isOpen && (
-            <div className="col col-left absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-10">
+            <div className="client-dropdown col col-left absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-10">
                 <PopupButton obj={this.propsState.currentContact} content={<div className="client-desc">Edit Profile</div>} popupSwitch="updateContact" />
 
-                <div onClick={async ()=>{
+                <div className="client-send-login" onClick={async ()=>{
                                             let obj = this.propsState.currentContact
 
                                             // In whatever place you set up your email object:
@@ -111,8 +111,10 @@ export default class DropdownMenu extends BaseComponent {
                                         }}>
                                             Send Login
                                         </div>
-                                        <div className="contact-profile-delete-btn" style={{ position: "absolute", right: "0px", bottom: "0px" }}>
-                                        <DelButton content="delete" obj={this.propsState.currentContact} callbackFunc={() => { this.dispatch({ currentContact: undefined }) }} />
+                                        <div className="contact-profile-delete-btn"
+                                             // style={{ position: "absolute", right: "0px", bottom: "0px" }}
+                                        >
+                                        <DelButton content="Delete" obj={this.propsState.currentContact} callbackFunc={() => { this.dispatch({ currentContact: undefined }) }} />
                                     </div>
             </div>
           )}
