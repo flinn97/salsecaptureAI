@@ -56,7 +56,7 @@ export default class ContactProfileDetailCard extends BaseComponent {
                         <div className="row row-align-start row-justify-left">
                             <div className="col-left profile-detail-left-col">
 
-                                <div className="row client-profile">
+                                <div className="row row-left client-profile">
                                     <div className="client-avatar">
                                         <i className="fa-solid fa-user"></i>
                                     </div>

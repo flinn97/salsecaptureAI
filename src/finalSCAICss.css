@@ -1249,21 +1249,29 @@ body {
 
 
 .client-dash-div .fit.client-div .client-div-contactcard{
-    width:350px;
   height:100%;
     background-color:#eaf4f1;
 }
+
+
 .fullScreen>.fit.client-dash-div {
-  width: 100%;
-  display:flex;
+  width: calc(100% - 15vw);
+  display: flex;
 }
 
+
 .fit.client-dash-div>:nth-child(1){
-  width:350px;
+  width:15vw;
+  padding:0;
 }
-.fit.client-dash-div>:nth-child(2){
-  width:calc(100% - 350px - 300px);
+
+.fit.client-dash-div>:nth-child(2) {
+  width: calc(100% - 15vw);
 }
+
+
+
+
 
 /*general*/
 
@@ -1317,8 +1325,8 @@ body {
 }
 
 .client-info {
-  flex: 1;
-  min-width: 0;
+  /*flex: 1;*/
+  /*min-width: 0;*/
 }
 
 .client-info .defaultButton{
@@ -1605,9 +1613,7 @@ margin-right:0.75rem;
   margin: 1rem 1rem;
 }
 
-.fit.client-dash-div>:nth-child(1){
- width:auto;
-}
+
 
 .dash-current-row-goal, .dash-current-row-goal>.dashboard-card{
   width:100%;
@@ -1630,8 +1636,6 @@ margin-right:0.75rem;
 }
 
 
-.client-dash-div{
-}
 
 @media (min-width: 850px) {
   .fullScreen>.fit {
@@ -1640,10 +1644,7 @@ margin-right:0.75rem;
   }
 }
 
-.fullScreen>.fit.client-dash-div {
-  width: calc(100% - 15vw);
-  display: flex;
-}
+
 
 
 /*fix overall layout for viridian*/
@@ -1762,9 +1763,7 @@ body{
   width:35%;
 }
 
-.fit.client-dash-div>:nth-child(1) {
-  width: 100%;
-}
+
 .vir-dash-first-col-second-row{
   width:100%;
   padding: 1rem 1rem;
@@ -1829,14 +1828,9 @@ justify-content: start;
 }
 
 
-.fit.client-dash-div>:nth-child(1) {
-  width: auto;
-  padding:0;
-}
 
-.fit.client-dash-div>:nth-child(2) {
-  width: calc(100% - 350px);
-}
+
+
 
 .client-desc{
   background-color: #406E5D;
@@ -1870,11 +1864,12 @@ justify-content: start;
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   margin-bottom: 10px;
+  white-space: nowrap;
 }
 .client-dropdown .defaultButton{
   width:100%;
@@ -2088,8 +2083,12 @@ justify-content: start;
 }
 
 .profile-detail-left-col{
-  width:50%;
+  width:550px;
 }
+.profile-detail-right-col{
+  width:350px;
+}
+
 
 .appointment .delButton{
   width:100%;
